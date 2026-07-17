@@ -95,10 +95,13 @@
     border-bottom:1px solid var(--hair);
     padding:18px 0;
   }
-  .controls-inner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+  .controls-inner{display:flex;flex-direction:column;gap:16px}
   .search{
-    position:relative;flex:1 1 280px;min-width:240px;
+    position:relative;flex:none;width:100%;min-width:240px;
   }
+  .filters{display:flex;flex-direction:column;gap:12px}
+  .filter-group{display:grid;grid-template-columns:88px 1fr;gap:16px;align-items:start}
+  .filter-label{color:var(--ink-soft);padding-top:9px;line-height:1;white-space:nowrap}
   .search input{
     width:100%;padding:13px 16px 13px 42px;
     border:1px solid var(--hair);border-radius:99px;
@@ -214,6 +217,8 @@
 
   /* responsive */
   @media (max-width:760px){
+    .filter-group{grid-template-columns:1fr;gap:6px}
+    .filter-label{padding-top:0}
     .row{grid-template-columns:36px 1fr auto;gap:12px;padding:20px 4px}
     .badge{display:none}              /* badge moves into panel on mobile */
     .panel-pad{grid-template-columns:1fr;gap:26px;padding:4px 4px 30px 4px}
@@ -263,13 +268,13 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <p class="kicker mono"><span class="dot"></span><span class="kicker-text">Houston Arts Alliance · Resource Hub · Draft for G.Z. Review Only</span></p>
+      <p class="kicker mono"><span class="dot"></span><span class="kicker-text">Houston Arts Alliance · Resource Hub</span></p>
       <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
     </div>
     <h1>Houston Arts Data Resource Hub</h1>
     <p class="stand">Wireframe of a single, public home for the studies, surveys, dashboards, and maps that report on the arts sector and make data easy to find, cite, and share.</p>
     <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-    <p class="meta mono" id="heroMeta">21 resources · Updated June 2026</p>
+    <p class="meta mono" id="heroMeta">21 resources · Updated July 2026</p>
   </div>
 </header>
 
@@ -279,7 +284,20 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       <input id="search" type="search" placeholder="Search by title, author, or topic…" autocomplete="off" aria-label="Search resources">
     </label>
-    <div class="chips" id="chips" role="group" aria-label="Filter by access"></div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label mono">Access</span>
+        <div class="chips" id="chips-access" role="group" aria-label="Filter by access"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label mono">Focus</span>
+        <div class="chips" id="chips-focus" role="group" aria-label="Filter by focus"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label mono">Methods</span>
+        <div class="chips" id="chips-methods" role="group" aria-label="Filter by method"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -295,7 +313,6 @@
 <footer>
   <div class="wrap">
     <span>S.R. Wireframe of Resource Hub</span>
-    <span class="mono">Internal Only · Draft for G.Z. Review</span>
   </div>
 </footer>
 
@@ -440,28 +457,80 @@ const RESOURCES = [
    finding:"", link:"https://nasaa-arts.org/nasaa_research/a-guide-to-promoting-statewide-strategies-in-the-arts-and-health/", linkType:"external"}
 ];
 
+/* --------------------------- filter dimensions --------------------------- */
+/* The sheet's `population` and `methods` fields are free-text and pack several
+   ideas into one cell, so they don't chip up cleanly on their own. The map
+   below collapses each resource into a short, curated set of Focus + Methods
+   tags. RESOURCES above is untouched — to re-tag anything, edit a row here.
+   (Focus is a subject read of `population`; a resource may carry more than one.) */
+const TAGS = {
+  "2021 Houston-Region Artist Survey":                                       {focus:["Artists & workforce"], methods:["Survey"]},
+  "Arts & Economic Prosperity 6":                                            {focus:["Organizations","Audiences & public"], methods:["Survey","Data analysis"]},
+  "Arts Data in the Public Sector":                                          {focus:["Organizations"], methods:["Interviews","Document review"]},
+  "Chicago Creative Workforce Study":                                        {focus:["Artists & workforce","Cross-city & national"], methods:["Data analysis"]},
+  "Civic Art Annual Report":                                                 {focus:["Civic art"], methods:["Data analysis"]},
+  "City of Houston Civic Art Collection Map":                                {focus:["Civic art"], methods:["Mapping"]},
+  "Creative Connections: Strategic Framework for Houston Cultural Districts": {focus:["Cultural districts"], methods:["Survey","Data analysis","Convenings"]},
+  "Cultural Tourism Index: 250 Global Cities":                               {focus:["Cross-city & national","Audiences & public"], methods:["Data analysis"]},
+  "Engaged by the Arts: Houston Demographics & Audience Opportunity":        {focus:["Artists & workforce","Audiences & public"], methods:["Survey","Data analysis"]},
+  "Financial & Operational Health of Houston's Arts Sector, 2019-2024":      {focus:["Organizations"], methods:["Data analysis"]},
+  "Greater Houston Survey of Artists":                                       {focus:["Artists & workforce"], methods:["Survey"]},
+  "HAA Grants and Panels Dashboard":                                         {focus:["Organizations"], methods:["Data analysis"]},
+  "Houston Events Calendar":                                                 {focus:["Audiences & public"], methods:["Community submissions"]},
+  "Houston Map of Local Government-Supported Arts Activities":               {focus:["Organizations","Audiences & public"], methods:["Mapping"]},
+  "Investigating Causal Effects of Arts Education Experiences":              {focus:["Education"], methods:["Experimental (RCT)"]},
+  "State of the Arts Report (TCT)":                                          {focus:["Cross-city & national"], methods:["Data analysis","Survey"]},
+  "State of the Arts in Education":                                          {focus:["Education"], methods:["Data analysis","Survey"]},
+  "Tactics from 11 Creative Communities: Federal Recovery Funds":            {focus:["Cross-city & national","Organizations"], methods:["Interviews","Survey","Document review"]},
+  "The Houston Arts Survey: Participation, Perceptions & Prospects":         {focus:["Audiences & public"], methods:["Survey"]},
+  "The Widening Resilience Gap: 10 U.S. City Arts Sectors (2019-24)":        {focus:["Organizations","Cross-city & national"], methods:["Data analysis"]},
+  "A Guide to Promoting Statewide Strategies in the Arts and Health":        {focus:["Cross-city & national"], methods:["Guide"]}
+};
+RESOURCES.forEach(r=>{
+  const t = TAGS[r.title] || {};
+  r._focus   = t.focus   || [];
+  r._methods = t.methods || [];
+});
+
 /* ------------------------------- rendering ------------------------------- */
 const list = document.getElementById('list');
-const chipsEl = document.getElementById('chips');
 const searchEl = document.getElementById('search');
 const countEl = document.getElementById('count');
 const emptyEl = document.getElementById('empty');
-
-let activeStatus = "All";
 let query = "";
 
-// build filter chips with live counts
-const order = ["All","Public","Upcoming","Upon request","Internal"];
-function statusCount(s){return s==="All"?RESOURCES.length:RESOURCES.filter(r=>r.access===s).length}
-order.forEach(s=>{
-  const b=document.createElement('button');
-  b.className='chip';
-  b.dataset.status=s;
-  b.setAttribute('aria-pressed', s==="All");
-  const label = s==="All"?"All":(STATUS[s]?STATUS[s].label:s);
-  b.innerHTML = `${label} <span class="n">${statusCount(s)}</span>`;
-  b.addEventListener('click',()=>{activeStatus=s;[...chipsEl.children].forEach(c=>c.setAttribute('aria-pressed',c.dataset.status===s));render();});
-  chipsEl.appendChild(b);
+/* Three single-select dimensions (each defaults to "All"), matching the
+   original Access filter. They AND together, and combine with the search box. */
+const DIMENSIONS = [
+  { el:document.getElementById('chips-access'),
+    order:["All","Public","Upcoming","Upon request","Internal"],
+    isAccess:true, active:"All", tags:r=>[r.access] },
+  { el:document.getElementById('chips-focus'),
+    order:["All","Artists & workforce","Organizations","Audiences & public","Cross-city & national","Civic art","Education","Cultural districts"],
+    active:"All", tags:r=>r._focus },
+  { el:document.getElementById('chips-methods'),
+    order:["All","Survey","Data analysis","Interviews","Document review","Mapping","Experimental (RCT)","Convenings","Community submissions","Guide"],
+    active:"All", tags:r=>r._methods }
+];
+
+function tagCount(dim,val){
+  return val==="All" ? RESOURCES.length : RESOURCES.filter(r=>dim.tags(r).includes(val)).length;
+}
+DIMENSIONS.forEach(dim=>{
+  dim.order.forEach(val=>{
+    const b=document.createElement('button');
+    b.className='chip';
+    b.dataset.value=val;
+    b.setAttribute('aria-pressed', val==="All");
+    const label = val==="All" ? "All" : (dim.isAccess && STATUS[val] ? STATUS[val].label : val);
+    b.innerHTML = `${label} <span class="n">${tagCount(dim,val)}</span>`;
+    b.addEventListener('click',()=>{
+      dim.active=val;
+      [...dim.el.children].forEach(c=>c.setAttribute('aria-pressed', c.dataset.value===val));
+      render();
+    });
+    dim.el.appendChild(b);
+  });
 });
 
 const icons = {
@@ -480,7 +549,9 @@ function actionHTML(r){
 }
 
 function matches(r){
-  if(activeStatus!=="All" && r.access!==activeStatus) return false;
+  for(const dim of DIMENSIONS){
+    if(dim.active!=="All" && !dim.tags(r).includes(dim.active)) return false;
+  }
   if(query){
     const hay=(r.title+" "+r.author+" "+r.summary+" "+r.population+" "+r.methods).toLowerCase();
     if(!hay.includes(query)) return false;
