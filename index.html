@@ -3,17 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow"><!-- ░░ REVIEW GATE: remove this line when the review is over ░░ -->
-<title>Arts Data Resource Hub</title>
+<title>Houston Arts Data Resource Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Hanken+Grotesk:wght@100..900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#06205c;          /* dark anchor */f
+    --navy:#06205c;          /* dark anchor */
     --cyan:#23C6DC;
     --coral:#FF5252;
-    --gold:#F0C148;
+    --gold:#F0C148;f
     --indigo:#5767FF;
     --green:#26E175;
     --orange:#FF9A3E;
@@ -26,7 +25,7 @@
     --hair:#d9d2c4;          /* hairline rules */
 
     --r:16px;
-    --maxw:1240px;
+    --maxw:1440px;
     --ease:cubic-bezier(.4,0,.1,1);
   }
 
@@ -72,11 +71,9 @@
   .hero h1 em{font-style:normal;font-weight:400}
   .hero .stand{
     margin:26px 0 0;
-    max-width:64ch;
     font-size:clamp(17px,2.2vw,20px);
     line-height:1.1;
     color:var(--ink-soft);
-    text-wrap:balance;
   }
   .spectrum{display:flex;height:6px;width:min(420px,70%);margin:34px 0 0;border-radius:99px;overflow:hidden}
   .spectrum span{flex:1;transform:scaleX(0);transform-origin:left;animation:grow .6s var(--ease) forwards}
@@ -94,15 +91,15 @@
     backdrop-filter:blur(10px);
     border-top:1px solid var(--hair);
     border-bottom:1px solid var(--hair);
-    padding:18px 0;
+    padding:14px 0;
   }
-  .controls-inner{display:flex;flex-direction:column;gap:16px}
+  .controls-inner{display:flex;flex-direction:column;gap:12px}
   .search{
-    position:relative;flex:none;width:100%;min-width:240px;
+    position:relative;
   }
-  .filters{display:flex;flex-direction:column;gap:12px}
+  .filters{display:flex;flex-direction:column;gap:10px}
   .filter-group{display:grid;grid-template-columns:88px 1fr;gap:16px;align-items:start}
-  .filter-label{color:var(--ink-soft);padding-top:9px;line-height:1;white-space:nowrap}
+  .filter-label{color:var(--ink-soft);padding-top:8px;line-height:1;white-space:nowrap}
   .search input{
     width:100%;padding:13px 16px 13px 42px;
     border:1px solid var(--hair);border-radius:99px;
@@ -113,10 +110,10 @@
   .search input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px color-mix(in srgb,var(--cyan) 30%,transparent)}
   .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--ink-soft)}
 
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
   .chip{
     font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;
-    padding:9px 14px;border-radius:99px;border:1px solid var(--hair);
+    padding:8px 11px;border-radius:99px;border:1px solid var(--hair);
     background:transparent;color:var(--ink-soft);cursor:pointer;
     transition:all .18s var(--ease);display:inline-flex;align-items:center;gap:7px;
   }
@@ -218,8 +215,6 @@
 
   /* responsive */
   @media (max-width:760px){
-    .filter-group{grid-template-columns:1fr;gap:6px}
-    .filter-label{padding-top:0}
     .row{grid-template-columns:36px 1fr auto;gap:12px;padding:20px 4px}
     .badge{display:none}              /* badge moves into panel on mobile */
     .panel-pad{grid-template-columns:1fr;gap:26px;padding:4px 4px 30px 4px}
@@ -227,53 +222,25 @@
     .hero h1{white-space:normal;font-size:clamp(34px,9vw,52px);max-width:16ch}
     .hero-top{grid-template-columns:1fr;gap:14px}
     .hero .logo{height:38px;width:33px}
+    .filter-group{grid-template-columns:1fr;gap:6px}
+    .filter-label{padding-top:0}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
     .spectrum span{transform:none}
   }
-
-  /* ░░ REVIEW PASSWORD GATE (temporary - delete with its HTML, JS, and the robots meta) ░░ */
-  .gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:var(--paper)}
-  .gate--hidden{display:none}
-  .gate-card{
-    width:min(420px,100%);display:flex;flex-direction:column;gap:14px;
-    padding:34px 30px;border:1px solid var(--hair);border-radius:18px;
-    background:color-mix(in srgb,var(--paper) 92%,#fff);
-    box-shadow:0 24px 60px -24px rgba(6,32,92,.45);
-  }
-  .gate-kicker{color:var(--ink-soft);margin:0}
-  .gate-title{font-family:"Geist Mono",monospace;font-weight:600;font-size:24px;letter-spacing:-.02em;margin:0;color:var(--ink)}
-  .gate-sub{margin:0;color:var(--ink-soft);font-size:15px}
-  .gate-input{width:100%;padding:13px 16px;border:1px solid var(--hair);border-radius:99px;background:var(--paper);color:var(--ink);font-family:inherit;font-size:15px}
-  .gate-input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px color-mix(in srgb,var(--cyan) 30%,transparent)}
-  .gate-btn{padding:13px 20px;border:0;border-radius:99px;cursor:pointer;background:var(--navy);color:var(--paper);font-family:inherit;font-size:15px;font-weight:600;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-  .gate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px var(--navy)}
-  .gate-error{margin:0;color:var(--coral);font-size:13px}
 </style>
 </head>
 <body>
 
-<!-- ░░ REVIEW PASSWORD GATE - temporary; remove this overlay, its .gate CSS, its <script>, and the robots meta when the review is over ░░ -->
-<div class="gate" id="reviewGate">
-  <form class="gate-card" id="gateForm" autocomplete="off">
-    <p class="gate-kicker mono">HAA · G.Z. and T.J. Review</p>
-    <h2 class="gate-title">Page in progress.</h2>
-    <p class="gate-sub">Enter password from S.R. to continue.</p>
-    <input class="gate-input" id="gateInput" type="password" placeholder="Password" aria-label="Review password" autofocus>
-    <button class="gate-btn" type="submit">Enter</button>
-    <p class="gate-error" id="gateError" hidden>Wrong password, try again.</p>
-  </form>
-</div>
-
 <header class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <p class="kicker mono"><span class="dot"></span><span class="kicker-text">Arts Data Resource Hub</span></p>
+      <p class="kicker mono"><span class="dot"></span><span class="kicker-text">Resource Hub</span></p>
       <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
     </div>
     <h1>Houston Arts Data Resource Hub</h1>
-    <p class="stand">Wireframe of a single, public home for the studies, surveys, dashboards, and&nbsp;maps that report on the arts sector and make data easy to find, cite, and share.</p>
+    <p class="stand">Wireframe of a single, public home for the studies, surveys, dashboards, and maps that report on the arts sector and make data easy to find, cite, and share.</p>
     <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
     <p class="meta mono" id="heroMeta">29 resources · Updated July 2026</p>
   </div>
@@ -289,6 +256,10 @@
       <div class="filter-group">
         <span class="filter-label mono">Access</span>
         <div class="chips" id="chips-access" role="group" aria-label="Filter by access"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label mono">Place</span>
+        <div class="chips" id="chips-place" role="group" aria-label="Filter by place"></div>
       </div>
       <div class="filter-group">
         <span class="filter-label mono">Focus</span>
@@ -313,18 +284,17 @@
 
 <footer>
   <div class="wrap">
-    <span>Draft</span>
+    <span>072126</span>
   </div>
 </footer>
 
 <script>
 /* ---------------------------------------------------------------------------
-   DATA - originally seeded from Resources_for_Hub.xlsx; entries have been added, edited, and removed since.
-   Summaries are lightly condensed from the sheet's "Purpose" field;
-   "finding" is the headline stat from the "Sample" field.
+   DATA - originally seeded from Resources_for_Hub.xlsx; entries have been
+   added, edited, and removed since.
    link / linkType drive the call-to-action state.
      external  -> opens a real URL
-     pdf       -> file to be hosted on the HAA page (relative asset)
+     pdf       -> downloadable PDF (hosted file or direct link)
      request   -> available upon request
      internal  -> internal only
      soon      -> published/forthcoming but no URL supplied yet
@@ -352,7 +322,8 @@ const RESOURCES = [
   {title:"A Guide to Promoting Statewide Strategies in the Arts and Health", author:"National Assembly of State Arts Agencies", year:2026, access:"Public", longitudinal:"No",
    population:"National and state", methods:"Guide",
    summary:"A national guide from NASAA on building statewide strategies that connect the arts with health and well-being.",
-   finding:"", link:"https://nasaa-arts.org/nasaa_research/a-guide-to-promoting-statewide-strategies-in-the-arts-and-health/", linkType:"external"},
+   finding:"",
+   link:"https://nasaa-arts.org/nasaa_research/a-guide-to-promoting-statewide-strategies-in-the-arts-and-health/", linkType:"external"},
 
   {title:"Arts & Economic Prosperity 6", author:"Americans for the Arts · HAA", year:2023, access:"Public", longitudinal:"Yes",
    population:"City, county, region", methods:"Surveys; financial and attendance data",
@@ -387,12 +358,14 @@ const RESOURCES = [
   {title:"City of Houston Civic Art Collection Map", author:"HAA", year:2026, access:"Public", longitudinal:"N/A",
    population:"COH Civic Art Collection", methods:"Mapping",
    summary:"A (new) interactive map showing what's in the City of Houston's civic art collection and where to find each work.",
-   finding:"", link:"https://houcityart.org/map", linkType:"external"},
+   finding:"",
+   link:"https://houcityart.org/map", linkType:"external"},
 
   {title:"Civic Art Annual Report", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
    population:"COH Civic Art Program", methods:"Analysis",
    summary:"HAA's annual report on the City of Houston Civic Art Program; acquisitions, conservation, and new commissions. The 2024 report is linked; the 2025 edition is forthcoming.",
-   finding:"", link:"https://www.houstontx.gov/arts/MOCA-2024-Annual-Report.pdf", linkType:"pdf"},
+   finding:"",
+   link:"https://www.houstontx.gov/arts/MOCA-2024-Annual-Report.pdf", linkType:"pdf"},
 
   {title:"Creative Connections: Strategic Framework for Houston Cultural Districts", author:"Trepwise", year:2024, access:"Public", longitudinal:"No",
    population:"Cultural districts", methods:"Survey; peer-city study; convenings",
@@ -427,7 +400,8 @@ const RESOURCES = [
   {title:"HAA Grants and Panels Dashboard", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
    population:"Applicants for City funding", methods:"Analysis",
    summary:"Grant-year totals and aggregate applicant demographics for City of Houston arts funding, presented as an interactive dashboard.",
-   finding:"", link:"https://files.haatx.com/grants/2025-2026_Annual_Grants_and_Panels_Dashboard.pdf", linkType:"pdf"},
+   finding:"",
+   link:"https://files.haatx.com/grants/2025-2026_Annual_Grants_and_Panels_Dashboard.pdf", linkType:"pdf"},
 
   {title:"HouArts in Action Messaging Guide", author:"HouArts in Action", year:2025, access:"Public", longitudinal:"No",
    population:"Local arts sector", methods:"Guide",
@@ -444,7 +418,8 @@ const RESOURCES = [
   {title:"Houston Events Calendar", author:"HAA", year:2026, access:"Public", longitudinal:"N/A",
    population:"Local arts sector", methods:"Community submissions",
    summary:"A community events finder for Houston's arts sector. Grantees are required to submit their public events here.",
-   finding:"", link:"https://www.houcalendar.com/", linkType:"external"},
+   finding:"",
+   link:"https://www.houcalendar.com/", linkType:"external"},
 
   {title:"Houston Map of Local Government-Supported Arts Activities", author:"Bloomberg Associates · SMU DataArts · HEI · HAA", year:2026, access:"Upcoming", longitudinal:"No",
    population:"City, agencies, and nonprofits", methods:"Mapping",
@@ -467,7 +442,8 @@ const RESOURCES = [
   {title:"State of the Arts in Education", author:"Arts Connect", year:2026, access:"Public", longitudinal:"Yes",
    population:"Local education and arts", methods:"Analysis; survey",
    summary:"Arts Connect's State of the Art Report on arts and education across the Houston region.",
-   finding:"", link:"https://www.artsconnecthouston.org/_files/ugd/e8f3b1_cc0029206f54493a94ec769258952bd0.pdf", linkType:"pdf"},
+   finding:"",
+   link:"https://www.artsconnecthouston.org/_files/ugd/e8f3b1_cc0029206f54493a94ec769258952bd0.pdf", linkType:"pdf"},
 
   {title:"State of the Arts Report (TCT)", author:"Texas Cultural Trust", year:2025, access:"Public", longitudinal:"Yes",
    population:"State of Texas", methods:"Multi-source analysis; surveys",
@@ -506,47 +482,47 @@ const RESOURCES = [
    link:"https://www.arts.gov/impact/research/arts-data-profile-series/38", linkType:"external"}
 ];
 
-/* --------------------------- filter dimensions --------------------------- */
-/* The sheet's `population` and `methods` fields are free-text and pack several
-   ideas into one cell, so they don't chip up cleanly on their own. The map
-   below collapses each resource into a short, curated set of Focus + Methods
+/* ---------------------------------------------------------------------------
+   TAGS - curated Focus, Methods, and Place tags for each resource, keyed by
+   exact title. Filters read from these
    tags. RESOURCES above is untouched. To re-tag anything, edit a row here.
-   (Focus is a subject read of `population`; a resource may carry more than one.) */
+--------------------------------------------------------------------------- */
 const TAGS = {
-  "2021 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"]},
-  "Arts & Economic Prosperity 6":                                            {focus:["Organizations","Audiences and public"], methods:["Survey","Data analysis"]},
-  "Arts Data in the Public Sector":                                          {focus:["Organizations"], methods:["Interviews","Document review"]},
-  "Chicago's Creative Workforce: Economic Conditions and Outcomes":                                        {focus:["Artists and workforce","Cross-city and national"], methods:["Data analysis"]},
-  "Civic Art Annual Report":                                                 {focus:["Civic art"], methods:["Data analysis"]},
-  "City of Houston Civic Art Collection Map":                                {focus:["Civic art"], methods:["Mapping"]},
-  "Creative Connections: Strategic Framework for Houston Cultural Districts": {focus:["Cultural districts"], methods:["Survey","Data analysis","Convenings"]},
-  "Cultural Tourism Index: 250 Global Cities":                               {focus:["Cross-city and national","Audiences and public"], methods:["Data analysis"]},
-  "Engaged by the Arts: Houston Demographics & Audience Opportunity":        {focus:["Artists and workforce","Audiences and public"], methods:["Survey","Data analysis"]},
-  "2026 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"]},
-  "HAA Grants and Panels Dashboard":                                         {focus:["Organizations"], methods:["Data analysis"]},
-  "Houston Events Calendar":                                                 {focus:["Audiences and public"], methods:["Community submissions"]},
-  "Houston Map of Local Government-Supported Arts Activities":               {focus:["Organizations","Audiences and public"], methods:["Mapping"]},
-  "Investigating Causal Effects of Arts Education Experiences":              {focus:["Education"], methods:["Experimental (RCT)"]},
-  "State of the Arts Report (TCT)":                                          {focus:["Cross-city and national"], methods:["Data analysis","Survey"]},
-  "State of the Arts in Education":                                          {focus:["Education"], methods:["Data analysis","Survey"]},
-  "Tactics from 11 Creative Communities: Federal Recovery Funds":            {focus:["Cross-city and national","Organizations"], methods:["Interviews","Survey","Document review"]},
-  "The Houston Arts Survey: Participation, Perceptions & Prospects":         {focus:["Audiences and public"], methods:["Survey"]},
-  "City Arts Sector Trends: Divergence and Resilience Across Ten U.S. Cities (2019-2024)":        {focus:["Organizations","Cross-city and national"], methods:["Data analysis"]},
-  "A Guide to Promoting Statewide Strategies in the Arts and Health":        {focus:["Cross-city and national"], methods:["Guide"]},
-  "Arts Vibrancy Index 2025: Data Explorer": {focus:["Cross-city and national"], methods:["Data analysis"]},
-  "The Great Connector: How Arts Participation Renews Civic and Community Engagement": {focus:["Audiences and public","Cross-city and national"], methods:["Survey","Data analysis"]},
-  "Jumpstarting Artist Jobs: Case Studies of U.S. Employment Programs for Creative Workers": {focus:["Artists and workforce","Cross-city and national"], methods:["Interviews","Document review"]},
-  "The U.S. Arts and Cultural Production Satellite Account (1998-2023)": {focus:["Cross-city and national"], methods:["Data analysis"]},
-  "State-Level Estimates of the Arts' Economic Value and Employment (2017-2022)": {focus:["Cross-city and national"], methods:["Data analysis"]},
-  "Creative Economy State Profiles": {focus:["Cross-city and national"], methods:["Data analysis"]},
-  "Creative Economy Research Policy Brief": {focus:["Cross-city and national"], methods:["Guide"]},
-  "HouArts in Action Messaging Guide": {focus:["Artists and workforce","Organizations"], methods:["Guide"]},
-  "HouArts in Action: Key Stats and Data Sources": {focus:["Organizations"], methods:["Data analysis"]}
+  "2021 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"], place:["Houston region"]},
+  "Arts & Economic Prosperity 6":                                             {focus:["Organizations","Audiences and public"], methods:["Survey","Data analysis"], place:["Houston region"]},
+  "Arts Data in the Public Sector":                                           {focus:["Organizations"], methods:["Interviews","Document review"], place:["National"]},
+  "Chicago's Creative Workforce: Economic Conditions and Outcomes":           {focus:["Artists and workforce","Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "Civic Art Annual Report":                                                  {focus:["Civic art"], methods:["Data analysis"], place:["Houston region"]},
+  "City of Houston Civic Art Collection Map":                                 {focus:["Civic art"], methods:["Mapping"], place:["Houston region"]},
+  "Creative Connections: Strategic Framework for Houston Cultural Districts": {focus:["Cultural districts"], methods:["Survey","Data analysis","Convenings"], place:["Houston region"]},
+  "Cultural Tourism Index: 250 Global Cities":                                {focus:["Cross-city and national","Audiences and public"], methods:["Data analysis"], place:["Global"]},
+  "Engaged by the Arts: Houston Demographics & Audience Opportunity":         {focus:["Artists and workforce","Audiences and public"], methods:["Survey","Data analysis"], place:["Houston region"]},
+  "2026 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"], place:["Houston region"]},
+  "HAA Grants and Panels Dashboard":                                          {focus:["Organizations"], methods:["Data analysis"], place:["Houston region"]},
+  "Houston Events Calendar":                                                  {focus:["Audiences and public"], methods:["Community submissions"], place:["Houston region"]},
+  "Houston Map of Local Government-Supported Arts Activities":                {focus:["Organizations","Audiences and public"], methods:["Mapping"], place:["Houston region"]},
+  "Investigating Causal Effects of Arts Education Experiences":               {focus:["Education"], methods:["Experimental (RCT)"], place:["Houston region"]},
+  "State of the Arts Report (TCT)":                                           {focus:["Cross-city and national"], methods:["Data analysis","Survey"], place:["Texas"]},
+  "State of the Arts in Education":                                           {focus:["Education"], methods:["Data analysis","Survey"], place:["Houston region"]},
+  "Tactics from 11 Creative Communities: Federal Recovery Funds":             {focus:["Cross-city and national","Organizations"], methods:["Interviews","Survey","Document review"], place:["National"]},
+  "The Houston Arts Survey: Participation, Perceptions & Prospects":          {focus:["Audiences and public"], methods:["Survey"], place:["Houston region"]},
+  "City Arts Sector Trends: Divergence and Resilience Across Ten U.S. Cities (2019-2024)": {focus:["Organizations","Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "A Guide to Promoting Statewide Strategies in the Arts and Health":         {focus:["Cross-city and national"], methods:["Guide"], place:["National"]},
+  "Arts Vibrancy Index 2025: Data Explorer":                                  {focus:["Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "The Great Connector: How Arts Participation Renews Civic and Community Engagement": {focus:["Audiences and public","Cross-city and national"], methods:["Survey","Data analysis"], place:["National"]},
+  "Jumpstarting Artist Jobs: Case Studies of U.S. Employment Programs for Creative Workers": {focus:["Artists and workforce","Cross-city and national"], methods:["Interviews","Document review"], place:["National"]},
+  "The U.S. Arts and Cultural Production Satellite Account (1998-2023)":      {focus:["Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "State-Level Estimates of the Arts' Economic Value and Employment (2017-2022)": {focus:["Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "Creative Economy State Profiles":                                          {focus:["Cross-city and national"], methods:["Data analysis"], place:["National"]},
+  "Creative Economy Research Policy Brief":                                   {focus:["Cross-city and national"], methods:["Guide"], place:["National"]},
+  "HouArts in Action Messaging Guide":                                        {focus:["Artists and workforce","Organizations"], methods:["Guide"], place:["Houston region"]},
+  "HouArts in Action: Key Stats and Data Sources":                            {focus:["Organizations"], methods:["Data analysis"], place:["Houston region"]}
 };
 RESOURCES.forEach(r=>{
   const t = TAGS[r.title] || {};
   r._focus   = t.focus   || [];
   r._methods = t.methods || [];
+  r._place   = t.place   || [];
 });
 
 /* ------------------------------- rendering ------------------------------- */
@@ -556,7 +532,7 @@ const countEl = document.getElementById('count');
 const emptyEl = document.getElementById('empty');
 let query = "";
 
-/* Three single-select dimensions (each defaults to "All"), matching the
+/* Four single-select dimensions (each defaults to "All"), matching the
    original Access filter. They AND together, and combine with the search box. */
 const DIMENSIONS = [
   { el:document.getElementById('chips-access'),
@@ -567,23 +543,27 @@ const DIMENSIONS = [
     active:"All", tags:r=>r._focus },
   { el:document.getElementById('chips-methods'),
     order:["All","Survey","Data analysis","Interviews","Document review","Mapping","Experimental (RCT)","Convenings","Community submissions","Guide"],
-    active:"All", tags:r=>r._methods }
+    active:"All", tags:r=>r._methods },
+  { el:document.getElementById('chips-place'),
+    order:["All","Houston region","Texas","National","Global"],
+    active:"All", tags:r=>r._place }
 ];
 
 function tagCount(dim,val){
   return val==="All" ? RESOURCES.length : RESOURCES.filter(r=>dim.tags(r).includes(val)).length;
 }
+
 DIMENSIONS.forEach(dim=>{
-  dim.order.forEach(val=>{
+  dim.order.forEach(v=>{
     const b=document.createElement('button');
     b.className='chip';
-    b.dataset.value=val;
-    b.setAttribute('aria-pressed', val==="All");
-    const label = val==="All" ? "All" : (dim.isAccess && STATUS[val] ? STATUS[val].label : val);
-    b.innerHTML = `${label} <span class="n">${tagCount(dim,val)}</span>`;
+    b.dataset.value=v;
+    b.setAttribute('aria-pressed', v===dim.active);
+    const label = (dim.isAccess && v!=="All" && STATUS[v]) ? STATUS[v].label : v;
+    b.innerHTML = `${label} <span class="n">${tagCount(dim,v)}</span>`;
     b.addEventListener('click',()=>{
-      dim.active=val;
-      [...dim.el.children].forEach(c=>c.setAttribute('aria-pressed', c.dataset.value===val));
+      dim.active=v;
+      [...dim.el.children].forEach(c=>c.setAttribute('aria-pressed',c.dataset.value===v));
       render();
     });
     dim.el.appendChild(b);
@@ -671,42 +651,6 @@ function render(){
 searchEl.addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render();});
 document.getElementById('heroMeta').textContent = RESOURCES.length + ' resources · Updated July 2026';
 render();
-</script>
-
-<script>
-/* ░░ REVIEW PASSWORD GATE - temporary; remove with its HTML + CSS + the robots meta after review ░░ */
-(function(){
-  var PASSWORD = "4e$HuBGzTj";          /* ← CHANGE THIS to the password you give the CEO */
-  var KEY = "haaReviewUnlocked";
-  var gate  = document.getElementById('reviewGate');
-  var form  = document.getElementById('gateForm');
-  var input = document.getElementById('gateInput');
-  var error = document.getElementById('gateError');
-  if(!gate) return;
-
-  function unlock(){
-    gate.classList.add('gate--hidden');
-    document.documentElement.style.overflow = '';
-  }
-
-  // Already unlocked in this browser session? Skip the prompt.
-  try { if(sessionStorage.getItem(KEY) === '1'){ unlock(); return; } } catch(e){}
-
-  document.documentElement.style.overflow = 'hidden';   // lock scroll while gated
-  if(input) input.focus();
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(input.value === PASSWORD){
-      try { sessionStorage.setItem(KEY,'1'); } catch(e){}
-      unlock();
-    } else {
-      error.hidden = false;
-      input.value = '';
-      input.focus();
-    }
-  });
-})();
 </script>
 </body>
 </html>
