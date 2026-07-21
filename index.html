@@ -76,6 +76,7 @@
     font-size:clamp(17px,2.2vw,20px);
     line-height:1.1;
     color:var(--ink-soft);
+    text-wrap:balance;
   }
   .spectrum{display:flex;height:6px;width:min(420px,70%);margin:34px 0 0;border-radius:99px;overflow:hidden}
   .spectrum span{flex:1;transform:scaleX(0);transform-origin:left;animation:grow .6s var(--ease) forwards}
@@ -165,7 +166,7 @@
   .item.open .toggle{background:var(--navy);border-color:var(--navy)}
   .item.open .toggle svg{stroke:var(--paper);transform:rotate(45deg)}
 
-  /* expanding panel — animated with grid-template-rows */
+  /* expanding panel - animated with grid-template-rows */
   .panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
   .item.open .panel{grid-template-rows:1fr}
   .panel-inner{overflow:hidden}
@@ -232,7 +233,7 @@
     .spectrum span{transform:none}
   }
 
-  /* ░░ REVIEW PASSWORD GATE (temporary — delete with its HTML, JS, and the robots meta) ░░ */
+  /* ░░ REVIEW PASSWORD GATE (temporary - delete with its HTML, JS, and the robots meta) ░░ */
   .gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:var(--paper)}
   .gate--hidden{display:none}
   .gate-card{
@@ -253,7 +254,7 @@
 </head>
 <body>
 
-<!-- ░░ REVIEW PASSWORD GATE — temporary; remove this overlay, its .gate CSS, its <script>, and the robots meta when the review is over ░░ -->
+<!-- ░░ REVIEW PASSWORD GATE - temporary; remove this overlay, its .gate CSS, its <script>, and the robots meta when the review is over ░░ -->
 <div class="gate" id="reviewGate">
   <form class="gate-card" id="gateForm" autocomplete="off">
     <p class="gate-kicker mono">HAA · G.Z. and T.J. Review</p>
@@ -272,9 +273,9 @@
       <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
     </div>
     <h1>Houston Arts Data Resource Hub</h1>
-    <p class="stand">Wireframe of a single, public home for the studies, surveys, dashboards, and maps that report on the arts sector and make data easy to find, cite, and share.</p>
+    <p class="stand">Wireframe of a single, public home for the studies, surveys, dashboards, and&nbsp;maps that report on the arts sector and make data easy to find, cite, and share.</p>
     <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-    <p class="meta mono" id="heroMeta">21 resources · Updated July 2026</p>
+    <p class="meta mono" id="heroMeta">29 resources · Updated July 2026</p>
   </div>
 </header>
 
@@ -318,7 +319,7 @@
 
 <script>
 /* ---------------------------------------------------------------------------
-   DATA — pulled directly from Resources_for_Hub.xlsx (rows 2–22).
+   DATA - originally seeded from Resources_for_Hub.xlsx; entries have been added, edited, and removed since.
    Summaries are lightly condensed from the sheet's "Purpose" field;
    "finding" is the headline stat from the "Sample" field.
    link / linkType drive the call-to-action state.
@@ -336,14 +337,25 @@ const STATUS = {
 };
 
 const RESOURCES = [
-  {title:"2021 Houston-Region Artist Survey", author:"Fresh Arts", year:2022, access:"Public", longitudinal:"Yes",
+  {title:"2021 Greater Houston Artist Survey", author:"Fresh Arts", year:2022, access:"Public", longitudinal:"Yes",
    population:"Houston artists", methods:"Survey",
    summary:"A longitudinal look at how Houston artists are faring, their evolving needs, income sources, and the socio-economic factors shaping their quality of life.",
    finding:"43% of Houston artists earn just 0-20% of their income from their artistic practice.",
    link:"Fresh-Arts-2021-artist-survey-summary-and-results.pdf", linkType:"pdf"},
 
+  {title:"2026 Greater Houston Artist Survey", author:"Fresh Arts · SMU DataArts", year:2026, access:"Upcoming", longitudinal:"Yes",
+   population:"Houston artists", methods:"Survey",
+   summary:"An upcoming follow-up to the 2021 artist survey, examining career sustainability and artists' evolving needs, with direct comparison to the prior wave.",
+   finding:"Analysis in progress.",
+   link:"", linkType:"soon"},
+
+  {title:"A Guide to Promoting Statewide Strategies in the Arts and Health", author:"National Assembly of State Arts Agencies", year:2026, access:"Public", longitudinal:"No",
+   population:"National and state", methods:"Guide",
+   summary:"A national guide from NASAA on building statewide strategies that connect the arts with health and well-being.",
+   finding:"", link:"https://nasaa-arts.org/nasaa_research/a-guide-to-promoting-statewide-strategies-in-the-arts-and-health/", linkType:"external"},
+
   {title:"Arts & Economic Prosperity 6", author:"Americans for the Arts · HAA", year:2023, access:"Public", longitudinal:"Yes",
-   population:"City, county, region", methods:"Surveys; financial & attendance data",
+   population:"City, county, region", methods:"Surveys; financial and attendance data",
    summary:"National study of the nonprofit arts industry's economic and social impact, with results broken out for the City of Houston, Harris County, and Greater Houston.",
    finding:"Arts organizations and audiences generated $1.4 billion in spending across Greater Houston in 2022.",
    link:"https://houstonartsalliance.com/aep6", linkType:"external"},
@@ -354,21 +366,33 @@ const RESOURCES = [
    finding:"Houston uses ZIP-code data to steer funding toward historically underrepresented areas of the city.",
    link:"BA_ArtsDataInThePublicSector_12082021.pdf", linkType:"pdf"},
 
-  {title:"Chicago Creative Workforce Study", author:"SMU DataArts", year:2026, access:"Upon request", longitudinal:"No",
+  {title:"Arts Vibrancy Index 2025: Data Explorer", author:"SMU DataArts", year:2026, access:"Public", longitudinal:"N/A",
+   population:"U.S. communities", methods:"Interactive index",
+   summary:"An interactive companion to SMU DataArts' tenth annual Arts Vibrancy Index, for exploring the measures of arts supply, demand, and public support that shape each community's score.",
+   finding:"",
+   link:"https://culturaldata.org/arts-vibrancy-2025/data-explorer/", linkType:"external"},
+
+  {title:"Chicago's Creative Workforce: Economic Conditions and Outcomes", author:"SMU DataArts", year:2026, access:"Upon request", longitudinal:"No",
    population:"Creative workforce", methods:"Federal data review",
-   summary:"Measures wages and access to benefits across three definitions of the creative workforce in Chicago and a set of peer cities, including Houston.",
+   summary:"Measures wages and access to benefits across three definitions of the creative workforce in Chicago and a set of peer cities, including Houston. The linked executive summary is public; the full report is available on request.",
    finding:"Houston's creative workforce earns less relative to a living wage than Chicago, Atlanta, or Los Angeles.",
-   link:"", linkType:"request"},
+   link:"https://culturaldata.org/media/3225/creative-workforce-environment-in-chicago_executive-summary_june2026.pdf", linkType:"pdf"},
 
-  {title:"Civic Art Annual Report", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
-   population:"COH Civic Art Program", methods:"Analysis",
-   summary:"HAA's annual report on the City of Houston Civic Art Program; acquisitions, conservation, and new commissions.",
-   finding:"", link:"", linkType:"soon"},
+  {title:"City Arts Sector Trends: Divergence and Resilience Across Ten U.S. Cities (2019-2024)", author:"SMU DataArts", year:2026, access:"Public", longitudinal:"No",
+   population:"Cities and nonprofit cultural orgs", methods:"CDP and agency application data",
+   summary:"Draws on 4,400+ arts organizations across ten U.S. cities to explain why some arts ecosystems thrived after the pandemic while others declined.",
+   finding:"Houston saw a milder 10% revenue dip, while NYC, LA, and others fell 20% or more.",
+   link:"https://culturaldata.org/media/3245/cityartssectortrends_fullreport.pdf", linkType:"pdf"},
 
-  {title:"City of Houston Civic Art Collection Map", author:"HAA", year:2026, access:"Public", longitudinal:"—",
+  {title:"City of Houston Civic Art Collection Map", author:"HAA", year:2026, access:"Public", longitudinal:"N/A",
    population:"COH Civic Art Collection", methods:"Mapping",
    summary:"A (new) interactive map showing what's in the City of Houston's civic art collection and where to find each work.",
    finding:"", link:"https://houcityart.org/map", linkType:"external"},
+
+  {title:"Civic Art Annual Report", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
+   population:"COH Civic Art Program", methods:"Analysis",
+   summary:"HAA's annual report on the City of Houston Civic Art Program; acquisitions, conservation, and new commissions. The 2024 report is linked; the 2025 edition is forthcoming.",
+   finding:"", link:"https://www.houstontx.gov/arts/MOCA-2024-Annual-Report.pdf", linkType:"pdf"},
 
   {title:"Creative Connections: Strategic Framework for Houston Cultural Districts", author:"Trepwise", year:2024, access:"Public", longitudinal:"No",
    population:"Cultural districts", methods:"Survey; peer-city study; convenings",
@@ -376,42 +400,54 @@ const RESOURCES = [
    finding:"60% of nonprofit respondents reported increased access to funding as a result of being in a Cultural District.",
    link:"Creative-Connections-Houston-Cultural-District.pdf", linkType:"pdf"},
 
+  {title:"Creative Economy Research Policy Brief", author:"National Assembly of State Arts Agencies", year:2024, access:"Public", longitudinal:"No",
+   population:"State arts agencies", methods:"Guide",
+   summary:"A plain-language primer on creative economy research: what the major studies measure, how they differ, and how to communicate the numbers credibly in policy conversations.",
+   finding:"",
+   link:"https://tsd-wpe-largefs-storage.s3.amazonaws.com/nasaa/wp-content/uploads/2017/05/Creative-Economy-Research-Policy-Brief.pdf", linkType:"pdf"},
+
+  {title:"Creative Economy State Profiles", author:"National Assembly of State Arts Agencies", year:2026, access:"Public", longitudinal:"N/A",
+   population:"States", methods:"Interactive dashboard",
+   summary:"An interactive dashboard of state creative economy data, showing value added, employment, and compensation alongside other industries and over time.",
+   finding:"",
+   link:"https://nasaa-arts.org/nasaa_research/creative-economy-state-profiles/", linkType:"external"},
+
   {title:"Cultural Tourism Index: 250 Global Cities", author:"BOP Consulting", year:2025, access:"Public", longitudinal:"No",
    population:"City", methods:"BOP500 tourism data analysis",
    summary:"Ranks 250 global cities on cultural tourism as a composite of tourist visits, visitor spend, and museum attendance.",
    finding:"Houston ranks 9th among North American cities and 29th of 250 globally for cultural tourism.",
    link:"https://smu.box.com/s/w2c8brmgmiqw62shboxohvmaisqk71no", linkType:"external"},
 
-  {title:"Engaged by the Arts: Houston Demographics & Audience Opportunity", author:"SMU DataArts (funded by HEI)", year:2019, access:"Public", longitudinal:"No",
-   population:"Houston arts workforce & attenders", methods:"Survey; demographic data appends",
+  {title:"Engaged by the Arts: Houston Demographics & Audience Opportunity", author:"SMU DataArts", year:2019, access:"Public", longitudinal:"No",
+   population:"Houston arts workforce and attenders", methods:"Survey",
    summary:"A demographic portrait of Greater Houston's arts workforce and audiences, plus an Audience Opportunity Tool predicting attendance by where households live.",
    finding:"32% of younger arts patrons identify as BIPOC, versus 8% of older patrons.",
    link:"engaged-by-the-arts-smu-dataarts-white-paper-rev.pdf", linkType:"pdf"},
-
-  {title:"Financial & Operational Health of Houston's Arts Sector, 2019-2024", author:"SMU DataArts · Bloomberg Associates", year:2026, access:"Internal", longitudinal:"No",
-   population:"Nonprofit cultural orgs", methods:"CDP data review",
-   summary:"Tracks key financial and operational metrics for HAA grant applicants from 2019-2024 against a national comparison group.",
-   finding:"Local government covers just 3-5% of Houston cultural orgs' expenses, versus 4-7% nationally.",
-   link:"", linkType:"internal"},
-
-  {title:"Greater Houston Survey of Artists", author:"Fresh Arts · SMU DataArts (funded by HEI)", year:2026, access:"Upcoming", longitudinal:"Yes",
-   population:"Houston artists", methods:"Survey",
-   summary:"An upcoming follow-up to the 2021 artist survey, examining career sustainability and artists' evolving needs, with direct comparison to the prior wave.",
-   finding:"Analysis in progress.",
-   link:"", linkType:"soon"},
 
   {title:"HAA Grants and Panels Dashboard", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
    population:"Applicants for City funding", methods:"Analysis",
    summary:"Grant-year totals and aggregate applicant demographics for City of Houston arts funding, presented as an interactive dashboard.",
    finding:"", link:"https://files.haatx.com/grants/2025-2026_Annual_Grants_and_Panels_Dashboard.pdf", linkType:"pdf"},
 
-  {title:"Houston Events Calendar", author:"HAA", year:2026, access:"Public", longitudinal:"—",
+  {title:"HouArts in Action Messaging Guide", author:"HouArts in Action", year:2025, access:"Public", longitudinal:"No",
+   population:"Local arts sector", methods:"Guide",
+   summary:"A shared messaging guide for Houston arts advocates, with common language for talking about the sector's value and the public funding that sustains it.",
+   finding:"",
+   link:"https://houarts.org/wp-content/uploads/2025/05/HouArts-in-Action-Guide-D1.pdf", linkType:"pdf"},
+
+  {title:"HouArts in Action: Key Stats and Data Sources", author:"HouArts in Action", year:2026, access:"Public", longitudinal:"N/A",
+   population:"Local arts sector", methods:"Curated statistics",
+   summary:"HouArts in Action's running collection of advocacy-ready statistics on Houston's arts economy, with links to the underlying data sources.",
+   finding:"",
+   link:"https://houarts.org/news-resources/#key-stats", linkType:"external"},
+
+  {title:"Houston Events Calendar", author:"HAA", year:2026, access:"Public", longitudinal:"N/A",
    population:"Local arts sector", methods:"Community submissions",
    summary:"A community events finder for Houston's arts sector. Grantees are required to submit their public events here.",
    finding:"", link:"https://www.houcalendar.com/", linkType:"external"},
 
   {title:"Houston Map of Local Government-Supported Arts Activities", author:"Bloomberg Associates · SMU DataArts · HEI · HAA", year:2026, access:"Upcoming", longitudinal:"No",
-   population:"City, agencies & nonprofits", methods:"Mapping",
+   population:"City, agencies, and nonprofits", methods:"Mapping",
    summary:"Maps where city-funded cultural activities take place...and where access gaps remain across Houston.",
    finding:"In progress.",
    link:"", linkType:"soon"},
@@ -422,22 +458,40 @@ const RESOURCES = [
    finding:"More arts education cut disciplinary infractions by 3.6 points and raised STAAR writing achievement by 0.13 SD.",
    link:"Research-Art-Works-TAMU.pdf", linkType:"pdf"},
 
+  {title:"Jumpstarting Artist Jobs: Case Studies of U.S. Employment Programs for Creative Workers", author:"National Endowment for the Arts", year:2025, access:"Public", longitudinal:"No",
+   population:"Creative workers", methods:"Case studies",
+   summary:"Profiles four artist employment programs launched during the pandemic, comparing their funding models, hiring structures, and what it has taken to sustain paid creative work.",
+   finding:"Seattle's Hope Corps began with a one-time NEA grant and is now sustained through a dedicated municipal tax.",
+   link:"https://www.arts.gov/sites/default/files/NASERC_Jumpstart-Artist-Jobs_rpt_202508.pdf", linkType:"pdf"},
+
+  {title:"State of the Arts in Education", author:"Arts Connect", year:2026, access:"Public", longitudinal:"Yes",
+   population:"Local education and arts", methods:"Analysis; survey",
+   summary:"Arts Connect's State of the Art Report on arts and education across the Houston region.",
+   finding:"", link:"https://www.artsconnecthouston.org/_files/ugd/e8f3b1_cc0029206f54493a94ec769258952bd0.pdf", linkType:"pdf"},
+
   {title:"State of the Arts Report (TCT)", author:"Texas Cultural Trust", year:2025, access:"Public", longitudinal:"Yes",
    population:"State of Texas", methods:"Multi-source analysis; surveys",
    summary:"A statewide look at the arts and creative sector's impact on Texas' economy, education, culture, and health and well-being.",
    finding:"The Texas arts and culture industry has grown 63%, generating $7.3 billion for the state economy.",
-   link:"", linkType:"soon"},
+   link:"https://issuu.com/txculturaltrust/docs/2025_state_of_the_arts_report?mode=window", linkType:"external"},
 
-  {title:"State of the Arts in Education", author:"Arts Connect", year:2026, access:"Public", longitudinal:"Yes",
-   population:"Local education & arts", methods:"Analysis; survey",
-   summary:"Arts Connect's State of the Art Report on arts and education across the Houston region.",
-   finding:"", link:"", linkType:"soon"},
+  {title:"State-Level Estimates of the Arts' Economic Value and Employment (2017-2022)", author:"National Endowment for the Arts · Bureau of Economic Analysis", year:2024, access:"Public", longitudinal:"Yes",
+   population:"States, including Texas", methods:"Federal economic accounts",
+   summary:"State-by-state estimates of arts and cultural value added, employment, and compensation, drawn from the national satellite account and mapped for every state.",
+   finding:"",
+   link:"https://www.arts.gov/impact/research/arts-data-profile-series/adp-35", linkType:"external"},
 
   {title:"Tactics from 11 Creative Communities: Federal Recovery Funds", author:"SMU DataArts · Bloomberg Associates", year:2024, access:"Public", longitudinal:"No",
    population:"City", methods:"Interviews; survey; document review",
    summary:"How 11 local arts agencies distributed COVID-19 recovery funds (SLFRF) covering advocacy, process, and equity. MOCA, now MOA, participated.",
    finding:"Houston's MOCA received $5M in recovery funds, a 39% increase over a typical year of regular funding.",
-   link:"", linkType:"soon"},
+   link:"https://culturaldata.org/media/3035/federalrecoveryfunds11communities-final.pdf", linkType:"pdf"},
+
+  {title:"The Great Connector: How Arts Participation Renews Civic and Community Engagement", author:"National Endowment for the Arts", year:2026, access:"Public", longitudinal:"No",
+   population:"U.S. adults", methods:"Analysis of three national surveys",
+   summary:"Draws on three national surveys to test how taking part in the arts relates to civic life, from volunteering and charitable giving to voting and community events.",
+   finding:"Arts participants were nearly four times as likely to take part in civic and community life, even after accounting for education and income.",
+   link:"https://www.arts.gov/sites/default/files/NASERC-Arts-and-Civic-Community-Engagement-508.pdf", linkType:"pdf"},
 
   {title:"The Houston Arts Survey: Participation, Perceptions & Prospects", author:"Kinder Institute", year:2012, access:"Public", longitudinal:"No",
    population:"Harris County residents", methods:"Survey",
@@ -445,46 +499,49 @@ const RESOURCES = [
    finding:"73% of Houstonians called excellent arts venues 'very important' to the city's quality of life.",
    link:"20120301 SHEA Arts Survey 2012.pdf", linkType:"pdf"},
 
-  {title:"The Widening Resilience Gap: 10 U.S. City Arts Sectors (2019-24)", author:"SMU DataArts", year:2026, access:"Upcoming", longitudinal:"No",
-   population:"Cities & nonprofit cultural orgs", methods:"CDP & agency application data",
-   summary:"Draws on 4,400+ arts organizations across ten U.S. cities to explain why some arts ecosystems thrived after the pandemic while others declined.",
-   finding:"Houston saw a milder 10% revenue dip, while NYC, LA, and others fell 20% or more.",
-   link:"", linkType:"soon"},
-
-  {title:"A Guide to Promoting Statewide Strategies in the Arts and Health", author:"National Assembly of State Arts Agencies", year:2026, access:"Public", longitudinal:"No",
-   population:"National & state", methods:"Guide",
-   summary:"A national guide from NASAA on building statewide strategies that connect the arts with health and well-being.",
-   finding:"", link:"https://nasaa-arts.org/nasaa_research/a-guide-to-promoting-statewide-strategies-in-the-arts-and-health/", linkType:"external"}
+  {title:"The U.S. Arts and Cultural Production Satellite Account (1998-2023)", author:"National Endowment for the Arts · Bureau of Economic Analysis", year:2025, access:"Public", longitudinal:"Yes",
+   population:"National economy", methods:"Federal economic accounts",
+   summary:"The federal measure of the arts economy, tracking the sector's contribution to GDP, employment, compensation, consumer spending, and trade across 25 years.",
+   finding:"Arts and cultural industries added $1.2 trillion to the U.S. economy in 2023, growing at twice the rate of the economy overall.",
+   link:"https://www.arts.gov/impact/research/arts-data-profile-series/38", linkType:"external"}
 ];
 
 /* --------------------------- filter dimensions --------------------------- */
 /* The sheet's `population` and `methods` fields are free-text and pack several
    ideas into one cell, so they don't chip up cleanly on their own. The map
    below collapses each resource into a short, curated set of Focus + Methods
-   tags. RESOURCES above is untouched — to re-tag anything, edit a row here.
+   tags. RESOURCES above is untouched. To re-tag anything, edit a row here.
    (Focus is a subject read of `population`; a resource may carry more than one.) */
 const TAGS = {
-  "2021 Houston-Region Artist Survey":                                       {focus:["Artists & workforce"], methods:["Survey"]},
-  "Arts & Economic Prosperity 6":                                            {focus:["Organizations","Audiences & public"], methods:["Survey","Data analysis"]},
+  "2021 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"]},
+  "Arts & Economic Prosperity 6":                                            {focus:["Organizations","Audiences and public"], methods:["Survey","Data analysis"]},
   "Arts Data in the Public Sector":                                          {focus:["Organizations"], methods:["Interviews","Document review"]},
-  "Chicago Creative Workforce Study":                                        {focus:["Artists & workforce","Cross-city & national"], methods:["Data analysis"]},
+  "Chicago's Creative Workforce: Economic Conditions and Outcomes":                                        {focus:["Artists and workforce","Cross-city and national"], methods:["Data analysis"]},
   "Civic Art Annual Report":                                                 {focus:["Civic art"], methods:["Data analysis"]},
   "City of Houston Civic Art Collection Map":                                {focus:["Civic art"], methods:["Mapping"]},
   "Creative Connections: Strategic Framework for Houston Cultural Districts": {focus:["Cultural districts"], methods:["Survey","Data analysis","Convenings"]},
-  "Cultural Tourism Index: 250 Global Cities":                               {focus:["Cross-city & national","Audiences & public"], methods:["Data analysis"]},
-  "Engaged by the Arts: Houston Demographics & Audience Opportunity":        {focus:["Artists & workforce","Audiences & public"], methods:["Survey","Data analysis"]},
-  "Financial & Operational Health of Houston's Arts Sector, 2019-2024":      {focus:["Organizations"], methods:["Data analysis"]},
-  "Greater Houston Survey of Artists":                                       {focus:["Artists & workforce"], methods:["Survey"]},
+  "Cultural Tourism Index: 250 Global Cities":                               {focus:["Cross-city and national","Audiences and public"], methods:["Data analysis"]},
+  "Engaged by the Arts: Houston Demographics & Audience Opportunity":        {focus:["Artists and workforce","Audiences and public"], methods:["Survey","Data analysis"]},
+  "2026 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"]},
   "HAA Grants and Panels Dashboard":                                         {focus:["Organizations"], methods:["Data analysis"]},
-  "Houston Events Calendar":                                                 {focus:["Audiences & public"], methods:["Community submissions"]},
-  "Houston Map of Local Government-Supported Arts Activities":               {focus:["Organizations","Audiences & public"], methods:["Mapping"]},
+  "Houston Events Calendar":                                                 {focus:["Audiences and public"], methods:["Community submissions"]},
+  "Houston Map of Local Government-Supported Arts Activities":               {focus:["Organizations","Audiences and public"], methods:["Mapping"]},
   "Investigating Causal Effects of Arts Education Experiences":              {focus:["Education"], methods:["Experimental (RCT)"]},
-  "State of the Arts Report (TCT)":                                          {focus:["Cross-city & national"], methods:["Data analysis","Survey"]},
+  "State of the Arts Report (TCT)":                                          {focus:["Cross-city and national"], methods:["Data analysis","Survey"]},
   "State of the Arts in Education":                                          {focus:["Education"], methods:["Data analysis","Survey"]},
-  "Tactics from 11 Creative Communities: Federal Recovery Funds":            {focus:["Cross-city & national","Organizations"], methods:["Interviews","Survey","Document review"]},
-  "The Houston Arts Survey: Participation, Perceptions & Prospects":         {focus:["Audiences & public"], methods:["Survey"]},
-  "The Widening Resilience Gap: 10 U.S. City Arts Sectors (2019-24)":        {focus:["Organizations","Cross-city & national"], methods:["Data analysis"]},
-  "A Guide to Promoting Statewide Strategies in the Arts and Health":        {focus:["Cross-city & national"], methods:["Guide"]}
+  "Tactics from 11 Creative Communities: Federal Recovery Funds":            {focus:["Cross-city and national","Organizations"], methods:["Interviews","Survey","Document review"]},
+  "The Houston Arts Survey: Participation, Perceptions & Prospects":         {focus:["Audiences and public"], methods:["Survey"]},
+  "City Arts Sector Trends: Divergence and Resilience Across Ten U.S. Cities (2019-2024)":        {focus:["Organizations","Cross-city and national"], methods:["Data analysis"]},
+  "A Guide to Promoting Statewide Strategies in the Arts and Health":        {focus:["Cross-city and national"], methods:["Guide"]},
+  "Arts Vibrancy Index 2025: Data Explorer": {focus:["Cross-city and national"], methods:["Data analysis"]},
+  "The Great Connector: How Arts Participation Renews Civic and Community Engagement": {focus:["Audiences and public","Cross-city and national"], methods:["Survey","Data analysis"]},
+  "Jumpstarting Artist Jobs: Case Studies of U.S. Employment Programs for Creative Workers": {focus:["Artists and workforce","Cross-city and national"], methods:["Interviews","Document review"]},
+  "The U.S. Arts and Cultural Production Satellite Account (1998-2023)": {focus:["Cross-city and national"], methods:["Data analysis"]},
+  "State-Level Estimates of the Arts' Economic Value and Employment (2017-2022)": {focus:["Cross-city and national"], methods:["Data analysis"]},
+  "Creative Economy State Profiles": {focus:["Cross-city and national"], methods:["Data analysis"]},
+  "Creative Economy Research Policy Brief": {focus:["Cross-city and national"], methods:["Guide"]},
+  "HouArts in Action Messaging Guide": {focus:["Artists and workforce","Organizations"], methods:["Guide"]},
+  "HouArts in Action: Key Stats and Data Sources": {focus:["Organizations"], methods:["Data analysis"]}
 };
 RESOURCES.forEach(r=>{
   const t = TAGS[r.title] || {};
@@ -503,10 +560,10 @@ let query = "";
    original Access filter. They AND together, and combine with the search box. */
 const DIMENSIONS = [
   { el:document.getElementById('chips-access'),
-    order:["All","Public","Upcoming","Upon request","Internal"],
+    order:["All","Public","Upcoming","Upon request"],
     isAccess:true, active:"All", tags:r=>[r.access] },
   { el:document.getElementById('chips-focus'),
-    order:["All","Artists & workforce","Organizations","Audiences & public","Cross-city & national","Civic art","Education","Cultural districts"],
+    order:["All","Artists and workforce","Organizations","Audiences and public","Cross-city and national","Civic art","Education","Cultural districts"],
     active:"All", tags:r=>r._focus },
   { el:document.getElementById('chips-methods'),
     order:["All","Survey","Data analysis","Interviews","Document review","Mapping","Experimental (RCT)","Convenings","Community submissions","Guide"],
@@ -612,11 +669,12 @@ function render(){
 }
 
 searchEl.addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render();});
+document.getElementById('heroMeta').textContent = RESOURCES.length + ' resources · Updated July 2026';
 render();
 </script>
 
 <script>
-/* ░░ REVIEW PASSWORD GATE — temporary; remove with its HTML + CSS + the robots meta after review ░░ */
+/* ░░ REVIEW PASSWORD GATE - temporary; remove with its HTML + CSS + the robots meta after review ░░ */
 (function(){
   var PASSWORD = "4e$HuBGzTj";          /* ← CHANGE THIS to the password you give the CEO */
   var KEY = "haaReviewUnlocked";
