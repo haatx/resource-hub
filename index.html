@@ -25,7 +25,7 @@
     --ink-soft:#1B4298;      /* muted navy for secondary text */
     --hair:#d9d2c4;          /* hairline rules */
 
-    --r:16px;
+    --r:0;
     --maxw:1440px;
     --ease:cubic-bezier(.4,0,.1,1);
   }
@@ -58,7 +58,7 @@
      directory moved to hub.html. See the INTRO JS block for the two hrefs
      that would need repointing.
      ======================================================================== */
-  #intro{--gap:clamp(58px,7vw,104px);display:block}
+  #intro{--gap:clamp(32px,3.4vw,52px);display:block}
   #intro .in{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   #intro .band{padding:var(--gap) 0 0}
 
@@ -74,14 +74,8 @@
   @keyframes introGrow{to{transform:scaleX(1)}}
 
   /* ---- 1. hero ---- */
-  #intro .hero{padding:72px 0 0}
-  #intro .hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;margin-bottom:22px}
-  #intro .kicker{
-    font-family:"Geist Mono",monospace;font-weight:400;font-size:14px;
-    letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
-    margin:0;display:flex;align-items:center;gap:12px;min-width:0;
-  }
-  #intro .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);flex:none}
+  #intro .hero{padding:32px 0 0}
+  #intro .hero-top{display:flex;justify-content:flex-end;align-items:center;margin-bottom:18px}
   #intro .logo{height:58px;width:51px;display:block;flex:none}
   #intro h1{
     font-family:"Geist Mono",monospace;font-weight:700;
@@ -90,13 +84,13 @@
   }
   #intro .stand{
     margin:26px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.25;
-    color:var(--ink-soft);max-width:62ch;
+    color:var(--ink-soft);
   }
   #intro .meta{
     font-family:"Geist Mono",monospace;font-size:14px;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--ink-soft);margin:30px 0 0;
+    text-transform:uppercase;color:var(--ink-soft);margin:22px 0 0;
   }
-  #intro .cta{margin:28px 0 0}
+  #intro .cta{margin:24px 0 0}
   #intro .btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 24px;border-radius:99px;text-decoration:none;
@@ -114,7 +108,7 @@
   #intro h2{
     font-family:"Geist Mono",monospace;font-weight:450;
     font-size:clamp(21px,2.5vw,30px);line-height:1.12;letter-spacing:-.02em;
-    margin:0 0 30px;max-width:26ch;
+    margin:0 0 22px;
   }
   #intro h3{font-family:"Geist Mono",monospace;font-weight:450;margin:0}
 
@@ -140,11 +134,11 @@
   #intro .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:26px 24px}
   #intro .ways article{border-top:2px solid var(--c);padding:16px 0 0}
   #intro .ways h3{font-size:16px;margin:0 0 9px}
-  #intro .ways p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.38;max-width:36ch}
+  #intro .ways p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.38}
 
   /* ---- 4. how to use the directory ---- */
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
-  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42;max-width:60ch}
+  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42;max-width:90ch}
   #intro .how p:last-child{margin-bottom:0}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
   #intro .facetlist div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair)}
@@ -181,7 +175,7 @@
     background:var(--paper-2);border:1px solid var(--hair);border-radius:var(--r);
     padding:clamp(26px,3.4vw,40px);
   }
-  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;max-width:62ch;color:var(--ink-soft)}
+  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;max-width:90ch;color:var(--ink-soft)}
   #intro .pair{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   #intro .ghostbtn{
     display:inline-flex;align-items:center;gap:9px;
@@ -194,7 +188,7 @@
 
   /* ---- 7. credit ---- */
   #intro .credit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
-  #intro .credit p{margin:0 0 12px;font-size:15px;line-height:1.42;color:var(--ink-soft);max-width:48ch}
+  #intro .credit p{margin:0 0 12px;font-size:15px;line-height:1.42;color:var(--ink-soft)}
   #intro .credit p:last-child{margin-bottom:0}
   #intro .credit strong{color:var(--ink);font-weight:600}
   #intro .partners{
@@ -204,20 +198,12 @@
   }
   #intro .close{padding:var(--gap) 0 0}
 
-  /* placeholder marker; anything still wearing this must not ship */
-  #intro .tk{
-    font-family:"Geist Mono",monospace;font-size:.85em;font-weight:500;
-    background:var(--gold);color:var(--navy);padding:1px 6px;border-radius:4px;
-    white-space:nowrap;
-  }
-
   @media (max-width:900px){
     #intro .how,#intro .credit{grid-template-columns:1fr;gap:30px}
   }
   @media (max-width:760px){
-    #intro .hero{padding:52px 0 0}
-    #intro h1{white-space:normal;font-size:clamp(34px,9vw,52px);max-width:16ch}
-    #intro .hero-top{grid-template-columns:1fr;gap:14px}
+    #intro .hero{padding:24px 0 0}
+    #intro h1{white-space:normal;font-size:clamp(34px,9vw,52px)}
     #intro .logo{height:38px;width:33px}
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
@@ -470,7 +456,6 @@
   <header class="hero">
     <div class="in">
       <div class="hero-top">
-        <p class="kicker"><span class="dot"></span><span>Resource Hub</span></p>
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
       <h1>Houston Arts Data Resource Hub</h1>
@@ -487,8 +472,8 @@
   <!-- 2. what is in here -->
   <section class="band" aria-labelledby="in-what">
     <div class="in">
-      <p class="eyebrow">What is in here</p>
-      <h2 id="in-what">Research on Houston's arts sector, and the wider picture it sits in</h2>
+      <p class="eyebrow">What's in here</p>
+      <h2 id="in-what">Research on Houston's arts sector, and the wider picture it sits in.</h2>
       <!-- cards, counts and filter links are all built from RESOURCES -->
       <div class="what" id="introWhat"></div>
     </div>
@@ -500,23 +485,23 @@
   <section class="band" aria-labelledby="in-ways">
     <div class="in">
       <p class="eyebrow">Ways to use it</p>
-      <h2 id="in-ways">Four things this is good for</h2>
+      <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
         <article style="--c:var(--cyan)">
-          <h3>Make the case</h3>
+          <h3>Make the case.</h3>
           <p>Pull cited figures for a funder meeting, a council briefing, or a public comment, with the source one click away.</p>
         </article>
         <article style="--c:var(--gold)">
-          <h3>Benchmark your organization</h3>
+          <h3>Benchmark your organization.</h3>
           <p>See where your budget, staffing, and audience sit against the Houston, Texas, and national picture.</p>
         </article>
         <article style="--c:var(--coral)">
-          <h3>Write the grant or the report</h3>
-          <p>Find the specific statistic and the citation to go with it, rather than reusing a number whose source you cannot name.</p>
+          <h3>Write the grant or the report.</h3>
+          <p>Find the specific statistic and the citation to go with it, rather than reusing a number whose source you can't name.</p>
         </article>
         <article style="--c:var(--indigo)">
-          <h3>Plan the program</h3>
-          <p>Understand who is attending, who is not, and where access gaps sit across the region.</p>
+          <h3>Plan the program.</h3>
+          <p>Understand who's attending, who isn't, and where access gaps sit across the region.</p>
         </article>
       </div>
     </div>
@@ -528,12 +513,12 @@
   <section class="band" aria-labelledby="in-how">
     <div class="in">
       <p class="eyebrow">How to use the directory</p>
-      <h2 id="in-how">Filter down, then open a row</h2>
+      <h2 id="in-how">Filter down, then open a row.</h2>
       <div class="how">
         <div>
-          <p>Every resource sits behind a single row. Open one and you get a plain-language summary, the key finding where the source reports one, and the details you need to cite it: who it covers, what methods it used, when it was published, how often it refreshes, and who maintains it.</p>
+          <p>Every resource sits behind a single row. Open one and you'll get a plain-language summary, the key finding where the source reports one, and the details you need to cite it: who it covers, what methods it used, when it was published, how often it refreshes, and who maintains it.</p>
           <p>The filters narrow the list six ways, and they combine; the search box runs across titles, authors, summaries, and stewards at the same time. Place narrows twice, so you can move from the Houston region down to a single school district.</p>
-          <p>Whatever you have filtered to is written into the address bar, so you can send someone the exact view you are looking at rather than telling them which boxes to tick.</p>
+          <p>Whatever you've filtered to is written into the address bar, so you can send someone the exact view you're looking at rather than telling them which boxes to tick.</p>
         </div>
         <dl class="facetlist">
           <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
@@ -553,7 +538,7 @@
   <section class="band" aria-labelledby="in-stats">
     <div class="in">
       <p class="eyebrow">Featured findings</p>
-      <h2 id="in-stats">A few numbers from the collection</h2>
+      <h2 id="in-stats">A few numbers from the collection.</h2>
       <!-- pulled from the finding fields of the records named in FEATURED -->
       <div class="stats" id="introStats"></div>
     </div>
@@ -565,14 +550,13 @@
   <section class="band" aria-labelledby="in-feedback">
     <div class="in">
       <p class="eyebrow">Feedback and contributions</p>
-      <h2 id="in-feedback">This hub is meant to grow</h2>
+      <h2 id="in-feedback">This hub is meant to grow.</h2>
       <div class="feedback">
-        <p>If you know of a study, survey, dashboard, or map that belongs here, send it to us; we would rather hear about it twice than miss it. If something is broken, mislabeled, or out of date, tell us that too.</p>
+        <p>If you know of a study, survey, dashboard, or map that belongs here, send it to us; we'd rather hear about it twice than miss it. If something's broken, mislabeled, or out of date, tell us that too.</p>
         <div class="pair">
-          <a class="ghostbtn" href="mailto:TKTK@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-          <a class="ghostbtn" href="mailto:TKTK@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what is not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
         </div>
-        <p style="margin-top:18px;font-size:14px"><span class="tk">TKTK</span> both links point at TKTK@haatx.com; replace with the real inbox before publication.</p>
       </div>
     </div>
   </section>
@@ -582,12 +566,12 @@
   <!-- 7. credit -->
   <section class="band close" aria-labelledby="in-credit">
     <div class="in">
-      <p class="eyebrow">Who is behind this</p>
-      <h2 id="in-credit">Built and maintained by Houston Arts Alliance</h2>
+      <p class="eyebrow">Who's behind this</p>
+      <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
           <p><strong>Houston Arts Alliance</strong> assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
-          <p><span class="tk">TKTK</span> one or two sentences on why HAA maintains the hub and who it is for; wording to be approved.</p>
+          <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here, artists, arts organizations, funders, and civic partners.</p>
         </div>
         <div>
           <p>Developed in partnership with:</p>
@@ -595,7 +579,6 @@
             <li>Houston Endowment</li>
             <li>SMU DataArts</li>
           </ul>
-          <p style="margin-top:16px"><span class="tk">TKTK</span> exact partnership credit line, and whether any other contributors or funders should be named here.</p>
         </div>
       </div>
     </div>
@@ -685,7 +668,7 @@
   <div class="wrap">
     <span>Houston Arts Alliance · Houston Arts Data Resource Hub</span>
     <span id="footMeta"></span>
-    <a href="mailto:TKTK@haatx.com?subject=Resource%20Hub%3A%20feedback">Suggest a resource or report a problem</a>
+    <a href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20feedback">Suggest a resource or report a problem</a>
   </div>
 </footer>
 
@@ -1363,7 +1346,7 @@ render();
     a.href = DIRECTORY + '?' + w.key + '=' + encodeURIComponent(w.value) + '#directory';
     a.dataset.facet = w.key;
     a.dataset.value = w.value;
-    a.innerHTML = `<span class="n">${n}</span><h3>${w.h}</h3><p>${w.p}</p>`;
+    a.innerHTML = `<span class="n">${n}</span><h3>${w.h}.</h3><p>${w.p}</p>`;
     whatEl.appendChild(a);
   });
 
