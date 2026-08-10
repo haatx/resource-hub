@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Houston Arts Data Resource Hub | Houston Arts Alliance</title>
+<title>Houston Creative Sector Resource Hub | Houston Arts Alliance</title>
 <meta name="description" content="A single, public home for the studies, surveys, dashboards, and maps that report on Houston's arts sector. Browse, filter, and cite research on artists, audiences, organizations, and the creative economy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -458,8 +458,8 @@
       <div class="hero-top">
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
-      <h1>Houston Arts Data Resource Hub</h1>
-      <p class="stand">A single, public home for the studies, surveys, dashboards, and maps that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
+      <h1>Houston Creative Sector Resource Hub</h1>
+      <p class="stand">Public source of reports and analysis for Houston's arts sector, gathered in one place so they're easy to find, cite, and share.</p>
       <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
@@ -517,7 +517,7 @@
       <div class="how">
         <div>
           <p>Every resource sits behind a single row. Open one and you'll get a plain-language summary, the key finding where the source reports one, and the details you need to cite it: who it covers, what methods it used, when it was published, how often it refreshes, and who maintains it.</p>
-          <p>The filters narrow the list six ways, and they combine; the search box runs across titles, authors, summaries, and stewards at the same time. Place narrows twice, so you can move from the Houston region down to a single school district.</p>
+          <p>The filters narrow the list six ways, and they combine; the search box runs across titles, authors, summaries, and stewards at the same time. Some options narrow further, opening a second set of choices beneath them when you select one.</p>
           <p>Whatever you've filtered to is written into the address bar, so you can send someone the exact view you're looking at rather than telling them which boxes to tick.</p>
         </div>
         <dl class="facetlist">
@@ -570,7 +570,7 @@
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
-          <p><strong>Houston Arts Alliance</strong> assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
+          <p>Houston Arts Alliance assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
           <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here, artists, arts organizations, funders, and civic partners.</p>
         </div>
         <div>
@@ -666,7 +666,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Houston Arts Alliance · Houston Arts Data Resource Hub</span>
+    <span>Houston Arts Alliance · Houston Creative Sector Resource Hub</span>
     <span id="footMeta"></span>
     <a href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20feedback">Suggest a resource or report a problem</a>
   </div>
@@ -1323,18 +1323,18 @@ render();
   /* Each card counts exactly one facet value and links to that same value, so
      the number on the card is always the number of rows you land on. */
   const WHAT = [
-    {c:'var(--cyan)',   key:'place',  value:'Houston region', h:'Houston and Harris County',
-     p:'Studies of the city, the county, the school district, and the wider metro.'},
-    {c:'var(--gold)',   key:'place',  value:'Texas', h:'Statewide Texas research',
-     p:'The state picture on the arts economy, education, and health.'},
-    {c:'var(--coral)',  key:'place',  value:'United States', h:'National and peer cities',
-     p:'Federal benchmarks and comparisons showing where Houston sits against other regions.'},
+    {c:'var(--cyan)',   key:'format', value:'Report', h:'Reports and studies',
+     p:'Full-length research, from local surveys to federal economic accounts.'},
+    {c:'var(--gold)',   key:'format', value:'Toolkit or guide', h:'Toolkits and guides',
+     p:'Advocacy-ready material: talking points, messaging guidance, and reusable briefs.'},
+    {c:'var(--coral)',  key:'format', value:'Map', h:'Maps',
+     p:'Where activity, funding, and access gaps actually sit on the ground.'},
     {c:'var(--indigo)', key:'format', value:'Dashboard or explorer', h:'Dashboards and explorers',
      p:'Interactive sources you can query yourself rather than read off a fixed page.'},
-    {c:'var(--green)',  key:'format', value:'Map', h:'Maps',
-     p:'Where activity, funding, and access gaps actually sit on the ground.'},
-    {c:'var(--orange)', key:'format', value:'Toolkit or guide', h:'Toolkits and guides',
-     p:'Advocacy-ready material: talking points, messaging guidance, and reusable briefs.'}
+    {c:'var(--green)',  key:'format', value:'Brief or one-pager', h:'Briefs and one-pagers',
+     p:'Short summaries you can hand to a board member or a council office.'},
+    {c:'var(--orange)', key:'format', value:'Directory or calendar', h:'Directories and calendars',
+     p:'Running lists of sources and events, updated continuously rather than published once.'}
   ];
 
   const whatEl = document.getElementById('introWhat');
