@@ -62,8 +62,16 @@
   #intro .in{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   #intro .band{padding:var(--gap) 0 0}
 
-  /* section divider: one solid navy rule */
+  /* section divider: one solid navy rule. The INTRO JS block draws each one in
+     from the left, once, as it scrolls into view. The hidden start state only
+     exists under .js-rules, which that script adds, so with JavaScript off or
+     reduced motion on every rule stays whole. clip-path, not scaleX, so the
+     rounded ends stay round while the line grows. */
   #intro .rule{height:4px;margin:var(--gap) 0 0;background:var(--navy);border-radius:99px}
+  #intro.js-rules .rule{clip-path:inset(0 100% 0 0 round 99px)}
+  #intro.js-rules .rule.drawing{animation:introDraw .95s var(--ease) .15s both}
+  #intro.js-rules .rule.drawn{clip-path:none}
+  @keyframes introDraw{to{clip-path:inset(0 0 0 0 round 99px)}}
 
   /* ---- 1. hero ---- */
   #intro .hero{padding:32px 0 0}
@@ -198,6 +206,9 @@
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #intro.js-rules .rule{clip-path:none}
   }
 
   /* ------------------------------ LAYOUT SHELL ----------------------------- */
@@ -1357,6 +1368,27 @@ render();
       `<p class="src">${r.author} · ${r.year} ${ICON_ARROW}</p>`;
     statsEl.appendChild(a);
   });
+
+  /* ---- section rules draw in ------------------------------------------- */
+  /* Each rule draws in once, the first time it is in view; a rule already in
+     view on load draws on load. Adding .js-rules is what hides the rules, so
+     it happens only here, and only when motion is allowed. The observer
+     watches each rule's wrapper, which sits exactly where the rule does: a
+     rule clipped to nothing never counts as visible itself. */
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const drawRules = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{
+        if(!en.isIntersecting) return;
+        drawRules.unobserve(en.target);
+        en.target.querySelector('.rule').classList.add('drawing');
+      });
+    }, {threshold:0.5});
+    introEl.querySelectorAll('.rule').forEach(r=>{
+      r.addEventListener('animationend', ()=>r.classList.replace('drawing','drawn'), {once:true});
+      drawRules.observe(r.parentElement);
+    });
+    introEl.classList.add('js-rules');
+  }
 
   /* ---- in-page enhancement --------------------------------------------- */
   /* When the directory is on this page, filter in place instead of reloading.
