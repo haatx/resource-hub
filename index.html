@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Houston Arts Data Resource Hub | Houston Arts Alliance</title>
-<meta name="description" content="A single, public home for the studies, surveys, dashboards, and maps that report on Houston's arts sector. Browse, filter, and cite research on artists, audiences, organizations, and the creative economy.">
+<meta name="description" content="Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share. Browse and filter research on artists, audiences, organizations, and the creative economy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Hanken+Grotesk:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#06205c;          /* dark anchor */
@@ -36,7 +36,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    font-family:"DM Sans",system-ui,sans-serif;
     font-size:17px;
     line-height:1.3;
     -webkit-font-smoothing:antialiased;
@@ -62,16 +62,8 @@
   #intro .in{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   #intro .band{padding:var(--gap) 0 0}
 
-  /* the spectrum motif, reused as a section divider */
-  #intro .spectrum{display:flex;height:6px;border-radius:99px;overflow:hidden}
-  #intro .spectrum span{flex:1;transform:scaleX(0);transform-origin:left;animation:introGrow .6s var(--ease) forwards}
-  #intro .spectrum span:nth-child(1){background:var(--cyan);animation-delay:.15s}
-  #intro .spectrum span:nth-child(2){background:var(--gold);animation-delay:.27s}
-  #intro .spectrum span:nth-child(3){background:var(--coral);animation-delay:.39s}
-  #intro .spectrum span:nth-child(4){background:var(--indigo);animation-delay:.51s}
-  #intro .hero .spectrum{width:min(420px,70%);margin:34px 0 0}
-  #intro .rule{height:4px;margin:var(--gap) 0 0}
-  @keyframes introGrow{to{transform:scaleX(1)}}
+  /* section divider: one solid navy rule */
+  #intro .rule{height:4px;margin:var(--gap) 0 0;background:var(--navy);border-radius:99px}
 
   /* ---- 1. hero ---- */
   #intro .hero{padding:32px 0 0}
@@ -88,7 +80,7 @@
   }
   #intro .meta{
     font-family:"Geist Mono",monospace;font-size:14px;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--ink-soft);margin:22px 0 0;
+    text-transform:uppercase;color:var(--ink-soft);margin:32px 0 0;
   }
   #intro .cta{margin:24px 0 0}
   #intro .btn{
@@ -101,13 +93,9 @@
   #intro .btn svg{width:15px;height:15px;stroke:currentColor;fill:none}
 
   /* ---- shared section furniture ---- */
-  #intro .eyebrow{
-    font-family:"Geist Mono",monospace;font-weight:400;font-size:12px;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px;
-  }
   #intro h2{
     font-family:"Geist Mono",monospace;font-weight:450;
-    font-size:clamp(21px,2.5vw,30px);line-height:1.12;letter-spacing:-.02em;
+    font-size:clamp(21px,2.5vw,30px);line-height:1.12;letter-spacing:-.02em;word-spacing:-.1em;
     margin:0 0 22px;
   }
   #intro h3{font-family:"Geist Mono",monospace;font-weight:450;margin:0}
@@ -138,7 +126,7 @@
 
   /* ---- 4. how to use the directory ---- */
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
-  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42;max-width:90ch}
+  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42}
   #intro .how p:last-child{margin-bottom:0}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
   #intro .facetlist div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair)}
@@ -160,9 +148,10 @@
   #intro .stats a:hover{transform:translateY(-3px);box-shadow:0 14px 28px -20px var(--navy)}
   #intro .stats a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
   #intro .stats .fig{
-    font-family:"Geist Mono",monospace;font-size:15.5px;line-height:1.3;
+    font-size:18px;line-height:1.3;font-weight:500;
     color:var(--navy);margin:0;
   }
+  #intro .stats .nw{white-space:nowrap}
   #intro .stats .src{
     font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.06em;
     text-transform:uppercase;color:var(--ink-soft);margin:0;
@@ -175,7 +164,7 @@
     background:var(--paper-2);border:1px solid var(--hair);border-radius:var(--r);
     padding:clamp(26px,3.4vw,40px);
   }
-  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;max-width:90ch;color:var(--ink-soft)}
+  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
   #intro .pair{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   #intro .ghostbtn{
     display:inline-flex;align-items:center;gap:9px;
@@ -185,21 +174,22 @@
     transition:background .2s var(--ease),color .2s var(--ease);
   }
   #intro .ghostbtn:hover{background:var(--navy);color:var(--paper)}
+  #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
   /* ---- 7. credit ---- */
-  #intro .credit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
-  #intro .credit p{margin:0 0 12px;font-size:15px;line-height:1.42;color:var(--ink-soft)}
+  #intro .credit > div + div{margin:30px 0 0}
+  #intro .credit p{margin:0 0 12px;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
   #intro .credit p:last-child{margin-bottom:0}
   #intro .credit strong{color:var(--ink);font-weight:600}
+  /* partner logos: sized to the HAA logo's area, not its height */
   #intro .partners{
-    font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--ink-soft);
-    display:flex;flex-wrap:wrap;gap:10px 18px;margin:16px 0 0;padding:0;list-style:none;
+    display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin:16px 0 0;padding:0;list-style:none;
   }
+  #intro .partners img{display:block;height:auto}
   #intro .close{padding:var(--gap) 0 0}
 
   @media (max-width:900px){
-    #intro .how,#intro .credit{grid-template-columns:1fr;gap:30px}
+    #intro .how{grid-template-columns:1fr;gap:30px}
   }
   @media (max-width:760px){
     #intro .hero{padding:24px 0 0}
@@ -208,9 +198,6 @@
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
-  }
-  @media (prefers-reduced-motion:reduce){
-    #intro .spectrum span{transform:none}
   }
 
   /* ------------------------------ LAYOUT SHELL ----------------------------- */
@@ -370,15 +357,16 @@
     opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease) .08s,transform .4s var(--ease) .08s;
   }
   .item.open .panel-pad{opacity:1;transform:none}
-  .summary{font-size:17px;color:var(--ink);margin:0 0 22px;max-width:52ch}
+  .summary{font-size:17px;color:var(--ink);margin:0 0 22px}
 
   /* key-finding pull quote */
   .finding{
     border-left:3px solid var(--accent);
     padding:14px 0 14px 20px;margin:0 0 26px;
-    font-family:"Geist Mono", monospace;font-size:16px;line-height:1.2;font-weight:400;
-    color:var(--navy);max-width:46ch;
+    font-size:18px;line-height:1.3;font-weight:500;
+    color:var(--navy);
   }
+  .finding .nw{white-space:nowrap}
   .finding .lbl{display:block;font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.1em;
     text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;font-weight:500}
 
@@ -459,32 +447,29 @@
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
       <h1>Houston Arts Data Resource Hub</h1>
-      <p class="stand">A single, public home for the studies, surveys, dashboards, and maps that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
-      <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <p class="stand">Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
       <p class="cta"><a class="btn" href="#directory">Browse the resources <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></p>
     </div>
   </header>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 2. what is in here -->
   <section class="band" aria-labelledby="in-what">
     <div class="in">
-      <p class="eyebrow">What's in here</p>
       <h2 id="in-what">Research on Houston's arts sector, and the wider picture it sits in.</h2>
       <!-- cards, counts and filter links are all built from RESOURCES -->
       <div class="what" id="introWhat"></div>
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 3. ways to use it -->
   <section class="band" aria-labelledby="in-ways">
     <div class="in">
-      <p class="eyebrow">Ways to use it</p>
       <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
         <article style="--c:var(--cyan)">
@@ -507,12 +492,11 @@
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 4. how to use the directory -->
   <section class="band" aria-labelledby="in-how">
     <div class="in">
-      <p class="eyebrow">How to use the directory</p>
       <h2 id="in-how">Filter down, then open a row.</h2>
       <div class="how">
         <div>
@@ -532,24 +516,22 @@
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 5. featured findings -->
   <section class="band" aria-labelledby="in-stats">
     <div class="in">
-      <p class="eyebrow">Featured findings</p>
       <h2 id="in-stats">A few numbers from the collection.</h2>
       <!-- pulled from the finding fields of the records named in FEATURED -->
       <div class="stats" id="introStats"></div>
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 6. feedback and contributions -->
   <section class="band" aria-labelledby="in-feedback">
     <div class="in">
-      <p class="eyebrow">Feedback and contributions</p>
       <h2 id="in-feedback">This hub is meant to grow.</h2>
       <div class="feedback">
         <p>If you know of a study, survey, dashboard, or map that belongs here, send it to us; we'd rather hear about it twice than miss it. If something's broken, mislabeled, or out of date, tell us that too.</p>
@@ -561,12 +543,11 @@
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
   <!-- 7. credit -->
   <section class="band close" aria-labelledby="in-credit">
     <div class="in">
-      <p class="eyebrow">Who's behind this</p>
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
@@ -576,15 +557,15 @@
         <div>
           <p>Developed in partnership with:</p>
           <ul class="partners">
-            <li>Houston Endowment</li>
-            <li>SMU DataArts</li>
+            <li><img src="assets/logos/houston-endowment.png" width="100" height="33" alt="Houston Endowment"></li>
+            <li><img src="assets/logos/smu-dataarts.png" width="164" height="17" alt="SMU DataArts"></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-    <div class="in"><div class="spectrum rule" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+    <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
 </section>
 
@@ -1202,6 +1183,9 @@ const icons = {
 
 /* mirrored locally in the INTRO JS block; keep the two in step */
 function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+/* display only: wraps numeric ranges such as 0-20% so they never break at the
+   hyphen; the text and its hyphen (U+002D) are unchanged. Mirrored in INTRO. */
+function keepRanges(s){ return s.replace(/\d+%?-\d+%?/g,'<span class="nw">$&</span>'); }
 
 function actionHTML(r){
   switch(r.linkType){
@@ -1257,7 +1241,7 @@ function render(){
       <div class="panel"><div class="panel-inner"><div class="panel-pad">
         <div>
           <p class="summary">${r.summary}</p>
-          ${r.finding?`<p class="finding"><span class="lbl">Key finding</span>${r.finding}</p>`:''}
+          ${r.finding?`<p class="finding"><span class="lbl">Key finding</span>${keepRanges(r.finding)}</p>`:''}
           <div class="action">${actionHTML(r)}</div>
         </div>
         <dl class="facts">
@@ -1312,6 +1296,7 @@ render();
   /* mirrors slugify() in the directory render; kept local so the intro has no
      dependency on it */
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const keepRanges = s => s.replace(/\d+%?-\d+%?/g,'<span class="nw">$&</span>');
   const countBy = (get,...vals) => RESOURCES.filter(r=>vals.some(v=>get(r).includes(v))).length;
   const byPlace  = r => r._placeAll;
   const byFormat = r => r._format;
@@ -1368,7 +1353,7 @@ render();
     a.style.setProperty('--c', ACCENTS[i % ACCENTS.length]);
     a.href = DIRECTORY + '#r-' + slug(r.title);
     a.dataset.record = 'r-' + slug(r.title);
-    a.innerHTML = `<p class="fig">${r.finding}</p>` +
+    a.innerHTML = `<p class="fig">${keepRanges(r.finding)}</p>` +
       `<p class="src">${r.author} · ${r.year} ${ICON_ARROW}</p>`;
     statsEl.appendChild(a);
   });
