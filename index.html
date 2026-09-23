@@ -19,8 +19,8 @@
     --orange:#FF9A3E;
     --offwhite:#F5FFF7;
 
-    --paper:#f6f3ec;         /* warm off-white background */
-    --paper-2:#efeae0;       /* slightly deeper paper for panels */
+    --paper:#f8f5ef;         /* warm off-white background */
+    --paper-2:#f0ece3;       /* slightly deeper paper for panels */
     --ink:#06205c;
     --ink-soft:#1B4298;      /* muted navy for secondary text */
     --hair:#d9d2c4;          /* hairline rules */
@@ -67,7 +67,7 @@
      exists under .js-rules, which that script adds, so with JavaScript off or
      reduced motion on every rule stays whole. clip-path, not scaleX, so the
      rounded ends stay round while the line grows. */
-  #intro .rule{height:4px;margin:var(--gap) 0 0;background:var(--navy);border-radius:99px}
+  #intro .rule{height:2px;margin:var(--gap) 0 0;background:var(--navy);border-radius:99px}
   #intro.js-rules .rule{clip-path:inset(0 100% 0 0 round 99px)}
   #intro.js-rules .rule.drawing{animation:introDraw .95s var(--ease) .15s both}
   #intro.js-rules .rule.drawn{clip-path:none}
@@ -188,7 +188,6 @@
   #intro .credit > div + div{margin:30px 0 0}
   #intro .credit p{margin:0 0 12px;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
   #intro .credit p:last-child{margin-bottom:0}
-  #intro .credit strong{color:var(--ink);font-weight:600}
   /* partner logos: sized to the HAA logo's area, not its height */
   #intro .partners{
     display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin:16px 0 0;padding:0;list-style:none;
@@ -406,7 +405,7 @@
   .empty.show{display:block}
 
   /* footer */
-  footer{border-top:1px solid var(--hair);padding:36px 0 60px;color:var(--ink-soft);font-size:13px}
+  footer{border-top:1px solid var(--hair);padding:36px 0 60px;color:var(--ink-soft);font-size:14px}
   footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
 
   /* responsive */
@@ -457,7 +456,7 @@
       <div class="hero-top">
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
-      <h1>Houston Arts Data Resource Hub</h1>
+      <h1 tabindex="-1">Houston Arts Data Resource Hub</h1>
       <p class="stand">Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
@@ -484,20 +483,20 @@
       <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
         <article style="--c:var(--cyan)">
-          <h3>Make the case.</h3>
-          <p>Pull cited figures for a funder meeting, a council briefing, or a public comment, with the source one click away.</p>
+          <h3>Make your case.</h3>
+          <p>Pull cited figures for a board presentation or City Council meeting, with the source one click away.</p>
         </article>
         <article style="--c:var(--gold)">
-          <h3>Benchmark your organization.</h3>
-          <p>See where your budget, staffing, and audience sit against the Houston, Texas, and national picture.</p>
+          <h3>Benchmark your work.</h3>
+          <p>See how your organization's numbers compare with peers close to home, across Texas, and nationwide.</p>
         </article>
         <article style="--c:var(--coral)">
-          <h3>Write the grant or the report.</h3>
-          <p>Find the specific statistic and the citation to go with it, rather than reusing a number whose source you can't name.</p>
+          <h3>Support every figure.</h3>
+          <p>Each finding here traces back to a study you can name and cite when someone asks where it came from.</p>
         </article>
         <article style="--c:var(--indigo)">
-          <h3>Plan the program.</h3>
-          <p>Understand who's attending, who isn't, and where access gaps sit across the region.</p>
+          <h3>Plan your programs.</h3>
+          <p>Learn who attends and supports the arts in the Houston area, and who has the hardest time taking part.</p>
         </article>
       </div>
     </div>
@@ -562,7 +561,7 @@
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
-          <p><strong>Houston Arts Alliance</strong> assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
+          <p>Houston Arts Alliance assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
           <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here, artists, arts organizations, funders, and civic partners.</p>
         </div>
         <div>
@@ -658,8 +657,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Houston Arts Alliance · Houston Arts Data Resource Hub</span>
-    <span id="footMeta"></span>
+    <a href="#top" id="toTop">Back to top <span aria-hidden="true">↑</span></a>
     <a href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20feedback">Suggest a resource or report a problem</a>
   </div>
 </footer>
@@ -1281,7 +1279,16 @@ searchEl.addEventListener('input',e=>{
   syncURL(); render();
 });
 
-document.getElementById('footMeta').textContent = 'Last updated ' + UPDATED;
+/* footer "Back to top": scroll up without writing #top into the address bar,
+   which carries the shareable filter state, and move focus to the page
+   heading. The href stays as the no-JavaScript fallback. */
+document.getElementById('toTop').addEventListener('click', e=>{
+  e.preventDefault();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:0, behavior: reduce ? 'instant' : 'smooth'});
+  const h1 = document.querySelector('h1');
+  if(h1) h1.focus({preventScroll:true});
+});
 
 readURL();
 DIMENSIONS.forEach(paintDim);
