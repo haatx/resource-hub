@@ -74,9 +74,16 @@
   @keyframes introDraw{to{clip-path:inset(0 0 0 0 round 99px)}}
 
   /* ---- 1. hero ---- */
-  #intro .hero{padding:32px 0 0}
-  #intro .hero-top{display:flex;justify-content:flex-end;align-items:center;margin-bottom:18px}
-  #intro .logo{height:58px;width:51px;display:block;flex:none}
+  #intro .hero{padding:56px 0 0}
+  /* Title and logo share one row as a lockup, logo on the right, its bottom
+     level with the bottom of the title's last line. Above 760px its height is
+     1.16 times the h1's font size (3.25vw), held between 38px and 58px, so it
+     reaches 58px as the h1 reaches its 50px cap. A top margin of minus its
+     largest height keeps it out of the row's height: anything taller than the
+     title rises into the hero's top padding, and nothing hangs below toward
+     the standfirst. */
+  #intro .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  #intro .logo{height:clamp(38px,3.25vw * 1.16,58px);width:auto;aspect-ratio:51/58;display:block;flex:none;margin:-58px 0 0}
   #intro h1{
     font-family:"Geist Mono",monospace;font-weight:700;
     font-size:clamp(27px,3.25vw,50px);line-height:.98;
@@ -181,10 +188,10 @@
   #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
   /* ---- 7. credit ---- */
-  #intro .credit > div + div{margin:12px 0 0}
-  #intro .credit p{margin:0 0 12px;font-size:16.5px;line-height:1.42;color:var(--ink)}
+  #intro .credit > div + div{margin:15px 0 0}
+  #intro .credit p{margin:0 0 15px;font-size:16.5px;line-height:1.42;color:var(--ink)}
   #intro .credit p:last-of-type{margin-bottom:0}
-  /* partner logos: sized to the HAA logo's area, not its height */
+  /* partner logos: balanced by eye rather than by height */
   #intro .partners{
     display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin:10px 0 0;padding:0;list-style:none;
   }
@@ -195,12 +202,20 @@
     #intro .how{grid-template-columns:1fr;gap:30px}
   }
   @media (max-width:760px){
-    #intro .hero{padding:24px 0 0}
+    #intro .hero{padding:40px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
-    #intro .logo{height:38px;width:33px}
+    #intro .logo{height:38px;width:33px;margin:0}
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
+  }
+  /* Below 520px the title needs the full width to break over two lines, so
+     the logo goes back to its own row above it, right-aligned, 18px clear,
+     as it was before the two shared a row. The h1 stays first in the source. */
+  @media (max-width:519px){
+    #intro .hero{padding:24px 0 0}
+    #intro .hero-top{flex-direction:column-reverse;align-items:flex-end;gap:18px}
+    #intro h1{align-self:stretch}
   }
   @media (prefers-reduced-motion:reduce){
     #intro.js-rules .rule{clip-path:none}
@@ -211,6 +226,8 @@
      >=1100px .shell becomes a two-column grid and the controls become a
      sticky left rail. Nothing here is shared with the intro block. */
   .shell{display:block}
+  /* focused by script when a shared link opens here; not a control, so no ring */
+  .shell:focus{outline:none}
   .controls{
     position:sticky;top:0;z-index:20;
     background:color-mix(in srgb,var(--paper) 88%, transparent);
@@ -396,6 +413,11 @@
   .btn svg{width:15px;height:15px;stroke:currentColor}
   .btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--hair);cursor:default}
   .btn.ghost:hover{transform:none;box-shadow:none}
+  /* read by screen readers, never drawn */
+  .visually-hidden{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
+    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+  }
 
   .empty{padding:70px 8px;text-align:center;color:var(--ink-soft);display:none}
   .empty.show{display:block}
@@ -450,9 +472,9 @@
   <header class="hero">
     <div class="in">
       <div class="hero-top">
+        <h1 tabindex="-1">Houston Arts Data Resource Hub</h1>
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
-      <h1 tabindex="-1">Houston Arts Data Resource Hub</h1>
       <p class="stand">Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
@@ -506,13 +528,13 @@
       <h2 id="in-how">Filter down, then open a row.</h2>
       <div class="how">
         <div>
-          <p>Every resource sits behind a single row. Open one and you'll get a plain-language summary, the key finding where the source reports one, and the details you need to cite it: its scope and type, when it was published, where it comes from, and how often it's updated if it recurs.</p>
-          <p>The filters narrow the list six ways, and they combine; the search box runs across titles, authors, summaries, and stewards at the same time. Place narrows twice, so you can move from the Houston region down to a single school district.</p>
-          <p>Whatever you've filtered to is written into the address bar, so you can send someone the exact view you're looking at rather than telling them which boxes to tick.</p>
+          <p>Each resource has its own row. Open one to see a plain-language summary, the key finding when the source reports one, and the details you need to cite and evaluate it, like its scope and type, when it was published, where it comes from, and, if it's updated regularly, how often.</p>
+          <p>You can narrow down the list six ways with the filters, and they work together. The search box looks across titles, authors, and topics at once. Some Place filters go a level deeper, so you can narrow down from the Houston region to a school district, for example.</p>
+          <p>Your filters are saved in the page's web address, so you can send someone the exact view you're looking at instead of telling them which filters to tick.</p>
         </div>
         <dl class="facetlist">
           <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
-          <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, each narrowing further</dd></div>
+          <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, some narrowing further</dd></div>
           <div><dt>Focus</dt><dd>Artists, organizations, audiences, education, civic art, cultural districts</dd></div>
           <div><dt>Format</dt><dd>Reports, briefs, toolkits, dashboards, maps, directories</dd></div>
           <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
@@ -540,7 +562,7 @@
     <div class="in">
       <h2 id="in-feedback">This hub is meant to grow.</h2>
       <div class="feedback">
-        <p>If you know of a study, survey, dashboard, or map that belongs here, send it to us; we'd rather hear about it twice than miss it. If something's broken, mislabeled, or out of date, tell us that too.</p>
+        <p>If you know of a study, dashboard, or map that belongs here, send it our way. And if something's broken or out of date, please let us know.</p>
         <div class="pair">
           <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
           <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
@@ -557,14 +579,14 @@
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
-          <p>Houston Arts Alliance assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
-          <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here: artists, arts organizations, funders, and civic partners.</p>
+          <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's for anyone who practices the arts or makes the case for them: artists and arts nonprofits, arts service organizations, and civic partners.</p>
+          <p>HAA maintains this collection and keeps the records current. If you have a question about anything on it, feel free to ask us.</p>
         </div>
         <div>
           <p>Developed in partnership with:</p>
           <ul class="partners">
             <li><img src="assets/logos/houston-endowment.png" width="100" height="33" alt="Houston Endowment"></li>
-            <li><img src="assets/logos/smu-dataarts.png" width="164" height="17" alt="SMU DataArts"></li>
+            <li><img src="assets/logos/smu-dataarts.png" width="154" height="16" alt="SMU DataArts"></li>
           </ul>
         </div>
       </div>
@@ -717,6 +739,13 @@ const RESOURCES = [
    finding:"",
    link:"https://www.mirrorandmap.nalac.org/resource-toolkit/", linkType:"external",
    updated:"", steward:"NALAC"},
+
+  {title:"Art Can Map", author:"Texas Cultural Trust", year:2026, access:"Public", longitudinal:"N/A",
+   population:"Texas school districts and campuses", methods:"Interactive map; Texas Education Agency data",
+   summary:"An interactive map of arts education access in school districts and campuses across Texas, built on Texas Education Agency data. It rates campuses and districts on measures such as students per fine arts teacher and lets you compare Houston-area districts beyond HISD, from Aldine and Alief to Cy-Fair, Fort Bend, Katy, and Pasadena.",
+   finding:"",
+   link:"https://txculturaltrust.org/what-we-do/artcan/map/", linkType:"external",
+   updated:"", steward:"Texas Cultural Trust"},
 
   {title:"Arts & Economic Prosperity 6", author:"Americans for the Arts · HAA", year:2023, access:"Public", longitudinal:"Yes",
    population:"City, county, region", methods:"Surveys; financial and attendance data",
@@ -966,6 +995,7 @@ const TAGS = {
   "A Guide to Promoting Statewide Strategies in the Arts and Health":         {focus:["Cross-city and national"], methods:["Guide"], place:["National scope"], format:["Toolkit or guide"]},
   "A Mirror and a Map":                                                       {focus:["Organizations","Cross-city and national"], methods:["Survey","Data analysis"], place:["National scope"], format:["Report"]},
   "A Mirror and a Map: Resource Toolkits":                                    {focus:["Organizations"], methods:["Guide"], place:["National scope"], format:["Toolkit or guide"]},
+  "Art Can Map":                                                              {focus:["Education"], methods:["Mapping","Data analysis"], place:["Texas"], format:["Map"]},
   "Arts Vibrancy Index 2025: Data Explorer":                                  {focus:["Cross-city and national"], methods:["Data analysis"], place:["National scope"], format:["Dashboard or explorer"]},
   "Bridging Distinct Communities: A Study of Artists and Culture Bearers in the Bay Area": {focus:["Artists and workforce"], methods:["Interviews","Mapping","Convenings"], place:["Peer cities and other regions"], format:["Brief or one-pager"]},
   "The Great Connector: How Arts Participation Renews Civic and Community Engagement": {focus:["Audiences and public","Cross-city and national"], methods:["Survey","Data analysis"], place:["National scope"], format:["Report"]},
@@ -1204,8 +1234,8 @@ document.getElementById('collapseAll').addEventListener('click',()=>setAllOpen(f
 const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
 
 const icons = {
-  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
-  external:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>'
+  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
+  external:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>'
 };
 
 /* mirrored locally in the INTRO JS block; keep the two in step */
@@ -1214,10 +1244,15 @@ function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/
    hyphen; the text and its hyphen (U+002D) are unchanged. Mirrored in INTRO. */
 function keepRanges(s){ return s.replace(/\d+%?-\d+%?/g,'<span class="nw">$&</span>'); }
 
+/* both link buttons open in a new tab; say so to screen readers. No space
+   between it and the icon: in the flex button that space becomes an item of
+   its own and widens the button by a gap. */
+const NEW_TAB = '<span class="visually-hidden"> (opens in a new tab)</span>';
+
 function actionHTML(r){
   switch(r.linkType){
-    case 'external': return `<a class="btn" href="${r.link}" target="_blank" rel="noopener">View resource ${icons.external}</a>`;
-    case 'pdf':      return `<a class="btn" href="${r.link}" target="_blank" rel="noopener">Download PDF ${icons.pdf}</a>`;
+    case 'external': return `<a class="btn" href="${r.link}" target="_blank" rel="noopener">View resource${NEW_TAB}${icons.external}</a>`;
+    case 'pdf':      return `<a class="btn" href="${r.link}" target="_blank" rel="noopener">Download PDF${NEW_TAB}${icons.pdf}</a>`;
     case 'request':  return `<span class="btn ghost">Available on request</span>`;
     case 'internal': return `<span class="btn ghost">Internal use only</span>`;
     default:         return `<span class="btn ghost">Link coming soon</span>`;
@@ -1312,6 +1347,42 @@ readURL();
 DIMENSIONS.forEach(paintDim);
 render();
 
+/* A shared link carrying filters or a search (?place=Texas, ?q=katy) and no
+   hash opens at the directory, where #directory would land, instead of on the
+   hero. The address bar is left as it is. Focus moves there too, so keyboard
+   and screen-reader users start from the directory; the tabindex goes once
+   focus leaves. The jump runs a frame later, after the intro has filled in
+   above, and again once fonts have loaded unless the visitor has moved.
+   "Moved" is any wheel, touch, key, or pointer input, or any scroll that
+   leaves the directory somewhere other than where the last jump put it
+   (a screen reader, find in page). The script's own jump, and the browser
+   holding the directory in place while fonts swap, both leave it there. */
+if((activeDims().length || queryRaw) && !location.hash){
+  const dir = document.getElementById('directory');
+  const root = document.documentElement;
+  let moved = false, landedTop = null;
+  const land = ()=>{
+    if(moved) return;
+    root.style.scrollBehavior = 'auto';   /* jump, don't glide */
+    dir.scrollIntoView({block:'start'});
+    root.style.scrollBehavior = '';
+    landedTop = dir.getBoundingClientRect().top;
+  };
+  ['wheel','touchstart','keydown','pointerdown'].forEach(t=>
+    addEventListener(t, ()=>{ moved = true; }, {once:true, passive:true}));
+  addEventListener('scroll', ()=>{
+    if(landedTop!==null && Math.abs(dir.getBoundingClientRect().top - landedTop) > 1) moved = true;
+  }, {passive:true});
+  requestAnimationFrame(()=>{
+    land();
+    dir.setAttribute('tabindex','-1');
+    dir.focus({preventScroll:true});
+    dir.addEventListener('blur', ()=>dir.removeAttribute('tabindex'), {once:true});
+    if(document.fonts) document.fonts.ready.then(land);
+    addEventListener('load', land, {once:true});
+  });
+}
+
 /* ===========================================================================
    INTRO / LANDING - self-contained.
    Reads from RESOURCES; writes only inside #intro. Every count rendered here
@@ -1338,7 +1409,7 @@ render();
   const byPlace  = r => r._placeAll;
   const byFormat = r => r._format;
 
-  /* the pipe is visual only; screen readers hear "Resources: 36 Updated: ..." */
+  /* the pipe is visual only; screen readers hear "Resources: <count> Updated: <month>" */
   document.getElementById('introMeta').innerHTML =
     'Resources: ' + RESOURCES.length + ' <span aria-hidden="true">|</span> Updated: ' + UPDATED;
 
