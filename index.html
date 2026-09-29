@@ -168,10 +168,6 @@
   #intro .stats .src svg{width:12px;height:12px;stroke:currentColor;fill:none;flex:none}
 
   /* ---- 6. feedback ---- */
-  #intro .feedback{
-    background:var(--paper-2);border:1px solid var(--hair);border-radius:var(--r);
-    padding:clamp(26px,3.4vw,40px);
-  }
   #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
   #intro .pair{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   #intro .ghostbtn{
@@ -185,12 +181,12 @@
   #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
   /* ---- 7. credit ---- */
-  #intro .credit > div + div{margin:30px 0 0}
+  #intro .credit > div + div{margin:12px 0 0}
   #intro .credit p{margin:0 0 12px;font-size:16.5px;line-height:1.42;color:var(--ink)}
-  #intro .credit p:last-child{margin-bottom:0}
+  #intro .credit p:last-of-type{margin-bottom:0}
   /* partner logos: sized to the HAA logo's area, not its height */
   #intro .partners{
-    display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin:16px 0 0;padding:0;list-style:none;
+    display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin:10px 0 0;padding:0;list-style:none;
   }
   #intro .partners img{display:block;height:auto}
   #intro .close{padding:var(--gap) 0 0}
@@ -263,12 +259,12 @@
   .chips-sub{display:flex;flex-direction:column;gap:7px}
   .chips-sub .chips{padding-left:13px;border-left:2px solid color-mix(in srgb,var(--coral) 50%,transparent)}
   .chip{
-    font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;
+    font-family:"Geist Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.04em;
     padding:8px 11px;border-radius:99px;border:1px solid var(--hair);
     background:transparent;color:var(--ink-soft);cursor:pointer;
     transition:all .18s var(--ease);display:inline-flex;align-items:center;gap:7px;
   }
-  .chip .n{opacity:.75}
+  .chip .n{opacity:.85}
   .chip:hover{border-color:var(--navy);color:var(--ink)}
   .chip:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
   /* Selected state. Navy on coral measures 4.81:1, which clears WCAG AA for
@@ -276,7 +272,7 @@
      the only signal: a check glyph and a weight change carry it too. */
   .chip[aria-pressed="true"]{background:var(--coral);color:var(--navy);border-color:var(--coral);font-weight:600}
   .chip[aria-pressed="true"]::before{content:"\2713";font-size:11px;line-height:1;font-weight:700}
-  .chip[aria-pressed="true"] .n{opacity:.8}
+  .chip[aria-pressed="true"] .n{opacity:1}
   .chip[aria-pressed="true"]:hover{border-color:var(--navy)}
 
   /* -------------------------- ACTIVE FILTER SUMMARY ------------------------ */
@@ -484,19 +480,19 @@
       <div class="ways">
         <article style="--c:var(--cyan)">
           <h3>Make your case.</h3>
-          <p>Pull cited figures for a board presentation or City Council meeting, with the source one click away.</p>
+          <p>Pull figures for a board presentation or City Council meeting, with the source a click away.</p>
         </article>
         <article style="--c:var(--gold)">
           <h3>Benchmark your work.</h3>
-          <p>See how your organization's numbers compare with peers close to home, across Texas, and nationwide.</p>
+          <p>See how your organization compares with peers close to home, across Texas, and nationwide.</p>
         </article>
         <article style="--c:var(--coral)">
           <h3>Support every figure.</h3>
-          <p>Each finding here traces back to a study you can name and cite when someone asks where it came from.</p>
+          <p>Each finding traces back to a study you can name and cite when someone asks where it's from.</p>
         </article>
         <article style="--c:var(--indigo)">
           <h3>Plan your programs.</h3>
-          <p>Learn who attends and supports the arts in the Houston area, and who has the hardest time taking part.</p>
+          <p>Learn who takes part in the arts across the Houston area, and what could bring more people in.</p>
         </article>
       </div>
     </div>
@@ -532,7 +528,7 @@
   <section class="band" aria-labelledby="in-stats">
     <div class="in">
       <h2 id="in-stats">A few numbers from the collection.</h2>
-      <!-- pulled from the finding fields of the records named in FEATURED -->
+      <!-- figures and credits are written for the cards in FEATURED; each card opens its record's row -->
       <div class="stats" id="introStats"></div>
     </div>
   </section>
@@ -562,7 +558,7 @@
       <div class="credit">
         <div>
           <p>Houston Arts Alliance assembles and maintains this collection, keeps the records current, and is the point of contact for anything on it.</p>
-          <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here, artists, arts organizations, funders, and civic partners.</p>
+          <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's built for anyone making the case for the arts here: artists, arts organizations, funders, and civic partners.</p>
         </div>
         <div>
           <p>Developed in partnership with:</p>
@@ -690,7 +686,7 @@ const RESOURCES = [
   {title:"2021 Greater Houston Artist Survey", author:"Fresh Arts", year:2022, access:"Public", longitudinal:"Yes",
    population:"Houston artists", methods:"Survey",
    summary:"A longitudinal look at how Houston artists are faring, their evolving needs, income sources, and the socio-economic factors shaping their quality of life.",
-   finding:"43% of Houston artists earn just 0-20% of their income from their artistic practice.",
+   finding:"73% of Houston-area artists define artistic success as having the time, space, and resources to make the art they want to make, the survey's most common answer.",
    link:"Fresh-Arts-2021-artist-survey-summary-and-results.pdf", linkType:"pdf",
    updated:"", steward:"Fresh Arts"},
 
@@ -1318,8 +1314,9 @@ render();
 
 /* ===========================================================================
    INTRO / LANDING - self-contained.
-   Reads from RESOURCES; writes only inside #intro. Every number rendered here
-   is derived, none is typed in.
+   Reads from RESOURCES; writes only inside #intro. Every count rendered here
+   is derived, none is typed in. The featured figures are the exception: their
+   text and credits are written by hand in FEATURED.
 
    If the intro is ever split into its own index.html with the directory moved
    to hub.html, this block moves with it and two things change: the DIRECTORY
@@ -1377,25 +1374,43 @@ render();
   });
 
   /* ---- 5. featured findings -------------------------------------------- */
-  /* Named by title, so a card follows its record if the finding is rewritten
-     and disappears rather than going stale if the record is removed. */
+  /* Short figures and credits written for the cards, not taken from the
+     records' finding fields; ordered national to local. Each card names its
+     record by title, so it opens that record's row and disappears rather than
+     going stale if the record is removed. Credits are stored in mixed case;
+     the CSS sets them in capitals. */
   const FEATURED = [
-    "Arts & Economic Prosperity 6",
-    "2021 Greater Houston Artist Survey",
-    "State of the Arts Advocacy Push Card",
-    "The U.S. Arts and Cultural Production Satellite Account (1998-2023)"
+    {title:"The U.S. Arts and Cultural Production Satellite Account (1998-2023)",
+     fig:"Arts and culture added $1.2 trillion in 2023, growing twice as fast as the U.S. economy.",
+     credit:"NEA | Arts Data Profile Series"},
+    {title:"State of the Arts Advocacy Push Card",
+     fig:"Texas arts and culture generates $69.7 billion in GDP, and 1 in 14 jobs is a creative career.",
+     credit:"Texas Cultural Trust | 2025 SOTA"},
+    {title:"Arts & Economic Prosperity 6",
+     fig:"Arts organizations and audiences generated $1.4 billion in spending across Greater Houston.",
+     credit:"Americans for the Arts | AEP6"},
+    {title:"2021 Greater Houston Artist Survey",
+     fig:"73% of Houston-area artists define success as having the time, space, and resources to make art.",
+     credit:"Fresh Arts | 2022 GHAS Report"}
   ];
   const ACCENTS = ['var(--cyan)','var(--coral)','var(--gold)','var(--indigo)'];
   const statsEl = document.getElementById('introStats');
-  FEATURED.forEach((title,i)=>{
-    const r = RESOURCES.find(x=>x.title===title);
-    if(!r || !r.finding) return;          /* record gone or finding emptied */
+  FEATURED.forEach((f,i)=>{
+    const r = RESOURCES.find(x=>x.title===f.title);
+    if(!r) return;                        /* record gone */
     const a = document.createElement('a');
     a.style.setProperty('--c', ACCENTS[i % ACCENTS.length]);
     a.href = DIRECTORY + '#r-' + slug(r.title);
     a.dataset.record = 'r-' + slug(r.title);
-    a.innerHTML = `<p class="fig">${keepRanges(r.finding)}</p>` +
-      `<p class="src">${r.author} · ${r.year} ${ICON_ARROW}</p>`;
+    /* The pipe is visual only, as in the hero meta line. The organization and
+       the label each stay whole, and the pipe is held to the organization, so a
+       credit that doesn't fit breaks after the pipe and never mid-phrase. The
+       outer span keeps .src's flex layout from splitting the credit apart. */
+    const [org, label] = f.credit.split(' | ');
+    const credit = `<span class="nw">${org}</span>` +
+      (label ? `&nbsp;<span aria-hidden="true">|</span> <span class="nw">${label}</span>` : '');
+    a.innerHTML = `<p class="fig">${keepRanges(f.fig)}</p>` +
+      `<p class="src"><span>${credit}</span> ${ICON_ARROW}</p>`;
     statsEl.appendChild(a);
   });
 
