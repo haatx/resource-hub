@@ -207,6 +207,13 @@
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
   }
+  /* Below 520px the title needs the full width to break over two lines, so
+     the logo goes back to its own row above it, right-aligned, 18px clear,
+     as it was before the two shared a row. The h1 stays first in the source. */
+  @media (max-width:519px){
+    #intro .hero-top{flex-direction:column-reverse;align-items:flex-end;gap:18px}
+    #intro h1{align-self:stretch}
+  }
   @media (prefers-reduced-motion:reduce){
     #intro.js-rules .rule{clip-path:none}
   }
