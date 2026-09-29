@@ -75,8 +75,12 @@
 
   /* ---- 1. hero ---- */
   #intro .hero{padding:32px 0 0}
-  #intro .hero-top{display:flex;justify-content:flex-end;align-items:center;margin-bottom:18px}
-  #intro .logo{height:58px;width:51px;display:block;flex:none}
+  /* title and logo share one row, logo on the right. On desktop the logo is
+     centred on the one-line title; its negative margins (half its height)
+     keep it out of the row's height, so the title keeps its spacing to the
+     standfirst whatever the title's size. */
+  #intro .hero-top{display:flex;justify-content:space-between;align-items:center;gap:24px}
+  #intro .logo{height:58px;width:51px;display:block;flex:none;margin:-29px 0}
   #intro h1{
     font-family:"Geist Mono",monospace;font-weight:700;
     font-size:clamp(27px,3.25vw,50px);line-height:.98;
@@ -197,7 +201,8 @@
   @media (max-width:760px){
     #intro .hero{padding:24px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
-    #intro .logo{height:38px;width:33px}
+    #intro .hero-top{align-items:flex-start}   /* logo level with the title's first line */
+    #intro .logo{height:38px;width:33px;margin:0}
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
@@ -457,9 +462,9 @@
   <header class="hero">
     <div class="in">
       <div class="hero-top">
+        <h1 tabindex="-1">Houston Arts Data Resource Hub</h1>
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
-      <h1 tabindex="-1">Houston Arts Data Resource Hub</h1>
       <p class="stand">Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
@@ -1337,19 +1342,27 @@ render();
    hero. The address bar is left as it is. Focus moves there too, so keyboard
    and screen-reader users start from the directory; the tabindex goes once
    focus leaves. The jump runs a frame later, after the intro has filled in
-   above, and again once fonts have loaded unless the visitor has moved. */
+   above, and again once fonts have loaded unless the visitor has moved.
+   "Moved" is any wheel, touch, key, or pointer input, or any scroll that
+   leaves the directory somewhere other than where the last jump put it
+   (a screen reader, find in page). The script's own jump, and the browser
+   holding the directory in place while fonts swap, both leave it there. */
 if((activeDims().length || queryRaw) && !location.hash){
   const dir = document.getElementById('directory');
   const root = document.documentElement;
-  let moved = false;
+  let moved = false, landedTop = null;
   const land = ()=>{
     if(moved) return;
     root.style.scrollBehavior = 'auto';   /* jump, don't glide */
     dir.scrollIntoView({block:'start'});
     root.style.scrollBehavior = '';
+    landedTop = dir.getBoundingClientRect().top;
   };
   ['wheel','touchstart','keydown','pointerdown'].forEach(t=>
     addEventListener(t, ()=>{ moved = true; }, {once:true, passive:true}));
+  addEventListener('scroll', ()=>{
+    if(landedTop!==null && Math.abs(dir.getBoundingClientRect().top - landedTop) > 1) moved = true;
+  }, {passive:true});
   requestAnimationFrame(()=>{
     land();
     dir.setAttribute('tabindex','-1');
@@ -1386,7 +1399,7 @@ if((activeDims().length || queryRaw) && !location.hash){
   const byPlace  = r => r._placeAll;
   const byFormat = r => r._format;
 
-  /* the pipe is visual only; screen readers hear "Resources: 36 Updated: ..." */
+  /* the pipe is visual only; screen readers hear "Resources: <count> Updated: <month>" */
   document.getElementById('introMeta').innerHTML =
     'Resources: ' + RESOURCES.length + ' <span aria-hidden="true">|</span> Updated: ' + UPDATED;
 
