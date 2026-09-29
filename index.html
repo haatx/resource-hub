@@ -74,7 +74,7 @@
   @keyframes introDraw{to{clip-path:inset(0 0 0 0 round 99px)}}
 
   /* ---- 1. hero ---- */
-  #intro .hero{padding:32px 0 0}
+  #intro .hero{padding:56px 0 0}
   /* Title and logo share one row as a lockup, logo on the right, its bottom
      level with the bottom of the title's last line. Above 760px its height is
      1.16 times the h1's font size (3.25vw), held between 38px and 58px, so it
@@ -202,7 +202,7 @@
     #intro .how{grid-template-columns:1fr;gap:30px}
   }
   @media (max-width:760px){
-    #intro .hero{padding:24px 0 0}
+    #intro .hero{padding:40px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
     #intro .logo{height:38px;width:33px;margin:0}
     #intro .ways{gap:22px}
@@ -213,6 +213,7 @@
      the logo goes back to its own row above it, right-aligned, 18px clear,
      as it was before the two shared a row. The h1 stays first in the source. */
   @media (max-width:519px){
+    #intro .hero{padding:24px 0 0}
     #intro .hero-top{flex-direction:column-reverse;align-items:flex-end;gap:18px}
     #intro h1{align-self:stretch}
   }
