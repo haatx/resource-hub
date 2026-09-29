@@ -259,12 +259,12 @@
   .chips-sub{display:flex;flex-direction:column;gap:7px}
   .chips-sub .chips{padding-left:13px;border-left:2px solid color-mix(in srgb,var(--coral) 50%,transparent)}
   .chip{
-    font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;
+    font-family:"Geist Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.04em;
     padding:8px 11px;border-radius:99px;border:1px solid var(--hair);
     background:transparent;color:var(--ink-soft);cursor:pointer;
     transition:all .18s var(--ease);display:inline-flex;align-items:center;gap:7px;
   }
-  .chip .n{opacity:.75}
+  .chip .n{opacity:.85}
   .chip:hover{border-color:var(--navy);color:var(--ink)}
   .chip:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
   /* Selected state. Navy on coral measures 4.81:1, which clears WCAG AA for
@@ -272,7 +272,7 @@
      the only signal: a check glyph and a weight change carry it too. */
   .chip[aria-pressed="true"]{background:var(--coral);color:var(--navy);border-color:var(--coral);font-weight:600}
   .chip[aria-pressed="true"]::before{content:"\2713";font-size:11px;line-height:1;font-weight:700}
-  .chip[aria-pressed="true"] .n{opacity:.8}
+  .chip[aria-pressed="true"] .n{opacity:1}
   .chip[aria-pressed="true"]:hover{border-color:var(--navy)}
 
   /* -------------------------- ACTIVE FILTER SUMMARY ------------------------ */
