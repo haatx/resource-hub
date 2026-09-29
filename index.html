@@ -75,12 +75,15 @@
 
   /* ---- 1. hero ---- */
   #intro .hero{padding:32px 0 0}
-  /* title and logo share one row, logo on the right. On desktop the logo is
-     centred on the one-line title; its negative margins (half its height)
-     keep it out of the row's height, so the title keeps its spacing to the
-     standfirst whatever the title's size. */
-  #intro .hero-top{display:flex;justify-content:space-between;align-items:center;gap:24px}
-  #intro .logo{height:58px;width:51px;display:block;flex:none;margin:-29px 0}
+  /* Title and logo share one row as a lockup, logo on the right, its bottom
+     level with the bottom of the title's last line. Above 760px its height is
+     1.16 times the h1's font size (3.25vw), held between 38px and 58px, so it
+     reaches 58px as the h1 reaches its 50px cap. A top margin of minus its
+     largest height keeps it out of the row's height: anything taller than the
+     title rises into the hero's top padding, and nothing hangs below toward
+     the standfirst. */
+  #intro .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  #intro .logo{height:clamp(38px,3.25vw * 1.16,58px);width:auto;aspect-ratio:51/58;display:block;flex:none;margin:-58px 0 0}
   #intro h1{
     font-family:"Geist Mono",monospace;font-weight:700;
     font-size:clamp(27px,3.25vw,50px);line-height:.98;
@@ -201,7 +204,6 @@
   @media (max-width:760px){
     #intro .hero{padding:24px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
-    #intro .hero-top{align-items:flex-start}   /* logo level with the title's first line */
     #intro .logo{height:38px;width:33px;margin:0}
     #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
