@@ -14,7 +14,14 @@
      page     -> PDF page index (the report prints no page numbers)
    A view outside a metric's coverage is "Not reported for this category".
    rowNotes record composition rows that do not sum to 100%.
+   label, cardNote, tableNote, and cardDefinition hold the interface text
+   that belongs to this report, so a new report replaces it with the data.
    source.url stays null until the houstonartsalliance.com address is live.
+
+   This file is the canonical source. After editing it, run
+     node scripts/build-smu-profile.js
+   to regenerate data/smu-houston-profile.csv and
+   docs/smu-houston-profile-inventory.md, then node scripts/check-explorer.js.
 --------------------------------------------------------------------------- */
 window.SMU_HOUSTON_PROFILE = {
   schemaVersion: 1,
@@ -29,25 +36,31 @@ window.SMU_HOUSTON_PROFILE = {
     pageCount: 18,
     printedPageNumbers: false,
     publicationDate: null,
-    publicationYear: null,
+    publicationYear: 2026,
     url: null,
     period: "FY25",
-    houston: {label: "Houston", n: 204, description: "available Houston data for FY25", descriptionStatus: "pending confirmation from SMU DataArts"},
+    houston: {label: "Houston", n: 204, description: "FY26 HAA operating support applicants reporting FY25 data", reportDescription: "available Houston data for FY25"},
     national: {label: "Nationally", n: 1509, description: "FY25 Cultural Data Profile records included in this analysis", benchmark: "SMU DataArts FY25 Cultural Data Profiles"},
-    statistic: "Averages (means) per organization unless the metric is a share; the report gives no medians or per-metric n."
+    statistic: "Averages (means) per organization unless the metric is a share; the report gives no medians or per-metric n.",
+    extractionNotes: [
+      "Every chart value was assigned from the rendered page: legend color for the series, row or axis label for the category. The text layer was used only to confirm digits.",
+      "Assignments were cross-checked against the PDF's vector shapes: segment fill colors against the legend swatches, and bar and diamond heights against the axis scale.",
+      "Revised file confirmed: five budget bands on p. 2, cohort text \"available Houston data for FY25\" on p. 1, and the \"Nationally\" callout on p. 13."
+    ]
   },
+  units: {percent: "percent", usd_millions: "US dollars (millions)", organizations: "organizations", staff: "staff (average per organization)", attendance_thousands: "attendees (thousands, average per organization)"},
   sections: [
     {id: "sector-profile", name: "Sector profile", reportSection: "Cohort Profile"},
     {id: "funding", name: "Funding and financial health", reportSection: "Average Total Expenses; Funding & Financial Health"},
-    {id: "workforce", name: "Workforce", reportSection: "Workforce Capacity"},
+    {id: "workforce", name: "Workforce", reportSection: "Workforce Capacity", note: "Staff figures are averages per organization. The report doesn't say how many organizations reported staff counts."},
     {id: "audience", name: "Audience reach", reportSection: "Audience Reach"},
     {id: "facilities", name: "Facilities and space", reportSection: "Facilities & Space"}
   ],
   views: [
     {id: "overall", mode: "overall", label: "Overall", reportLabel: "Houston / Nationally"},
-    {id: "performing", mode: "discipline", label: "Performing Arts", reportLabel: "Performing Arts", ntee: "A6, A27, and A84 prefixes"},
-    {id: "visual", mode: "discipline", label: "Visual Arts", reportLabel: "Visual Arts", ntee: "A3, A4, A51, and A53 prefixes"},
-    {id: "other", mode: "discipline", label: "Other Arts", reportLabel: "Other", ntee: "remaining or unclassified arts and culture organizations"},
+    {id: "performing", mode: "discipline", label: "Performing Arts", reportLabel: "Performing Arts", ntee: "A6, A27, and A84 prefixes", cardDefinition: "Performing arts organizations (NTEE A6), such as performing arts centers, dance, theater, music, opera, and performing arts schools, plus community celebrations (A27) and commemorative events (A84)."},
+    {id: "visual", mode: "discipline", label: "Visual Arts", reportLabel: "Visual Arts", ntee: "A3, A4, A51, and A53 prefixes", cardDefinition: "Media and communications organizations (NTEE A3), such as film and video, television, publishing, and radio, along with visual arts organizations, art museums, and folk arts museums."},
+    {id: "other", mode: "discipline", label: "Other Arts", reportLabel: "Other", ntee: "remaining or unclassified arts and culture organizations", cardDefinition: "All other arts, culture, and humanities organizations, including arts councils and agencies, arts education, history and humanities organizations, arts services, and museums other than art and folk arts museums."},
     {id: "under-250k", mode: "budget", label: "Under $250k", reportLabel: "<$250k", definition: "Total expenses less than $250,000"},
     {id: "250k-1m", mode: "budget", label: "$250k-$999k", reportLabel: "$250k-$999k", definition: "Total expenses of $250,000 to less than $1 million"},
     {id: "1m-3m", mode: "budget", label: "$1M-$2.99M", reportLabel: "$1M-$2.99M", definition: "Total expenses of $1 million to less than $3 million"},
@@ -59,11 +72,12 @@ window.SMU_HOUSTON_PROFILE = {
       id: "orgs_total",
       section: "sector-profile",
       name: "Organizations in the cohort",
+      label: "Organizations",
       unit: "organizations",
       precision: 1,
       coverage: ["overall"],
       pages: [1, 2],
-      definition: "Number of organizations whose FY25 data are analyzed. Houston: \"available Houston data for FY25.\" National: \"the nationwide set of FY25 Cultural Data Profile records included in this analysis.\""
+      definition: "Number of organizations whose FY25 data are analyzed. Houston: FY26 HAA operating support applicants reporting FY25 data (the report says \"available Houston data for FY25\"). National: \"the nationwide set of FY25 Cultural Data Profile records included in this analysis.\""
     },
     {
       id: "orgs_by_discipline_count",
@@ -113,6 +127,7 @@ window.SMU_HOUSTON_PROFILE = {
       id: "avg_expenses",
       section: "funding",
       name: "Average total expenses",
+      label: "Average expenses",
       unit: "usd_millions",
       precision: 0.1,
       coverage: ["overall", "discipline"],
@@ -123,27 +138,32 @@ window.SMU_HOUSTON_PROFILE = {
       id: "avg_revenue",
       section: "funding",
       name: "Average total revenue",
+      label: "Average revenue",
       unit: "usd_millions",
       precision: 0.1,
       coverage: ["overall", "discipline"],
       pages: [4, 5],
-      definition: "Average total revenue per organization, \"combining earned income (ticket sales, program fees) with contributed income (donations, grants, sponsorships, and government support).\" The report does not say whether capital, endowment, investment, or restricted revenue is included."
+      definition: "Average total revenue per organization, \"combining earned income (ticket sales, program fees) with contributed income (donations, grants, sponsorships, and government support).\" The report does not say whether capital, endowment, investment, or restricted revenue is included.",
+      tableNote: "Average revenue minus average expenses doesn't equal the operating surplus or deficit. The report gives the operating result separately."
     },
     {
       id: "earned_vs_contributed",
       section: "funding",
       name: "Earned vs. contributed revenue",
+      label: "Earned revenue share",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
       pages: [5, 6],
       components: ["earned", "contributed"],
-      definition: "The balance between earned revenue (market-based income such as admissions and program fees) and contributed revenue (individuals, foundations, corporations, and government)."
+      definition: "The balance between earned revenue (market-based income such as admissions and program fees) and contributed revenue (individuals, foundations, corporations, and government).",
+      cardNote: "Earned revenue includes admissions, ticket sales, and program fees."
     },
     {
       id: "contributed_sources",
       section: "funding",
       name: "Sources of contributed revenue",
+      label: "Sources of contributed revenue",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
@@ -155,36 +175,43 @@ window.SMU_HOUSTON_PROFILE = {
       id: "local_gov_pct_expenses",
       section: "funding",
       name: "Local government support as % of expenses",
+      label: "Local government support",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
       pages: [9],
-      definition: "Local government support relative to expenses. \"A value of 5% indicates that local government support is equivalent to 5% of average organizational expenses.\""
+      definition: "Local government support relative to expenses. \"A value of 5% indicates that local government support is equivalent to 5% of average organizational expenses.\"",
+      cardNote: "A share of expenses: 5% means local government support equivalent to 5% of average organizational expenses."
     },
     {
       id: "operating_result_pct_expenses",
       section: "funding",
       name: "Operating surplus/deficit as % of expenses",
+      label: "Operating surplus or deficit",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
       pages: [10],
-      definition: "Operating surplus or deficit as a percentage of expenses. Higher values indicate organizations retaining a larger share of revenue after covering expenses; negative values indicate a deficit. The report does not define what \"operating\" excludes."
+      definition: "Operating surplus or deficit as a percentage of expenses. Higher values indicate organizations retaining a larger share of revenue after covering expenses; negative values indicate a deficit. The report does not define what \"operating\" excludes.",
+      cardNote: "The report's operating result, as a share of expenses. It is not total revenue minus total expenses."
     },
     {
       id: "personnel_pct_expenses",
       section: "workforce",
       name: "Personnel as % of expenses",
+      label: "Personnel",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
       pages: [11],
-      definition: "Personnel expenses as a percentage of total expenses, including full-time, part-time, and contracted workers."
+      definition: "Personnel expenses as a percentage of total expenses, including full-time, part-time, and contracted workers.",
+      cardNote: "Personnel costs as a share of total expenses, including full-time, part-time, and contracted workers."
     },
     {
       id: "avg_ft_staff",
       section: "workforce",
       name: "Average full-time staff",
+      label: "Full-time staff",
       unit: "staff",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
@@ -195,6 +222,7 @@ window.SMU_HOUSTON_PROFILE = {
       id: "avg_pt_staff",
       section: "workforce",
       name: "Average part-time staff",
+      label: "Part-time staff",
       unit: "staff",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
@@ -205,16 +233,19 @@ window.SMU_HOUSTON_PROFILE = {
       id: "avg_attendance",
       section: "audience",
       name: "Average total attendance",
+      label: "Average attendance per organization",
       unit: "attendance_thousands",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
       pages: [14],
-      definition: "Average total attendance per organization, through paid and free, in-person and virtual programming. A per-organization average, not total attendance across Houston."
+      definition: "Average total attendance per organization, through paid and free, in-person and virtual programming. A per-organization average, not total attendance across Houston.",
+      cardNote: "Includes paid and free, in-person and virtual programming. This is an average per organization, not total attendance across Houston."
     },
     {
       id: "primary_facility",
       section: "facilities",
       name: "Primary facility arrangement",
+      label: "Primary facility",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
@@ -226,6 +257,7 @@ window.SMU_HOUSTON_PROFILE = {
       id: "primary_facility_use",
       section: "facilities",
       name: "Primary facility use",
+      label: "Primary facility use",
       unit: "percent",
       precision: 1,
       coverage: ["overall", "discipline", "budget"],
