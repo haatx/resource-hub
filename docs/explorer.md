@@ -34,7 +34,8 @@ The scripts need Node (any current version) and no packages. Nothing in them run
   - Houston is navy; the national benchmark is a lighter navy and a thinner bar. Every bar is labeled in text, so color is never the only signal.
 - **Group size.** On the four data cards, every view shows "Based on a group of [n] Houston and [n] national benchmark organizations." When the Houston group has fewer than `SMALL_GROUP` (20) organizations, the card adds: "A small group: these averages come from a group of [n] Houston organizations, and one organization can move them substantially."
 - **Ranges.** `keepBands()` wraps budget-band labels such as `$250k-$999k` and `$1M-$2.99M` in a `white-space: nowrap` span and keeps the ordinary hyphen. It's separate from `index.html`'s `keepRanges()`, which matches digits on both sides of a hyphen only and would miss the dollar signs and the k or M.
-- **Source lines.** Each card's source line names the report, the publication year, the period, and the pages of every figure on the card, all generated from the data file. The PDF link appears only when `source.url` is set.
+- **Source lines.** Each card's source line names the report, the publication year, the period, and the pages of every figure on the card, all generated from the data file.
+- **The PDF link.** It's built from `source.url` alone and appears in the hero and in About this data. While `source.url` is null, those two places show `source.pdfFallback` instead ("The full report isn't posted online yet. For a copy, email data@haatx.com."), with the address linked. Setting `source.url` replaces the line with the link everywhere; nothing else changes.
 - **Motion.** Cards fade in and bars grow when the view changes, and the section rules draw in as on the homepage. All of it is off under `prefers-reduced-motion`, and the rules stay whole without JavaScript.
 
 ## Data schema
@@ -45,7 +46,8 @@ The scripts need Node (any current version) and no packages. Nothing in them run
   - `title`, `author`, `initiative`, `creditLine` (the report's credit line, verbatim), and `presentedBy`.
   - `fileName`, `fileGenerated`, `pageCount`, and `printedPageNumbers`.
   - `publicationYear` and `publicationDate` (null until SMU DataArts confirms it).
-  - `url`: the single address of the report PDF on houstonartsalliance.com. It stays null until that address is live, and the page hides every PDF link while it's null.
+  - `url`: the single address of the report PDF on houstonartsalliance.com. It stays null until that address is live.
+  - `pdfFallback`: the line shown wherever the PDF link would appear while `url` is null.
   - `period`; `houston` and `national` (label, n, description, and the report's own wording); `statistic`; and `extractionNotes`.
 - **`units`**: readable names for each unit code, used in the CSV and the inventory.
 - **`sections`**: the five cards' ids and names, with optional card-level `note`.
@@ -81,7 +83,7 @@ The cohort counts (`orgs_total`, `orgs_by_discipline_count`, `orgs_by_budget_cou
    - Use the text layer only to confirm digits.
    - Record a drawn segment with no printed value as `not-labeled`, and a category with no segment as `not-shown`. Never derive either by subtraction.
 2. **Edit `data/smu-houston-profile.js`.**
-   - Update `source`: title, dates, `url`, cohort sizes and descriptions, and `period`.
+   - Update `source`: title, dates, `url` (or `pdfFallback` while there's no URL), cohort sizes and descriptions, and `period`.
    - Update `values` and `rowNotes`.
    - Add or change `metrics`, `views`, or `coverage` only if the report's structure changed.
    - Keep display strings exactly as printed.
@@ -97,7 +99,7 @@ The cohort counts (`orgs_total`, `orgs_by_discipline_count`, `orgs_by_budget_cou
    node scripts/check-explorer.js
    ```
 
-   It must print `PASS`. It fails if any figure on any view differs from the data file, if a card shows more than four headline figures or more than one chart, if a digit appears in the page's text outside a figure or data-derived text, if a band label can break at its hyphen, if the CSV or inventory is stale, or if a file has LF line endings.
+   It must print `PASS`. It fails if any figure on any view differs from the data file, if the PDF link or its fallback line shows in the wrong state, if a card shows more than four headline figures or more than one chart, if a digit appears in the page's text outside a figure or data-derived text, if a band label can break at its hyphen, if the CSV or inventory is stale, or if a file has LF line endings.
 5. **Adjust `CARDS` in `explore.html`** only if the report adds or drops a metric that a card shows.
 6. **Update the directory record** in `index.html` (year, summary, finding) to match.
 

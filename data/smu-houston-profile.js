@@ -16,7 +16,8 @@
    rowNotes record composition rows that do not sum to 100%.
    label, cardNote, tableNote, and cardDefinition hold the interface text
    that belongs to this report, so a new report replaces it with the data.
-   source.url stays null until the houstonartsalliance.com address is live.
+   source.url stays null until the houstonartsalliance.com address is live;
+   while it is null, source.pdfFallback shows wherever the PDF link would.
 
    This file is the canonical source. After editing it, run
      node scripts/build-smu-profile.js
@@ -38,6 +39,7 @@ window.SMU_HOUSTON_PROFILE = {
     publicationDate: null,
     publicationYear: 2026,
     url: null,
+    pdfFallback: "The full report isn't posted online yet. For a copy, email data@haatx.com.",
     period: "FY25",
     houston: {label: "Houston", n: 204, description: "FY26 HAA operating support applicants reporting FY25 data", reportDescription: "available Houston data for FY25"},
     national: {label: "Nationally", n: 1509, description: "FY25 Cultural Data Profile records included in this analysis", benchmark: "SMU DataArts FY25 Cultural Data Profiles"},

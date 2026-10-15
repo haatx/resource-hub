@@ -235,6 +235,34 @@ ok(MET.avg_revenue.tableNote === "Average revenue minus average expenses doesn't
 ok(MET.earned_vs_contributed.cardNote === 'Earned revenue includes admissions, ticket sales, and program fees.', 'earned revenue wording');
 ok(/media and communications/i.test(VIEW.visual.cardDefinition) && /NTEE A3/.test(VIEW.visual.cardDefinition), 'Visual Arts definition names media and communications (NTEE A3)');
 
+/* PDF link or fallback: the approved line shows wherever the PDF link would,
+   only while source.url is null; with a URL, the link shows and the line doesn't */
+const FALLBACK = "The full report isn't posted online yet. For a copy, email data@haatx.com.";
+ok(D.source.pdfFallback === FALLBACK, 'source.pdfFallback wording');
+function pdfStates(E2, url){
+  const hero = E2.heroPdf(), about = E2.aboutHTML();
+  const where = url ? 'with source.url' : 'without source.url';
+  if(url){
+    ok(hero.where === 'cta' && hero.html.includes(`href="${url}"`), `hero ${where}: PDF button missing`);
+    ok(about.includes(`href="${url}"`), `About ${where}: PDF link missing`);
+    ok(!textOf(hero.html + about).includes(FALLBACK), `${where}: fallback line still shown`);
+  } else {
+    ok(hero.where === 'note' && textOf(hero.html) === FALLBACK, `hero ${where}: fallback reads "${textOf(hero.html)}"`);
+    ok(textOf(about).includes(FALLBACK), `About ${where}: fallback line missing`);
+    ok(!/Read the full report/.test(hero.html + about), `${where}: PDF link shown`);
+    ok(hero.html.includes('href="mailto:data@haatx.com"'), `hero ${where}: email not linked`);
+  }
+}
+pdfStates(E, D.source.url);
+{
+  const D2 = JSON.parse(JSON.stringify(D));
+  D2.source.url = D.source.url || 'https://houstonartsalliance.com/example-report.pdf';
+  D2.source.url = D.source.url ? null : D2.source.url;
+  const box = { window: { SMU_HOUSTON_PROFILE: D2 } };
+  vm.runInNewContext(m[1], box, { filename: 'explore.html#explorer-app' });
+  pdfStates(box.window.SMU_EXPLORER, D2.source.url);
+}
+
 /* surrounding text */
 for(const [name, fn] of [['about', E.aboutHTML], ['standfirst', E.standfirst], ['hero meta', E.heroMeta], ['credit', E.creditHTML]]){
   const out = fn();

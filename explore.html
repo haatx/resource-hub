@@ -286,6 +286,7 @@
 
   footer{border-top:1px solid var(--hair);margin:var(--gap) 0 0;padding:36px 0 60px;color:var(--ink-soft);font-size:14px}
   footer .in{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
+  .pdfnote{margin:16px 0 0;font-size:15px;line-height:1.38;color:var(--ink-soft)}
   .noscript{margin:24px 0 0;padding:14px 16px;border-left:3px solid var(--coral);background:var(--paper-2)}
 
   /* wide screens: the selector stays in reach while the cards scroll */
@@ -344,9 +345,10 @@
       <p class="meta" id="heroMeta"></p>
       <p class="cta">
         <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="ghostbtn" id="pdfLink" hidden target="_blank" rel="noopener">Read the full report (PDF)<span class="visually-hidden"> (opens in a new tab)</span> <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></a>
         <a class="ghostbtn" href="index.html">All Hub resources <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
       </p>
+      <!-- the PDF link, or while the report isn't online, source.pdfFallback -->
+      <p class="pdfnote" id="pdfNote" hidden></p>
       <noscript><p class="noscript">This explorer needs JavaScript to show the figures. Every figure is also in the <a href="data/smu-houston-profile.csv">CSV download</a>.</p></noscript>
     </div>
   </header>
@@ -716,6 +718,19 @@
   function heroMeta(){
     return `<span class="dx">Source: ${esc(S.author)}</span> <span aria-hidden="true">|</span> <span class="dx">${esc(S.period)} data</span> <span aria-hidden="true">|</span> <span class="dx">Published ${S.publicationYear}</span>`;
   }
+  /* The PDF link comes from source.url alone. While it is null, the
+     report's fallback line from the data file shows wherever the link would,
+     with its email address linked. */
+  const PDF_ICON = '<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>';
+  const NEW_TAB = '<span class="visually-hidden"> (opens in a new tab)</span>';
+  function pdfFallback(){
+    if(!S.pdfFallback) return '';
+    return `<span class="pdf-fallback">${esc(S.pdfFallback).replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, m=>`<a href="mailto:${m}">${m}</a>`)}</span>`;
+  }
+  function heroPdf(){
+    if(S.url) return {where:'cta', html:`<a class="ghostbtn" id="pdfLink" href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB} ${PDF_ICON}</a>`};
+    return {where:'note', html:pdfFallback()};
+  }
   function citation(){
     return `${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data.`;
   }
@@ -733,7 +748,7 @@
     const largest = disc.reduce((a,b)=>groupN(b.id,'houston').value > groupN(a.id,'houston').value ? b : a);
     const smallBands = budg.filter(v=>isSmall(v.id));
     const sec = (h, body) => `<section><h3>${h}</h3>${body}</section>`;
-    const pdf = S.url ? ` <a href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)<span class="visually-hidden"> (opens in a new tab)</span></a>.` : '';
+    const pdf = S.url ? ` <a href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB}</a>.` : (S.pdfFallback ? ' ' + pdfFallback() : '');
     return [
       sec('The source', `<p>${esc(S.creditLine)} The report's title is <cite>${esc(S.title)}</cite>, and ${esc(S.presentedBy)} presents its figures here in an interactive format.${pdf}</p>`),
       sec('The Houston cohort', `<p>The Houston figures come from ${val(groupN('overall','houston'))} organizations: ${dx(S.houston.description)}. They are a selected group, not a census of Houston's nonprofit arts organizations.</p>`),
@@ -752,7 +767,7 @@
     ].join('');
   }
 
-  root.SMU_EXPLORER = {CARDS, renderCards, renderCard, statusText, standfirst, heroMeta, creditHTML, aboutHTML, keepBands, SMALL_GROUP, STATUS_TEXT};
+  root.SMU_EXPLORER = {CARDS, renderCards, renderCard, statusText, standfirst, heroMeta, creditHTML, aboutHTML, heroPdf, pdfFallback, keepBands, SMALL_GROUP, STATUS_TEXT};
 
   /* ======================== browser only below ======================== */
   if(typeof document === 'undefined') return;
@@ -767,10 +782,12 @@
   document.getElementById('heroMeta').innerHTML = heroMeta();
   document.getElementById('credit').innerHTML = creditHTML();
   document.getElementById('aboutBody').innerHTML = aboutHTML();
-  if(S.url){
-    const pdf = document.getElementById('pdfLink');
-    pdf.href = S.url;
-    pdf.hidden = false;
+  const pdf = heroPdf();
+  if(pdf.where === 'cta') document.getElementById('csvLink').insertAdjacentHTML('afterend', pdf.html);
+  else if(pdf.html){
+    const note = document.getElementById('pdfNote');
+    note.innerHTML = pdf.html;
+    note.hidden = false;
   }
 
   /* group options come from the data file */
