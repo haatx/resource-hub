@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore Houston's Nonprofit Arts Sector | Houston Arts Data Resource Hub</title>
+<meta name="description" content="Explore SMU DataArts' financial and operational profile of Houston's nonprofit arts sector by discipline and budget size, with a national benchmark beside every figure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens mirror :root in index.html; keep the two in step. */
+  :root{
+    --navy:#06205c;
+    --cyan:#23C6DC;
+    --coral:#FF5252;
+    --gold:#F0C148;
+    --indigo:#5767FF;
+    --green:#26E175;
+    --orange:#FF9A3E;
+    --offwhite:#F5FFF7;
+
+    --paper:#f8f5ef;
+    --paper-2:#f0ece3;
+    --ink:#06205c;
+    --ink-soft:#1B4298;
+    --hair:#d9d2c4;
+
+    --r:0;
+    --maxw:1440px;
+    --ease:cubic-bezier(.4,0,.1,1);
+
+    /* explorer only: the national benchmark sits beside Houston in a lighter
+       navy. 55% navy on paper measures 3.7:1, above the 3:1 needed for
+       graphics; every bar is also labeled in text, so color is never the
+       only signal. */
+    --houston:var(--navy);
+    --national:color-mix(in srgb,var(--navy) 55%,var(--paper));
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"DM Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.3;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  [hidden]{display:none!important}
+  .in{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .nw{white-space:nowrap}
+  /* read by screen readers, never drawn */
+  .visually-hidden{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
+    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+  }
+
+  #explore{--gap:clamp(32px,3.4vw,52px)}
+  .band{padding:var(--gap) 0 0}
+
+  /* section divider, as on the homepage: one solid navy rule that draws in
+     from the left once, the first time it is in view. The hidden start state
+     exists only under .js-rules, which the script adds when motion is allowed,
+     so with JavaScript off or reduced motion on every rule stays whole. */
+  .rule{height:2px;margin:var(--gap) 0 0;background:var(--navy);border-radius:99px}
+  #explore.js-rules .rule{clip-path:inset(0 100% 0 0 round 99px)}
+  #explore.js-rules .rule.drawing{animation:draw .95s var(--ease) .15s both}
+  #explore.js-rules .rule.drawn{clip-path:none}
+  @keyframes draw{to{clip-path:inset(0 0 0 0 round 99px)}}
+
+  /* ---- hero: same lockup as the homepage ---- */
+  .hero{padding:56px 0 0}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  .logo{height:clamp(38px,3.25vw * 1.16,58px);width:auto;aspect-ratio:51/58;display:block;flex:none;margin:-58px 0 0}
+  h1{
+    font-family:"Geist Mono",monospace;font-weight:700;
+    font-size:clamp(27px,3.25vw,50px);line-height:.98;
+    letter-spacing:-.03em;word-spacing:-.05em;margin:0;
+  }
+  h1:focus{outline:none}
+  .stand{margin:26px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.25;color:var(--ink-soft)}
+  .meta{
+    font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink-soft);margin:32px 0 0;
+  }
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
+  .btn,.ghostbtn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:12px 20px;border-radius:99px;text-decoration:none;
+    font-size:14.5px;font-weight:600;
+    transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),color .2s var(--ease);
+  }
+  .btn{background:var(--navy);color:var(--paper);border:1px solid var(--navy)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px var(--navy)}
+  .ghostbtn{color:var(--navy);background:transparent;border:1px solid var(--navy)}
+  .ghostbtn:hover{background:var(--navy);color:var(--paper)}
+  .btn:focus-visible,.ghostbtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  .btn svg,.ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
+
+  /* ---- shared headings: the homepage h2 rule, including its word spacing ---- */
+  h2{
+    font-family:"Geist Mono",monospace;font-weight:450;
+    font-size:clamp(19px,2.25vw,27px);line-height:1.12;letter-spacing:-.02em;word-spacing:-.1em;
+    margin:0 0 22px;
+  }
+
+  /* ---- the selector ---- */
+  .lead{margin:0 0 20px;font-size:16.5px;line-height:1.42}
+  .pickbar{padding:14px 0 16px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .pickrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+  fieldset{border:0;margin:0;padding:0;min-width:0}
+  /* native radios, visually replaced; the input keeps focus and arrow keys */
+  .opt{position:relative;display:inline-flex}
+  .opt input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+  /* mode: a three-part segmented control */
+  .seg{display:inline-flex;border:1px solid var(--navy);border-radius:99px;padding:3px;gap:2px;background:var(--paper)}
+  .seg .opt span{
+    display:block;padding:9px 16px;border-radius:99px;
+    font-size:14.5px;font-weight:600;color:var(--navy);white-space:nowrap;
+    transition:background .18s var(--ease),color .18s var(--ease);
+  }
+  .seg .opt:hover span{background:color-mix(in srgb,var(--navy) 9%,transparent)}
+  .seg .opt input:checked + span{background:var(--navy);color:var(--paper)}
+  .seg .opt input:focus-visible + span{outline:2px solid var(--navy);outline-offset:3px}
+  /* group: the directory's chips, built from radios */
+  .groups{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+  .groups[hidden]{display:none}
+  .groups legend{
+    float:left;margin-right:4px;
+    font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    font-family:"Geist Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.04em;
+    padding:8px 11px;border-radius:99px;border:1px solid var(--hair);
+    color:var(--ink-soft);display:inline-flex;align-items:center;gap:7px;
+    transition:all .18s var(--ease);
+  }
+  .opt:hover .chip{border-color:var(--navy);color:var(--ink)}
+  .opt input:focus-visible + .chip{outline:2px solid var(--navy);outline-offset:2px}
+  /* selected: navy on coral, 4.81:1, with a check glyph and weight change so
+     color is not the only signal (same as the directory's chips) */
+  .opt input:checked + .chip{background:var(--coral);color:var(--navy);border-color:var(--coral);font-weight:600}
+  .opt input:checked + .chip::before{content:"\2713";font-size:11px;line-height:1;font-weight:700}
+  .status{margin:12px 0 0;font-size:15px;color:var(--ink-soft)}
+  .status strong{color:var(--ink);font-weight:600}
+
+  /* ---- section cards ---- */
+  .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;padding:26px 0 0}
+  .card{
+    background:var(--paper-2);border:1px solid var(--hair);border-top:3px solid var(--c);
+    border-radius:var(--r);padding:24px 26px 22px;min-width:0;
+  }
+  .card h2{margin:0}
+  .groupline{margin:8px 0 0;font-size:15px;color:var(--ink-soft)}
+  .smallnote{
+    margin:12px 0 0;padding:10px 0 10px 14px;border-left:3px solid var(--gold);
+    font-size:15px;line-height:1.38;color:var(--ink);
+  }
+  .card-body{display:grid;gap:26px 40px;margin:22px 0 0;animation:fade .35s var(--ease)}
+  /* one figure: figure and chart side by side; several: figures in a row,
+     the chart beneath them */
+  .card-body.side{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);align-items:start}
+  .card-body.stack .chart{max-width:860px}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}}
+
+  /* headline figures: Houston large, the national benchmark beside it */
+  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px 28px;margin:0}
+  .fig-item{border-top:1px solid var(--hair);padding:12px 0 0;min-width:0}
+  .fig-item dt{font-size:14.5px;font-weight:600;line-height:1.3;color:var(--ink)}
+  .fig-item dd{margin:10px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px}
+  .fig-h,.fig-n{display:flex;flex-direction:column;gap:3px}
+  .fig-h .v{
+    font-family:"Geist Mono",monospace;font-weight:450;font-size:clamp(32px,3.3vw,44px);
+    line-height:1;letter-spacing:-.03em;color:var(--houston);
+  }
+  .fig-n .v{
+    font-family:"Geist Mono",monospace;font-weight:450;font-size:21px;
+    line-height:1;letter-spacing:-.02em;color:var(--ink-soft);
+  }
+  .who{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .fig-item .v.na,.fig-h .v.na,.fig-n .v.na{
+    font-family:"DM Sans",system-ui,sans-serif;font-size:15px;font-weight:500;
+    letter-spacing:0;line-height:1.3;color:var(--ink-soft);
+  }
+  .fig-sub{flex-basis:100%;font-size:14px;line-height:1.38;color:var(--ink-soft)}
+  .fig-sub .v{font-weight:600;color:var(--ink)}
+
+  /* charts: plain HTML rows, every value written out */
+  .chart{margin:0;min-width:0}
+  .chart-title{font-size:14.5px;font-weight:600;margin:0 0 6px;padding:12px 0 0;border-top:1px solid var(--hair)}
+  .legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 10px;padding:0;list-style:none}
+  .legend li{display:inline-flex;align-items:center;gap:7px}
+  .key{display:inline-block;width:14px;border-radius:2px}
+  .key.h{height:10px;background:var(--houston)}
+  .key.n{height:6px;background:var(--national)}
+  .crow{display:grid;grid-template-columns:minmax(96px,30%) minmax(0,1fr);gap:4px 14px;align-items:center;padding:7px 0;border-top:1px solid color-mix(in srgb,var(--hair) 60%,transparent)}
+  .crow:first-of-type{border-top:0}
+  .crow-label{margin:0;font-size:14.5px;line-height:1.25}
+  .crow.dim .crow-label{color:var(--ink-soft)}
+  .crow.sel .crow-label{font-weight:700}
+  .crow.sel{background:color-mix(in srgb,var(--coral) 12%,transparent);box-shadow:-8px 0 0 color-mix(in srgb,var(--coral) 12%,transparent),8px 0 0 color-mix(in srgb,var(--coral) 12%,transparent)}
+  .crow.sel .crow-label::before{content:"\25B8\00A0";color:var(--navy)}
+  .bars{display:grid;gap:4px;min-width:0}
+  .bar{display:grid;grid-template-columns:minmax(0,1fr) 7.4em;gap:10px;align-items:center}
+  .track{position:relative;display:block;height:12px}
+  .bar.n .track{height:7px}
+  .fill{
+    position:absolute;top:0;bottom:0;left:var(--l,0);width:var(--w);border-radius:2px;
+    background:var(--houston);transform-origin:left center;animation:grow .6s var(--ease);
+  }
+  .bar.n .fill{background:var(--national)}
+  .fill.neg{transform-origin:right center}
+  @keyframes grow{from{transform:scaleX(0)}}
+  .bval{font-size:14px;line-height:1.2;white-space:nowrap}
+  .bar.h .bval .v{font-family:"Geist Mono",monospace;font-weight:500;color:var(--houston)}
+  .bar.n .bval{color:var(--ink-soft)}
+  .bar .na-wide{grid-column:1 / -1;font-size:13.5px;color:var(--ink-soft)}
+  /* diverging chart: a shared zero line */
+  .zero{position:absolute;top:-4px;bottom:-4px;left:var(--z);width:0;border-left:1.5px solid var(--ink)}
+  .axis{display:grid;grid-template-columns:minmax(96px,30%) minmax(0,1fr);gap:14px;margin:4px 0 0}
+  .axis .ticks{display:grid;grid-template-columns:minmax(0,1fr) 7.4em;gap:10px}
+  .axis .tick{position:relative;height:16px;font-size:12px;color:var(--ink-soft)}
+  .axis .tick span{position:absolute;left:var(--z);transform:translateX(-50%)}
+  .chart-note{margin:10px 0 0;font-size:14px;line-height:1.38;color:var(--ink-soft)}
+
+  .notes{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+  .notes li{font-size:14.5px;line-height:1.4;color:var(--ink-soft);padding-left:14px;position:relative}
+  .notes li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--c)}
+
+  /* full-figures table */
+  .full{margin:20px 0 0;border-top:1px solid var(--hair)}
+  .full summary,.about summary{
+    cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
+  }
+  .full summary{padding:14px 0 4px;font-size:14.5px;font-weight:600}
+  .full summary::-webkit-details-marker,.about summary::-webkit-details-marker{display:none}
+  .full summary:focus-visible,.about summary:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  .plus{
+    width:26px;height:26px;border-radius:50%;border:1px solid var(--hair);flex:none;
+    display:grid;place-items:center;transition:all .25s var(--ease);
+  }
+  .plus svg{width:12px;height:12px;stroke:var(--ink);transition:transform .3s var(--ease)}
+  details[open] > summary .plus{background:var(--navy);border-color:var(--navy)}
+  details[open] > summary .plus svg{stroke:var(--paper);transform:rotate(45deg)}
+  .tablewrap{overflow-x:auto;margin:10px 0 0}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.3}
+  caption{text-align:left}
+  th,td{padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);text-align:left;vertical-align:top}
+  thead th{
+    font-family:"Geist Mono",monospace;font-weight:500;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  td.num,th.num{text-align:right}
+  td.num{white-space:nowrap}
+  td.num .v{font-family:"Geist Mono",monospace}
+  td.num .v.na{font-family:inherit;font-size:13px;color:var(--ink-soft);white-space:normal}
+  td.pg{text-align:right;color:var(--ink-soft);font-size:13px;white-space:nowrap;padding-right:0}
+  tr.grp th{padding-top:16px;font-weight:600;color:var(--ink)}
+  tr.sub th{font-weight:400;padding-left:14px}
+  tr.tnote td{font-size:14px;color:var(--ink-soft);padding-top:0;border-bottom:1px solid var(--hair)}
+  tr.hasnote th,tr.hasnote td{border-bottom:0}
+  .rownotes{margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
+
+  .src{margin:18px 0 0;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
+  .src cite{font-style:italic}
+
+  /* ---- about this data ---- */
+  .about summary h2{margin:0}
+  .about summary{gap:14px}
+  .about-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr));gap:6px 48px;margin:24px 0 0}
+  .about-body section{border-top:1px solid var(--hair);padding:14px 0 6px}
+  .about-body h3{font-family:"Geist Mono",monospace;font-weight:450;font-size:16px;letter-spacing:-.01em;margin:0 0 8px}
+  .about-body p,.about-body li{margin:0 0 10px;font-size:16px;line-height:1.42}
+  .about-body ul{margin:0;padding:0 0 0 18px}
+
+  /* ---- credit ---- */
+  .credit p{margin:0 0 15px;font-size:16.5px;line-height:1.42}
+  .credit p:last-child{margin-bottom:0}
+  .close{padding-bottom:0}
+
+  footer{border-top:1px solid var(--hair);margin:var(--gap) 0 0;padding:36px 0 60px;color:var(--ink-soft);font-size:14px}
+  footer .in{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
+  .pdfnote{margin:16px 0 0;font-size:15px;line-height:1.38;color:var(--ink-soft)}
+  .noscript{margin:24px 0 0;padding:14px 16px;border-left:3px solid var(--coral);background:var(--paper-2)}
+
+  /* wide screens: the selector stays in reach while the cards scroll */
+  @media (min-width:900px){
+    .pickbar{
+      position:sticky;top:0;z-index:20;
+      background:color-mix(in srgb,var(--paper) 90%,transparent);
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    }
+  }
+  @media (max-width:899px){
+    .card-body.side{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .hero{padding:40px 0 0}
+    h1{font-size:clamp(31px,8.1vw,47px)}
+    .logo{height:38px;width:33px;margin:0}
+    .card{padding:20px 18px 18px}
+    .cta{flex-direction:column;align-items:stretch}
+    .btn,.ghostbtn{justify-content:center}
+  }
+  @media (max-width:519px){
+    .in{padding:0 16px}
+    .hero{padding:24px 0 0}
+    .hero-top{flex-direction:column-reverse;align-items:flex-end;gap:18px}
+    h1{align-self:stretch}
+    .seg{display:flex;width:100%}
+    .seg .opt{flex:1 1 auto}
+    .seg .opt span{padding:9px 8px;font-size:13.5px;text-align:center}
+    .groups legend{float:none;display:block;margin:0 0 7px}
+    .crow{grid-template-columns:1fr;gap:4px}
+    .axis{grid-template-columns:1fr;gap:0}
+    .axis > span{display:none}
+    .bar{grid-template-columns:minmax(0,1fr) 6.6em}
+    .axis .ticks{grid-template-columns:minmax(0,1fr) 6.6em}
+    .fig-item dd{gap:6px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    #explore.js-rules .rule{clip-path:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="explore">
+
+  <header class="hero">
+    <div class="in">
+      <div class="hero-top">
+        <h1 tabindex="-1">Explore Houston's Nonprofit Arts Sector</h1>
+        <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
+      </div>
+      <!-- the second and third sentences are built from the data file -->
+      <p class="stand" id="standfirst">Choose a discipline or budget size to see figures on finances, staffing, attendance, and facilities for Houston's nonprofit arts organizations, with a national benchmark beside each one.</p>
+      <p class="meta" id="heroMeta"></p>
+      <p class="cta">
+        <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        <a class="ghostbtn" href="index.html">All Hub resources <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+      </p>
+      <!-- the PDF link, or while the report isn't online, source.pdfFallback -->
+      <p class="pdfnote" id="pdfNote" hidden></p>
+      <noscript><p class="noscript">This explorer needs JavaScript to show the figures. Every figure is also in the <a href="data/smu-houston-profile.csv">CSV download</a>.</p></noscript>
+    </div>
+  </header>
+
+  <div class="in"><div class="rule" aria-hidden="true"></div></div>
+
+  <section class="band" aria-labelledby="pick-h">
+    <div class="in">
+      <h2 id="pick-h">Choose a part of the sector.</h2>
+      <p class="lead">Look at all organizations together, or at one discipline or one budget size. The two breakdowns are separate: the report doesn't combine them.</p>
+    </div>
+    <div class="in">
+      <div class="pickbar" id="pickbar">
+        <div class="pickrow">
+          <fieldset class="seg" id="modes">
+            <legend class="visually-hidden">Show figures for</legend>
+            <label class="opt"><input type="radio" name="mode" value="overall"><span>Overall</span></label>
+            <label class="opt"><input type="radio" name="mode" value="discipline"><span>By discipline</span></label>
+            <label class="opt"><input type="radio" name="mode" value="budget"><span>By budget size</span></label>
+          </fieldset>
+          <fieldset class="groups" data-mode="discipline" hidden>
+            <legend>Discipline</legend>
+            <div class="chips"></div>
+          </fieldset>
+          <fieldset class="groups" data-mode="budget" hidden>
+            <legend>Budget size</legend>
+            <div class="chips"></div>
+          </fieldset>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <div class="in"><div class="rule" aria-hidden="true"></div></div>
+
+  <section class="band" aria-labelledby="about-h">
+    <div class="in">
+      <details class="about" id="about">
+        <summary><h2 id="about-h">About this data</h2><span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+        <div class="about-body" id="aboutBody"></div>
+      </details>
+    </div>
+  </section>
+
+  <div class="in"><div class="rule" aria-hidden="true"></div></div>
+
+  <section class="band close" aria-labelledby="credit-h">
+    <div class="in">
+      <h2 id="credit-h">Presented by Houston Arts Alliance.</h2>
+      <div class="credit" id="credit"></div>
+    </div>
+  </section>
+
+  <div class="in"><div class="rule" aria-hidden="true"></div></div>
+
+</div>
+
+<footer>
+  <div class="in">
+    <a href="#top" id="toTop">Back to top <span aria-hidden="true">↑</span></a>
+    <a href="index.html">All Hub resources</a>
+    <a href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20explorer%20feedback">Suggest a resource or report a problem</a>
+  </div>
+</footer>
+
+<script src="data/smu-houston-profile.js"></script>
+<script id="explorer-app">
+/* ===========================================================================
+   EXPLORER
+   Everything shown comes from window.SMU_HOUSTON_PROFILE: figures, labels,
+   definitions, notes, page citations, dates, and group sizes. This script
+   only decides which metrics go on which card. A new report replaces the
+   data file; nothing here needs to change unless the report adds or drops
+   a metric.
+
+   Rendering is pure (data + view id -> HTML string), so
+   scripts/check-explorer.js runs the same functions in Node, without a
+   browser, and checks every figure against the data file. DOM wiring starts
+   below the "browser only" line.
+   =========================================================================== */
+(function(root){
+  'use strict';
+  const D = root.SMU_HOUSTON_PROFILE;
+  if(!D) return;
+  const S = D.source;
+
+  const VIEW = Object.fromEntries(D.views.map(v=>[v.id, v]));
+  const MET  = Object.fromEntries(D.metrics.map(m=>[m.id, m]));
+  const SEC  = Object.fromEntries(D.sections.map(s=>[s.id, s]));
+  const key  = (m,v,g,c) => [m, v, g, c || ''].join('|');
+  const REC  = {};
+  D.values.forEach(r=>{ REC[key(r.metric, r.view, r.geo, r.component)] = r; });
+
+  /* a Houston group below this size gets the small-group note */
+  const SMALL_GROUP = 20;
+  const STATUS_TEXT = {
+    'not-labeled':  'Not labeled in the report',
+    'not-shown':    'Not shown in the report',
+    'not-reported': 'Not reported for this category'
+  };
+  const MODE_COUNT = {discipline:'orgs_by_discipline_count', budget:'orgs_by_budget_count'};
+  const MODE_SHARE = {discipline:'orgs_by_discipline_share', budget:'orgs_by_budget_share'};
+
+  /* Which metrics each card shows. Cards hold at most four headline figures
+     and at most one chart; everything else for the view is in the table. */
+  const CARDS = [
+    {section:'sector-profile', accent:'var(--cyan)'},
+    {section:'funding', accent:'var(--gold)',
+     figs:[{m:'avg_expenses'}, {m:'earned_vs_contributed', c:'earned', sub:'contributed'}, {m:'local_gov_pct_expenses'}],
+     chart:{type:'diverging', m:'operating_result_pct_expenses'},
+     notes:['earned_vs_contributed', 'local_gov_pct_expenses'],
+     table:['avg_expenses', 'avg_revenue', 'earned_vs_contributed', 'contributed_sources', 'local_gov_pct_expenses', 'operating_result_pct_expenses']},
+    {section:'workforce', accent:'var(--coral)',
+     figs:[{m:'personnel_pct_expenses'}, {m:'avg_ft_staff'}, {m:'avg_pt_staff'}],
+     notes:['personnel_pct_expenses']},
+    {section:'audience', accent:'var(--indigo)',
+     figs:[{m:'avg_attendance'}],
+     notes:['avg_attendance']},
+    {section:'facilities', accent:'var(--green)',
+     figs:[{m:'primary_facility_use', c:'administrative'}, {m:'primary_facility_use', c:'program'}, {m:'primary_facility_use', c:'both'}],
+     chart:{type:'rows', m:'primary_facility'},
+     table:['primary_facility', 'primary_facility_use']}
+  ];
+
+  /* ------------------------------------------------------------ helpers -- */
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  /* Display only. Keeps budget-band labels such as $250k-$999k and
+     $1M-$2.99M on one line, with the ordinary hyphen. index.html's
+     keepRanges() matches digits on both sides of the hyphen only, so it
+     would miss these; this pattern allows the dollar sign and the k or M. */
+  const BAND = /\$?\d[\d.,]*[kKM]?%?-\$?\d[\d.,]*[kKM]?%?/g;
+  const keepBands = s => esc(s).replace(BAND, '<span class="nw">$&</span>');
+  const dx = s => `<span class="dx">${keepBands(s)}</span>`;   /* data-derived text */
+  const viewLabel = id => dx(VIEW[id].label);
+
+  let PAGES = null;   /* pages cited by the card being built */
+
+  function covered(m, view){ return MET[m].coverage.includes(VIEW[view].mode); }
+  function rec(m, view, geo, c){
+    if(!covered(m, view)) return {metric:m, view, geo, component:c || '', status:'not-reported', display:null};
+    const r = REC[key(m, view, geo, c)];
+    if(!r) throw new Error('No record for ' + key(m, view, geo, c));
+    return r;
+  }
+  /* every figure on the page goes through val(), so each carries its record */
+  function val(r, cls){
+    if(PAGES && r.page) PAGES.add(r.page);
+    const text = r.status === 'reported' ? r.display : STATUS_TEXT[r.status];
+    const c = 'v' + (r.status === 'reported' ? '' : ' na') + (cls ? ' ' + cls : '');
+    return `<span class="${c}" data-m="${r.metric}" data-g="${r.geo}" data-c="${r.component || ''}" data-v="${r.view}" data-s="${r.status}">${esc(text)}</span>`;
+  }
+  function groupN(view, geo){
+    const v = VIEW[view];
+    return v.mode === 'overall' ? REC[key('orgs_total', 'overall', geo)] : REC[key(MODE_COUNT[v.mode], 'overall', geo, view)];
+  }
+  function groupShare(view, geo){
+    const v = VIEW[view];
+    return v.mode === 'overall' ? null : REC[key(MODE_SHARE[v.mode], 'overall', geo, view)];
+  }
+  const isSmall = view => groupN(view, 'houston').value < SMALL_GROUP;
+  const pagesText = set => {
+    const p = [...set].sort((a,b)=>a-b);
+    return (p.length > 1 ? 'pp. ' : 'p. ') + p.join(', ');
+  };
+  /* "a", "a and b", "a, b, and c" */
+  const list = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1];
+  const PLUS = '<span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>';
+
+  /* exact wording approved for the group-size line and the small-group note */
+  function groupLine(view){
+    return `<p class="groupline">Based on a group of ${val(groupN(view,'houston'))} Houston and ${val(groupN(view,'national'))} national benchmark organizations.</p>`;
+  }
+  function smallNote(view){
+    if(!isSmall(view)) return '';
+    return `<p class="smallnote">A small group: these averages come from a group of ${val(groupN(view,'houston'))} Houston organizations, and one organization can move them substantially.</p>`;
+  }
+
+  /* --------------------------------------------------------- figures --- */
+  function figLabel(f){
+    const m = MET[f.m];
+    return f.c && m.components.length > 2 ? `${m.label}: ${D.componentLabels[f.c]}` : m.label;
+  }
+  function figItem(label, h, n, sub){
+    if(h.status === 'not-reported'){
+      return `<div class="fig-item"><dt>${esc(label)}</dt><dd><span class="fig-h">${val(h)}</span></dd></div>`;
+    }
+    return `<div class="fig-item"><dt>${esc(label)}</dt><dd>` +
+      `<span class="fig-h">${val(h)}<span class="who">Houston</span></span>` +
+      `<span class="fig-n">${val(n)}<span class="who">National benchmark</span></span>` +
+      (sub || '') + `</dd></div>`;
+  }
+  function metricFig(f, view){
+    const h = rec(f.m, view, 'houston', f.c), n = rec(f.m, view, 'national', f.c);
+    let sub = '';
+    if(f.sub && h.status !== 'not-reported'){
+      sub = `<span class="fig-sub">${esc(D.componentLabels[f.sub])}: ${val(rec(f.m, view, 'houston', f.sub))} Houston, ${val(rec(f.m, view, 'national', f.sub))} national benchmark</span>`;
+    }
+    return figItem(figLabel(f), h, n, sub);
+  }
+
+  /* ---------------------------------------------------------- charts --- */
+  const LEGEND = '<ul class="legend" aria-hidden="true"><li><span class="key h"></span><span class="who">Houston</span></li><li><span class="key n"></span><span class="who">National benchmark</span></li></ul>';
+
+  function barHTML(geo, r, extra, pos){
+    const who = `<span class="visually-hidden"> ${geo === 'houston' ? 'Houston' : 'National benchmark'}</span>`;
+    if(r.status !== 'reported'){
+      return `<div class="bar ${geo === 'houston' ? 'h' : 'n'}"><span class="na-wide">${val(r)}${who}</span></div>`;
+    }
+    const style = pos ? `--l:${pos.l}%;--w:${pos.w}%` : `--w:${Math.max(0, r.value)}%`;
+    const neg = pos && pos.neg ? ' neg' : '';
+    const zero = pos ? `<span class="zero" style="--z:${pos.z}%"></span>` : '';
+    return `<div class="bar ${geo === 'houston' ? 'h' : 'n'}">` +
+      `<span class="track" aria-hidden="true">${zero}<span class="fill${neg}" style="${style}"></span></span>` +
+      `<span class="bval">${val(r)}${extra || ''}${who}</span></div>`;
+  }
+
+  /* composition rows: one row per category, Houston and national bars on a
+     0-100% scale, every value printed. Never stacked: a stacked bar would need
+     unlabeled segments back-solved to be drawn. */
+  function rowsChart(title, rows){
+    return `<figure class="chart"><figcaption class="chart-title">${esc(title)}</figcaption>${LEGEND}` +
+      rows.map(row=>`<div class="crow${row.sel ? ' sel' : ''}${row.dim ? ' dim' : ''}">` +
+        `<p class="crow-label">${row.label}</p><div class="bars">` +
+        barHTML('houston', row.h, row.hx) + barHTML('national', row.n, row.nx) +
+        `</div></div>`).join('') + `</figure>`;
+  }
+
+  /* diverging bars from zero, on one scale for every view so the views can
+     be compared as you switch */
+  function divergingChart(m, view){
+    const all = D.values.filter(r=>r.metric === m && r.status === 'reported').map(r=>r.value);
+    const lo = Math.min(0, Math.floor(Math.min(...all) / 5) * 5);
+    const hi = Math.max(0, Math.ceil(Math.max(...all) / 5) * 5);
+    const span = hi - lo, z = (-lo) / span * 100;
+    const pos = r => r.status !== 'reported' ? null :
+      {l:(Math.min(0, r.value) - lo) / span * 100, w:Math.abs(r.value) / span * 100, z, neg:r.value < 0};
+    const h = rec(m, view, 'houston'), n = rec(m, view, 'national');
+    const row = (label, geo, r) => `<div class="crow"><p class="crow-label">${label}</p><div class="bars">${barHTML(geo, r, '', pos(r))}</div></div>`;
+    return `<figure class="chart"><figcaption class="chart-title">${esc(MET[m].label)}</figcaption>` +
+      row('Houston', 'houston', h) + row('National benchmark', 'national', n) +
+      `<div class="axis" aria-hidden="true"><span></span><div class="ticks"><div class="tick" style="--z:${z}%"><span class="dx">0%</span></div><span></span></div></div>` +
+      (MET[m].cardNote ? `<p class="chart-note">${dx(MET[m].cardNote)}</p>` : '') + `</figure>`;
+  }
+
+  function compositionChart(metric, view, selected){
+    const m = MET[metric];
+    const countM = metric.replace('_share', '_count');
+    const title = m.id.includes('discipline') ? 'Share of organizations by discipline' : 'Share of organizations by budget size';
+    return rowsChart(title, m.components.map(c=>({
+      label: (c === selected ? '<span class="visually-hidden">Selected: </span>' : '') + viewLabel(c),
+      sel: c === selected, dim: selected && c !== selected,
+      h: rec(metric, 'overall', 'houston', c), hx: ` (${val(rec(countM, 'overall', 'houston', c))})`,
+      n: rec(metric, 'overall', 'national', c), nx: ` (${val(rec(countM, 'overall', 'national', c))})`
+    })));
+  }
+
+  /* ---------------------------------------------------------- tables --- */
+  function tableRows(metric, view){
+    const m = MET[metric];
+    const rows = [];
+    const page = r => r.page ? `<span class="dx">${r.page}</span>` : '';
+    const line = (label, h, n, cls) =>
+      `<tr${cls ? ` class="${cls}"` : ''}><th scope="row">${label}</th><td class="num">${val(h)}</td><td class="num">${val(n)}</td><td class="pg">${page(h)}</td></tr>`;
+    if(!m.components){
+      const h = rec(metric, view, 'houston'), n = rec(metric, view, 'national');
+      const note = m.tableNote && h.status !== 'not-reported';
+      rows.push(line(esc(m.name), h, n, note ? 'hasnote' : ''));
+      if(note) rows.push(`<tr class="tnote"><td colspan="4">${dx(m.tableNote)}</td></tr>`);
+    } else {
+      rows.push(`<tr class="grp"><th scope="rowgroup" colspan="4">${esc(m.name)}</th></tr>`);
+      m.components.forEach(c=>rows.push(line(esc(D.componentLabels[c]), rec(metric, view, 'houston', c), rec(metric, view, 'national', c), 'sub')));
+    }
+    return rows.join('');
+  }
+  function compositionTable(metric, view){
+    const m = MET[metric];
+    const countM = metric.replace('_share', '_count');
+    const title = m.id.includes('discipline') ? 'Organizations by discipline' : 'Organizations by budget size';
+    let rows = `<tr class="grp"><th scope="rowgroup" colspan="4">${esc(title)}</th></tr>`;
+    m.components.forEach(c=>{
+      const h = rec(metric, 'overall', 'houston', c), n = rec(metric, 'overall', 'national', c);
+      rows += `<tr class="sub"><th scope="row">${viewLabel(c)}</th>` +
+        `<td class="num">${val(h)} (${val(rec(countM, 'overall', 'houston', c))})</td>` +
+        `<td class="num">${val(n)} (${val(rec(countM, 'overall', 'national', c))})</td>` +
+        `<td class="pg"><span class="dx">${h.page}</span></td></tr>`;
+    });
+    return rows;
+  }
+  function tableBlock(card, view, bodyRows, metrics){
+    const notes = D.rowNotes.filter(n=>metrics.includes(n.metric) && n.view === view);
+    const open = OPEN.has(card.section) ? ' open' : '';
+    return `<details class="full" data-section="${card.section}"${open}><summary>${PLUS}Full figures</summary>` +
+      `<div class="tablewrap"><table><caption class="visually-hidden">${esc(SEC[card.section].name)}, ${viewLabel(view)}: full figures</caption>` +
+      `<thead><tr><th scope="col">Figure</th><th scope="col" class="num">Houston</th><th scope="col" class="num">National benchmark</th><th scope="col" class="num">Page</th></tr></thead>` +
+      `<tbody>${bodyRows}</tbody></table></div>` +
+      (notes.length ? `<ul class="rownotes">` + notes.map(n=>`<li>${dx(`${n.geo === 'houston' ? 'Houston' : 'National benchmark'}, ${MET[n.metric].name}: ${n.note}`)}</li>`).join('') + `</ul>` : '') +
+      `</details>`;
+  }
+  let OPEN = new Set();
+
+  /* ----------------------------------------------------------- cards --- */
+  function sourceLine(){
+    return `<p class="src">Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>.</p>`;
+  }
+
+  function sectorCard(card, view){
+    const v = VIEW[view];
+    let figs, chart, table, notes = [];
+    if(v.mode === 'overall'){
+      figs = figItem(MET.orgs_total.label, groupN(view, 'houston'), groupN(view, 'national'));
+      chart = compositionChart('orgs_by_discipline_share', view, null);
+      table = compositionTable('orgs_by_discipline_share', view) + compositionTable('orgs_by_budget_share', view);
+    } else {
+      const sub = `<span class="fig-sub">${val(groupShare(view,'houston'))} of the Houston cohort, ${val(groupShare(view,'national'))} of the national benchmark</span>`;
+      figs = figItem(MET.orgs_total.label, groupN(view, 'houston'), groupN(view, 'national'), sub);
+      chart = compositionChart(MODE_SHARE[v.mode], view, view);
+      table = compositionTable(MODE_SHARE[v.mode], view);
+      notes.push(v.cardDefinition || (v.definition + '.'));
+    }
+    return {
+      body: `<div class="card-body side"><dl class="figs">${figs}</dl>${chart}</div>`,
+      notes, table: tableBlock(card, view, table, [])
+    };
+  }
+
+  function dataCard(card, view){
+    const figs = card.figs.map(f=>metricFig(f, view)).join('');
+    let chart = '';
+    if(card.chart && card.chart.type === 'diverging') chart = divergingChart(card.chart.m, view);
+    if(card.chart && card.chart.type === 'rows'){
+      const m = MET[card.chart.m];
+      chart = rowsChart(m.name, m.components.map(c=>({
+        label: esc(D.componentLabels[c]), h: rec(m.id, view, 'houston', c), n: rec(m.id, view, 'national', c)
+      })));
+    }
+    const notes = (card.notes || []).map(id=>MET[id].cardNote).filter(Boolean);
+    if(SEC[card.section].note) notes.push(SEC[card.section].note);
+    const table = card.table ? tableBlock(card, view, card.table.map(id=>tableRows(id, view)).join(''), card.table) : '';
+    const layout = !chart ? '' : card.figs.length > 1 ? ' stack' : ' side';
+    return {body:`<div class="card-body${layout}"><dl class="figs">${figs}</dl>${chart}</div>`, notes, table};
+  }
+
+  function renderCard(card, view){
+    PAGES = new Set();
+    const sec = SEC[card.section];
+    const parts = card.section === 'sector-profile' ? sectorCard(card, view) : dataCard(card, view);
+    const head = card.section === 'sector-profile' ? '' : groupLine(view) + smallNote(view);
+    const notes = parts.notes.length ? `<ul class="notes">${parts.notes.map(t=>`<li>${dx(t)}</li>`).join('')}</ul>` : '';
+    const html = `<section class="card" data-section="${card.section}" aria-labelledby="h-${card.section}" style="--c:${card.accent}">` +
+      `<h2 id="h-${card.section}">${esc(sec.name)}</h2>${head}${parts.body}${notes}${parts.table}${sourceLine()}</section>`;
+    PAGES = null;
+    return html;
+  }
+
+  function renderCards(view){ return CARDS.map(c=>renderCard(c, view)).join(''); }
+
+  /* --------------------------------------------------- surrounding text --- */
+  function statusText(view){
+    return `Showing <strong>${viewLabel(view)}</strong>: ${val(groupN(view,'houston'))} Houston organizations, ${val(groupN(view,'national'))} in the national benchmark.`;
+  }
+  function standfirst(){
+    PAGES = null;
+    return ` The figures come from ${esc(S.author)}' ${dx(S.period)} profile of ${val(groupN('overall','houston'))} Houston organizations, ${dx(S.houston.description)}, benchmarked against ${val(groupN('overall','national'))} organizations in the ${dx(S.national.benchmark)}. ${esc(S.presentedBy)} presents them here as ${esc(S.author)} published them.`;
+  }
+  function heroMeta(){
+    return `<span class="dx">Source: ${esc(S.author)}</span> <span aria-hidden="true">|</span> <span class="dx">${esc(S.period)} data</span> <span aria-hidden="true">|</span> <span class="dx">Published ${S.publicationYear}</span>`;
+  }
+  /* The PDF link comes from source.url alone. While it is null, the
+     report's fallback line from the data file shows wherever the link would,
+     with its email address linked. */
+  const PDF_ICON = '<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>';
+  const NEW_TAB = '<span class="visually-hidden"> (opens in a new tab)</span>';
+  function pdfFallback(){
+    if(!S.pdfFallback) return '';
+    return `<span class="pdf-fallback">${esc(S.pdfFallback).replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, m=>`<a href="mailto:${m}">${m}</a>`)}</span>`;
+  }
+  function heroPdf(){
+    if(S.url) return {where:'cta', html:`<a class="ghostbtn" id="pdfLink" href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB} ${PDF_ICON}</a>`};
+    return {where:'note', html:pdfFallback()};
+  }
+  function citation(){
+    return `${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data.`;
+  }
+  function creditHTML(){
+    return `<p>${esc(S.creditLine)}</p>` +
+      `<p>${esc(S.presentedBy)} presents the report's figures here in an interactive format, as ${esc(S.author)} published them. To cite them, cite the report: <span class="dx">${citation()}</span></p>` +
+      `<p><a href="data/smu-houston-profile.csv" download>Download every figure as a CSV file</a>, with each figure's unit, published display, status, and page.</p>`;
+  }
+
+  function aboutHTML(){
+    PAGES = null;
+    const dd = D.definitions.disciplineDefinitions;
+    const disc = D.views.filter(v=>v.mode === 'discipline');
+    const budg = D.views.filter(v=>v.mode === 'budget');
+    const largest = disc.reduce((a,b)=>groupN(b.id,'houston').value > groupN(a.id,'houston').value ? b : a);
+    const smallBands = budg.filter(v=>isSmall(v.id));
+    const sec = (h, body) => `<section><h3>${h}</h3>${body}</section>`;
+    const pdf = S.url ? ` <a href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB}</a>.` : (S.pdfFallback ? ' ' + pdfFallback() : '');
+    return [
+      sec('The source', `<p>${esc(S.creditLine)} The report's title is <cite>${esc(S.title)}</cite>, and ${esc(S.presentedBy)} presents its figures here in an interactive format.${pdf}</p>`),
+      sec('The Houston cohort', `<p>The Houston figures come from ${val(groupN('overall','houston'))} organizations: ${dx(S.houston.description)}. They are a selected group, not a census of Houston's nonprofit arts organizations.</p>`),
+      sec('The national benchmark', `<p>The national figures come from ${val(groupN('overall','national'))} organizations in the ${dx(S.national.benchmark)}. The benchmark isn't a representative sample of all U.S. nonprofit arts organizations, and it isn't national economic statistics.</p>`),
+      sec('Fiscal year', `<p>Every figure, Houston and national, covers ${dx(S.period)}.</p>`),
+      sec('Disciplines', `<p>${esc(S.author)} groups organizations by the first characters of their NTEE code (the National Taxonomy of Exempt Entities).</p><ul>` +
+        disc.map(v=>`<li><strong>${viewLabel(v.id)}</strong> (${val(groupN(v.id,'houston'))} Houston, ${val(groupN(v.id,'national'))} national): ${dx(dd[v.id])}</li>`).join('') +
+        `</ul><p>${viewLabel(largest.id)} is the largest group in Houston. In the report's charts it's labeled "${esc(largest.reportLabel)}".</p>`),
+      sec('Budget sizes', `<p>Budget size is based on total expenses.</p><ul>` +
+        budg.map(v=>`<li><strong>${viewLabel(v.id)}</strong>: ${dx(v.definition.charAt(0).toLowerCase() + v.definition.slice(1))} (${val(groupN(v.id,'houston'))} Houston, ${val(groupN(v.id,'national'))} national)</li>`).join('') +
+        `</ul>` + (smallBands.length ? `<p>The ${list(smallBands.map(v=>viewLabel(v.id)))} ${smallBands.length > 1 ? 'groups hold' : 'group holds'} ${list(smallBands.map(v=>val(groupN(v.id,'houston'))))} Houston organizations, so their averages rest on very few organizations.</p>` : '')),
+      sec('Averages, not totals', `<p>Most figures are averages per organization. They aren't totals, and a few very large organizations can pull an average well above what a typical organization looks like. The report gives no medians.</p>`),
+      sec('Revenue and the operating result', `<p>${dx(MET.avg_revenue.tableNote)}</p><p>${dx(MET.operating_result_pct_expenses.cardNote)}</p>`),
+      sec('Rounding and gaps', `<p>Figures are shown exactly as published, rounded as the report rounds them, so some sets of percentages don't add up exactly. Where a chart in the report draws a segment without printing its value, it's marked "${STATUS_TEXT['not-labeled']}". Where it draws no segment at all, it's marked "${STATUS_TEXT['not-shown']}". Neither is filled in here. Where the report has no figure for a group, it's marked "${STATUS_TEXT['not-reported']}".</p>`),
+      sec('Separate breakdowns', `<p>The discipline and budget-size figures are two separate breakdowns of the same organizations. The report doesn't combine them, so there are no figures for, say, small performing arts organizations.</p>`)
+    ].join('');
+  }
+
+  root.SMU_EXPLORER = {CARDS, renderCards, renderCard, statusText, standfirst, heroMeta, creditHTML, aboutHTML, heroPdf, pdfFallback, keepBands, SMALL_GROUP, STATUS_TEXT};
+
+  /* ======================== browser only below ======================== */
+  if(typeof document === 'undefined') return;
+
+  const cardsEl  = document.getElementById('cards');
+  const statusEl = document.getElementById('status');
+  const modeInputs = [...document.querySelectorAll('input[name="mode"]')];
+  const groupSets  = [...document.querySelectorAll('.groups')];
+  const lastGroup  = {};
+
+  document.getElementById('standfirst').insertAdjacentHTML('beforeend', standfirst());
+  document.getElementById('heroMeta').innerHTML = heroMeta();
+  document.getElementById('credit').innerHTML = creditHTML();
+  document.getElementById('aboutBody').innerHTML = aboutHTML();
+  const pdf = heroPdf();
+  if(pdf.where === 'cta') document.getElementById('csvLink').insertAdjacentHTML('afterend', pdf.html);
+  else if(pdf.html){
+    const note = document.getElementById('pdfNote');
+    note.innerHTML = pdf.html;
+    note.hidden = false;
+  }
+
+  /* group options come from the data file */
+  groupSets.forEach(fs=>{
+    const mode = fs.dataset.mode;
+    fs.querySelector('.chips').innerHTML = D.views.filter(v=>v.mode === mode).map(v=>
+      `<label class="opt"><input type="radio" name="group-${mode}" value="${v.id}"><span class="chip">${keepBands(v.label)}</span></label>`).join('');
+  });
+
+  /* ?view=<id>; anything missing or unknown falls back to Overall */
+  function readView(){
+    let id = null;
+    try{ id = new URLSearchParams(location.search).get('view'); }catch(e){}
+    return VIEW[id] ? id : 'overall';
+  }
+  /* replaceState so switching views doesn't fill the back stack; wrapped
+     because some browsers refuse history writes on file://. Other query
+     parameters are kept. */
+  function writeView(id){
+    try{
+      const p = new URLSearchParams(location.search);
+      if(id === 'overall') p.delete('view'); else p.set('view', id);
+      const qs = p.toString();
+      history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+    }catch(e){}
+  }
+
+  let current = null;
+  function show(view, announce){
+    current = view;
+    const mode = VIEW[view].mode;
+    if(mode !== 'overall') lastGroup[mode] = view;
+    modeInputs.forEach(i=>{ i.checked = i.value === mode; });
+    groupSets.forEach(fs=>{
+      fs.hidden = fs.dataset.mode !== mode;
+      fs.querySelectorAll('input').forEach(i=>{ i.checked = i.value === view; });
+    });
+    cardsEl.innerHTML = renderCards(view);
+    const text = statusText(view);
+    /* first paint fills the line without announcing it */
+    if(announce) statusEl.innerHTML = text;
+    else { statusEl.setAttribute('aria-live','off'); statusEl.innerHTML = text; requestAnimationFrame(()=>statusEl.setAttribute('aria-live','polite')); }
+    writeView(view);
+  }
+
+  modeInputs.forEach(i=>i.addEventListener('change', ()=>{
+    if(!i.checked) return;
+    const mode = i.value;
+    const first = D.views.find(v=>v.mode === mode).id;
+    show(mode === 'overall' ? 'overall' : (lastGroup[mode] || first), true);
+  }));
+  groupSets.forEach(fs=>fs.addEventListener('change', e=>{
+    if(e.target.checked) show(e.target.value, true);
+  }));
+  /* the full-figures tables stay open or closed as you switch views */
+  cardsEl.addEventListener('toggle', e=>{
+    const d = e.target;
+    if(!d.matches || !d.matches('details.full')) return;
+    if(d.open) OPEN.add(d.dataset.section); else OPEN.delete(d.dataset.section);
+  }, true);
+
+  show(readView(), false);
+
+  document.getElementById('toTop').addEventListener('click', e=>{
+    e.preventDefault();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0, behavior: reduce ? 'instant' : 'smooth'});
+    document.querySelector('h1').focus({preventScroll:true});
+  });
+
+  /* section rules draw in once, as on the homepage */
+  const page = document.getElementById('explore');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{
+        if(!en.isIntersecting) return;
+        io.unobserve(en.target);
+        en.target.querySelector('.rule').classList.add('drawing');
+      });
+    }, {threshold:0.5});
+    page.querySelectorAll('.rule').forEach(r=>{
+      r.addEventListener('animationend', ()=>r.classList.replace('drawing','drawn'), {once:true});
+      io.observe(r.parentElement);
+    });
+    page.classList.add('js-rules');
+  }
+})(window);
+</script>
+</body>
+</html>

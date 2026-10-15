@@ -97,7 +97,7 @@
     font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.05em;
     text-transform:uppercase;color:var(--ink-soft);margin:32px 0 0;
   }
-  #intro .cta{margin:24px 0 0}
+  #intro .cta{margin:24px 0 0;display:flex;flex-wrap:wrap;gap:12px}
   #intro .btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 24px;border-radius:99px;text-decoration:none;
@@ -478,7 +478,8 @@
       <p class="stand">Public home for the studies, surveys, maps, and more that report on Houston's arts sector, built to make the data easy to find, cite, and share.</p>
       <!-- count is live off RESOURCES; the month comes from UPDATED in the script -->
       <p class="meta" id="introMeta">Loading the collection</p>
-      <p class="cta"><a class="btn" href="#directory">Browse the resources <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></p>
+      <p class="cta"><a class="btn" href="#directory">Browse the resources <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+        <a class="ghostbtn" href="explore.html">Explore Houston's nonprofit arts sector <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></p>
     </div>
   </header>
 
@@ -689,6 +690,7 @@
      pdf       -> downloadable PDF (hosted file or direct link)
      request   -> available upon request
      internal  -> internal only
+     explore   -> an on-site page; opens in the same tab as "Explore the data"
      soon      -> published/forthcoming but no URL supplied yet
    updated      -> leave empty for one-time publications; the panel shows Updated only when set
    longitudinal -> the panel shows it only when "Yes"
@@ -852,6 +854,13 @@ const RESOURCES = [
    link:"engaged-by-the-arts-smu-dataarts-white-paper-rev.pdf", linkType:"pdf",
    updated:"", steward:"SMU DataArts"},
 
+  {title:"Financial and Operational Profile of the Nonprofit Arts Sector in Houston, TX", author:"SMU DataArts", year:2026, access:"Public", longitudinal:"No",
+   population:"204 Houston nonprofit arts organizations, with a national benchmark", methods:"Analysis of FY25 financial and operational data",
+   summary:"FY25 finances, staffing, attendance, and facilities for 204 Houston nonprofit arts organizations that applied for HAA operating support, benchmarked against 1,509 organizations in SMU DataArts' FY25 Cultural Data Profiles, with an interactive explorer by discipline and budget size.",
+   finding:"46% of the Houston organizations in the cohort have budgets under $250,000, compared with 44% of the national benchmark.",
+   link:"explore.html", linkType:"explore",
+   updated:"", steward:"SMU DataArts, through the City Arts Data Exchange with Bloomberg Associates"},
+
   {title:"HAA Grants and Panels Dashboard", author:"HAA", year:2026, access:"Public", longitudinal:"Yes",
    population:"Applicants for City funding", methods:"Analysis",
    summary:"Grant-year totals and aggregate applicant demographics for City of Houston arts funding, presented as an interactive dashboard.",
@@ -989,6 +998,7 @@ const TAGS = {
   "Cultural Tourism Index: 250 Global Cities":                                {focus:["Cross-city and national","Audiences and public"], methods:["Data analysis"], place:["Global"], format:["Report"]},
   "Data Snapshot: 2023-24 Arts Education Access in Houston ISD":                                     {focus:["Education"], methods:["Mapping","Survey"], place:["HISD campuses"], format:["Map"]},
   "Engaged by the Arts: Houston Demographics & Audience Opportunity":         {focus:["Artists and workforce","Audiences and public"], methods:["Survey","Data analysis"], place:["Greater Houston"], format:["Report"]},
+  "Financial and Operational Profile of the Nonprofit Arts Sector in Houston, TX": {focus:["Organizations","Cross-city and national"], methods:["Data analysis"], place:["City of Houston"], format:["Dashboard or explorer","Report"]},
   "2026 Greater Houston Artist Survey":                                       {focus:["Artists and workforce"], methods:["Survey"], place:["Greater Houston"], format:["Report"]},
   "HAA Grants and Panels Dashboard":                                          {focus:["Organizations"], methods:["Data analysis"], place:["City of Houston"], format:["Dashboard or explorer"]},
   "Houston Events Calendar":                                                  {focus:["Audiences and public"], methods:["Community submissions"], place:["Greater Houston"], format:["Directory or calendar"]},
@@ -1263,6 +1273,7 @@ function actionHTML(r){
     case 'pdf':      return `<a class="btn" href="${r.link}" target="_blank" rel="noopener">Download PDF${NEW_TAB}${icons.pdf}</a>`;
     case 'request':  return `<span class="btn ghost">Available on request</span>`;
     case 'internal': return `<span class="btn ghost">Internal use only</span>`;
+    case 'explore':  return `<a class="btn" href="${r.link}">Explore the data${ICON_ARROW}</a>`;
     default:         return `<span class="btn ghost">Link coming soon</span>`;
   }
 }

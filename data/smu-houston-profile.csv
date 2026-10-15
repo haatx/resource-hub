@@ -1,0 +1,411 @@
+metric,metric_name,section,view,view_label,view_mode,geography,component,component_label,value,unit,display,status,period,pdf_page,group_n,note,row_note
+orgs_total,Organizations in the cohort,Sector profile,overall,Overall,overall,Houston,,,204,organizations,204,Reported,FY25,1,204,,
+orgs_total,Organizations in the cohort,Sector profile,overall,Overall,overall,National benchmark,,,1509,organizations,"1,509",Reported,FY25,1,1509,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,Houston,performing,Performing Arts,73,organizations,73,Reported,FY25,1,204,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,National benchmark,performing,Performing Arts,527,organizations,527,Reported,FY25,1,1509,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,Houston,visual,Visual Arts,17,organizations,17,Reported,FY25,1,204,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,National benchmark,visual,Visual Arts,137,organizations,137,Reported,FY25,1,1509,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,Houston,other,Other Arts,114,organizations,114,Reported,FY25,1,204,,
+orgs_by_discipline_count,Organizations by discipline (count),Sector profile,overall,Overall,overall,National benchmark,other,Other Arts,845,organizations,845,Reported,FY25,1,1509,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,Houston,performing,Performing Arts,36,percent,36%,Reported,FY25,1,204,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,National benchmark,performing,Performing Arts,35,percent,35%,Reported,FY25,1,1509,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,Houston,visual,Visual Arts,8,percent,8%,Reported,FY25,1,204,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,National benchmark,visual,Visual Arts,9,percent,9%,Reported,FY25,1,1509,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,Houston,other,Other Arts,56,percent,56%,Reported,FY25,1,204,,
+orgs_by_discipline_share,Organizations by discipline (share),Sector profile,overall,Overall,overall,National benchmark,other,Other Arts,56,percent,56%,Reported,FY25,1,1509,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,Houston,under-250k,<$250k,93,organizations,93,Reported,FY25,2,204,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,National benchmark,under-250k,<$250k,657,organizations,657,Reported,FY25,2,1509,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,Houston,250k-1m,$250k-$999k,68,organizations,68,Reported,FY25,2,204,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,National benchmark,250k-1m,$250k-$999k,430,organizations,430,Reported,FY25,2,1509,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,Houston,1m-3m,$1M-$2.99M,19,organizations,19,Reported,FY25,2,204,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,National benchmark,1m-3m,$1M-$2.99M,224,organizations,224,Reported,FY25,2,1509,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,Houston,3m-10m,$3M-$9.99M,12,organizations,12,Reported,FY25,2,204,Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render.,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,National benchmark,3m-10m,$3M-$9.99M,109,organizations,109,Reported,FY25,2,1509,Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render.,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,Houston,10m-plus,$10M+,12,organizations,12,Reported,FY25,2,204,,
+orgs_by_budget_count,Organizations by budget size (count),Sector profile,overall,Overall,overall,National benchmark,10m-plus,$10M+,89,organizations,89,Reported,FY25,2,1509,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,Houston,under-250k,<$250k,46,percent,46%,Reported,FY25,2,204,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,National benchmark,under-250k,<$250k,44,percent,44%,Reported,FY25,2,1509,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,Houston,250k-1m,$250k-$999k,33,percent,33%,Reported,FY25,2,204,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,National benchmark,250k-1m,$250k-$999k,28,percent,28%,Reported,FY25,2,1509,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,Houston,1m-3m,$1M-$2.99M,9,percent,9%,Reported,FY25,2,204,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,National benchmark,1m-3m,$1M-$2.99M,15,percent,15%,Reported,FY25,2,1509,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,Houston,3m-10m,$3M-$9.99M,6,percent,6%,Reported,FY25,2,204,Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render.,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,National benchmark,3m-10m,$3M-$9.99M,7,percent,7%,Reported,FY25,2,1509,Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render.,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,Houston,10m-plus,$10M+,6,percent,6%,Reported,FY25,2,204,,
+orgs_by_budget_share,Organizations by budget size (share),Sector profile,overall,Overall,overall,National benchmark,10m-plus,$10M+,6,percent,6%,Reported,FY25,2,1509,,
+avg_expenses,Average total expenses,Funding and financial health,overall,Overall,overall,Houston,,,3.2,US dollars (millions),$3.2M,Reported,FY25,3,204,,
+avg_expenses,Average total expenses,Funding and financial health,overall,Overall,overall,National benchmark,,,2.7,US dollars (millions),$2.7M,Reported,FY25,3,1509,,
+avg_expenses,Average total expenses,Funding and financial health,performing,Performing Arts,discipline,Houston,,,2.7,US dollars (millions),$2.7M,Reported,FY25,3,73,,
+avg_expenses,Average total expenses,Funding and financial health,performing,Performing Arts,discipline,National benchmark,,,2.7,US dollars (millions),$2.7M,Reported,FY25,3,527,,
+avg_expenses,Average total expenses,Funding and financial health,visual,Visual Arts,discipline,Houston,,,9.3,US dollars (millions),$9.3M,Reported,FY25,3,17,,
+avg_expenses,Average total expenses,Funding and financial health,visual,Visual Arts,discipline,National benchmark,,,5.7,US dollars (millions),$5.7M,Reported,FY25,3,137,,
+avg_expenses,Average total expenses,Funding and financial health,other,Other Arts,discipline,Houston,,,2.6,US dollars (millions),$2.6M,Reported,FY25,3,114,,
+avg_expenses,Average total expenses,Funding and financial health,other,Other Arts,discipline,National benchmark,,,2.2,US dollars (millions),$2.2M,Reported,FY25,3,845,,
+avg_revenue,Average total revenue,Funding and financial health,overall,Overall,overall,Houston,,,4.2,US dollars (millions),$4.2M,Reported,FY25,5,204,,
+avg_revenue,Average total revenue,Funding and financial health,overall,Overall,overall,National benchmark,,,3.5,US dollars (millions),$3.5M,Reported,FY25,5,1509,,
+avg_revenue,Average total revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,,,3.2,US dollars (millions),$3.2M,Reported,FY25,5,73,,
+avg_revenue,Average total revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,,,3.2,US dollars (millions),$3.2M,Reported,FY25,5,527,,
+avg_revenue,Average total revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,,,12.5,US dollars (millions),$12.5M,Reported,FY25,5,17,,
+avg_revenue,Average total revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,,,9.1,US dollars (millions),$9.1M,Reported,FY25,5,137,,
+avg_revenue,Average total revenue,Funding and financial health,other,Other Arts,discipline,Houston,,,3.6,US dollars (millions),$3.6M,Reported,FY25,5,114,,
+avg_revenue,Average total revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,,,2.8,US dollars (millions),$2.8M,Reported,FY25,5,845,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,overall,Overall,overall,Houston,earned,Earned revenue,60,percent,60%,Reported,FY25,5,204,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,overall,Overall,overall,Houston,contributed,Contributed revenue,40,percent,40%,Reported,FY25,5,204,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,earned,Earned revenue,57,percent,57%,Reported,FY25,5,1509,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,contributed,Contributed revenue,43,percent,43%,Reported,FY25,5,1509,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,earned,Earned revenue,59,percent,59%,Reported,FY25,6,73,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,contributed,Contributed revenue,41,percent,41%,Reported,FY25,6,73,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,earned,Earned revenue,85,percent,85%,Reported,FY25,6,17,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,contributed,Contributed revenue,15,percent,15%,Reported,FY25,6,17,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,earned,Earned revenue,47,percent,47%,Reported,FY25,6,114,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,contributed,Contributed revenue,53,percent,53%,Reported,FY25,6,114,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,earned,Earned revenue,59,percent,59%,Reported,FY25,6,527,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,contributed,Contributed revenue,41,percent,41%,Reported,FY25,6,527,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,earned,Earned revenue,67,percent,67%,Reported,FY25,6,137,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,contributed,Contributed revenue,33,percent,33%,Reported,FY25,6,137,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,earned,Earned revenue,51,percent,51%,Reported,FY25,6,845,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,contributed,Contributed revenue,49,percent,49%,Reported,FY25,6,845,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,earned,Earned revenue,41,percent,41%,Reported,FY25,6,93,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,contributed,Contributed revenue,59,percent,59%,Reported,FY25,6,93,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,earned,Earned revenue,36,percent,36%,Reported,FY25,6,68,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,contributed,Contributed revenue,64,percent,64%,Reported,FY25,6,68,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,earned,Earned revenue,26,percent,26%,Reported,FY25,6,19,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,contributed,Contributed revenue,74,percent,74%,Reported,FY25,6,19,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,earned,Earned revenue,43,percent,43%,Reported,FY25,6,12,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,contributed,Contributed revenue,57,percent,57%,Reported,FY25,6,12,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,earned,Earned revenue,66,percent,66%,Reported,FY25,6,12,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,contributed,Contributed revenue,34,percent,34%,Reported,FY25,6,12,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,earned,Earned revenue,37,percent,37%,Reported,FY25,6,657,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,contributed,Contributed revenue,63,percent,63%,Reported,FY25,6,657,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,earned,Earned revenue,39,percent,39%,Reported,FY25,6,430,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,contributed,Contributed revenue,61,percent,61%,Reported,FY25,6,430,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,earned,Earned revenue,38,percent,38%,Reported,FY25,6,224,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,contributed,Contributed revenue,62,percent,62%,Reported,FY25,6,224,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,earned,Earned revenue,44,percent,44%,Reported,FY25,6,109,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,contributed,Contributed revenue,56,percent,56%,Reported,FY25,6,109,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,earned,Earned revenue,63,percent,63%,Reported,FY25,6,89,,
+earned_vs_contributed,Earned vs. contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,contributed,Contributed revenue,37,percent,37%,Reported,FY25,6,89,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,local_gov,Local gov't,11,percent,11%,Reported,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,federal_gov,Federal gov't,4,percent,4%,Reported,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,individuals,Individuals,32,percent,32%,Reported,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,foundations,Foundations,44,percent,44%,Reported,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,Houston,corporations,Corporations,7,percent,7%,Reported,FY25,7,204,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,local_gov,Local gov't,14,percent,14%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,state_gov,State gov't,6,percent,6%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,federal_gov,Federal gov't,5,percent,5%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,individuals,Individuals,36,percent,36%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,foundations,Foundations,32,percent,32%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,overall,Overall,overall,National benchmark,corporations,Corporations,7,percent,7%,Reported,FY25,7,1509,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,local_gov,Local gov't,8,percent,8%,Reported,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,individuals,Individuals,41,percent,41%,Reported,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,foundations,Foundations,39,percent,39%,Reported,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,Houston,corporations,Corporations,7,percent,7%,Reported,FY25,8,73,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,local_gov,Local gov't,6,percent,6%,Reported,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,individuals,Individuals,18,percent,18%,Reported,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,foundations,Foundations,64,percent,64%,Reported,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,Houston,corporations,Corporations,7,percent,7%,Reported,FY25,8,17,,Labeled values sum to 95%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,local_gov,Local gov't,12,percent,12%,Reported,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,federal_gov,Federal gov't,6,percent,6%,Reported,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,individuals,Individuals,29,percent,29%,Reported,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,foundations,Foundations,43,percent,43%,Reported,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,Houston,corporations,Corporations,6,percent,6%,Reported,FY25,8,114,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,local_gov,Local gov't,11,percent,11%,Reported,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,state_gov,State gov't,5,percent,5%,Reported,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,individuals,Individuals,42,percent,42%,Reported,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,foundations,Foundations,32,percent,32%,Reported,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,performing,Performing Arts,discipline,National benchmark,corporations,Corporations,8,percent,8%,Reported,FY25,8,527,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,local_gov,Local gov't,6,percent,6%,Reported,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,state_gov,State gov't,4,percent,4%,Reported,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,individuals,Individuals,54,percent,54%,Reported,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,foundations,Foundations,29,percent,29%,Reported,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,visual,Visual Arts,discipline,National benchmark,corporations,Corporations,6,percent,6%,Reported,FY25,8,137,,Labeled values sum to 99%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,local_gov,Local gov't,19,percent,19%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,state_gov,State gov't,8,percent,8%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,federal_gov,Federal gov't,7,percent,7%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,individuals,Individuals,26,percent,26%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,foundations,Foundations,33,percent,33%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,other,Other Arts,discipline,National benchmark,corporations,Corporations,7,percent,7%,Reported,FY25,8,845,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,local_gov,Local gov't,15,percent,15%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,state_gov,State gov't,12,percent,12%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,federal_gov,Federal gov't,10,percent,10%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,individuals,Individuals,25,percent,25%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,foundations,Foundations,21,percent,21%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,Houston,corporations,Corporations,17,percent,17%,Reported,FY25,8,93,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,local_gov,Local gov't,17,percent,17%,Reported,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,federal_gov,Federal gov't,6,percent,6%,Reported,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,individuals,Individuals,19,percent,19%,Reported,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,foundations,Foundations,46,percent,46%,Reported,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,corporations,Corporations,9,percent,9%,Reported,FY25,8,68,,Labeled values sum to 97%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,local_gov,Local gov't,8,percent,8%,Reported,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,individuals,Individuals,24,percent,24%,Reported,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,foundations,Foundations,57,percent,57%,Reported,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,corporations,Corporations,,percent,,Not labeled in the report,FY25,8,19,,Labeled values sum to 89%; 3 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,local_gov,Local gov't,,percent,,Not labeled in the report,FY25,8,12,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,state_gov,State gov't,10,percent,10%,Reported,FY25,8,12,"Text-layer order would pair 10% with Local gov't; the render and segment colors show Local gov't is the small unlabeled first segment, 10% is State gov't, and 6% is Federal gov't.",Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,federal_gov,Federal gov't,6,percent,6%,Reported,FY25,8,12,"Text-layer order would pair 10% with Local gov't; the render and segment colors show Local gov't is the small unlabeled first segment, 10% is State gov't, and 6% is Federal gov't.",Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,individuals,Individuals,44,percent,44%,Reported,FY25,8,12,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,foundations,Foundations,31,percent,31%,Reported,FY25,8,12,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,corporations,Corporations,7,percent,7%,Reported,FY25,8,12,,Labeled values sum to 98%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,local_gov,Local gov't,12,percent,12%,Reported,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,state_gov,State gov't,,percent,,Not labeled in the report,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,individuals,Individuals,41,percent,41%,Reported,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,foundations,Foundations,38,percent,38%,Reported,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,Houston,corporations,Corporations,6,percent,6%,Reported,FY25,8,12,,Labeled values sum to 97%; 2 drawn segments not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,local_gov,Local gov't,17,percent,17%,Reported,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,state_gov,State gov't,10,percent,10%,Reported,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,individuals,Individuals,22,percent,22%,Reported,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,foundations,Foundations,37,percent,37%,Reported,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,under-250k,Under $250k,budget,National benchmark,corporations,Corporations,10,percent,10%,Reported,FY25,8,657,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,local_gov,Local gov't,14,percent,14%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,state_gov,State gov't,7,percent,7%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,federal_gov,Federal gov't,5,percent,5%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,individuals,Individuals,24,percent,24%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,foundations,Foundations,44,percent,44%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,corporations,Corporations,5,percent,5%,Reported,FY25,8,430,,Published values sum to 99% (rounding).
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,local_gov,Local gov't,17,percent,17%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,state_gov,State gov't,6,percent,6%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,federal_gov,Federal gov't,4,percent,4%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,individuals,Individuals,35,percent,35%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,foundations,Foundations,33,percent,33%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,corporations,Corporations,5,percent,5%,Reported,FY25,8,224,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,local_gov,Local gov't,15,percent,15%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,state_gov,State gov't,7,percent,7%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,federal_gov,Federal gov't,7,percent,7%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,individuals,Individuals,33,percent,33%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,foundations,Foundations,33,percent,33%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,corporations,Corporations,5,percent,5%,Reported,FY25,8,109,,
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,local_gov,Local gov't,13,percent,13%,Reported,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,state_gov,State gov't,5,percent,5%,Reported,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,federal_gov,Federal gov't,,percent,,Not labeled in the report,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,individuals,Individuals,44,percent,44%,Reported,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,foundations,Foundations,28,percent,28%,Reported,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+contributed_sources,Sources of contributed revenue,Funding and financial health,10m-plus,$10M+,budget,National benchmark,corporations,Corporations,6,percent,6%,Reported,FY25,8,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,overall,Overall,overall,Houston,,,6,percent,6%,Reported,FY25,9,204,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,overall,Overall,overall,National benchmark,,,8,percent,8%,Reported,FY25,9,1509,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,performing,Performing Arts,discipline,Houston,,,3,percent,3%,Reported,FY25,9,73,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,performing,Performing Arts,discipline,National benchmark,,,5,percent,5%,Reported,FY25,9,527,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,visual,Visual Arts,discipline,Houston,,,1,percent,1%,Reported,FY25,9,17,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,visual,Visual Arts,discipline,National benchmark,,,3,percent,3%,Reported,FY25,9,137,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,other,Other Arts,discipline,Houston,,,10,percent,10%,Reported,FY25,9,114,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,other,Other Arts,discipline,National benchmark,,,12,percent,12%,Reported,FY25,9,845,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,under-250k,Under $250k,budget,Houston,,,12,percent,12%,Reported,FY25,9,93,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,under-250k,Under $250k,budget,National benchmark,,,14,percent,14%,Reported,FY25,9,657,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,,,13,percent,13%,Reported,FY25,9,68,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,,,9,percent,9%,Reported,FY25,9,430,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,,,7,percent,7%,Reported,FY25,9,19,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,,,12,percent,12%,Reported,FY25,9,224,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,,,1,percent,1%,Reported,FY25,9,12,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,,,8,percent,8%,Reported,FY25,9,109,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,10m-plus,$10M+,budget,Houston,,,5,percent,5%,Reported,FY25,9,12,,
+local_gov_pct_expenses,Local government support as % of expenses,Funding and financial health,10m-plus,$10M+,budget,National benchmark,,,6,percent,6%,Reported,FY25,9,89,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,overall,Overall,overall,Houston,,,10,percent,10%,Reported,FY25,10,204,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,overall,Overall,overall,National benchmark,,,12,percent,12%,Reported,FY25,10,1509,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,performing,Performing Arts,discipline,Houston,,,5,percent,5%,Reported,FY25,10,73,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,performing,Performing Arts,discipline,National benchmark,,,9,percent,9%,Reported,FY25,10,527,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,visual,Visual Arts,discipline,Houston,,,-10,percent,-10%,Reported,FY25,10,17,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,visual,Visual Arts,discipline,National benchmark,,,11,percent,11%,Reported,FY25,10,137,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,other,Other Arts,discipline,Houston,,,24,percent,24%,Reported,FY25,10,114,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,other,Other Arts,discipline,National benchmark,,,14,percent,14%,Reported,FY25,10,845,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,under-250k,Under $250k,budget,Houston,,,16,percent,16%,Reported,FY25,10,93,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,under-250k,Under $250k,budget,National benchmark,,,15,percent,15%,Reported,FY25,10,657,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,250k-1m,$250k-$999k,budget,Houston,,,21,percent,21%,Reported,FY25,10,68,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,250k-1m,$250k-$999k,budget,National benchmark,,,11,percent,11%,Reported,FY25,10,430,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,1m-3m,$1M-$2.99M,budget,Houston,,,21,percent,21%,Reported,FY25,10,19,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,1m-3m,$1M-$2.99M,budget,National benchmark,,,15,percent,15%,Reported,FY25,10,224,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,3m-10m,$3M-$9.99M,budget,Houston,,,9,percent,9%,Reported,FY25,10,12,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,3m-10m,$3M-$9.99M,budget,National benchmark,,,6,percent,6%,Reported,FY25,10,109,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,10m-plus,$10M+,budget,Houston,,,9,percent,9%,Reported,FY25,10,12,,
+operating_result_pct_expenses,Operating surplus/deficit as % of expenses,Funding and financial health,10m-plus,$10M+,budget,National benchmark,,,12,percent,12%,Reported,FY25,10,89,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,overall,Overall,overall,Houston,,,54,percent,54%,Reported,FY25,11,204,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,overall,Overall,overall,National benchmark,,,56,percent,56%,Reported,FY25,11,1509,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,performing,Performing Arts,discipline,Houston,,,57,percent,57%,Reported,FY25,11,73,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,performing,Performing Arts,discipline,National benchmark,,,59,percent,59%,Reported,FY25,11,527,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,visual,Visual Arts,discipline,Houston,,,43,percent,43%,Reported,FY25,11,17,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,visual,Visual Arts,discipline,National benchmark,,,51,percent,51%,Reported,FY25,11,137,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,other,Other Arts,discipline,Houston,,,58,percent,58%,Reported,FY25,11,114,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,other,Other Arts,discipline,National benchmark,,,57,percent,57%,Reported,FY25,11,845,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,under-250k,Under $250k,budget,Houston,,,62,percent,62%,Reported,FY25,11,93,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,under-250k,Under $250k,budget,National benchmark,,,63,percent,63%,Reported,FY25,11,657,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,250k-1m,$250k-$999k,budget,Houston,,,65,percent,65%,Reported,FY25,11,68,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,250k-1m,$250k-$999k,budget,National benchmark,,,66,percent,66%,Reported,FY25,11,430,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,1m-3m,$1M-$2.99M,budget,Houston,,,62,percent,62%,Reported,FY25,11,19,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,1m-3m,$1M-$2.99M,budget,National benchmark,,,62,percent,62%,Reported,FY25,11,224,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,3m-10m,$3M-$9.99M,budget,Houston,,,45,percent,45%,Reported,FY25,11,12,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,3m-10m,$3M-$9.99M,budget,National benchmark,,,60,percent,60%,Reported,FY25,11,109,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,10m-plus,$10M+,budget,Houston,,,53,percent,53%,Reported,FY25,11,12,,
+personnel_pct_expenses,Personnel as % of expenses,Workforce,10m-plus,$10M+,budget,National benchmark,,,54,percent,54%,Reported,FY25,11,89,,
+avg_ft_staff,Average full-time staff,Workforce,overall,Overall,overall,Houston,,,19,staff (average per organization),19,Reported,FY25,12,204,,
+avg_ft_staff,Average full-time staff,Workforce,overall,Overall,overall,National benchmark,,,16,staff (average per organization),16,Reported,FY25,12,1509,,
+avg_ft_staff,Average full-time staff,Workforce,performing,Performing Arts,discipline,Houston,,,15,staff (average per organization),15,Reported,FY25,12,73,,
+avg_ft_staff,Average full-time staff,Workforce,performing,Performing Arts,discipline,National benchmark,,,17,staff (average per organization),17,Reported,FY25,12,527,,
+avg_ft_staff,Average full-time staff,Workforce,visual,Visual Arts,discipline,Houston,,,49,staff (average per organization),49,Reported,FY25,12,17,,
+avg_ft_staff,Average full-time staff,Workforce,visual,Visual Arts,discipline,National benchmark,,,28,staff (average per organization),28,Reported,FY25,12,137,,
+avg_ft_staff,Average full-time staff,Workforce,other,Other Arts,discipline,Houston,,,16,staff (average per organization),16,Reported,FY25,12,114,,
+avg_ft_staff,Average full-time staff,Workforce,other,Other Arts,discipline,National benchmark,,,13,staff (average per organization),13,Reported,FY25,12,845,,
+avg_ft_staff,Average full-time staff,Workforce,under-250k,Under $250k,budget,Houston,,,1,staff (average per organization),1,Reported,FY25,12,93,,
+avg_ft_staff,Average full-time staff,Workforce,under-250k,Under $250k,budget,National benchmark,,,1,staff (average per organization),1,Reported,FY25,12,657,,
+avg_ft_staff,Average full-time staff,Workforce,250k-1m,$250k-$999k,budget,Houston,,,3,staff (average per organization),3,Reported,FY25,12,68,,
+avg_ft_staff,Average full-time staff,Workforce,250k-1m,$250k-$999k,budget,National benchmark,,,4,staff (average per organization),4,Reported,FY25,12,430,,
+avg_ft_staff,Average full-time staff,Workforce,1m-3m,$1M-$2.99M,budget,Houston,,,8,staff (average per organization),8,Reported,FY25,12,19,,
+avg_ft_staff,Average full-time staff,Workforce,1m-3m,$1M-$2.99M,budget,National benchmark,,,10,staff (average per organization),10,Reported,FY25,12,224,,
+avg_ft_staff,Average full-time staff,Workforce,3m-10m,$3M-$9.99M,budget,Houston,,,24,staff (average per organization),24,Reported,FY25,12,12,,
+avg_ft_staff,Average full-time staff,Workforce,3m-10m,$3M-$9.99M,budget,National benchmark,,,30,staff (average per organization),30,Reported,FY25,12,109,,
+avg_ft_staff,Average full-time staff,Workforce,10m-plus,$10M+,budget,Houston,,,183,staff (average per organization),183,Reported,FY25,12,12,,
+avg_ft_staff,Average full-time staff,Workforce,10m-plus,$10M+,budget,National benchmark,,,135,staff (average per organization),135,Reported,FY25,12,89,,
+avg_pt_staff,Average part-time staff,Workforce,overall,Overall,overall,Houston,,,18,staff (average per organization),18,Reported,FY25,13,204,,
+avg_pt_staff,Average part-time staff,Workforce,overall,Overall,overall,National benchmark,,,22,staff (average per organization),22,Reported,FY25,13,1509,,
+avg_pt_staff,Average part-time staff,Workforce,performing,Performing Arts,discipline,Houston,,,27,staff (average per organization),27,Reported,FY25,13,73,,
+avg_pt_staff,Average part-time staff,Workforce,performing,Performing Arts,discipline,National benchmark,,,29,staff (average per organization),29,Reported,FY25,13,527,,
+avg_pt_staff,Average part-time staff,Workforce,visual,Visual Arts,discipline,Houston,,,8,staff (average per organization),8,Reported,FY25,13,17,,
+avg_pt_staff,Average part-time staff,Workforce,visual,Visual Arts,discipline,National benchmark,,,17,staff (average per organization),17,Reported,FY25,13,137,,
+avg_pt_staff,Average part-time staff,Workforce,other,Other Arts,discipline,Houston,,,15,staff (average per organization),15,Reported,FY25,13,114,,
+avg_pt_staff,Average part-time staff,Workforce,other,Other Arts,discipline,National benchmark,,,18,staff (average per organization),18,Reported,FY25,13,845,,
+avg_pt_staff,Average part-time staff,Workforce,under-250k,Under $250k,budget,Houston,,,1,staff (average per organization),1,Reported,FY25,13,93,,
+avg_pt_staff,Average part-time staff,Workforce,under-250k,Under $250k,budget,National benchmark,,,3,staff (average per organization),3,Reported,FY25,13,657,,
+avg_pt_staff,Average part-time staff,Workforce,250k-1m,$250k-$999k,budget,Houston,,,4,staff (average per organization),4,Reported,FY25,13,68,,
+avg_pt_staff,Average part-time staff,Workforce,250k-1m,$250k-$999k,budget,National benchmark,,,8,staff (average per organization),8,Reported,FY25,13,430,,
+avg_pt_staff,Average part-time staff,Workforce,1m-3m,$1M-$2.99M,budget,Houston,,,23,staff (average per organization),23,Reported,FY25,13,19,,
+avg_pt_staff,Average part-time staff,Workforce,1m-3m,$1M-$2.99M,budget,National benchmark,,,20,staff (average per organization),20,Reported,FY25,13,224,,
+avg_pt_staff,Average part-time staff,Workforce,3m-10m,$3M-$9.99M,budget,Houston,,,23,staff (average per organization),23,Reported,FY25,13,12,,
+avg_pt_staff,Average part-time staff,Workforce,3m-10m,$3M-$9.99M,budget,National benchmark,,,61,staff (average per organization),61,Reported,FY25,13,109,,
+avg_pt_staff,Average part-time staff,Workforce,10m-plus,$10M+,budget,Houston,,,118,staff (average per organization),118,Reported,FY25,13,12,,
+avg_pt_staff,Average part-time staff,Workforce,10m-plus,$10M+,budget,National benchmark,,,114,staff (average per organization),114,Reported,FY25,13,89,,
+avg_attendance,Average total attendance,Audience reach,overall,Overall,overall,Houston,,,61,"attendees (thousands, average per organization)",61K,Reported,FY25,14,204,,
+avg_attendance,Average total attendance,Audience reach,overall,Overall,overall,National benchmark,,,77,"attendees (thousands, average per organization)",77K,Reported,FY25,14,1509,,
+avg_attendance,Average total attendance,Audience reach,performing,Performing Arts,discipline,Houston,,,34,"attendees (thousands, average per organization)",34K,Reported,FY25,14,73,,
+avg_attendance,Average total attendance,Audience reach,performing,Performing Arts,discipline,National benchmark,,,33,"attendees (thousands, average per organization)",33K,Reported,FY25,14,527,,
+avg_attendance,Average total attendance,Audience reach,visual,Visual Arts,discipline,Houston,,,142,"attendees (thousands, average per organization)",142K,Reported,FY25,14,17,,
+avg_attendance,Average total attendance,Audience reach,visual,Visual Arts,discipline,National benchmark,,,153,"attendees (thousands, average per organization)",153K,Reported,FY25,14,137,,
+avg_attendance,Average total attendance,Audience reach,other,Other Arts,discipline,Houston,,,67,"attendees (thousands, average per organization)",67K,Reported,FY25,14,114,,
+avg_attendance,Average total attendance,Audience reach,other,Other Arts,discipline,National benchmark,,,93,"attendees (thousands, average per organization)",93K,Reported,FY25,14,845,,
+avg_attendance,Average total attendance,Audience reach,under-250k,Under $250k,budget,Houston,,,7,"attendees (thousands, average per organization)",7K,Reported,FY25,14,93,"Label sits against the axis zero; the text layer reads ""07K"". Read as 7K from the render at zoom; bar height agrees.",
+avg_attendance,Average total attendance,Audience reach,under-250k,Under $250k,budget,National benchmark,,,17,"attendees (thousands, average per organization)",17K,Reported,FY25,14,657,,
+avg_attendance,Average total attendance,Audience reach,250k-1m,$250k-$999k,budget,Houston,,,41,"attendees (thousands, average per organization)",41K,Reported,FY25,14,68,,
+avg_attendance,Average total attendance,Audience reach,250k-1m,$250k-$999k,budget,National benchmark,,,71,"attendees (thousands, average per organization)",71K,Reported,FY25,14,430,,
+avg_attendance,Average total attendance,Audience reach,1m-3m,$1M-$2.99M,budget,Houston,,,76,"attendees (thousands, average per organization)",76K,Reported,FY25,14,19,,
+avg_attendance,Average total attendance,Audience reach,1m-3m,$1M-$2.99M,budget,National benchmark,,,54,"attendees (thousands, average per organization)",54K,Reported,FY25,14,224,,
+avg_attendance,Average total attendance,Audience reach,3m-10m,$3M-$9.99M,budget,Houston,,,49,"attendees (thousands, average per organization)",49K,Reported,FY25,14,12,,
+avg_attendance,Average total attendance,Audience reach,3m-10m,$3M-$9.99M,budget,National benchmark,,,170,"attendees (thousands, average per organization)",170K,Reported,FY25,14,109,,
+avg_attendance,Average total attendance,Audience reach,10m-plus,$10M+,budget,Houston,,,581,"attendees (thousands, average per organization)",581K,Reported,FY25,14,12,,
+avg_attendance,Average total attendance,Audience reach,10m-plus,$10M+,budget,National benchmark,,,492,"attendees (thousands, average per organization)",492K,Reported,FY25,14,89,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,Houston,rent,Rent,51,percent,51%,Reported,FY25,15,204,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,Houston,own,Own,22,percent,22%,Reported,FY25,15,204,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,Houston,donated_in_kind,Donated in-kind,27,percent,27%,Reported,FY25,15,204,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,National benchmark,rent,Rent,52,percent,52%,Reported,FY25,15,1509,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,National benchmark,own,Own,26,percent,26%,Reported,FY25,15,1509,,
+primary_facility,Primary facility arrangement,Facilities and space,overall,Overall,overall,National benchmark,donated_in_kind,Donated in-kind,22,percent,22%,Reported,FY25,15,1509,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,Houston,rent,Rent,60,percent,60%,Reported,FY25,16,73,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,Houston,own,Own,12,percent,12%,Reported,FY25,16,73,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,Houston,donated_in_kind,Donated in-kind,28,percent,28%,Reported,FY25,16,73,,
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,Houston,rent,Rent,53,percent,53%,Reported,FY25,16,17,,Published values sum to 101% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,Houston,own,Own,24,percent,24%,Reported,FY25,16,17,,Published values sum to 101% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,Houston,donated_in_kind,Donated in-kind,24,percent,24%,Reported,FY25,16,17,,Published values sum to 101% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,Houston,rent,Rent,45,percent,45%,Reported,FY25,16,114,,
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,Houston,own,Own,28,percent,28%,Reported,FY25,16,114,,
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,Houston,donated_in_kind,Donated in-kind,27,percent,27%,Reported,FY25,16,114,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,National benchmark,rent,Rent,56,percent,56%,Reported,FY25,16,527,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,National benchmark,own,Own,21,percent,21%,Reported,FY25,16,527,,
+primary_facility,Primary facility arrangement,Facilities and space,performing,Performing Arts,discipline,National benchmark,donated_in_kind,Donated in-kind,23,percent,23%,Reported,FY25,16,527,,
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,National benchmark,rent,Rent,47,percent,47%,Reported,FY25,16,137,,
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,National benchmark,own,Own,36,percent,36%,Reported,FY25,16,137,,
+primary_facility,Primary facility arrangement,Facilities and space,visual,Visual Arts,discipline,National benchmark,donated_in_kind,Donated in-kind,17,percent,17%,Reported,FY25,16,137,,
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,National benchmark,rent,Rent,49,percent,49%,Reported,FY25,16,845,,
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,National benchmark,own,Own,28,percent,28%,Reported,FY25,16,845,,
+primary_facility,Primary facility arrangement,Facilities and space,other,Other Arts,discipline,National benchmark,donated_in_kind,Donated in-kind,23,percent,23%,Reported,FY25,16,845,,
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,Houston,rent,Rent,49,percent,49%,Reported,FY25,16,93,,
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,Houston,own,Own,10,percent,10%,Reported,FY25,16,93,,
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,Houston,donated_in_kind,Donated in-kind,41,percent,41%,Reported,FY25,16,93,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,Houston,rent,Rent,57,percent,57%,Reported,FY25,16,68,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,Houston,own,Own,18,percent,18%,Reported,FY25,16,68,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,Houston,donated_in_kind,Donated in-kind,25,percent,25%,Reported,FY25,16,68,,
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,rent,Rent,63,percent,63%,Reported,FY25,16,19,,
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,own,Own,32,percent,32%,Reported,FY25,16,19,,
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,donated_in_kind,Donated in-kind,5,percent,5%,Reported,FY25,16,19,,
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,rent,Rent,25,percent,25%,Reported,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,own,Own,75,percent,75%,Reported,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,donated_in_kind,Donated in-kind,,percent,,Not shown in the report,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,Houston,rent,Rent,30,percent,30%,Reported,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,Houston,own,Own,70,percent,70%,Reported,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,Houston,donated_in_kind,Donated in-kind,,percent,,Not shown in the report,FY25,16,12,,"No segment is drawn for Donated in-kind; recorded as not shown, not as 0%."
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,National benchmark,rent,Rent,50,percent,50%,Reported,FY25,16,657,,
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,National benchmark,own,Own,18,percent,18%,Reported,FY25,16,657,,
+primary_facility,Primary facility arrangement,Facilities and space,under-250k,Under $250k,budget,National benchmark,donated_in_kind,Donated in-kind,32,percent,32%,Reported,FY25,16,657,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,rent,Rent,59,percent,59%,Reported,FY25,16,430,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,own,Own,22,percent,22%,Reported,FY25,16,430,,
+primary_facility,Primary facility arrangement,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,donated_in_kind,Donated in-kind,19,percent,19%,Reported,FY25,16,430,,
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,rent,Rent,52,percent,52%,Reported,FY25,16,224,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,own,Own,32,percent,32%,Reported,FY25,16,224,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,donated_in_kind,Donated in-kind,15,percent,15%,Reported,FY25,16,224,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,rent,Rent,44,percent,44%,Reported,FY25,16,109,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,own,Own,44,percent,44%,Reported,FY25,16,109,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,donated_in_kind,Donated in-kind,11,percent,11%,Reported,FY25,16,109,,Published values sum to 99% (rounding).
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,National benchmark,rent,Rent,29,percent,29%,Reported,FY25,16,89,,
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,National benchmark,own,Own,63,percent,63%,Reported,FY25,16,89,,
+primary_facility,Primary facility arrangement,Facilities and space,10m-plus,$10M+,budget,National benchmark,donated_in_kind,Donated in-kind,8,percent,8%,Reported,FY25,16,89,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,Houston,administrative,Administrative,32,percent,32%,Reported,FY25,17,204,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,Houston,program,Program,11,percent,11%,Reported,FY25,17,204,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,Houston,both,Both,57,percent,57%,Reported,FY25,17,204,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,National benchmark,administrative,Administrative,25,percent,25%,Reported,FY25,17,1509,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,National benchmark,program,Program,12,percent,12%,Reported,FY25,17,1509,,
+primary_facility_use,Primary facility use,Facilities and space,overall,Overall,overall,National benchmark,both,Both,63,percent,63%,Reported,FY25,17,1509,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,Houston,administrative,Administrative,36,percent,36%,Reported,FY25,18,73,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,Houston,program,Program,17,percent,17%,Reported,FY25,18,73,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,Houston,both,Both,47,percent,47%,Reported,FY25,18,73,,
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,Houston,administrative,Administrative,29,percent,29%,Reported,FY25,18,17,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,Houston,program,Program,,percent,,Not shown in the report,FY25,18,17,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,Houston,both,Both,71,percent,71%,Reported,FY25,18,17,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,Houston,administrative,Administrative,29,percent,29%,Reported,FY25,18,114,,
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,Houston,program,Program,10,percent,10%,Reported,FY25,18,114,,
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,Houston,both,Both,61,percent,61%,Reported,FY25,18,114,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,National benchmark,administrative,Administrative,30,percent,30%,Reported,FY25,18,527,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,National benchmark,program,Program,14,percent,14%,Reported,FY25,18,527,,
+primary_facility_use,Primary facility use,Facilities and space,performing,Performing Arts,discipline,National benchmark,both,Both,56,percent,56%,Reported,FY25,18,527,,
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,National benchmark,administrative,Administrative,14,percent,14%,Reported,FY25,18,137,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,National benchmark,program,Program,,percent,,Not labeled in the report,FY25,18,137,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+primary_facility_use,Primary facility use,Facilities and space,visual,Visual Arts,discipline,National benchmark,both,Both,82,percent,82%,Reported,FY25,18,137,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,National benchmark,administrative,Administrative,24,percent,24%,Reported,FY25,18,845,,
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,National benchmark,program,Program,11,percent,11%,Reported,FY25,18,845,,
+primary_facility_use,Primary facility use,Facilities and space,other,Other Arts,discipline,National benchmark,both,Both,65,percent,65%,Reported,FY25,18,845,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,Houston,administrative,Administrative,47,percent,47%,Reported,FY25,18,93,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,Houston,program,Program,14,percent,14%,Reported,FY25,18,93,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,Houston,both,Both,39,percent,39%,Reported,FY25,18,93,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,Houston,administrative,Administrative,21,percent,21%,Reported,FY25,18,68,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,Houston,program,Program,9,percent,9%,Reported,FY25,18,68,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,Houston,both,Both,70,percent,70%,Reported,FY25,18,68,,
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,administrative,Administrative,26,percent,26%,Reported,FY25,18,19,,Published values sum to 99% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,program,Program,5,percent,5%,Reported,FY25,18,19,,Published values sum to 99% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,Houston,both,Both,68,percent,68%,Reported,FY25,18,19,,Published values sum to 99% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,administrative,Administrative,25,percent,25%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,program,Program,8,percent,8%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,Houston,both,Both,67,percent,67%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,Houston,administrative,Administrative,8,percent,8%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,Houston,program,Program,17,percent,17%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,Houston,both,Both,75,percent,75%,Reported,FY25,18,12,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,National benchmark,administrative,Administrative,33,percent,33%,Reported,FY25,18,657,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,National benchmark,program,Program,18,percent,18%,Reported,FY25,18,657,,
+primary_facility_use,Primary facility use,Facilities and space,under-250k,Under $250k,budget,National benchmark,both,Both,49,percent,49%,Reported,FY25,18,657,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,administrative,Administrative,25,percent,25%,Reported,FY25,18,430,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,program,Program,10,percent,10%,Reported,FY25,18,430,,
+primary_facility_use,Primary facility use,Facilities and space,250k-1m,$250k-$999k,budget,National benchmark,both,Both,65,percent,65%,Reported,FY25,18,430,,
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,administrative,Administrative,17,percent,17%,Reported,FY25,18,224,,Published values sum to 101% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,program,Program,6,percent,6%,Reported,FY25,18,224,,Published values sum to 101% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,1m-3m,$1M-$2.99M,budget,National benchmark,both,Both,78,percent,78%,Reported,FY25,18,224,,Published values sum to 101% (rounding).
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,administrative,Administrative,15,percent,15%,Reported,FY25,18,109,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,program,Program,,percent,,Not shown in the report,FY25,18,109,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,3m-10m,$3M-$9.99M,budget,National benchmark,both,Both,85,percent,85%,Reported,FY25,18,109,,"No segment is drawn for Program; recorded as not shown, not as 0%."
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,National benchmark,administrative,Administrative,11,percent,11%,Reported,FY25,18,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,National benchmark,program,Program,,percent,,Not labeled in the report,FY25,18,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
+primary_facility_use,Primary facility use,Facilities and space,10m-plus,$10M+,budget,National benchmark,both,Both,85,percent,85%,Reported,FY25,18,89,,Labeled values sum to 96%; 1 drawn segment not labeled in the report.
