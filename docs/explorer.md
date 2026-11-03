@@ -46,7 +46,7 @@ The scripts need Node (any current version) and no packages. Nothing in them run
   - `title`, `author`, `initiative`, `creditLine` (the report's credit line, verbatim), and `presentedBy`.
   - `fileName`, `fileGenerated`, `pageCount`, and `printedPageNumbers`.
   - `publicationYear` and `publicationDate` (null until SMU DataArts confirms it).
-  - `url`: the single address of the report PDF on houstonartsalliance.com. It stays null until that address is live.
+  - `url`: the single address of the report PDF on files.haatx.com. If it's ever set to null, the page falls back to `pdfFallback`.
   - `pdfFallback`: the line shown wherever the PDF link would appear while `url` is null.
   - `period`; `houston` and `national` (label, n, description, and the report's own wording); `statistic`; and `extractionNotes`.
 - **`units`**: readable names for each unit code, used in the CSV and the inventory.
