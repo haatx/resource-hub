@@ -98,10 +98,10 @@
     display:inline-flex;align-items:center;gap:9px;
     padding:12px 20px;border-radius:99px;text-decoration:none;
     font-size:14.5px;font-weight:600;
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),color .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease);
   }
   .btn{background:var(--navy);color:var(--paper);border:1px solid var(--navy)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px var(--navy)}
+  .btn:hover{background:transparent;color:var(--navy)}
   .ghostbtn{color:var(--navy);background:transparent;border:1px solid var(--navy)}
   .ghostbtn:hover{background:var(--navy);color:var(--paper)}
   .btn:focus-visible,.ghostbtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
@@ -349,7 +349,7 @@
       <p class="stand" id="standfirst">Choose a discipline or budget size to see figures on finances, staffing, attendance, and facilities for Houston's nonprofit arts organizations, with a national benchmark beside each one.</p>
       <p class="meta" id="heroMeta"></p>
       <p class="cta">
-        <a class="ghostbtn" href="index.html#directory"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg> Back to all resources</a>
+        <a class="btn" href="index.html#directory"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg> Back to all resources</a>
         <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
       </p>
       <!-- the PDF link, or while the report isn't online, source.pdfFallback -->

@@ -106,11 +106,11 @@
   #intro .cta{margin:24px 0 0;display:flex;flex-wrap:wrap;gap:12px}
   #intro .btn{
     display:inline-flex;align-items:center;gap:10px;
-    padding:14px 24px;border-radius:99px;text-decoration:none;
+    padding:13px 23px;border:1px solid var(--navy);border-radius:99px;text-decoration:none;
     font-size:15px;font-weight:600;background:var(--navy);color:var(--paper);
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease);
   }
-  #intro .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px var(--navy)}
+  #intro .btn:hover{background:transparent;color:var(--navy);transform:none;box-shadow:none}
   #intro .btn svg{width:15px;height:15px;stroke:currentColor;fill:none}
 
   /* ---- shared section furniture ---- */
@@ -405,15 +405,14 @@
   .action{margin-top:6px}
   .btn{
     display:inline-flex;align-items:center;gap:10px;
-    padding:12px 20px;border-radius:99px;text-decoration:none;
+    padding:11px 19px;border:1px solid var(--navy);border-radius:99px;text-decoration:none;
     font-size:14px;font-weight:600;
     background:var(--navy);color:var(--paper);
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease);
   }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px var(--navy)}
+  .btn:not(.ghost):hover{background:transparent;color:var(--navy)}
   .btn svg{width:15px;height:15px;stroke:currentColor}
   .btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--hair);cursor:default}
-  .btn.ghost:hover{transform:none;box-shadow:none}
   /* read by screen readers, never drawn */
   .visually-hidden{
     position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
