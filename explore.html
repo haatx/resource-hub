@@ -98,12 +98,16 @@
     display:inline-flex;align-items:center;gap:9px;
     padding:12px 20px;border-radius:99px;text-decoration:none;
     font-size:14.5px;font-weight:600;
-    transition:background .2s var(--ease),color .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
   }
   .btn{background:var(--navy);color:var(--paper);border:1px solid var(--navy)}
-  .btn:hover{background:transparent;color:var(--navy)}
+  .btn:hover{background:var(--ink-soft);border-color:var(--ink-soft)}
   .ghostbtn{color:var(--navy);background:transparent;border:1px solid var(--navy)}
-  .ghostbtn:hover{background:var(--navy);color:var(--paper)}
+  @media (hover:hover){.ghostbtn:hover{background:var(--navy);color:var(--paper)}}
+  /* One filled button per row: while an outlined neighbor is hovered, the navy
+     button gives up its fill. Hover-capable pointers only, so a tap on a phone
+     can't leave two filled buttons. */
+  @media (hover:hover){.cta:has(.ghostbtn:hover) .btn{background:transparent;color:var(--navy)}}
   .btn:focus-visible,.ghostbtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
   .btn svg,.ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
