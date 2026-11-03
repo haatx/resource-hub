@@ -108,9 +108,13 @@
     display:inline-flex;align-items:center;gap:10px;
     padding:13px 23px;border:1px solid var(--navy);border-radius:99px;text-decoration:none;
     font-size:15px;font-weight:600;background:var(--navy);color:var(--paper);
-    transition:background .2s var(--ease),color .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
   }
-  #intro .btn:hover{background:transparent;color:var(--navy);transform:none;box-shadow:none}
+  #intro .btn:hover{background:var(--ink-soft);border-color:var(--ink-soft)}
+  /* One filled button per row: while an outlined neighbor is hovered, the navy
+     button gives up its fill. Hover-capable pointers only, so a tap on a phone
+     can't leave two filled buttons. */
+  @media (hover:hover){#intro .cta:has(.ghostbtn:hover) .btn{background:transparent;color:var(--navy)}}
   #intro .btn svg{width:15px;height:15px;stroke:currentColor;fill:none}
 
   /* ---- shared section furniture ---- */
@@ -186,7 +190,7 @@
     background:transparent;border:1px solid var(--navy);
     transition:background .2s var(--ease),color .2s var(--ease);
   }
-  #intro .ghostbtn:hover{background:var(--navy);color:var(--paper)}
+  @media (hover:hover){#intro .ghostbtn:hover{background:var(--navy);color:var(--paper)}}
   #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
   /* ---- 7. credit ---- */
@@ -415,9 +419,9 @@
     padding:11px 19px;border:1px solid var(--navy);border-radius:99px;text-decoration:none;
     font-size:14px;font-weight:600;
     background:var(--navy);color:var(--paper);
-    transition:background .2s var(--ease),color .2s var(--ease);
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
   }
-  .btn:not(.ghost):hover{background:transparent;color:var(--navy)}
+  .btn:not(.ghost):hover{background:var(--ink-soft);border-color:var(--ink-soft)}
   .btn svg{width:15px;height:15px;stroke:currentColor}
   .btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--hair);cursor:default}
   /* read by screen readers, never drawn */
