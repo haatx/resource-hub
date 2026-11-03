@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Explore Houston's Nonprofit Arts Sector | Houston Arts Data Resource Hub</title>
 <meta name="description" content="Explore SMU DataArts' financial and operational profile of Houston's nonprofit arts sector by discipline and budget size, with a national benchmark beside every figure.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://files.haatx.com" crossorigin>
+<link rel="preload" href="https://files.haatx.com/fonts/Roobert-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Roobert, self-hosted on files.haatx.com. Regular, Medium, and SemiBold are
+     the licensed web styles. There is no bold or italic, and font-synthesis on
+     body stops the browser from faking either. */
+  @font-face{font-family:"Roobert";font-weight:400;font-style:normal;font-display:swap;src:url("https://files.haatx.com/fonts/Roobert-Regular.woff2") format("woff2")}
+  @font-face{font-family:"Roobert";font-weight:500;font-style:normal;font-display:swap;src:url("https://files.haatx.com/fonts/Roobert-Medium.woff2") format("woff2")}
+  @font-face{font-family:"Roobert";font-weight:600;font-style:normal;font-display:swap;src:url("https://files.haatx.com/fonts/Roobert-SemiBold.woff2") format("woff2")}
   /* Design tokens mirror :root in index.html; keep the two in step. */
   :root{
     --navy:#06205c;
@@ -44,7 +49,8 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:"DM Sans",system-ui,sans-serif;
+    font-family:"Roobert",system-ui,sans-serif;
+    font-synthesis:none;
     font-size:17px;
     line-height:1.3;
     -webkit-font-smoothing:antialiased;
@@ -78,15 +84,14 @@
   .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
   .logo{height:clamp(38px,3.25vw * 1.16,58px);width:auto;aspect-ratio:51/58;display:block;flex:none;margin:-58px 0 0}
   h1{
-    font-family:"Geist Mono",monospace;font-weight:700;
+    font-weight:600;
     font-size:clamp(27px,3.25vw,50px);line-height:.98;
-    letter-spacing:-.03em;word-spacing:-.05em;margin:0;
+    letter-spacing:-.022em;margin:0;
   }
   h1:focus{outline:none}
   .stand{margin:26px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.25;color:var(--ink-soft)}
   .meta{
-    font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--ink-soft);margin:32px 0 0;
+    font-size:14.5px;color:var(--ink-soft);margin:32px 0 0;
   }
   .cta{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   .btn,.ghostbtn{
@@ -102,10 +107,10 @@
   .btn:focus-visible,.ghostbtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
   .btn svg,.ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
-  /* ---- shared headings: the homepage h2 rule, including its word spacing ---- */
+  /* ---- shared headings: the homepage h2 rule ---- */
   h2{
-    font-family:"Geist Mono",monospace;font-weight:450;
-    font-size:clamp(19px,2.25vw,27px);line-height:1.12;letter-spacing:-.02em;word-spacing:-.1em;
+    font-weight:500;
+    font-size:clamp(21px,2.5vw,30px);line-height:1.12;letter-spacing:-.014em;
     margin:0 0 22px;
   }
 
@@ -132,11 +137,11 @@
   .groups[hidden]{display:none}
   .groups legend{
     float:left;margin-right:4px;
-    font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
+    font-size:13.5px;font-weight:500;color:var(--ink-soft);
   }
   .chips{display:flex;flex-wrap:wrap;gap:7px}
   .chip{
-    font-family:"Geist Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.04em;
+    font-weight:500;font-size:13px;letter-spacing:.005em;
     padding:8px 11px;border-radius:99px;border:1px solid var(--hair);
     color:var(--ink-soft);display:inline-flex;align-items:center;gap:7px;
     transition:all .18s var(--ease);
@@ -176,16 +181,16 @@
   .fig-item dd{margin:10px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px}
   .fig-h,.fig-n{display:flex;flex-direction:column;gap:3px}
   .fig-h .v{
-    font-family:"Geist Mono",monospace;font-weight:450;font-size:clamp(32px,3.3vw,44px);
-    line-height:1;letter-spacing:-.03em;color:var(--houston);
+    font-weight:500;font-size:clamp(32px,3.3vw,44px);
+    line-height:1;letter-spacing:-.025em;color:var(--houston);
   }
   .fig-n .v{
-    font-family:"Geist Mono",monospace;font-weight:450;font-size:21px;
-    line-height:1;letter-spacing:-.02em;color:var(--ink-soft);
+    font-weight:500;font-size:21px;
+    line-height:1;letter-spacing:-.01em;color:var(--ink-soft);
   }
-  .who{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .who{font-size:12.5px;font-weight:500;color:var(--ink-soft)}
   .fig-item .v.na,.fig-h .v.na,.fig-n .v.na{
-    font-family:"DM Sans",system-ui,sans-serif;font-size:15px;font-weight:500;
+    font-size:15px;font-weight:500;
     letter-spacing:0;line-height:1.3;color:var(--ink-soft);
   }
   .fig-sub{flex-basis:100%;font-size:14px;line-height:1.38;color:var(--ink-soft)}
@@ -218,7 +223,7 @@
   .fill.neg{transform-origin:right center}
   @keyframes grow{from{transform:scaleX(0)}}
   .bval{font-size:14px;line-height:1.2;white-space:nowrap}
-  .bar.h .bval .v{font-family:"Geist Mono",monospace;font-weight:500;color:var(--houston)}
+  .bar.h .bval .v{font-weight:600;color:var(--houston)}
   .bar.n .bval{color:var(--ink-soft)}
   .bar .na-wide{grid-column:1 / -1;font-size:13.5px;color:var(--ink-soft)}
   /* diverging chart: a shared zero line */
@@ -253,12 +258,11 @@
   caption{text-align:left}
   th,td{padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);text-align:left;vertical-align:top}
   thead th{
-    font-family:"Geist Mono",monospace;font-weight:500;font-size:11px;letter-spacing:.06em;
-    text-transform:uppercase;color:var(--ink-soft);
+    font-weight:500;font-size:13px;color:var(--ink-soft);
   }
   td.num,th.num{text-align:right}
   td.num{white-space:nowrap}
-  td.num .v{font-family:"Geist Mono",monospace}
+  td.num .v{font-weight:500;font-variant-numeric:tabular-nums}
   td.num .v.na{font-family:inherit;font-size:13px;color:var(--ink-soft);white-space:normal}
   td.pg{text-align:right;color:var(--ink-soft);font-size:13px;white-space:nowrap;padding-right:0}
   tr.grp th{padding-top:16px;font-weight:600;color:var(--ink)}
@@ -268,14 +272,15 @@
   .rownotes{margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
 
   .src{margin:18px 0 0;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
-  .src cite{font-style:italic}
+  /* no italic is licensed yet, so report titles are upright on purpose */
+  cite{font-style:normal}
 
   /* ---- about this data ---- */
   .about summary h2{margin:0}
   .about summary{gap:14px}
   .about-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr));gap:6px 48px;margin:24px 0 0}
   .about-body section{border-top:1px solid var(--hair);padding:14px 0 6px}
-  .about-body h3{font-family:"Geist Mono",monospace;font-weight:450;font-size:16px;letter-spacing:-.01em;margin:0 0 8px}
+  .about-body h3{font-weight:500;font-size:17px;letter-spacing:-.006em;margin:0 0 8px}
   .about-body p,.about-body li{margin:0 0 10px;font-size:16px;line-height:1.42}
   .about-body ul{margin:0;padding:0 0 0 18px}
 
