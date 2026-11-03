@@ -320,14 +320,21 @@
   .clear-all:hover{color:var(--ink)}
 
   /* ------------------------------ RESULT BAR ------------------------------- */
-  .resultbar{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px;padding:24px 0 6px}
+  .resultbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:24px 0 10px}
   .count{color:var(--ink-soft);font-size:14px;font-weight:500;margin:0;padding:0}
-  .bulk{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-soft)}
-  .linkbtn{
-    background:none;border:0;padding:0;font:inherit;color:var(--ink-soft);cursor:pointer;
-    text-decoration:underline;text-underline-offset:3px;
+  /* one toggle for every listed row; its circle sits above the rows' toggles */
+  .bulk{
+    display:flex;align-items:center;gap:9px;
+    background:none;border:0;padding:0 8px 0 0;cursor:pointer;
+    font-size:14px;font-weight:500;color:var(--ink-soft);
+    transition:color .2s var(--ease);
   }
-  .linkbtn:hover{color:var(--ink)}
+  .bulk[hidden]{display:none}
+  .bulk:hover{color:var(--ink)}
+  .bulk:hover .toggle{border-color:var(--navy)}
+  .bulk:focus-visible{outline:2px solid var(--navy);outline-offset:3px;border-radius:99px}
+  .bulk.all-open .toggle{background:var(--navy);border-color:var(--navy)}
+  .bulk.all-open .toggle svg{stroke:var(--paper);transform:rotate(45deg)}
 
   /* --------------------------------- LIST ---------------------------------- */
   .list{padding-bottom:80px;border-top:1px solid var(--hair)}
@@ -459,6 +466,7 @@
     .filters{display:none}
     .filters.open{display:flex;gap:14px;padding-top:2px}
     .resultbar{gap:8px}
+    .bulk{padding-right:4px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -660,11 +668,12 @@
     </div>
     <div class="resultbar">
       <p class="count" id="count"></p>
-      <div class="bulk">
-        <button class="linkbtn" id="expandAll" type="button">Expand all</button>
-        <span aria-hidden="true">/</span>
-        <button class="linkbtn" id="collapseAll" type="button">Collapse all</button>
-      </div>
+      <button class="bulk" id="bulkToggle" type="button">
+        <span class="bulk-label">Expand all</span>
+        <span class="toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </span>
+      </button>
     </div>
     <div class="list" id="list"></div>
     <div class="empty" id="empty">
@@ -1241,14 +1250,26 @@ filtersToggle.addEventListener('click',()=>{
   filtersToggle.setAttribute('aria-expanded',open);
 });
 
+const bulkToggle = document.getElementById('bulkToggle');
+const bulkLabel  = bulkToggle.querySelector('.bulk-label');
+/* The bulk toggle reads "Collapse all" and shows an open row's icon only when
+   every listed row is open; otherwise it reads "Expand all". It is hidden
+   when no rows are listed. Call after anything opens, closes, or lists rows. */
+function syncBulk(){
+  const items=[...list.querySelectorAll('.item')];
+  const allOpen=items.length>0 && items.every(it=>it.classList.contains('open'));
+  bulkToggle.hidden=items.length===0;
+  bulkToggle.classList.toggle('all-open',allOpen);
+  bulkLabel.textContent=allOpen?'Collapse all':'Expand all';
+}
 function setAllOpen(open){
   list.querySelectorAll('.item').forEach(it=>{
     it.classList.toggle('open',open);
     it.querySelector('.row').setAttribute('aria-expanded',open?'true':'false');
   });
+  syncBulk();
 }
-document.getElementById('expandAll').addEventListener('click',()=>setAllOpen(true));
-document.getElementById('collapseAll').addEventListener('click',()=>setAllOpen(false));
+bulkToggle.addEventListener('click',()=>setAllOpen(!bulkToggle.classList.contains('all-open')));
 
 const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
 
@@ -1341,9 +1362,11 @@ function render(){
     btn.addEventListener('click',()=>{
       const open=item.classList.toggle('open');
       btn.setAttribute('aria-expanded',open);
+      syncBulk();
     });
     list.appendChild(item);
   });
+  syncBulk();
 }
 
 searchEl.addEventListener('input',e=>{
@@ -1545,6 +1568,7 @@ if((activeDims().length || queryRaw) && !location.hash){
       if(!row){ document.getElementById('directory').scrollIntoView({block:'start'}); return; }
       row.classList.add('open');
       row.querySelector('.row').setAttribute('aria-expanded','true');
+      syncBulk();
       row.scrollIntoView({block:'center'});
     }
   });
