@@ -10,6 +10,7 @@ This file covers how it's built, the data schema, and how to update the figures 
 |---|---|
 | `explore.html` | The page. Inline CSS and JavaScript, no build step, like `index.html`. |
 | `data/smu-houston-profile.js` | **The canonical data.** Every figure, label, definition, note, and the source metadata. Edited by hand. |
+| `data/smu-houston-summaries.js` | HAA's plain-language findings for every view and section, with the claims each one makes. Edited by hand. |
 | `data/smu-houston-profile.csv` | Generated from the data file. Offered on the page as a download. |
 | `docs/smu-houston-profile-inventory.md` | Generated from the data file. Every statistic with its source page. |
 | `scripts/build-smu-profile.js` | Writes the CSV and the inventory from the data file. |
@@ -22,19 +23,22 @@ The scripts need Node (any current version) and no packages. Nothing in them run
 - **Data loading.** `explore.html` loads `data/smu-houston-profile.js` with a plain `<script>` tag. The file assigns one global, `window.SMU_HOUSTON_PROFILE`. There's no `fetch()`, so the page works when opened straight from disk (`file://`) as well as on GitHub Pages. No local server is needed.
 - **One selector.** A three-part control picks the mode (Overall, By discipline, By budget size), and a second row of chips picks the group. Both are native radio buttons, so Tab moves between the two groups and arrow keys move within one. Discipline and budget size are alternative breakdowns; they never combine. A polite live region announces the selected group and its size.
 - **The URL.** The selected view is written to `?view=<id>` with `history.replaceState` (guarded for `file://`). Other query parameters are kept. A missing or unknown `view` falls back to Overall. View ids come from the data file: `overall`, `performing`, `visual`, `other`, `under-250k`, `250k-1m`, `1m-3m`, `3m-10m`, `10m-plus`. The page has its own URL, so it never meets the directory's `syncURL()` on `index.html`.
-- **Cards.** The `CARDS` list in the script decides which metrics each card shows: at most four headline figures, at most one chart, and an expandable full-figures table for the selected view. That list is the only part of the page tied to particular metrics; everything else is read from the data file.
+- **Cards.** Each card opens with a snapshot: a self-contained frame holding a finding, why it matters, one picture, up to four supporting figures, and its own definitions, group sizes, and source. It's built so a screenshot of the frame can stand alone. The expandable full-figures table sits below the frame. The `CARDS` list in the script decides which metrics each card shows. That list is the only part of the page tied to particular metrics; figures are read from the data file.
+- **Summaries.** `data/smu-houston-summaries.js` holds one finding and one "why it matters" line per view and section, 45 pairs in all. They're HAA's sentences, not SMU DataArts', and each frame says so. Three rules keep them honest:
+  - No figure is typed. Each is a token such as `{h:local_gov_pct_expenses}` that reads the data file through `val()`.
+  - Each entry lists the `claims` its wording makes, such as "above the benchmark" or "highest of any budget size." `scripts/check-explorer.js` tests every claim, so a new report can't leave a false sentence behind.
+  - "Why it matters" stays within what the report supports: a plain restatement, another published figure, or a simple implication. No outside facts and no causal claims. "Compared with" is the default; "close to" means within one unit; better/worse framing fails the check.
 - **Rendering.** Rendering is a set of pure functions that turn the data and a view id into HTML strings. Every figure goes through one function, `val()`, which writes the published display string and tags the element with its record (`data-m`, `data-g`, `data-c`, `data-v`, `data-s`). That's what lets `scripts/check-explorer.js` run the page's own code in Node and compare every figure with the data file.
 - **Missing data.** Three cases, each with fixed wording, and none ever falls back to an overall figure:
   - "Not reported for this category": the metric's `coverage` doesn't include the view's mode.
   - "Not labeled in the report": a segment is drawn in the report's chart, but no value is printed.
   - "Not shown in the report": no segment is drawn for that category.
-- **Charts.** Plain HTML rows with every value printed beside its bar. No library is used.
-  - Composition charts give each category its own row, with Houston and national bars on a 0-100% scale. Stacked bars aren't used, because drawing one with an unlabeled segment would mean back-solving that segment from 100%. This layout also means rows that sum to 99% or 101% need no adjustment.
-  - The operating surplus/deficit chart is a diverging bar from zero. Its scale spans every view's values, so switching views keeps the scale fixed.
-  - Houston is navy; the national benchmark is a lighter navy and a thinner bar. Every bar is labeled in text, so color is never the only signal.
-- **Group size.** On the four data cards, every view shows "Based on a group of [n] Houston and [n] national benchmark organizations." When the Houston group has fewer than `SMALL_GROUP` (20) organizations, the card adds: "A small group: these averages come from a group of [n] Houston organizations, and one organization can move them substantially."
+- **Pictures.** Every picture counts in squares, drawn as inline SVG with every value printed as text. No library is used. A square always stands for one thing, and the caption says what: one organization, $1 of every $100 in average expenses, 1 in every 100 organizations, or 1,000 in attendance. Squares are never scaled to fit a value, and the check confirms each count matches its figure.
+  - A figure the report doesn't give fills no squares, so nothing is back-solved from 100%. Rows that sum to 99% or 101% need no adjustment, because each part has its own hundred squares.
+  - The picture sits on a navy plate, where every section's accent color clears 3:1. Houston is the accent color; the national benchmark is a lighter neutral. Every value is labeled in text, so color is never the only signal.
+- **Group size.** On all five cards, every view shows "Based on a group of [n] Houston and [n] national benchmark organizations." followed by who the two groups are. On the four data cards, when the Houston group has fewer than `SMALL_GROUP` (20) organizations, the card adds: "A small group: these averages come from a group of [n] Houston organizations, and one organization can move them substantially."
 - **Ranges.** `keepBands()` wraps budget-band labels such as `$250k-$999k` and `$1M-$2.99M` in a `white-space: nowrap` span and keeps the ordinary hyphen. It's separate from `index.html`'s `keepRanges()`, which matches digits on both sides of a hyphen only and would miss the dollar signs and the k or M.
-- **Source lines.** Each card's source line names the report, the publication year, the period, and the pages of every figure on the card, all generated from the data file.
+- **Source lines.** Each snapshot's source line names the report, the publication year, the period, and the pages of every figure in the frame, all generated from the data file. The full-figures table has its own page column.
 - **The PDF link.** It's built from `source.url` alone and appears in the hero and in About this data. While `source.url` is null, those two places show `source.pdfFallback` instead ("The full report isn't posted online yet. For a copy, email data@haatx.com."), with the address linked. Setting `source.url` replaces the line with the link everywhere; nothing else changes.
 - **Motion.** Cards fade in and bars grow when the view changes, and the section rules draw in as on the homepage. All of it is off under `prefers-reduced-motion`, and the rules stay whole without JavaScript.
 
@@ -99,9 +103,10 @@ The cohort counts (`orgs_total`, `orgs_by_discipline_count`, `orgs_by_budget_cou
    node scripts/check-explorer.js
    ```
 
-   It must print `PASS`. It fails if any figure on any view differs from the data file, if the PDF link or its fallback line shows in the wrong state, if a card shows more than four headline figures or more than one chart, if a digit appears in the page's text outside a figure or data-derived text, if a band label can break at its hyphen, if the CSV or inventory is stale, or if a file has LF line endings.
-5. **Adjust `CARDS` in `explore.html`** only if the report adds or drops a metric that a card shows.
-6. **Update the directory record** in `index.html` (year, summary, finding) to match.
+   It must print `PASS`. It fails if any figure on any view differs from the data file, if a summary's claim no longer holds, if a picture's squares don't match its figures, if the source or cohort line leaves a frame, if the PDF link or its fallback line shows in the wrong state, if a card shows more than four headline figures or more than one picture, if a digit appears in the page's text outside a figure or data-derived text, if a band label can break at its hyphen, if the CSV or inventory is stale, or if a file has LF line endings.
+5. **Reread `data/smu-houston-summaries.js`.** A failed claim tells you which sentence went wrong, but a sentence can pass and still stop being the most useful thing to say. Rewrite what needs it, and update its `claims`.
+6. **Adjust `CARDS` in `explore.html`** only if the report adds or drops a metric that a card shows.
+7. **Update the directory record** in `index.html` (year, summary, finding) to match.
 
 The check confirms the page matches the data file. It can't confirm the data file matches the PDF, so the extraction in step 1 is where the care goes.
 
