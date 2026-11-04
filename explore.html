@@ -521,9 +521,9 @@
     return r;
   }
   /* every figure on the page goes through val(), so each carries its record */
-  function val(r, cls){
+  function val(r, cls, long){
     if(PAGES && r.page) PAGES.add(r.page);
-    const text = r.status === 'reported' ? r.display : STATUS_TEXT[r.status];
+    const text = r.status === 'reported' ? (long || r.display) : STATUS_TEXT[r.status];
     const c = 'v' + (r.status === 'reported' ? '' : ' na') + (cls ? ' ' + cls : '');
     return `<span class="${c}" data-m="${r.metric}" data-g="${r.geo}" data-c="${r.component || ''}" data-v="${r.view}" data-s="${r.status}">${esc(text)}</span>`;
   }
@@ -588,7 +588,10 @@
       const r = c ? REC[key(m, 'overall', geo, c)] : REC[key(m, 'overall', geo)];
       return val(r);
     }
-    return val(rec(m, at || view, geo, c), at && at !== view ? 'xv' : '');
+    const r = rec(m, at || view, geo, c);
+    /* sentences spell attendance out: 61K reads 61,000 */
+    const long = MET[m].unit === 'attendance_thousands' && r.status === 'reported';
+    return val(r, [at && at !== view ? 'xv' : '', long ? 'long' : ''].filter(Boolean).join(' '), long ? (r.value * 1000).toLocaleString('en-US') : null);
   }
   function say(text, view){
     return text.split(/(\{[^}]+\})/).map(part=>{

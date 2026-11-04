@@ -6,7 +6,8 @@
 
    For each of the nine views it renders every card with the page's own code
    (the script in explore.html, run in Node without a browser) and asserts:
-     - every displayed figure equals the data file's display string, and each
+     - every displayed figure equals the data file's display string, or, for
+       attendance in a sentence, its value spelled out in full, and each
        status text ("Not labeled in the report" and so on) matches the record;
      - figures belong to the selected view (cohort counts excepted), and no
        overall figure stands in for a missing subgroup figure;
@@ -92,7 +93,7 @@ function read(src){
     const entry = { tag: name, skip: cls.includes('dx') || cls.includes('pic-note') };
     if(cls.includes('v') && a.m !== undefined){
       if(cur) failures.push(`nested value span inside ${cur.m}`);
-      cur = entry.value = { m: a.m, g: a.g, c: a.c, v: a.v, s: a.s, xv: cls.includes('xv'), text: '' };
+      cur = entry.value = { m: a.m, g: a.g, c: a.c, v: a.v, s: a.s, xv: cls.includes('xv'), long: cls.includes('long'), text: '' };
       entry.skip = true;
     }
     stack.push(entry);
@@ -112,7 +113,9 @@ function checkValues(where, values, view){
     ok(!!r, `${where}: no record for ${key(v.m, v.v, v.g, v.c)}`);
     if(!r) continue;
     ok(r.status === v.s, `${where}: ${key(v.m, v.v, v.g, v.c)} status ${v.s}, data says ${r.status}`);
-    const want = r.status === 'reported' ? r.display : E.STATUS_TEXT[r.status];
+    /* sentences spell attendance out: the published value, times 1,000 */
+    ok(!v.long || (MET[v.m].unit === 'attendance_thousands' && r.status === 'reported'), `${where}: ${v.m} is spelled out, but it isn't reported attendance`);
+    const want = r.status !== 'reported' ? E.STATUS_TEXT[r.status] : v.long ? (r.value * 1000).toLocaleString('en-US') : r.display;
     ok(v.text === want, `${where}: ${key(v.m, v.v, v.g, v.c)} shows "${v.text}", data says "${want}"`);
     /* a figure from another view must say so with class xv */
     ok(COHORT.has(v.m) ? v.v === 'overall' : (v.v === view || v.xv), `${where}: ${v.m} from view ${v.v} shown in view ${view}`);
@@ -306,6 +309,12 @@ function claim(c, view, where){
     const peers = peersOf(b, a).map(x=>lookup(x, view)).filter(r=>r && r.status === 'reported').map(r=>r.value);
     return ok(operand(a, view, where) === Math.max(...peers), say);
   }
+  if(op === 'largest'){
+    const [, g, mm, , at] = a.match(REF);
+    const v2 = COHORT.has(mm) ? 'overall' : (at || view);
+    const parts = MET[mm].components.map(c2=>REC[key(mm, v2, g === 'h' ? 'houston' : 'national', c2)]).filter(r=>r && r.status === 'reported').map(r=>r.value);
+    return ok(operand(a, view, where) === Math.max(...parts), say);
+  }
   if(op === 'widest'){
     const gap = (h2, n2) => (h2 && n2 && h2.status === 'reported' && n2.status === 'reported') ? Math.abs(h2.value - n2.value) : -1;
     if(b === 'budget-mix'){
@@ -337,7 +346,7 @@ for(const w of D.views){
       ok(!FRAMING.test(text), `${where}: ${part} uses better/worse framing: "${(text.match(FRAMING) || [''])[0]}"`);
       ok(!/\d/.test(text.replace(TOKEN, '')), `${where}: ${part} has a typed digit`);
       for(const t of text.matchAll(TOKEN)){
-        if(t[1] === 'lit'){ ok(LABELS.includes(t[2]) || t[2] === '$999k' || t[2] === '$2.99M' || t[2] === '$9.99M', `${where}: label "${t[2]}" isn't in the data file`); continue; }
+        if(t[1] === 'lit'){ ok(LABELS.includes(t[2]) || t[2] === '$999K' || t[2] === '$2.99M' || t[2] === '$9.99M', `${where}: label "${t[2]}" isn't in the data file`); continue; }
         const r = lookup(t[1] + ':' + t[2], w.id);
         ok(r && r.status === 'reported', `${where}: token ${t[0]} isn't a reported figure`);
         if(part === 'lead') ok(!t[2].includes('@'), `${where}: another view's figure in the lead`);
