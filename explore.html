@@ -159,91 +159,109 @@
   .status{margin:12px 0 0;font-size:15px;color:var(--ink-soft)}
   .status strong{color:var(--ink);font-weight:600}
 
-  /* ---- section cards ---- */
-  .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;padding:26px 0 0}
-  .card{
-    background:var(--paper-2);border:1px solid var(--hair);border-top:3px solid var(--c);
-    border-radius:var(--r);padding:24px 26px 22px;min-width:0;
+  /* ---- snapshots ----
+     Each section opens with a self-contained snapshot: a plain finding, why
+     it matters, one picture, and its source, all inside one frame so a
+     screenshot of the frame needs nothing around it. The picture sits on a
+     navy plate, where every section's accent color clears 3:1. Every picture
+     counts in squares. Full figures sit below the frame, unchanged. */
+  .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;padding:26px 0 0}
+  .card{background:var(--paper-2);border:1px solid var(--hair);border-top:3px solid var(--c);border-radius:var(--r);min-width:0}
+  .snap{
+    --pad:26px;
+    --s-ink:var(--ink);--s-soft:var(--ink-soft);--s-hair:var(--hair);
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
+    animation:fade .35s var(--ease);
   }
-  .card h2{margin:0}
-  .groupline{margin:8px 0 0;font-size:15px;color:var(--ink-soft)}
-  .smallnote{
-    margin:12px 0 0;padding:10px 0 10px 14px;border-left:3px solid var(--gold);
-    font-size:15px;line-height:1.38;color:var(--ink);
-  }
-  .card-body{display:grid;gap:26px 40px;margin:22px 0 0;animation:fade .35s var(--ease)}
-  /* one figure: figure and chart side by side; several: figures in a row,
-     the chart beneath them */
-  .card-body.side{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);align-items:start}
-  .card-body.stack .chart{max-width:860px}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}}
+  .snap-say{padding:clamp(20px,2.2vw,32px) var(--pad) clamp(20px,2.2vw,30px);min-width:0}
+  .snap-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 20px;margin:0 0 clamp(18px,2.4vw,34px)}
+  .snap h2{margin:0;font-size:clamp(17px,1.6vw,20px);color:var(--s-ink)}
+  .snap-tag{margin:0;font-size:13.5px;font-weight:500;color:var(--s-soft)}
+  .snap-lead{margin:0;font-size:clamp(25px,2.65vw,38px);line-height:1.14;font-weight:500;letter-spacing:-.018em;color:var(--s-ink)}
+  .snap-why{margin:clamp(14px,1.5vw,20px) 0 0;font-size:clamp(16.5px,1.3vw,18.5px);line-height:1.38;color:var(--s-ink)}
+  .snap-why strong{font-weight:600}
+  .smallnote{
+    margin:14px 0 0;padding:9px 0 9px 13px;border-left:3px solid var(--gold);
+    font-size:15px;line-height:1.36;color:var(--ink);
+  }
 
-  /* headline figures: Houston large, the national benchmark beside it */
-  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px 28px;margin:0}
-  .fig-item{border-top:1px solid var(--hair);padding:12px 0 0;min-width:0}
-  .fig-item dt{font-size:14.5px;font-weight:600;line-height:1.3;color:var(--ink)}
-  .fig-item dd{margin:10px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px}
-  .fig-h,.fig-n{display:flex;flex-direction:column;gap:3px}
-  .fig-h .v{
-    font-weight:500;font-size:clamp(32px,3.3vw,44px);
-    line-height:1;letter-spacing:-.025em;color:var(--houston);
+  /* the picture: squares in inline SVG on the navy plate, values always text */
+  .chart{
+    --s-ink:var(--paper);
+    --s-soft:color-mix(in srgb,var(--paper) 82%,var(--navy));
+    --s-hair:color-mix(in srgb,var(--paper) 22%,var(--navy));
+    --s-on:var(--c);
+    --s-off:color-mix(in srgb,var(--paper) 13%,var(--navy));
+    --s-bench:color-mix(in srgb,var(--paper) 62%,var(--navy));
+    margin:0;min-width:0;background:var(--navy);color:var(--s-ink);
+    padding:clamp(20px,2.2vw,30px) var(--pad) clamp(16px,1.6vw,22px);
   }
-  .fig-n .v{
-    font-weight:500;font-size:21px;
-    line-height:1;letter-spacing:-.01em;color:var(--ink-soft);
-  }
-  .who{font-size:12.5px;font-weight:500;color:var(--ink-soft)}
-  .fig-item .v.na,.fig-h .v.na,.fig-n .v.na{
-    font-size:15px;font-weight:500;
-    letter-spacing:0;line-height:1.3;color:var(--ink-soft);
-  }
-  .fig-sub{flex-basis:100%;font-size:14px;line-height:1.38;color:var(--ink-soft)}
-  .fig-sub .v{font-weight:600;color:var(--ink)}
+  .sq{display:block;width:100%;height:auto}
+  .sq .on{fill:var(--s-on)}
+  .sq .off{fill:var(--s-off)}
+  .sq .bench{fill:var(--s-bench)}
+  .sq .g0{fill:color-mix(in srgb,var(--paper) 38%,var(--navy))}
+  .sq .g1{fill:color-mix(in srgb,var(--paper) 24%,var(--navy))}
+  .pic-note{margin:12px 0 0;font-size:13px;line-height:1.35;color:var(--s-soft)}
+  .pic-title{margin:0 0 7px;font-size:13.5px;line-height:1.3;font-weight:600}
+  .fig-h,.fig-n{display:flex;flex-direction:column;gap:4px}
+  .who{font-size:12.5px;font-weight:500;color:var(--s-soft)}
+  .big{margin:0 0 12px}
+  .big .v{font-weight:500;font-size:clamp(36px,3.7vw,54px);line-height:1;letter-spacing:-.025em}
+  .big.fig-n .v{color:var(--s-soft)}
 
-  /* charts: plain HTML rows, every value written out */
-  .chart{margin:0;min-width:0}
-  .chart-title{font-size:14.5px;font-weight:600;margin:0 0 6px;padding:12px 0 0;border-top:1px solid var(--hair)}
-  .legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 10px;padding:0;list-style:none}
-  .legend li{display:inline-flex;align-items:center;gap:7px}
-  .key{display:inline-block;width:14px;border-radius:2px}
-  .key.h{height:10px;background:var(--houston)}
-  .key.n{height:6px;background:var(--national)}
-  .crow{display:grid;grid-template-columns:minmax(96px,30%) minmax(0,1fr);gap:4px 14px;align-items:center;padding:7px 0;border-top:1px solid color-mix(in srgb,var(--hair) 60%,transparent)}
-  .crow:first-of-type{border-top:0}
-  .crow-label{margin:0;font-size:14.5px;line-height:1.25}
-  .crow.dim .crow-label{color:var(--ink-soft)}
-  .crow.sel .crow-label{font-weight:700}
-  .crow.sel{background:color-mix(in srgb,var(--coral) 12%,transparent);box-shadow:-8px 0 0 color-mix(in srgb,var(--coral) 12%,transparent),8px 0 0 color-mix(in srgb,var(--coral) 12%,transparent)}
-  .crow.sel .crow-label::before{content:"\25B8\00A0";color:var(--navy)}
-  .bars{display:grid;gap:4px;min-width:0}
-  .bar{display:grid;grid-template-columns:minmax(0,1fr) 7.4em;gap:10px;align-items:center}
-  .track{position:relative;display:block;height:12px}
-  .bar.n .track{height:7px}
-  .fill{
-    position:absolute;top:0;bottom:0;left:var(--l,0);width:var(--w);border-radius:2px;
-    background:var(--houston);transform-origin:left center;animation:grow .6s var(--ease);
-  }
-  .bar.n .fill{background:var(--national)}
-  .fill.neg{transform-origin:right center}
-  @keyframes grow{from{transform:scaleX(0)}}
-  .bval{font-size:14px;line-height:1.2;white-space:nowrap}
-  .bar.h .bval .v{font-weight:600;color:var(--houston)}
-  .bar.n .bval{color:var(--ink-soft)}
-  .bar .na-wide{grid-column:1 / -1;font-size:13.5px;color:var(--ink-soft)}
-  /* diverging chart: a shared zero line */
-  .zero{position:absolute;top:-4px;bottom:-4px;left:var(--z);width:0;border-left:1.5px solid var(--ink)}
-  .axis{display:grid;grid-template-columns:minmax(96px,30%) minmax(0,1fr);gap:14px;margin:4px 0 0}
-  .axis .ticks{display:grid;grid-template-columns:minmax(0,1fr) 7.4em;gap:10px}
-  .axis .tick{position:relative;height:16px;font-size:12px;color:var(--ink-soft)}
-  .axis .tick span{position:absolute;left:var(--z);transform:translateX(-50%)}
-  .chart-note{margin:10px 0 0;font-size:14px;line-height:1.38;color:var(--ink-soft)}
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,220px));justify-content:space-between;gap:0 20px;align-content:start}
+  .pair .pic-note{grid-column:1 / -1}
 
-  .notes{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:6px}
-  .notes li{font-size:14.5px;line-height:1.4;color:var(--ink-soft);padding-left:14px;position:relative}
-  .notes li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--c)}
+  .tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(14px,1.8vw,26px);align-content:start}
+  .tri .pic-note{grid-column:1 / -1}
+  .tri-label{margin:0 0 8px;font-size:15px;line-height:1.2;font-weight:600}
+  .tri .big .v{font-size:clamp(30px,2.9vw,42px)}
+  .tri .fig-n{margin-top:10px}
+  .tri .fig-n .v{font-size:15px;font-weight:500;letter-spacing:0;color:var(--s-ink)}
+
+  .units{align-content:start}
+  .units-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px clamp(18px,2vw,30px);align-items:start}
+  .ulist{margin:0;padding:0;list-style:none;font-size:14px;line-height:1.25}
+  .ulist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;padding:6px 0;border-top:1px solid var(--s-hair);color:var(--s-soft)}
+  .ulist li:first-child{border-top:0;padding-top:0}
+  .ulist li.sel{color:var(--s-ink);font-weight:600}
+  .ulist .num{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .ulist .sub{grid-column:1 / -1;font-size:12.5px;font-weight:400;color:var(--s-soft)}
+
+  .lead-pair{display:flex;flex-wrap:wrap;gap:6px clamp(22px,3vw,44px);margin:0 0 14px}
+  .lead-pair .big{margin:0}
+  .brow{display:grid;grid-template-columns:minmax(96px,29%) minmax(0,1fr);gap:4px 14px;align-items:start;padding:6px 0;border-top:1px solid var(--s-hair)}
+  .brow-label{margin:0;font-size:14px;line-height:1.25;color:var(--s-soft)}
+  .brow.sel .brow-label{color:var(--s-ink);font-weight:600}
+  .brow-vals{display:block;margin:2px 0 0;font-size:13.5px;font-weight:400;font-variant-numeric:tabular-nums;color:var(--s-soft)}
+  .brow.sel .brow-vals{color:var(--s-ink)}
+  .brow .sq .on{fill:var(--s-bench)}
+  .brow.sel .sq .on{fill:var(--s-on)}
+  .bandrows.all .brow .sq .on{fill:var(--s-on)}
+
+  /* supporting figures: small, in a row under the finding */
+  .figs{
+    grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
+    gap:14px clamp(18px,2.4vw,36px);margin:0;padding:16px var(--pad) 0;
+  }
+  .fig-item{min-width:0}
+  .fig-item dt{font-size:14px;font-weight:600;line-height:1.25}
+  .fig-item dd{margin:7px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px}
+  .fig-item .fig-h .v{font-weight:500;font-size:clamp(23px,2vw,28px);line-height:1;letter-spacing:-.015em}
+  .fig-item .fig-n .v{font-weight:500;font-size:17px;line-height:1;letter-spacing:-.005em;color:var(--s-soft)}
+  .fig-sub{flex-basis:100%;font-size:13.5px;line-height:1.35;color:var(--s-soft)}
+  .fig-sub .v{font-weight:600;color:var(--s-ink)}
+  /* a missing figure is always small text: this sits after every figure size
+     above, which it would otherwise lose to at equal specificity */
+  .snap .v.na{font-size:14px;font-weight:500;letter-spacing:0;line-height:1.28;color:var(--s-soft)}
+
+  .snap-foot{grid-column:1 / -1;display:grid;gap:4px;margin:14px var(--pad) 0;padding:11px 0 14px;border-top:1px solid var(--s-hair);font-size:13px;line-height:1.38;color:var(--s-soft)}
+  .notes,.groupline,.src-line{margin:0}
 
   /* full-figures table */
-  .full{margin:20px 0 0;border-top:1px solid var(--hair)}
+  .full{margin:0;padding:2px 26px 10px;border-top:1px solid var(--hair)}
   .full summary,.about summary{
     cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
   }
@@ -275,7 +293,6 @@
   tr.hasnote th,tr.hasnote td{border-bottom:0}
   .rownotes{margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
 
-  .src{margin:18px 0 0;font-size:13.5px;line-height:1.4;color:var(--ink-soft)}
   /* no italic is licensed yet, so report titles are upright on purpose */
   cite{font-style:normal}
 
@@ -307,15 +324,16 @@
     }
   }
   @media (max-width:899px){
-    .card-body.side{grid-template-columns:1fr}
+    .snap{grid-template-columns:minmax(0,1fr)}
   }
   @media (max-width:760px){
     .hero{padding:40px 0 0}
     h1{font-size:clamp(31px,8.1vw,47px)}
     .logo{height:38px;width:33px;margin:0}
-    .card{padding:20px 18px 18px}
     .cta{flex-direction:column;align-items:stretch}
     .btn,.ghostbtn{justify-content:center}
+    .snap{--pad:18px}
+    .full{padding-left:18px;padding-right:18px}
   }
   @media (max-width:519px){
     .in{padding:0 16px}
@@ -326,12 +344,7 @@
     .seg .opt{flex:1 1 auto}
     .seg .opt span{padding:9px 8px;font-size:13.5px;text-align:center}
     .groups legend{float:none;display:block;margin:0 0 7px}
-    .crow{grid-template-columns:1fr;gap:4px}
-    .axis{grid-template-columns:1fr;gap:0}
-    .axis > span{display:none}
-    .bar{grid-template-columns:minmax(0,1fr) 6.6em}
-    .axis .ticks{grid-template-columns:minmax(0,1fr) 6.6em}
-    .fig-item dd{gap:6px 18px}
+    .units-wrap{grid-template-columns:minmax(0,1fr)}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -426,6 +439,7 @@
 </footer>
 
 <script src="data/smu-houston-profile.js"></script>
+<script src="data/smu-houston-summaries.js"></script>
 <script id="explorer-app">
 /* ===========================================================================
    EXPLORER
@@ -463,24 +477,26 @@
   const MODE_COUNT = {discipline:'orgs_by_discipline_count', budget:'orgs_by_budget_count'};
   const MODE_SHARE = {discipline:'orgs_by_discipline_share', budget:'orgs_by_budget_share'};
 
-  /* Which metrics each card shows. Cards hold at most four headline figures
-     and at most one chart; everything else for the view is in the table. */
+  /* Which metrics each card shows. Each snapshot holds one picture and at most
+     four headline figures; everything else for the view is in the table.
+     The sentences come from data/smu-houston-summaries.js. */
   const CARDS = [
-    {section:'sector-profile', accent:'var(--cyan)'},
+    {section:'sector-profile', accent:'var(--cyan)', pic:{type:'units'}},
     {section:'funding', accent:'var(--gold)',
-     figs:[{m:'avg_expenses'}, {m:'earned_vs_contributed', c:'earned', sub:'contributed'}, {m:'local_gov_pct_expenses'}],
-     chart:{type:'diverging', m:'operating_result_pct_expenses'},
-     notes:['earned_vs_contributed', 'local_gov_pct_expenses'],
+     pic:{type:'pair', m:'local_gov_pct_expenses', caption:'dollars'},
+     figs:[{m:'earned_vs_contributed', c:'earned', sub:'contributed'}, {m:'operating_result_pct_expenses'}, {m:'avg_expenses'}],
+     notes:['earned_vs_contributed', 'operating_result_pct_expenses'],
      table:['avg_expenses', 'avg_revenue', 'earned_vs_contributed', 'contributed_sources', 'local_gov_pct_expenses', 'operating_result_pct_expenses']},
     {section:'workforce', accent:'var(--coral)',
-     figs:[{m:'personnel_pct_expenses'}, {m:'avg_ft_staff'}, {m:'avg_pt_staff'}],
+     pic:{type:'pair', m:'personnel_pct_expenses', caption:'dollars'},
+     figs:[{m:'avg_ft_staff'}, {m:'avg_pt_staff'}],
      notes:['personnel_pct_expenses']},
     {section:'audience', accent:'var(--indigo)',
-     figs:[{m:'avg_attendance'}],
+     pic:{type:'bands', m:'avg_attendance', caption:'attendance'},
      notes:['avg_attendance']},
     {section:'facilities', accent:'var(--green)',
+     pic:{type:'tri', m:'primary_facility', caption:'share'},
      figs:[{m:'primary_facility_use', c:'administrative'}, {m:'primary_facility_use', c:'program'}, {m:'primary_facility_use', c:'both'}],
-     chart:{type:'rows', m:'primary_facility'},
      table:['primary_facility', 'primary_facility_use']}
   ];
 
@@ -505,9 +521,9 @@
     return r;
   }
   /* every figure on the page goes through val(), so each carries its record */
-  function val(r, cls){
+  function val(r, cls, long){
     if(PAGES && r.page) PAGES.add(r.page);
-    const text = r.status === 'reported' ? r.display : STATUS_TEXT[r.status];
+    const text = r.status === 'reported' ? (long || r.display) : STATUS_TEXT[r.status];
     const c = 'v' + (r.status === 'reported' ? '' : ' na') + (cls ? ' ' + cls : '');
     return `<span class="${c}" data-m="${r.metric}" data-g="${r.geo}" data-c="${r.component || ''}" data-v="${r.view}" data-s="${r.status}">${esc(text)}</span>`;
   }
@@ -529,8 +545,8 @@
   const PLUS = '<span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>';
 
   /* exact wording approved for the group-size line and the small-group note */
-  function groupLine(view){
-    return `<p class="groupline">Based on a group of ${val(groupN(view,'houston'))} Houston and ${val(groupN(view,'national'))} national benchmark organizations.</p>`;
+  function groupText(view){
+    return `<span class="groupline">Based on a group of ${val(groupN(view,'houston'))} Houston and ${val(groupN(view,'national'))} national benchmark organizations.</span>`;
   }
   function smallNote(view){
     if(!isSmall(view)) return '';
@@ -560,60 +576,113 @@
     return figItem(figLabel(f), h, n, sub);
   }
 
-  /* ---------------------------------------------------------- charts --- */
-  const LEGEND = '<ul class="legend" aria-hidden="true"><li><span class="key h"></span><span class="who">Houston</span></li><li><span class="key n"></span><span class="who">National benchmark</span></li></ul>';
-
-  function barHTML(geo, r, extra, pos){
-    const who = `<span class="visually-hidden"> ${geo === 'houston' ? 'Houston' : 'National benchmark'}</span>`;
-    if(r.status !== 'reported'){
-      return `<div class="bar ${geo === 'houston' ? 'h' : 'n'}"><span class="na-wide">${val(r)}${who}</span></div>`;
+  /* -------------------------------------------------------- sentences --- */
+  /* Fills a summary's tokens. Each figure goes through val(), so it carries
+     its record like every other figure on the page. A figure from another
+     view is marked xv; the check allows those in "why" lines only. */
+  const SUM = root.SMU_HOUSTON_SUMMARIES;
+  function tokenVal(geo, ref, view){
+    const [body, at] = ref.split('@');
+    const [m, c] = body.split('|');
+    if(m.startsWith('orgs_')){
+      const r = c ? REC[key(m, 'overall', geo, c)] : REC[key(m, 'overall', geo)];
+      return val(r);
     }
-    const style = pos ? `--l:${pos.l}%;--w:${pos.w}%` : `--w:${Math.max(0, r.value)}%`;
-    const neg = pos && pos.neg ? ' neg' : '';
-    const zero = pos ? `<span class="zero" style="--z:${pos.z}%"></span>` : '';
-    return `<div class="bar ${geo === 'houston' ? 'h' : 'n'}">` +
-      `<span class="track" aria-hidden="true">${zero}<span class="fill${neg}" style="${style}"></span></span>` +
-      `<span class="bval">${val(r)}${extra || ''}${who}</span></div>`;
+    const r = rec(m, at || view, geo, c);
+    /* sentences spell attendance out: 61K reads 61,000 */
+    const long = MET[m].unit === 'attendance_thousands' && r.status === 'reported';
+    return val(r, [at && at !== view ? 'xv' : '', long ? 'long' : ''].filter(Boolean).join(' '), long ? (r.value * 1000).toLocaleString('en-US') : null);
+  }
+  function say(text, view){
+    return text.split(/(\{[^}]+\})/).map(part=>{
+      const t = part.match(/^\{(h|n|lit):(.+)\}$/);
+      if(!t) return esc(part);
+      return t[1] === 'lit' ? dx(t[2]) : tokenVal(t[1] === 'h' ? 'houston' : 'national', t[2], view);
+    }).join('');
   }
 
-  /* composition rows: one row per category, Houston and national bars on a
-     0-100% scale, every value printed. Never stacked: a stacked bar would need
-     unlabeled segments back-solved to be drawn. */
-  function rowsChart(title, rows){
-    return `<figure class="chart"><figcaption class="chart-title">${esc(title)}</figcaption>${LEGEND}` +
-      rows.map(row=>`<div class="crow${row.sel ? ' sel' : ''}${row.dim ? ' dim' : ''}">` +
-        `<p class="crow-label">${row.label}</p><div class="bars">` +
-        barHTML('houston', row.h, row.hx) + barHTML('national', row.n, row.nx) +
-        `</div></div>`).join('') + `</figure>`;
+  /* --------------------------------------------------------- pictures --- */
+  /* Every picture counts in squares, so one unit is always one thing: an
+     organization, a dollar of every hundred, one in a hundred organizations,
+     or a thousand in attendance. A square is never scaled to fit a value. */
+  function squares(groups, cols){
+    const u = 8, gap = 2, step = u + gap;
+    let i = 0;
+    const paths = groups.map(g=>{
+      let d = '';
+      for(let k = 0; k < g.n; k++, i++) d += `M${(i % cols) * step} ${Math.floor(i / cols) * step}h${u}v${u}h-${u}z`;
+      return d ? `<path class="${g.cls}" d="${d}"/>` : '';
+    }).join('');
+    const rows = Math.max(1, Math.ceil(i / cols));
+    return `<svg class="sq" viewBox="0 0 ${cols * step - gap} ${rows * step - gap}" aria-hidden="true" focusable="false">${paths}</svg>`;
+  }
+  /* a hundred squares, with the reported number filled in. A figure the
+     report doesn't give fills nothing, so nothing is back-solved. */
+  function hundred(r, cls){
+    const n = r.status === 'reported' ? Math.round(r.value) : 0;
+    return squares([{n, cls}, {n:100 - n, cls:'off'}], 10);
+  }
+  const caption = k => `<figcaption class="pic-note">${esc(SUM.captions[k])}</figcaption>`;
+
+  /* Houston and the benchmark, a hundred squares each */
+  function pairPic(p, view){
+    const cell = (geo, slot, name, cls) => {
+      const r = rec(p.m, view, geo);
+      return `<div><span class="${slot} big">${val(r)}<span class="who">${name}</span></span>${hundred(r, cls)}</div>`;
+    };
+    return `<figure class="chart pair">${cell('houston', 'fig-h', 'Houston', 'on')}${cell('national', 'fig-n', 'National benchmark', 'bench')}${caption(p.caption)}</figure>`;
   }
 
-  /* diverging bars from zero, on one scale for every view so the views can
-     be compared as you switch */
-  function divergingChart(m, view){
-    const all = D.values.filter(r=>r.metric === m && r.status === 'reported').map(r=>r.value);
-    const lo = Math.min(0, Math.floor(Math.min(...all) / 5) * 5);
-    const hi = Math.max(0, Math.ceil(Math.max(...all) / 5) * 5);
-    const span = hi - lo, z = (-lo) / span * 100;
-    const pos = r => r.status !== 'reported' ? null :
-      {l:(Math.min(0, r.value) - lo) / span * 100, w:Math.abs(r.value) / span * 100, z, neg:r.value < 0};
-    const h = rec(m, view, 'houston'), n = rec(m, view, 'national');
-    const row = (label, geo, r) => `<div class="crow"><p class="crow-label">${label}</p><div class="bars">${barHTML(geo, r, '', pos(r))}</div></div>`;
-    return `<figure class="chart"><figcaption class="chart-title">${esc(MET[m].label)}</figcaption>` +
-      row('Houston', 'houston', h) + row('National benchmark', 'national', n) +
-      `<div class="axis" aria-hidden="true"><span></span><div class="ticks"><div class="tick" style="--z:${z}%"><span class="dx">0%</span></div><span></span></div></div>` +
-      (MET[m].cardNote ? `<p class="chart-note">${dx(MET[m].cardNote)}</p>` : '') + `</figure>`;
+  /* one metric's parts side by side: the rent, own, and donated picture */
+  function triPic(p, view){
+    const cells = MET[p.m].components.map(c=>{
+      const h = rec(p.m, view, 'houston', c), n = rec(p.m, view, 'national', c);
+      return `<div><p class="tri-label">${esc(D.componentLabels[c])}</p>` +
+        `<span class="fig-h big">${val(h)}<span class="who">Houston</span></span>${hundred(h, 'on')}` +
+        `<span class="fig-n">${val(n)}<span class="who">National benchmark</span></span></div>`;
+    }).join('');
+    return `<figure class="chart tri">${cells}${caption(p.caption)}</figure>`;
   }
 
-  function compositionChart(metric, view, selected){
-    const m = MET[metric];
-    const countM = metric.replace('_share', '_count');
-    const title = m.id.includes('discipline') ? 'Share of organizations by discipline' : 'Share of organizations by budget size';
-    return rowsChart(title, m.components.map(c=>({
-      label: (c === selected ? '<span class="visually-hidden">Selected: </span>' : '') + viewLabel(c),
-      sel: c === selected, dim: selected && c !== selected,
-      h: rec(metric, 'overall', 'houston', c), hx: ` (${val(rec(countM, 'overall', 'houston', c))})`,
-      n: rec(metric, 'overall', 'national', c), nx: ` (${val(rec(countM, 'overall', 'national', c))})`
-    })));
+  /* one square per organization, with the selected group lit. Overall lights
+     the smallest budget size, which its finding is about. */
+  function unitsPic(view){
+    const v = VIEW[view];
+    const mode = v.mode === 'discipline' ? 'discipline' : 'budget';
+    const selected = v.mode === 'overall' ? 'under-250k' : view;
+    const m = MET[MODE_COUNT[mode]];
+    const count = (c, g) => REC[key(MODE_COUNT[mode], 'overall', g, c)];
+    const share = (c, g) => REC[key(MODE_SHARE[mode], 'overall', g, c)];
+    const groups = m.components.map((c, i)=>({n:count(c, 'houston').value, cls:c === selected ? 'on' : 'g' + (i % 2)}));
+    const rows = m.components.map(c=>`<li${c === selected ? ' class="sel"' : ''}>` +
+      `<span>${c === selected && v.mode !== 'overall' ? '<span class="visually-hidden">Selected: </span>' : ''}${viewLabel(c)}</span>` +
+      `<span class="num">${val(count(c, 'houston'))} <span class="pct">(${val(share(c, 'houston'))})</span></span>` +
+      `<span class="sub">National benchmark: ${val(share(c, 'national'))} (${val(count(c, 'national'))})</span></li>`).join('');
+    return `<figure class="chart units"><div class="units-wrap">${squares(groups, 17)}<ul class="ulist">${rows}</ul></div>${caption('organizations')}</figure>`;
+  }
+
+  /* the headline pair, then the same figure across the view's peers, so the
+     range behind an average is visible. All budget sizes on Overall. */
+  function bandsPic(p, view){
+    const v = VIEW[view];
+    const peers = D.views.filter(x=>x.mode === (v.mode === 'discipline' ? 'discipline' : 'budget'));
+    const big = (geo, slot, name) => `<span class="${slot} big">${val(rec(p.m, view, geo))}<span class="who">${name}</span></span>`;
+    const rows = peers.map(x=>{
+      const h = rec(p.m, x.id, 'houston'), n = rec(p.m, x.id, 'national');
+      const sel = x.id === view, flag = sel ? '' : 'xv';
+      return `<div class="brow${sel ? ' sel' : ''}"><p class="brow-label">${sel ? '<span class="visually-hidden">Selected: </span>' : ''}${viewLabel(x.id)}` +
+        `<span class="brow-vals">${val(h, flag)}<span class="brow-n"> <span class="visually-hidden">National benchmark </span>vs. ${val(n, flag)}</span></span></p>` +
+        `${squares([{n:Math.round(h.value), cls:'on'}], 40)}</div>`;
+    }).join('');
+    return `<figure class="chart bandrows${v.mode === 'overall' ? ' all' : ''}"><div class="lead-pair">${big('houston', 'fig-h', 'Houston')}${big('national', 'fig-n', 'National benchmark')}</div><p class="pic-title">Houston vs. national benchmark, by ${v.mode === 'discipline' ? 'discipline' : 'budget size'}</p>${rows}${caption(p.caption)}</figure>`;
+  }
+
+  function picture(card, view){
+    const p = card.pic;
+    if(p.type === 'units') return unitsPic(view);
+    if(p.type === 'pair') return pairPic(p, view);
+    if(p.type === 'tri') return triPic(p, view);
+    return bandsPic(p, view);
   }
 
   /* ---------------------------------------------------------- tables --- */
@@ -661,57 +730,50 @@
   let OPEN = new Set();
 
   /* ----------------------------------------------------------- cards --- */
-  function sourceLine(){
-    return `<p class="src">Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>.</p>`;
+  function sourceText(){
+    return `<span class="src">Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>. ${esc(SUM.credit)}</span>`;
   }
 
-  function sectorCard(card, view){
+  /* who the figures describe, inside the frame so a screenshot can't lose it */
+  function whoText(){
+    return `<span class="dx">Houston: ${esc(S.houston.description)}, not a census. National benchmark: ${esc(S.national.benchmark)}.</span>`;
+  }
+
+  /* who the snapshot is about, so a screenshot names its own group */
+  function viewTag(view){
     const v = VIEW[view];
-    let figs, chart, table, notes = [];
-    if(v.mode === 'overall'){
-      figs = figItem(MET.orgs_total.label, groupN(view, 'houston'), groupN(view, 'national'));
-      chart = compositionChart('orgs_by_discipline_share', view, null);
-      table = compositionTable('orgs_by_discipline_share', view) + compositionTable('orgs_by_budget_share', view);
-    } else {
-      const sub = `<span class="fig-sub">${val(groupShare(view,'houston'))} of the Houston cohort, ${val(groupShare(view,'national'))} of the national benchmark</span>`;
-      figs = figItem(MET.orgs_total.label, groupN(view, 'houston'), groupN(view, 'national'), sub);
-      chart = compositionChart(MODE_SHARE[v.mode], view, view);
-      table = compositionTable(MODE_SHARE[v.mode], view);
-      notes.push(v.cardDefinition || (v.definition + '.'));
-    }
-    return {
-      body: `<div class="card-body side"><dl class="figs">${figs}</dl>${chart}</div>`,
-      notes, table: tableBlock(card, view, table, [])
-    };
+    const pre = v.mode === 'discipline' ? 'Discipline: ' : v.mode === 'budget' ? 'Budget size: ' : '';
+    return `<p class="snap-tag">${pre}${v.mode === 'overall' ? 'All organizations' : viewLabel(view)}</p>`;
   }
 
-  function dataCard(card, view){
-    const figs = card.figs.map(f=>metricFig(f, view)).join('');
-    let chart = '';
-    if(card.chart && card.chart.type === 'diverging') chart = divergingChart(card.chart.m, view);
-    if(card.chart && card.chart.type === 'rows'){
-      const m = MET[card.chart.m];
-      chart = rowsChart(m.name, m.components.map(c=>({
-        label: esc(D.componentLabels[c]), h: rec(m.id, view, 'houston', c), n: rec(m.id, view, 'national', c)
-      })));
-    }
-    const notes = (card.notes || []).map(id=>MET[id].cardNote).filter(Boolean);
-    if(SEC[card.section].note) notes.push(SEC[card.section].note);
-    const table = card.table ? tableBlock(card, view, card.table.map(id=>tableRows(id, view)).join(''), card.table) : '';
-    const layout = !chart ? '' : card.figs.length > 1 ? ' stack' : ' side';
-    return {body:`<div class="card-body${layout}"><dl class="figs">${figs}</dl>${chart}</div>`, notes, table};
+  function sectorTable(card, view){
+    const v = VIEW[view];
+    const rows = v.mode === 'overall'
+      ? compositionTable('orgs_by_discipline_share', view) + compositionTable('orgs_by_budget_share', view)
+      : compositionTable(MODE_SHARE[v.mode], view);
+    return tableBlock(card, view, rows, []);
   }
 
   function renderCard(card, view){
     PAGES = new Set();
-    const sec = SEC[card.section];
-    const parts = card.section === 'sector-profile' ? sectorCard(card, view) : dataCard(card, view);
-    const head = card.section === 'sector-profile' ? '' : groupLine(view) + smallNote(view);
-    const notes = parts.notes.length ? `<ul class="notes">${parts.notes.map(t=>`<li>${dx(t)}</li>`).join('')}</ul>` : '';
-    const html = `<section class="card" data-section="${card.section}" aria-labelledby="h-${card.section}" style="--c:${card.accent}">` +
-      `<h2 id="h-${card.section}">${esc(sec.name)}</h2>${head}${parts.body}${notes}${parts.table}${sourceLine()}</section>`;
+    const sec = SEC[card.section], v = VIEW[view];
+    const copy = SUM.views[view][card.section];
+    const figs = (card.figs || []).filter(f=>covered(f.m, view)).map(f=>metricFig(f, view)).join('');
+    const notes = (card.notes || []).map(id=>MET[id].cardNote).filter(Boolean);
+    if(sec.note) notes.push(sec.note);
+    if(card.section === 'sector-profile' && v.mode !== 'overall') notes.push(v.cardDefinition || (v.definition + '.'));
+    const frame = `<div class="snap">` +
+      `<div class="snap-say"><div class="snap-top"><h2 id="h-${card.section}">${esc(sec.name)}</h2>${viewTag(view)}</div>` +
+      `<p class="snap-lead">${say(copy.lead, view)}</p>` +
+      `<p class="snap-why"><strong>${esc(SUM.whyLabel)}</strong> ${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
+      picture(card, view) +
+      (figs ? `<dl class="figs">${figs}</dl>` : '') +
+      `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${groupText(view)} ${whoText()} ${sourceText()}</p></div>` +
+      `</div>`;
     PAGES = null;
-    return html;
+    const table = card.section === 'sector-profile' ? sectorTable(card, view)
+      : card.table ? tableBlock(card, view, card.table.map(id=>tableRows(id, view)).join(''), card.table) : '';
+    return `<section class="card" data-section="${card.section}" aria-labelledby="h-${card.section}" style="--c:${card.accent}">${frame}${table}</section>`;
   }
 
   function renderCards(view){ return CARDS.map(c=>renderCard(c, view)).join(''); }
@@ -745,7 +807,7 @@
   }
   function creditHTML(){
     return `<p>${esc(S.creditLine)}</p>` +
-      `<p>${esc(S.presentedBy)} presents the report's figures here in an interactive format, as ${esc(S.author)} published them. To cite them, cite the report: <span class="dx">${citation()}</span></p>` +
+      `<p>${esc(S.presentedBy)} presents the report's figures here in an interactive format, as ${esc(S.author)} published them. The plain-language summaries are ${esc(S.presentedBy)}'s own reading of those figures. To cite a figure, cite the report: <span class="dx">${citation()}</span></p>` +
       `<p><a href="data/smu-houston-profile.csv" download>Download every figure as a CSV file</a>, with each figure's unit, published display, status, and page.</p>`;
   }
 

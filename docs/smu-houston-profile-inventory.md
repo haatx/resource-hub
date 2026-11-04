@@ -56,8 +56,8 @@ The report provides no discipline x budget intersections.
 | Performing Arts | 73 (36%) | 527 (35%) | 1 |
 | Visual Arts | 17 (8%) | 137 (9%) | 1 |
 | Other Arts (report label: "Other") | 114 (56%) | 845 (56%) | 1 |
-| Under $250k (report label: "<$250k") | 93 (46%) | 657 (44%) | 2 |
-| $250k-$999k | 68 (33%) | 430 (28%) | 2 |
+| Under $250K (report label: "<$250k") | 93 (46%) | 657 (44%) | 2 |
+| $250K-$999K (report label: "$250k-$999k") | 68 (33%) | 430 (28%) | 2 |
 | $1M-$2.99M | 19 (9%) | 224 (15%) | 2 |
 | $3M-$9.99M | 12 (6%) | 109 (7%) | 2 |
 | $10M+ | 12 (6%) | 89 (6%) | 2 |
@@ -70,14 +70,14 @@ The report provides no discipline x budget intersections.
 | Sources of contributed revenue | Performing Arts | Houston | Labeled values sum to 95%; 2 drawn segments not labeled in the report. |
 | Sources of contributed revenue | Visual Arts | Houston | Labeled values sum to 95%; 2 drawn segments not labeled in the report. |
 | Sources of contributed revenue | Other Arts | Houston | Labeled values sum to 96%; 1 drawn segment not labeled in the report. |
-| Sources of contributed revenue | $250k-$999k | Houston | Labeled values sum to 97%; 1 drawn segment not labeled in the report. |
+| Sources of contributed revenue | $250K-$999K | Houston | Labeled values sum to 97%; 1 drawn segment not labeled in the report. |
 | Sources of contributed revenue | $1M-$2.99M | Houston | Labeled values sum to 89%; 3 drawn segments not labeled in the report. |
 | Sources of contributed revenue | $3M-$9.99M | Houston | Labeled values sum to 98%; 1 drawn segment not labeled in the report. |
 | Sources of contributed revenue | $10M+ | Houston | Labeled values sum to 97%; 2 drawn segments not labeled in the report. |
 | Sources of contributed revenue | Performing Arts | National benchmark | Labeled values sum to 98%; 1 drawn segment not labeled in the report. |
 | Sources of contributed revenue | Visual Arts | National benchmark | Labeled values sum to 99%; 1 drawn segment not labeled in the report. |
-| Sources of contributed revenue | Under $250k | National benchmark | Labeled values sum to 96%; 1 drawn segment not labeled in the report. |
-| Sources of contributed revenue | $250k-$999k | National benchmark | Published values sum to 99% (rounding). |
+| Sources of contributed revenue | Under $250K | National benchmark | Labeled values sum to 96%; 1 drawn segment not labeled in the report. |
+| Sources of contributed revenue | $250K-$999K | National benchmark | Published values sum to 99% (rounding). |
 | Sources of contributed revenue | $10M+ | National benchmark | Labeled values sum to 96%; 1 drawn segment not labeled in the report. |
 | Primary facility arrangement | Visual Arts | Houston | Published values sum to 101% (rounding). |
 | Primary facility arrangement | $3M-$9.99M | Houston | No segment is drawn for Donated in-kind; recorded as not shown, not as 0%. |
@@ -131,20 +131,20 @@ The report provides no discipline x budget intersections.
 | 12 | Sector profile | Organizations by discipline (share) | Overall | Visual Arts | National benchmark | 1,509 | 9 | percent | `9%` | Reported | FY25 | 1 |  |
 | 13 | Sector profile | Organizations by discipline (share) | Overall | Other Arts | Houston | 204 | 56 | percent | `56%` | Reported | FY25 | 1 |  |
 | 14 | Sector profile | Organizations by discipline (share) | Overall | Other Arts | National benchmark | 1,509 | 56 | percent | `56%` | Reported | FY25 | 1 |  |
-| 15 | Sector profile | Organizations by budget size (count) | Overall | <$250k | Houston | 204 | 93 | organizations | `93` | Reported | FY25 | 2 |  |
-| 16 | Sector profile | Organizations by budget size (count) | Overall | <$250k | National benchmark | 1,509 | 657 | organizations | `657` | Reported | FY25 | 2 |  |
-| 17 | Sector profile | Organizations by budget size (count) | Overall | $250k-$999k | Houston | 204 | 68 | organizations | `68` | Reported | FY25 | 2 |  |
-| 18 | Sector profile | Organizations by budget size (count) | Overall | $250k-$999k | National benchmark | 1,509 | 430 | organizations | `430` | Reported | FY25 | 2 |  |
+| 15 | Sector profile | Organizations by budget size (count) | Overall | <$250K | Houston | 204 | 93 | organizations | `93` | Reported | FY25 | 2 |  |
+| 16 | Sector profile | Organizations by budget size (count) | Overall | <$250K | National benchmark | 1,509 | 657 | organizations | `657` | Reported | FY25 | 2 |  |
+| 17 | Sector profile | Organizations by budget size (count) | Overall | $250K-$999K | Houston | 204 | 68 | organizations | `68` | Reported | FY25 | 2 |  |
+| 18 | Sector profile | Organizations by budget size (count) | Overall | $250K-$999K | National benchmark | 1,509 | 430 | organizations | `430` | Reported | FY25 | 2 |  |
 | 19 | Sector profile | Organizations by budget size (count) | Overall | $1M-$2.99M | Houston | 204 | 19 | organizations | `19` | Reported | FY25 | 2 |  |
 | 20 | Sector profile | Organizations by budget size (count) | Overall | $1M-$2.99M | National benchmark | 1,509 | 224 | organizations | `224` | Reported | FY25 | 2 |  |
 | 21 | Sector profile | Organizations by budget size (count) | Overall | $3M-$9.99M | Houston | 204 | 12 | organizations | `12` | Reported | FY25 | 2 | Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render. |
 | 22 | Sector profile | Organizations by budget size (count) | Overall | $3M-$9.99M | National benchmark | 1,509 | 109 | organizations | `109` | Reported | FY25 | 2 | Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render. |
 | 23 | Sector profile | Organizations by budget size (count) | Overall | $10M+ | Houston | 204 | 12 | organizations | `12` | Reported | FY25 | 2 |  |
 | 24 | Sector profile | Organizations by budget size (count) | Overall | $10M+ | National benchmark | 1,509 | 89 | organizations | `89` | Reported | FY25 | 2 |  |
-| 25 | Sector profile | Organizations by budget size (share) | Overall | <$250k | Houston | 204 | 46 | percent | `46%` | Reported | FY25 | 2 |  |
-| 26 | Sector profile | Organizations by budget size (share) | Overall | <$250k | National benchmark | 1,509 | 44 | percent | `44%` | Reported | FY25 | 2 |  |
-| 27 | Sector profile | Organizations by budget size (share) | Overall | $250k-$999k | Houston | 204 | 33 | percent | `33%` | Reported | FY25 | 2 |  |
-| 28 | Sector profile | Organizations by budget size (share) | Overall | $250k-$999k | National benchmark | 1,509 | 28 | percent | `28%` | Reported | FY25 | 2 |  |
+| 25 | Sector profile | Organizations by budget size (share) | Overall | <$250K | Houston | 204 | 46 | percent | `46%` | Reported | FY25 | 2 |  |
+| 26 | Sector profile | Organizations by budget size (share) | Overall | <$250K | National benchmark | 1,509 | 44 | percent | `44%` | Reported | FY25 | 2 |  |
+| 27 | Sector profile | Organizations by budget size (share) | Overall | $250K-$999K | Houston | 204 | 33 | percent | `33%` | Reported | FY25 | 2 |  |
+| 28 | Sector profile | Organizations by budget size (share) | Overall | $250K-$999K | National benchmark | 1,509 | 28 | percent | `28%` | Reported | FY25 | 2 |  |
 | 29 | Sector profile | Organizations by budget size (share) | Overall | $1M-$2.99M | Houston | 204 | 9 | percent | `9%` | Reported | FY25 | 2 |  |
 | 30 | Sector profile | Organizations by budget size (share) | Overall | $1M-$2.99M | National benchmark | 1,509 | 15 | percent | `15%` | Reported | FY25 | 2 |  |
 | 31 | Sector profile | Organizations by budget size (share) | Overall | $3M-$9.99M | Houston | 204 | 6 | percent | `6%` | Reported | FY25 | 2 | Label is rotated inside a small segment and interleaves with neighboring labels in the text layer; read from the render. |
@@ -183,20 +183,20 @@ The report provides no discipline x budget intersections.
 | 64 | Funding and financial health | Earned vs. contributed revenue | Visual Arts | Contributed revenue | National benchmark | 137 | 33 | percent | `33%` | Reported | FY25 | 6 |  |
 | 65 | Funding and financial health | Earned vs. contributed revenue | Other Arts | Earned revenue | National benchmark | 845 | 51 | percent | `51%` | Reported | FY25 | 6 |  |
 | 66 | Funding and financial health | Earned vs. contributed revenue | Other Arts | Contributed revenue | National benchmark | 845 | 49 | percent | `49%` | Reported | FY25 | 6 |  |
-| 67 | Funding and financial health | Earned vs. contributed revenue | Under $250k | Earned revenue | Houston | 93 | 41 | percent | `41%` | Reported | FY25 | 6 |  |
-| 68 | Funding and financial health | Earned vs. contributed revenue | Under $250k | Contributed revenue | Houston | 93 | 59 | percent | `59%` | Reported | FY25 | 6 |  |
-| 69 | Funding and financial health | Earned vs. contributed revenue | $250k-$999k | Earned revenue | Houston | 68 | 36 | percent | `36%` | Reported | FY25 | 6 |  |
-| 70 | Funding and financial health | Earned vs. contributed revenue | $250k-$999k | Contributed revenue | Houston | 68 | 64 | percent | `64%` | Reported | FY25 | 6 |  |
+| 67 | Funding and financial health | Earned vs. contributed revenue | Under $250K | Earned revenue | Houston | 93 | 41 | percent | `41%` | Reported | FY25 | 6 |  |
+| 68 | Funding and financial health | Earned vs. contributed revenue | Under $250K | Contributed revenue | Houston | 93 | 59 | percent | `59%` | Reported | FY25 | 6 |  |
+| 69 | Funding and financial health | Earned vs. contributed revenue | $250K-$999K | Earned revenue | Houston | 68 | 36 | percent | `36%` | Reported | FY25 | 6 |  |
+| 70 | Funding and financial health | Earned vs. contributed revenue | $250K-$999K | Contributed revenue | Houston | 68 | 64 | percent | `64%` | Reported | FY25 | 6 |  |
 | 71 | Funding and financial health | Earned vs. contributed revenue | $1M-$2.99M | Earned revenue | Houston | 19 | 26 | percent | `26%` | Reported | FY25 | 6 |  |
 | 72 | Funding and financial health | Earned vs. contributed revenue | $1M-$2.99M | Contributed revenue | Houston | 19 | 74 | percent | `74%` | Reported | FY25 | 6 |  |
 | 73 | Funding and financial health | Earned vs. contributed revenue | $3M-$9.99M | Earned revenue | Houston | 12 | 43 | percent | `43%` | Reported | FY25 | 6 |  |
 | 74 | Funding and financial health | Earned vs. contributed revenue | $3M-$9.99M | Contributed revenue | Houston | 12 | 57 | percent | `57%` | Reported | FY25 | 6 |  |
 | 75 | Funding and financial health | Earned vs. contributed revenue | $10M+ | Earned revenue | Houston | 12 | 66 | percent | `66%` | Reported | FY25 | 6 |  |
 | 76 | Funding and financial health | Earned vs. contributed revenue | $10M+ | Contributed revenue | Houston | 12 | 34 | percent | `34%` | Reported | FY25 | 6 |  |
-| 77 | Funding and financial health | Earned vs. contributed revenue | Under $250k | Earned revenue | National benchmark | 657 | 37 | percent | `37%` | Reported | FY25 | 6 |  |
-| 78 | Funding and financial health | Earned vs. contributed revenue | Under $250k | Contributed revenue | National benchmark | 657 | 63 | percent | `63%` | Reported | FY25 | 6 |  |
-| 79 | Funding and financial health | Earned vs. contributed revenue | $250k-$999k | Earned revenue | National benchmark | 430 | 39 | percent | `39%` | Reported | FY25 | 6 |  |
-| 80 | Funding and financial health | Earned vs. contributed revenue | $250k-$999k | Contributed revenue | National benchmark | 430 | 61 | percent | `61%` | Reported | FY25 | 6 |  |
+| 77 | Funding and financial health | Earned vs. contributed revenue | Under $250K | Earned revenue | National benchmark | 657 | 37 | percent | `37%` | Reported | FY25 | 6 |  |
+| 78 | Funding and financial health | Earned vs. contributed revenue | Under $250K | Contributed revenue | National benchmark | 657 | 63 | percent | `63%` | Reported | FY25 | 6 |  |
+| 79 | Funding and financial health | Earned vs. contributed revenue | $250K-$999K | Earned revenue | National benchmark | 430 | 39 | percent | `39%` | Reported | FY25 | 6 |  |
+| 80 | Funding and financial health | Earned vs. contributed revenue | $250K-$999K | Contributed revenue | National benchmark | 430 | 61 | percent | `61%` | Reported | FY25 | 6 |  |
 | 81 | Funding and financial health | Earned vs. contributed revenue | $1M-$2.99M | Earned revenue | National benchmark | 224 | 38 | percent | `38%` | Reported | FY25 | 6 |  |
 | 82 | Funding and financial health | Earned vs. contributed revenue | $1M-$2.99M | Contributed revenue | National benchmark | 224 | 62 | percent | `62%` | Reported | FY25 | 6 |  |
 | 83 | Funding and financial health | Earned vs. contributed revenue | $3M-$9.99M | Earned revenue | National benchmark | 109 | 44 | percent | `44%` | Reported | FY25 | 6 |  |
@@ -251,18 +251,18 @@ The report provides no discipline x budget intersections.
 | 132 | Funding and financial health | Sources of contributed revenue | Other Arts | Individuals | National benchmark | 845 | 26 | percent | `26%` | Reported | FY25 | 8 |  |
 | 133 | Funding and financial health | Sources of contributed revenue | Other Arts | Foundations | National benchmark | 845 | 33 | percent | `33%` | Reported | FY25 | 8 |  |
 | 134 | Funding and financial health | Sources of contributed revenue | Other Arts | Corporations | National benchmark | 845 | 7 | percent | `7%` | Reported | FY25 | 8 |  |
-| 135 | Funding and financial health | Sources of contributed revenue | Under $250k | Local gov't | Houston | 93 | 15 | percent | `15%` | Reported | FY25 | 8 |  |
-| 136 | Funding and financial health | Sources of contributed revenue | Under $250k | State gov't | Houston | 93 | 12 | percent | `12%` | Reported | FY25 | 8 |  |
-| 137 | Funding and financial health | Sources of contributed revenue | Under $250k | Federal gov't | Houston | 93 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
-| 138 | Funding and financial health | Sources of contributed revenue | Under $250k | Individuals | Houston | 93 | 25 | percent | `25%` | Reported | FY25 | 8 |  |
-| 139 | Funding and financial health | Sources of contributed revenue | Under $250k | Foundations | Houston | 93 | 21 | percent | `21%` | Reported | FY25 | 8 |  |
-| 140 | Funding and financial health | Sources of contributed revenue | Under $250k | Corporations | Houston | 93 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
-| 141 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Local gov't | Houston | 68 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
-| 142 | Funding and financial health | Sources of contributed revenue | $250k-$999k | State gov't | Houston | 68 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
-| 143 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Federal gov't | Houston | 68 | 6 | percent | `6%` | Reported | FY25 | 8 |  |
-| 144 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Individuals | Houston | 68 | 19 | percent | `19%` | Reported | FY25 | 8 |  |
-| 145 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Foundations | Houston | 68 | 46 | percent | `46%` | Reported | FY25 | 8 |  |
-| 146 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Corporations | Houston | 68 | 9 | percent | `9%` | Reported | FY25 | 8 |  |
+| 135 | Funding and financial health | Sources of contributed revenue | Under $250K | Local gov't | Houston | 93 | 15 | percent | `15%` | Reported | FY25 | 8 |  |
+| 136 | Funding and financial health | Sources of contributed revenue | Under $250K | State gov't | Houston | 93 | 12 | percent | `12%` | Reported | FY25 | 8 |  |
+| 137 | Funding and financial health | Sources of contributed revenue | Under $250K | Federal gov't | Houston | 93 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
+| 138 | Funding and financial health | Sources of contributed revenue | Under $250K | Individuals | Houston | 93 | 25 | percent | `25%` | Reported | FY25 | 8 |  |
+| 139 | Funding and financial health | Sources of contributed revenue | Under $250K | Foundations | Houston | 93 | 21 | percent | `21%` | Reported | FY25 | 8 |  |
+| 140 | Funding and financial health | Sources of contributed revenue | Under $250K | Corporations | Houston | 93 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
+| 141 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Local gov't | Houston | 68 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
+| 142 | Funding and financial health | Sources of contributed revenue | $250K-$999K | State gov't | Houston | 68 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
+| 143 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Federal gov't | Houston | 68 | 6 | percent | `6%` | Reported | FY25 | 8 |  |
+| 144 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Individuals | Houston | 68 | 19 | percent | `19%` | Reported | FY25 | 8 |  |
+| 145 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Foundations | Houston | 68 | 46 | percent | `46%` | Reported | FY25 | 8 |  |
+| 146 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Corporations | Houston | 68 | 9 | percent | `9%` | Reported | FY25 | 8 |  |
 | 147 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | Local gov't | Houston | 19 | 8 | percent | `8%` | Reported | FY25 | 8 |  |
 | 148 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | State gov't | Houston | 19 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
 | 149 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | Federal gov't | Houston | 19 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
@@ -281,18 +281,18 @@ The report provides no discipline x budget intersections.
 | 162 | Funding and financial health | Sources of contributed revenue | $10M+ | Individuals | Houston | 12 | 41 | percent | `41%` | Reported | FY25 | 8 |  |
 | 163 | Funding and financial health | Sources of contributed revenue | $10M+ | Foundations | Houston | 12 | 38 | percent | `38%` | Reported | FY25 | 8 |  |
 | 164 | Funding and financial health | Sources of contributed revenue | $10M+ | Corporations | Houston | 12 | 6 | percent | `6%` | Reported | FY25 | 8 |  |
-| 165 | Funding and financial health | Sources of contributed revenue | Under $250k | Local gov't | National benchmark | 657 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
-| 166 | Funding and financial health | Sources of contributed revenue | Under $250k | State gov't | National benchmark | 657 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
-| 167 | Funding and financial health | Sources of contributed revenue | Under $250k | Federal gov't | National benchmark | 657 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
-| 168 | Funding and financial health | Sources of contributed revenue | Under $250k | Individuals | National benchmark | 657 | 22 | percent | `22%` | Reported | FY25 | 8 |  |
-| 169 | Funding and financial health | Sources of contributed revenue | Under $250k | Foundations | National benchmark | 657 | 37 | percent | `37%` | Reported | FY25 | 8 |  |
-| 170 | Funding and financial health | Sources of contributed revenue | Under $250k | Corporations | National benchmark | 657 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
-| 171 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Local gov't | National benchmark | 430 | 14 | percent | `14%` | Reported | FY25 | 8 |  |
-| 172 | Funding and financial health | Sources of contributed revenue | $250k-$999k | State gov't | National benchmark | 430 | 7 | percent | `7%` | Reported | FY25 | 8 |  |
-| 173 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Federal gov't | National benchmark | 430 | 5 | percent | `5%` | Reported | FY25 | 8 |  |
-| 174 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Individuals | National benchmark | 430 | 24 | percent | `24%` | Reported | FY25 | 8 |  |
-| 175 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Foundations | National benchmark | 430 | 44 | percent | `44%` | Reported | FY25 | 8 |  |
-| 176 | Funding and financial health | Sources of contributed revenue | $250k-$999k | Corporations | National benchmark | 430 | 5 | percent | `5%` | Reported | FY25 | 8 |  |
+| 165 | Funding and financial health | Sources of contributed revenue | Under $250K | Local gov't | National benchmark | 657 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
+| 166 | Funding and financial health | Sources of contributed revenue | Under $250K | State gov't | National benchmark | 657 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
+| 167 | Funding and financial health | Sources of contributed revenue | Under $250K | Federal gov't | National benchmark | 657 |  | percent |  | Not labeled in the report | FY25 | 8 |  |
+| 168 | Funding and financial health | Sources of contributed revenue | Under $250K | Individuals | National benchmark | 657 | 22 | percent | `22%` | Reported | FY25 | 8 |  |
+| 169 | Funding and financial health | Sources of contributed revenue | Under $250K | Foundations | National benchmark | 657 | 37 | percent | `37%` | Reported | FY25 | 8 |  |
+| 170 | Funding and financial health | Sources of contributed revenue | Under $250K | Corporations | National benchmark | 657 | 10 | percent | `10%` | Reported | FY25 | 8 |  |
+| 171 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Local gov't | National benchmark | 430 | 14 | percent | `14%` | Reported | FY25 | 8 |  |
+| 172 | Funding and financial health | Sources of contributed revenue | $250K-$999K | State gov't | National benchmark | 430 | 7 | percent | `7%` | Reported | FY25 | 8 |  |
+| 173 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Federal gov't | National benchmark | 430 | 5 | percent | `5%` | Reported | FY25 | 8 |  |
+| 174 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Individuals | National benchmark | 430 | 24 | percent | `24%` | Reported | FY25 | 8 |  |
+| 175 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Foundations | National benchmark | 430 | 44 | percent | `44%` | Reported | FY25 | 8 |  |
+| 176 | Funding and financial health | Sources of contributed revenue | $250K-$999K | Corporations | National benchmark | 430 | 5 | percent | `5%` | Reported | FY25 | 8 |  |
 | 177 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | Local gov't | National benchmark | 224 | 17 | percent | `17%` | Reported | FY25 | 8 |  |
 | 178 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | State gov't | National benchmark | 224 | 6 | percent | `6%` | Reported | FY25 | 8 |  |
 | 179 | Funding and financial health | Sources of contributed revenue | $1M-$2.99M | Federal gov't | National benchmark | 224 | 4 | percent | `4%` | Reported | FY25 | 8 |  |
@@ -319,10 +319,10 @@ The report provides no discipline x budget intersections.
 | 200 | Funding and financial health | Local government support as % of expenses | Visual Arts |  | National benchmark | 137 | 3 | percent | `3%` | Reported | FY25 | 9 |  |
 | 201 | Funding and financial health | Local government support as % of expenses | Other Arts |  | Houston | 114 | 10 | percent | `10%` | Reported | FY25 | 9 |  |
 | 202 | Funding and financial health | Local government support as % of expenses | Other Arts |  | National benchmark | 845 | 12 | percent | `12%` | Reported | FY25 | 9 |  |
-| 203 | Funding and financial health | Local government support as % of expenses | Under $250k |  | Houston | 93 | 12 | percent | `12%` | Reported | FY25 | 9 |  |
-| 204 | Funding and financial health | Local government support as % of expenses | Under $250k |  | National benchmark | 657 | 14 | percent | `14%` | Reported | FY25 | 9 |  |
-| 205 | Funding and financial health | Local government support as % of expenses | $250k-$999k |  | Houston | 68 | 13 | percent | `13%` | Reported | FY25 | 9 |  |
-| 206 | Funding and financial health | Local government support as % of expenses | $250k-$999k |  | National benchmark | 430 | 9 | percent | `9%` | Reported | FY25 | 9 |  |
+| 203 | Funding and financial health | Local government support as % of expenses | Under $250K |  | Houston | 93 | 12 | percent | `12%` | Reported | FY25 | 9 |  |
+| 204 | Funding and financial health | Local government support as % of expenses | Under $250K |  | National benchmark | 657 | 14 | percent | `14%` | Reported | FY25 | 9 |  |
+| 205 | Funding and financial health | Local government support as % of expenses | $250K-$999K |  | Houston | 68 | 13 | percent | `13%` | Reported | FY25 | 9 |  |
+| 206 | Funding and financial health | Local government support as % of expenses | $250K-$999K |  | National benchmark | 430 | 9 | percent | `9%` | Reported | FY25 | 9 |  |
 | 207 | Funding and financial health | Local government support as % of expenses | $1M-$2.99M |  | Houston | 19 | 7 | percent | `7%` | Reported | FY25 | 9 |  |
 | 208 | Funding and financial health | Local government support as % of expenses | $1M-$2.99M |  | National benchmark | 224 | 12 | percent | `12%` | Reported | FY25 | 9 |  |
 | 209 | Funding and financial health | Local government support as % of expenses | $3M-$9.99M |  | Houston | 12 | 1 | percent | `1%` | Reported | FY25 | 9 |  |
@@ -337,10 +337,10 @@ The report provides no discipline x budget intersections.
 | 218 | Funding and financial health | Operating surplus/deficit as % of expenses | Visual Arts |  | National benchmark | 137 | 11 | percent | `11%` | Reported | FY25 | 10 |  |
 | 219 | Funding and financial health | Operating surplus/deficit as % of expenses | Other Arts |  | Houston | 114 | 24 | percent | `24%` | Reported | FY25 | 10 |  |
 | 220 | Funding and financial health | Operating surplus/deficit as % of expenses | Other Arts |  | National benchmark | 845 | 14 | percent | `14%` | Reported | FY25 | 10 |  |
-| 221 | Funding and financial health | Operating surplus/deficit as % of expenses | Under $250k |  | Houston | 93 | 16 | percent | `16%` | Reported | FY25 | 10 |  |
-| 222 | Funding and financial health | Operating surplus/deficit as % of expenses | Under $250k |  | National benchmark | 657 | 15 | percent | `15%` | Reported | FY25 | 10 |  |
-| 223 | Funding and financial health | Operating surplus/deficit as % of expenses | $250k-$999k |  | Houston | 68 | 21 | percent | `21%` | Reported | FY25 | 10 |  |
-| 224 | Funding and financial health | Operating surplus/deficit as % of expenses | $250k-$999k |  | National benchmark | 430 | 11 | percent | `11%` | Reported | FY25 | 10 |  |
+| 221 | Funding and financial health | Operating surplus/deficit as % of expenses | Under $250K |  | Houston | 93 | 16 | percent | `16%` | Reported | FY25 | 10 |  |
+| 222 | Funding and financial health | Operating surplus/deficit as % of expenses | Under $250K |  | National benchmark | 657 | 15 | percent | `15%` | Reported | FY25 | 10 |  |
+| 223 | Funding and financial health | Operating surplus/deficit as % of expenses | $250K-$999K |  | Houston | 68 | 21 | percent | `21%` | Reported | FY25 | 10 |  |
+| 224 | Funding and financial health | Operating surplus/deficit as % of expenses | $250K-$999K |  | National benchmark | 430 | 11 | percent | `11%` | Reported | FY25 | 10 |  |
 | 225 | Funding and financial health | Operating surplus/deficit as % of expenses | $1M-$2.99M |  | Houston | 19 | 21 | percent | `21%` | Reported | FY25 | 10 |  |
 | 226 | Funding and financial health | Operating surplus/deficit as % of expenses | $1M-$2.99M |  | National benchmark | 224 | 15 | percent | `15%` | Reported | FY25 | 10 |  |
 | 227 | Funding and financial health | Operating surplus/deficit as % of expenses | $3M-$9.99M |  | Houston | 12 | 9 | percent | `9%` | Reported | FY25 | 10 |  |
@@ -355,10 +355,10 @@ The report provides no discipline x budget intersections.
 | 236 | Workforce | Personnel as % of expenses | Visual Arts |  | National benchmark | 137 | 51 | percent | `51%` | Reported | FY25 | 11 |  |
 | 237 | Workforce | Personnel as % of expenses | Other Arts |  | Houston | 114 | 58 | percent | `58%` | Reported | FY25 | 11 |  |
 | 238 | Workforce | Personnel as % of expenses | Other Arts |  | National benchmark | 845 | 57 | percent | `57%` | Reported | FY25 | 11 |  |
-| 239 | Workforce | Personnel as % of expenses | Under $250k |  | Houston | 93 | 62 | percent | `62%` | Reported | FY25 | 11 |  |
-| 240 | Workforce | Personnel as % of expenses | Under $250k |  | National benchmark | 657 | 63 | percent | `63%` | Reported | FY25 | 11 |  |
-| 241 | Workforce | Personnel as % of expenses | $250k-$999k |  | Houston | 68 | 65 | percent | `65%` | Reported | FY25 | 11 |  |
-| 242 | Workforce | Personnel as % of expenses | $250k-$999k |  | National benchmark | 430 | 66 | percent | `66%` | Reported | FY25 | 11 |  |
+| 239 | Workforce | Personnel as % of expenses | Under $250K |  | Houston | 93 | 62 | percent | `62%` | Reported | FY25 | 11 |  |
+| 240 | Workforce | Personnel as % of expenses | Under $250K |  | National benchmark | 657 | 63 | percent | `63%` | Reported | FY25 | 11 |  |
+| 241 | Workforce | Personnel as % of expenses | $250K-$999K |  | Houston | 68 | 65 | percent | `65%` | Reported | FY25 | 11 |  |
+| 242 | Workforce | Personnel as % of expenses | $250K-$999K |  | National benchmark | 430 | 66 | percent | `66%` | Reported | FY25 | 11 |  |
 | 243 | Workforce | Personnel as % of expenses | $1M-$2.99M |  | Houston | 19 | 62 | percent | `62%` | Reported | FY25 | 11 |  |
 | 244 | Workforce | Personnel as % of expenses | $1M-$2.99M |  | National benchmark | 224 | 62 | percent | `62%` | Reported | FY25 | 11 |  |
 | 245 | Workforce | Personnel as % of expenses | $3M-$9.99M |  | Houston | 12 | 45 | percent | `45%` | Reported | FY25 | 11 |  |
@@ -373,10 +373,10 @@ The report provides no discipline x budget intersections.
 | 254 | Workforce | Average full-time staff | Visual Arts |  | National benchmark | 137 | 28 | staff (average per organization) | `28` | Reported | FY25 | 12 |  |
 | 255 | Workforce | Average full-time staff | Other Arts |  | Houston | 114 | 16 | staff (average per organization) | `16` | Reported | FY25 | 12 |  |
 | 256 | Workforce | Average full-time staff | Other Arts |  | National benchmark | 845 | 13 | staff (average per organization) | `13` | Reported | FY25 | 12 |  |
-| 257 | Workforce | Average full-time staff | Under $250k |  | Houston | 93 | 1 | staff (average per organization) | `1` | Reported | FY25 | 12 |  |
-| 258 | Workforce | Average full-time staff | Under $250k |  | National benchmark | 657 | 1 | staff (average per organization) | `1` | Reported | FY25 | 12 |  |
-| 259 | Workforce | Average full-time staff | $250k-$999k |  | Houston | 68 | 3 | staff (average per organization) | `3` | Reported | FY25 | 12 |  |
-| 260 | Workforce | Average full-time staff | $250k-$999k |  | National benchmark | 430 | 4 | staff (average per organization) | `4` | Reported | FY25 | 12 |  |
+| 257 | Workforce | Average full-time staff | Under $250K |  | Houston | 93 | 1 | staff (average per organization) | `1` | Reported | FY25 | 12 |  |
+| 258 | Workforce | Average full-time staff | Under $250K |  | National benchmark | 657 | 1 | staff (average per organization) | `1` | Reported | FY25 | 12 |  |
+| 259 | Workforce | Average full-time staff | $250K-$999K |  | Houston | 68 | 3 | staff (average per organization) | `3` | Reported | FY25 | 12 |  |
+| 260 | Workforce | Average full-time staff | $250K-$999K |  | National benchmark | 430 | 4 | staff (average per organization) | `4` | Reported | FY25 | 12 |  |
 | 261 | Workforce | Average full-time staff | $1M-$2.99M |  | Houston | 19 | 8 | staff (average per organization) | `8` | Reported | FY25 | 12 |  |
 | 262 | Workforce | Average full-time staff | $1M-$2.99M |  | National benchmark | 224 | 10 | staff (average per organization) | `10` | Reported | FY25 | 12 |  |
 | 263 | Workforce | Average full-time staff | $3M-$9.99M |  | Houston | 12 | 24 | staff (average per organization) | `24` | Reported | FY25 | 12 |  |
@@ -391,10 +391,10 @@ The report provides no discipline x budget intersections.
 | 272 | Workforce | Average part-time staff | Visual Arts |  | National benchmark | 137 | 17 | staff (average per organization) | `17` | Reported | FY25 | 13 |  |
 | 273 | Workforce | Average part-time staff | Other Arts |  | Houston | 114 | 15 | staff (average per organization) | `15` | Reported | FY25 | 13 |  |
 | 274 | Workforce | Average part-time staff | Other Arts |  | National benchmark | 845 | 18 | staff (average per organization) | `18` | Reported | FY25 | 13 |  |
-| 275 | Workforce | Average part-time staff | Under $250k |  | Houston | 93 | 1 | staff (average per organization) | `1` | Reported | FY25 | 13 |  |
-| 276 | Workforce | Average part-time staff | Under $250k |  | National benchmark | 657 | 3 | staff (average per organization) | `3` | Reported | FY25 | 13 |  |
-| 277 | Workforce | Average part-time staff | $250k-$999k |  | Houston | 68 | 4 | staff (average per organization) | `4` | Reported | FY25 | 13 |  |
-| 278 | Workforce | Average part-time staff | $250k-$999k |  | National benchmark | 430 | 8 | staff (average per organization) | `8` | Reported | FY25 | 13 |  |
+| 275 | Workforce | Average part-time staff | Under $250K |  | Houston | 93 | 1 | staff (average per organization) | `1` | Reported | FY25 | 13 |  |
+| 276 | Workforce | Average part-time staff | Under $250K |  | National benchmark | 657 | 3 | staff (average per organization) | `3` | Reported | FY25 | 13 |  |
+| 277 | Workforce | Average part-time staff | $250K-$999K |  | Houston | 68 | 4 | staff (average per organization) | `4` | Reported | FY25 | 13 |  |
+| 278 | Workforce | Average part-time staff | $250K-$999K |  | National benchmark | 430 | 8 | staff (average per organization) | `8` | Reported | FY25 | 13 |  |
 | 279 | Workforce | Average part-time staff | $1M-$2.99M |  | Houston | 19 | 23 | staff (average per organization) | `23` | Reported | FY25 | 13 |  |
 | 280 | Workforce | Average part-time staff | $1M-$2.99M |  | National benchmark | 224 | 20 | staff (average per organization) | `20` | Reported | FY25 | 13 |  |
 | 281 | Workforce | Average part-time staff | $3M-$9.99M |  | Houston | 12 | 23 | staff (average per organization) | `23` | Reported | FY25 | 13 |  |
@@ -409,10 +409,10 @@ The report provides no discipline x budget intersections.
 | 290 | Audience reach | Average total attendance | Visual Arts |  | National benchmark | 137 | 153 | attendees (thousands, average per organization) | `153K` | Reported | FY25 | 14 |  |
 | 291 | Audience reach | Average total attendance | Other Arts |  | Houston | 114 | 67 | attendees (thousands, average per organization) | `67K` | Reported | FY25 | 14 |  |
 | 292 | Audience reach | Average total attendance | Other Arts |  | National benchmark | 845 | 93 | attendees (thousands, average per organization) | `93K` | Reported | FY25 | 14 |  |
-| 293 | Audience reach | Average total attendance | Under $250k |  | Houston | 93 | 7 | attendees (thousands, average per organization) | `7K` | Reported | FY25 | 14 | Label sits against the axis zero; the text layer reads "07K". Read as 7K from the render at zoom; bar height agrees. |
-| 294 | Audience reach | Average total attendance | Under $250k |  | National benchmark | 657 | 17 | attendees (thousands, average per organization) | `17K` | Reported | FY25 | 14 |  |
-| 295 | Audience reach | Average total attendance | $250k-$999k |  | Houston | 68 | 41 | attendees (thousands, average per organization) | `41K` | Reported | FY25 | 14 |  |
-| 296 | Audience reach | Average total attendance | $250k-$999k |  | National benchmark | 430 | 71 | attendees (thousands, average per organization) | `71K` | Reported | FY25 | 14 |  |
+| 293 | Audience reach | Average total attendance | Under $250K |  | Houston | 93 | 7 | attendees (thousands, average per organization) | `7K` | Reported | FY25 | 14 | Label sits against the axis zero; the text layer reads "07K". Read as 7K from the render at zoom; bar height agrees. |
+| 294 | Audience reach | Average total attendance | Under $250K |  | National benchmark | 657 | 17 | attendees (thousands, average per organization) | `17K` | Reported | FY25 | 14 |  |
+| 295 | Audience reach | Average total attendance | $250K-$999K |  | Houston | 68 | 41 | attendees (thousands, average per organization) | `41K` | Reported | FY25 | 14 |  |
+| 296 | Audience reach | Average total attendance | $250K-$999K |  | National benchmark | 430 | 71 | attendees (thousands, average per organization) | `71K` | Reported | FY25 | 14 |  |
 | 297 | Audience reach | Average total attendance | $1M-$2.99M |  | Houston | 19 | 76 | attendees (thousands, average per organization) | `76K` | Reported | FY25 | 14 |  |
 | 298 | Audience reach | Average total attendance | $1M-$2.99M |  | National benchmark | 224 | 54 | attendees (thousands, average per organization) | `54K` | Reported | FY25 | 14 |  |
 | 299 | Audience reach | Average total attendance | $3M-$9.99M |  | Houston | 12 | 49 | attendees (thousands, average per organization) | `49K` | Reported | FY25 | 14 |  |
@@ -443,12 +443,12 @@ The report provides no discipline x budget intersections.
 | 324 | Facilities and space | Primary facility arrangement | Other Arts | Rent | National benchmark | 845 | 49 | percent | `49%` | Reported | FY25 | 16 |  |
 | 325 | Facilities and space | Primary facility arrangement | Other Arts | Own | National benchmark | 845 | 28 | percent | `28%` | Reported | FY25 | 16 |  |
 | 326 | Facilities and space | Primary facility arrangement | Other Arts | Donated in-kind | National benchmark | 845 | 23 | percent | `23%` | Reported | FY25 | 16 |  |
-| 327 | Facilities and space | Primary facility arrangement | Under $250k | Rent | Houston | 93 | 49 | percent | `49%` | Reported | FY25 | 16 |  |
-| 328 | Facilities and space | Primary facility arrangement | Under $250k | Own | Houston | 93 | 10 | percent | `10%` | Reported | FY25 | 16 |  |
-| 329 | Facilities and space | Primary facility arrangement | Under $250k | Donated in-kind | Houston | 93 | 41 | percent | `41%` | Reported | FY25 | 16 |  |
-| 330 | Facilities and space | Primary facility arrangement | $250k-$999k | Rent | Houston | 68 | 57 | percent | `57%` | Reported | FY25 | 16 |  |
-| 331 | Facilities and space | Primary facility arrangement | $250k-$999k | Own | Houston | 68 | 18 | percent | `18%` | Reported | FY25 | 16 |  |
-| 332 | Facilities and space | Primary facility arrangement | $250k-$999k | Donated in-kind | Houston | 68 | 25 | percent | `25%` | Reported | FY25 | 16 |  |
+| 327 | Facilities and space | Primary facility arrangement | Under $250K | Rent | Houston | 93 | 49 | percent | `49%` | Reported | FY25 | 16 |  |
+| 328 | Facilities and space | Primary facility arrangement | Under $250K | Own | Houston | 93 | 10 | percent | `10%` | Reported | FY25 | 16 |  |
+| 329 | Facilities and space | Primary facility arrangement | Under $250K | Donated in-kind | Houston | 93 | 41 | percent | `41%` | Reported | FY25 | 16 |  |
+| 330 | Facilities and space | Primary facility arrangement | $250K-$999K | Rent | Houston | 68 | 57 | percent | `57%` | Reported | FY25 | 16 |  |
+| 331 | Facilities and space | Primary facility arrangement | $250K-$999K | Own | Houston | 68 | 18 | percent | `18%` | Reported | FY25 | 16 |  |
+| 332 | Facilities and space | Primary facility arrangement | $250K-$999K | Donated in-kind | Houston | 68 | 25 | percent | `25%` | Reported | FY25 | 16 |  |
 | 333 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Rent | Houston | 19 | 63 | percent | `63%` | Reported | FY25 | 16 |  |
 | 334 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Own | Houston | 19 | 32 | percent | `32%` | Reported | FY25 | 16 |  |
 | 335 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Donated in-kind | Houston | 19 | 5 | percent | `5%` | Reported | FY25 | 16 |  |
@@ -458,12 +458,12 @@ The report provides no discipline x budget intersections.
 | 339 | Facilities and space | Primary facility arrangement | $10M+ | Rent | Houston | 12 | 30 | percent | `30%` | Reported | FY25 | 16 |  |
 | 340 | Facilities and space | Primary facility arrangement | $10M+ | Own | Houston | 12 | 70 | percent | `70%` | Reported | FY25 | 16 |  |
 | 341 | Facilities and space | Primary facility arrangement | $10M+ | Donated in-kind | Houston | 12 |  | percent |  | Not shown in the report | FY25 | 16 |  |
-| 342 | Facilities and space | Primary facility arrangement | Under $250k | Rent | National benchmark | 657 | 50 | percent | `50%` | Reported | FY25 | 16 |  |
-| 343 | Facilities and space | Primary facility arrangement | Under $250k | Own | National benchmark | 657 | 18 | percent | `18%` | Reported | FY25 | 16 |  |
-| 344 | Facilities and space | Primary facility arrangement | Under $250k | Donated in-kind | National benchmark | 657 | 32 | percent | `32%` | Reported | FY25 | 16 |  |
-| 345 | Facilities and space | Primary facility arrangement | $250k-$999k | Rent | National benchmark | 430 | 59 | percent | `59%` | Reported | FY25 | 16 |  |
-| 346 | Facilities and space | Primary facility arrangement | $250k-$999k | Own | National benchmark | 430 | 22 | percent | `22%` | Reported | FY25 | 16 |  |
-| 347 | Facilities and space | Primary facility arrangement | $250k-$999k | Donated in-kind | National benchmark | 430 | 19 | percent | `19%` | Reported | FY25 | 16 |  |
+| 342 | Facilities and space | Primary facility arrangement | Under $250K | Rent | National benchmark | 657 | 50 | percent | `50%` | Reported | FY25 | 16 |  |
+| 343 | Facilities and space | Primary facility arrangement | Under $250K | Own | National benchmark | 657 | 18 | percent | `18%` | Reported | FY25 | 16 |  |
+| 344 | Facilities and space | Primary facility arrangement | Under $250K | Donated in-kind | National benchmark | 657 | 32 | percent | `32%` | Reported | FY25 | 16 |  |
+| 345 | Facilities and space | Primary facility arrangement | $250K-$999K | Rent | National benchmark | 430 | 59 | percent | `59%` | Reported | FY25 | 16 |  |
+| 346 | Facilities and space | Primary facility arrangement | $250K-$999K | Own | National benchmark | 430 | 22 | percent | `22%` | Reported | FY25 | 16 |  |
+| 347 | Facilities and space | Primary facility arrangement | $250K-$999K | Donated in-kind | National benchmark | 430 | 19 | percent | `19%` | Reported | FY25 | 16 |  |
 | 348 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Rent | National benchmark | 224 | 52 | percent | `52%` | Reported | FY25 | 16 |  |
 | 349 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Own | National benchmark | 224 | 32 | percent | `32%` | Reported | FY25 | 16 |  |
 | 350 | Facilities and space | Primary facility arrangement | $1M-$2.99M | Donated in-kind | National benchmark | 224 | 15 | percent | `15%` | Reported | FY25 | 16 |  |
@@ -497,12 +497,12 @@ The report provides no discipline x budget intersections.
 | 378 | Facilities and space | Primary facility use | Other Arts | Administrative | National benchmark | 845 | 24 | percent | `24%` | Reported | FY25 | 18 |  |
 | 379 | Facilities and space | Primary facility use | Other Arts | Program | National benchmark | 845 | 11 | percent | `11%` | Reported | FY25 | 18 |  |
 | 380 | Facilities and space | Primary facility use | Other Arts | Both | National benchmark | 845 | 65 | percent | `65%` | Reported | FY25 | 18 |  |
-| 381 | Facilities and space | Primary facility use | Under $250k | Administrative | Houston | 93 | 47 | percent | `47%` | Reported | FY25 | 18 |  |
-| 382 | Facilities and space | Primary facility use | Under $250k | Program | Houston | 93 | 14 | percent | `14%` | Reported | FY25 | 18 |  |
-| 383 | Facilities and space | Primary facility use | Under $250k | Both | Houston | 93 | 39 | percent | `39%` | Reported | FY25 | 18 |  |
-| 384 | Facilities and space | Primary facility use | $250k-$999k | Administrative | Houston | 68 | 21 | percent | `21%` | Reported | FY25 | 18 |  |
-| 385 | Facilities and space | Primary facility use | $250k-$999k | Program | Houston | 68 | 9 | percent | `9%` | Reported | FY25 | 18 |  |
-| 386 | Facilities and space | Primary facility use | $250k-$999k | Both | Houston | 68 | 70 | percent | `70%` | Reported | FY25 | 18 |  |
+| 381 | Facilities and space | Primary facility use | Under $250K | Administrative | Houston | 93 | 47 | percent | `47%` | Reported | FY25 | 18 |  |
+| 382 | Facilities and space | Primary facility use | Under $250K | Program | Houston | 93 | 14 | percent | `14%` | Reported | FY25 | 18 |  |
+| 383 | Facilities and space | Primary facility use | Under $250K | Both | Houston | 93 | 39 | percent | `39%` | Reported | FY25 | 18 |  |
+| 384 | Facilities and space | Primary facility use | $250K-$999K | Administrative | Houston | 68 | 21 | percent | `21%` | Reported | FY25 | 18 |  |
+| 385 | Facilities and space | Primary facility use | $250K-$999K | Program | Houston | 68 | 9 | percent | `9%` | Reported | FY25 | 18 |  |
+| 386 | Facilities and space | Primary facility use | $250K-$999K | Both | Houston | 68 | 70 | percent | `70%` | Reported | FY25 | 18 |  |
 | 387 | Facilities and space | Primary facility use | $1M-$2.99M | Administrative | Houston | 19 | 26 | percent | `26%` | Reported | FY25 | 18 |  |
 | 388 | Facilities and space | Primary facility use | $1M-$2.99M | Program | Houston | 19 | 5 | percent | `5%` | Reported | FY25 | 18 |  |
 | 389 | Facilities and space | Primary facility use | $1M-$2.99M | Both | Houston | 19 | 68 | percent | `68%` | Reported | FY25 | 18 |  |
@@ -512,12 +512,12 @@ The report provides no discipline x budget intersections.
 | 393 | Facilities and space | Primary facility use | $10M+ | Administrative | Houston | 12 | 8 | percent | `8%` | Reported | FY25 | 18 |  |
 | 394 | Facilities and space | Primary facility use | $10M+ | Program | Houston | 12 | 17 | percent | `17%` | Reported | FY25 | 18 |  |
 | 395 | Facilities and space | Primary facility use | $10M+ | Both | Houston | 12 | 75 | percent | `75%` | Reported | FY25 | 18 |  |
-| 396 | Facilities and space | Primary facility use | Under $250k | Administrative | National benchmark | 657 | 33 | percent | `33%` | Reported | FY25 | 18 |  |
-| 397 | Facilities and space | Primary facility use | Under $250k | Program | National benchmark | 657 | 18 | percent | `18%` | Reported | FY25 | 18 |  |
-| 398 | Facilities and space | Primary facility use | Under $250k | Both | National benchmark | 657 | 49 | percent | `49%` | Reported | FY25 | 18 |  |
-| 399 | Facilities and space | Primary facility use | $250k-$999k | Administrative | National benchmark | 430 | 25 | percent | `25%` | Reported | FY25 | 18 |  |
-| 400 | Facilities and space | Primary facility use | $250k-$999k | Program | National benchmark | 430 | 10 | percent | `10%` | Reported | FY25 | 18 |  |
-| 401 | Facilities and space | Primary facility use | $250k-$999k | Both | National benchmark | 430 | 65 | percent | `65%` | Reported | FY25 | 18 |  |
+| 396 | Facilities and space | Primary facility use | Under $250K | Administrative | National benchmark | 657 | 33 | percent | `33%` | Reported | FY25 | 18 |  |
+| 397 | Facilities and space | Primary facility use | Under $250K | Program | National benchmark | 657 | 18 | percent | `18%` | Reported | FY25 | 18 |  |
+| 398 | Facilities and space | Primary facility use | Under $250K | Both | National benchmark | 657 | 49 | percent | `49%` | Reported | FY25 | 18 |  |
+| 399 | Facilities and space | Primary facility use | $250K-$999K | Administrative | National benchmark | 430 | 25 | percent | `25%` | Reported | FY25 | 18 |  |
+| 400 | Facilities and space | Primary facility use | $250K-$999K | Program | National benchmark | 430 | 10 | percent | `10%` | Reported | FY25 | 18 |  |
+| 401 | Facilities and space | Primary facility use | $250K-$999K | Both | National benchmark | 430 | 65 | percent | `65%` | Reported | FY25 | 18 |  |
 | 402 | Facilities and space | Primary facility use | $1M-$2.99M | Administrative | National benchmark | 224 | 17 | percent | `17%` | Reported | FY25 | 18 |  |
 | 403 | Facilities and space | Primary facility use | $1M-$2.99M | Program | National benchmark | 224 | 6 | percent | `6%` | Reported | FY25 | 18 |  |
 | 404 | Facilities and space | Primary facility use | $1M-$2.99M | Both | National benchmark | 224 | 78 | percent | `78%` | Reported | FY25 | 18 |  |
