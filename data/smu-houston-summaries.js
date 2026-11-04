@@ -37,7 +37,7 @@ window.SMU_HOUSTON_SUMMARIES = {
     "overall": {
       "sector-profile": {
         lead: "Nearly half of these {h:orgs_total} Houston arts organizations spend less than {lit:$250K} a year.",
-        why: "A few large organizations pull up the averages on this page. Pick a budget size to see the numbers in context.",
+        why: "A few large organizations push up the averages for this data point. Pick a budget size above to see the numbers in context.",
         claims: [["gt","h:orgs_by_budget_share|under-250k",40],["lt","h:orgs_by_budget_share|under-250k",50]]
       },
       "funding": {
@@ -52,7 +52,7 @@ window.SMU_HOUSTON_SUMMARIES = {
       },
       "audience": {
         lead: "These Houston organizations averaged {h:avg_attendance} in attendance each. The national benchmark is {n:avg_attendance}.",
-        why: "Don't read too much into that average. Budget groups run from {h:avg_attendance@under-250k} under {lit:$250K} to {h:avg_attendance@10m-plus} at {lit:$10M+}, and most land below it.",
+        why: "Don't read too much into that average. Budget groups run from {h:avg_attendance@under-250k} under {lit:$250K} to {h:avg_attendance@10m-plus} at {lit:$10 million} and up.",
         claims: [["lt","h:avg_attendance@under-250k","h:avg_attendance"],["lt","h:avg_attendance@250k-1m","h:avg_attendance"],["lt","h:avg_attendance@3m-10m","h:avg_attendance"],["gt","h:avg_attendance@10m-plus","h:avg_attendance"]]
       },
       "facilities": {
