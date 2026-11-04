@@ -210,7 +210,6 @@
   .big{margin:0 0 12px}
   .big .v{font-weight:500;font-size:clamp(36px,3.7vw,54px);line-height:1;letter-spacing:-.025em}
   .big.fig-n .v{color:var(--s-soft)}
-  .snap .v.na{font-size:14px;font-weight:500;letter-spacing:0;line-height:1.28;color:var(--s-soft)}
 
   .pair{display:grid;grid-template-columns:repeat(2,minmax(0,220px));justify-content:space-between;gap:0 20px;align-content:start}
   .pair .pic-note{grid-column:1 / -1}
@@ -254,6 +253,9 @@
   .fig-item .fig-n .v{font-weight:500;font-size:17px;line-height:1;letter-spacing:-.005em;color:var(--s-soft)}
   .fig-sub{flex-basis:100%;font-size:13.5px;line-height:1.35;color:var(--s-soft)}
   .fig-sub .v{font-weight:600;color:var(--s-ink)}
+  /* a missing figure is always small text: this sits after every figure size
+     above, which it would otherwise lose to at equal specificity */
+  .snap .v.na{font-size:14px;font-weight:500;letter-spacing:0;line-height:1.28;color:var(--s-soft)}
 
   .snap-foot{grid-column:1 / -1;display:grid;gap:4px;margin:14px var(--pad) 0;padding:11px 0 14px;border-top:1px solid var(--s-hair);font-size:13px;line-height:1.38;color:var(--s-soft)}
   .notes,.groupline,.src-line{margin:0}
