@@ -154,8 +154,13 @@
 
   /* ---- 4. how to use the directory ---- */
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
-  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42}
-  #intro .how p:last-child{margin-bottom:0}
+  /* Numbered steps at the size of the paragraphs they replaced. The numbers
+     hang in a gutter just wide enough for them, so every line of a step
+     starts at the same edge and runs the full column. */
+  #intro .steps{margin:0;padding:0 0 0 1.35em;font-size:16.5px;line-height:1.42}
+  #intro .steps li{margin:0 0 10px;padding-left:.15em}
+  #intro .steps li:last-child{margin-bottom:0}
+  #intro .steps li::marker{color:var(--ink-soft);font-weight:500;font-variant-numeric:tabular-nums}
   /* heading over the facet list, set like the h3s in section 3 */
   #intro .how h3{font-size:16px;margin:0 0 12px}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
@@ -545,11 +550,13 @@
     <div class="in">
       <h2 id="in-how">Filter down, then open a row.</h2>
       <div class="how">
-        <div>
-          <p>Each resource has its own row. Open one to see a plain-language summary, the key finding when the source reports one, and the details you need to cite and evaluate it, like its scope and type, when it was published, where it comes from, and, if it's updated regularly, how often.</p>
-          <p>You can narrow down the list six ways with the filters, and they work together. The search box looks across titles, authors, and topics at once. Some Place filters go a level deeper, so you can narrow down from the Houston region to a school district, for example.</p>
-          <p>Your filters are saved in the page's web address, so you can send someone the exact view you're looking at instead of telling them which filters to tick.</p>
-        </div>
+        <ol class="steps">
+          <li>Search by title, author, or topic.</li>
+          <li>Filter the list. Houston region plus Map, for example, shows maps of the Houston region.</li>
+          <li>Pick more than one option in a group, like Map and Report, to see both.</li>
+          <li>Open a row for a plain-language summary, the key finding when there is one, and the details you need to cite and evaluate it.</li>
+          <li>Share what you see. Your search and filters are saved in the page's web address, so the link opens the same view.</li>
+        </ol>
         <div>
           <h3>Ways to filter.</h3>
           <dl class="facetlist">
