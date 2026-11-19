@@ -1097,29 +1097,45 @@ const filterCountEl = document.getElementById('filterCount');
 let query = "";
 let queryRaw = "";
 
-/* Single-select dimensions, each defaulting to "All". They AND together and
-   combine with the search box. `key` doubles as the URL query parameter. */
+/* Multi-select dimensions. `selected` holds the chosen options; empty means
+   "All". Within a dimension the options combine with OR (Map or Report);
+   dimensions AND together and combine with the search box. `key` doubles as
+   the URL query parameter, repeated once per option. */
 const DIMENSIONS = [
   { key:'access', label:'Access', el:document.getElementById('chips-access'),
     order:["All","Public","Upcoming","Upon request"],
-    isAccess:true, active:"All", tags:r=>[r.access] },
+    isAccess:true, selected:new Set(), tags:r=>[r.access] },
   { key:'place', label:'Place', el:document.getElementById('chips-place'),
     childEl:document.getElementById('chips-place-children'), tree:PLACE_TREE,
     order:["All","Houston region","Texas","United States","Global"],
-    active:"All", tags:r=>r._placeAll },
+    selected:new Set(), tags:r=>r._placeAll },
   { key:'focus', label:'Focus', el:document.getElementById('chips-focus'),
     order:["All","Artists and workforce","Audiences and public","Civic art","Cross-city and national","Cultural districts","Education","Organizations"],
-    active:"All", tags:r=>r._focus },
+    selected:new Set(), tags:r=>r._focus },
   { key:'format', label:'Format', el:document.getElementById('chips-format'),
     order:["All","Brief or one-pager","Dashboard or explorer","Directory or calendar","Map","Report","Toolkit or guide"],
-    active:"All", tags:r=>r._format },
+    selected:new Set(), tags:r=>r._format },
   { key:'methods', label:'Methods', el:document.getElementById('chips-methods'),
     order:["All","Community submissions","Convenings","Data analysis","Document review","Experimental (RCT)","Guide","Interviews","Mapping","Survey"],
-    active:"All", tags:r=>r._methods },
+    selected:new Set(), tags:r=>r._methods },
   { key:'year', label:'Published', el:document.getElementById('chips-year'),
     order:["All","2026","2025","2024","2020-2023","Before 2020"],
-    active:"All", tags:r=>[yearBucket(r.year)] }
+    selected:new Set(), tags:r=>[yearBucket(r.year)] }
 ];
+
+/* The values a dimension's records are matched against, in chip order. A
+   Place parent narrowed by sub-options contributes those sub-options instead
+   of itself, so Houston region narrowed to Harris County, plus Texas, gives
+   Harris County and Texas. Each value is one token and one URL parameter. */
+function filterValues(dim){
+  const out=[];
+  dim.order.forEach(v=>{
+    if(!dim.selected.has(v)) return;
+    const kids = dim.tree ? (dim.tree[v]||[]).filter(c=>dim.selected.has(c)) : [];
+    if(kids.length) out.push(...kids); else out.push(v);
+  });
+  return out;
+}
 
 /* Counts are over the whole collection, not the current result set, so a chip
    never reads zero and the numbers stay stable as you filter. */
@@ -1127,13 +1143,22 @@ function tagCount(dim,val){
   return val==="All" ? RESOURCES.length : RESOURCES.filter(r=>dim.tags(r).includes(val)).length;
 }
 
-/* A second click on a selected chip clears it, the same as the token's x or
-   "All". In Place, clearing a child steps back to its parent, and clearing a
-   parent returns to All; clicking a parent while one of its children is
-   selected still widens to the parent, as before. */
+/* The selection after a click on v, as a new set. "All" clears the group.
+   Any other option toggles: a click adds it, a second click removes it, the
+   same as its token's x. In Place, a sub-option is added with its parent;
+   removing a parent removes its sub-options too; and removing a parent's
+   last sub-option leaves the whole parent selected. */
 function nextValue(dim,v){
-  if(v==="All" || v!==dim.active) return v;
-  return (dim.tree && PLACE_PARENT[v]) ? PLACE_PARENT[v] : "All";
+  if(v==="All") return new Set();
+  const next=new Set(dim.selected);
+  if(next.has(v)){
+    next.delete(v);
+    if(dim.tree && dim.tree[v]) dim.tree[v].forEach(c=>next.delete(c));
+  } else {
+    next.add(v);
+    if(dim.tree && PLACE_PARENT[v]) next.add(PLACE_PARENT[v]);
+  }
+  return next;
 }
 
 function makeChip(dim,v){
@@ -1145,8 +1170,8 @@ function makeChip(dim,v){
   const label = (dim.isAccess && v!=="All" && STATUS[v]) ? STATUS[v].label : v;
   b.innerHTML = `${label} <span class="n">${tagCount(dim,v)}</span>`;
   b.addEventListener('click',()=>{
-    const next = nextValue(dim,v);
-    if(next!==dim.active) setActive(dim,next);
+    if(v==="All" && !dim.selected.size) return;
+    setActive(dim,nextValue(dim,v));
   });
   return b;
 }
@@ -1169,72 +1194,85 @@ DIMENSIONS.forEach(dim=>{
 });
 
 /* Chips are built once and only repainted, so keyboard focus survives a
-   selection. */
+   selection. "All" is pressed when nothing else in the group is. A Place
+   parent stays pressed while sub-options narrow it, and each selected parent
+   that has sub-options shows its own row of them. */
 function paintDim(dim){
-  let activeParent = null;
-  if(dim.tree){
-    activeParent = dim.tree[dim.active] ? dim.active : (PLACE_PARENT[dim.active] || null);
-  }
+  const press=(c,on)=>c.setAttribute('aria-pressed', on ? 'true' : 'false');
   [...dim.el.children].forEach(c=>{
     const v=c.dataset.value;
-    const on = (v===dim.active) || (activeParent!==null && v===activeParent);
-    c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    press(c, v==="All" ? dim.selected.size===0 : dim.selected.has(v));
   });
   if(dim.tree){
     [...dim.childEl.children].forEach(grp=>{
-      grp.hidden = grp.dataset.parent!==activeParent;
-      [...grp.children].forEach(c=>c.setAttribute('aria-pressed', c.dataset.value===dim.active ? 'true' : 'false'));
+      grp.hidden = !dim.selected.has(grp.dataset.parent);
+      [...grp.children].forEach(c=>press(c, dim.selected.has(c.dataset.value)));
     });
   }
 }
 
-function setActive(dim,v,rerender=true){
-  dim.active=v;
+function setActive(dim,sel,rerender=true){
+  dim.selected=sel;
   paintDim(dim);
   if(rerender){ syncURL(); render(); }
 }
 
 /* ------------------------- deep-linkable filter state -------------------- */
 /* replaceState rather than pushState so filtering does not fill the back
-   stack. Wrapped because some browsers refuse history writes on file:// */
+   stack. Wrapped because some browsers refuse history writes on file://
+   pages. Each value from filterValues() is its own parameter, repeated for
+   more than one (?format=Map&format=Report), so a single-value link is just
+   the one-value case and no delimiter can collide with an option name. */
 function syncURL(){
   const p=new URLSearchParams();
-  DIMENSIONS.forEach(d=>{ if(d.active!=="All") p.set(d.key,d.active); });
+  DIMENSIONS.forEach(d=>filterValues(d).forEach(v=>p.append(d.key,v)));
   if(queryRaw) p.set('q',queryRaw);
   const qs=p.toString();
   try{ history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash); }catch(e){}
 }
 
+/* A Place sub-option (?place=Harris%20County) selects its parent as well, so
+   it opens with Houston region narrowed to Harris County. Values that match
+   no option, and "All", are dropped. */
 function readURL(){
   let p;
   try{ p=new URLSearchParams(location.search); }catch(e){ return; }
   DIMENSIONS.forEach(d=>{
-    const v=p.get(d.key);
-    if(!v) return;
-    const valid = d.order.includes(v) ||
-      (d.tree && Object.keys(d.tree).some(k=>d.tree[k].includes(v)));
-    if(valid) d.active=v;
+    p.getAll(d.key).forEach(v=>{
+      const parent = d.tree && Object.keys(d.tree).find(k=>d.tree[k].includes(v));
+      if(parent){ d.selected.add(parent); d.selected.add(v); }
+      else if(v!=="All" && d.order.includes(v)) d.selected.add(v);
+    });
   });
   const q=p.get('q');
   if(q){ searchEl.value=q; queryRaw=q; query=q.trim().toLowerCase(); }
 }
 
 /* --------------------- active filter summary and tokens ------------------ */
-function activeDims(){ return DIMENSIONS.filter(d=>d.active!=="All"); }
+function activeDims(){ return DIMENSIONS.filter(d=>d.selected.size); }
 
+/* One token per value from filterValues(), so a narrowed Place parent is
+   represented by its sub-options' tokens. A token's x does what a second
+   click on its chip does. The Filters count is the number of filter tokens;
+   the search term has its own box above the button and isn't counted. */
 function renderActive(){
-  const dims=activeDims();
+  /* Rebuilding the tokens drops focus from the one just removed. Hand it to
+     the token now in that place (or the last one), so a keyboard user can
+     keep removing; with none left, to the top of the directory. */
+  const was=[...tokensEl.children].indexOf(document.activeElement);
   tokensEl.innerHTML='';
-  dims.forEach(d=>{
-    const shown=(d.isAccess && STATUS[d.active]) ? STATUS[d.active].label : d.active;
+  let n=0;
+  DIMENSIONS.forEach(d=>filterValues(d).forEach(v=>{
+    const shown=(d.isAccess && STATUS[v]) ? STATUS[v].label : v;
     const b=document.createElement('button');
     b.type='button';
     b.className='token';
     b.setAttribute('aria-label','Remove filter '+d.label+': '+shown);
     b.innerHTML=`<span class="k">${d.label}</span> ${shown} <span class="x" aria-hidden="true">×</span>`;
-    b.addEventListener('click',()=>setActive(d,'All'));
+    b.addEventListener('click',()=>setActive(d,nextValue(d,v)));
     tokensEl.appendChild(b);
-  });
+    n++;
+  }));
   if(queryRaw){
     const b=document.createElement('button');
     b.type='button';
@@ -1244,13 +1282,23 @@ function renderActive(){
     b.addEventListener('click',()=>{ searchEl.value=''; queryRaw=''; query=''; syncURL(); render(); });
     tokensEl.appendChild(b);
   }
-  activeEl.hidden = dims.length===0 && !queryRaw;
-  filterCountEl.textContent = dims.length;
-  filterCountEl.dataset.zero = dims.length===0 ? 'true' : 'false';
+  activeEl.hidden = n===0 && !queryRaw;
+  filterCountEl.textContent = n;
+  filterCountEl.dataset.zero = n===0 ? 'true' : 'false';
+  if(was>-1){
+    const left=tokensEl.children;
+    if(left.length) left[Math.min(was,left.length-1)].focus();
+    else{
+      const dir=document.getElementById('directory');
+      dir.setAttribute('tabindex','-1');
+      dir.focus({preventScroll:true});
+      dir.addEventListener('blur',()=>dir.removeAttribute('tabindex'),{once:true});
+    }
+  }
 }
 
 document.getElementById('clearAll').addEventListener('click',()=>{
-  DIMENSIONS.forEach(d=>{ d.active="All"; paintDim(d); });
+  DIMENSIONS.forEach(d=>{ d.selected=new Set(); paintDim(d); });
   searchEl.value=''; queryRaw=''; query='';
   syncURL(); render();
 });
@@ -1313,7 +1361,9 @@ function actionHTML(r){
 
 function matches(r){
   for(const dim of DIMENSIONS){
-    if(dim.active!=="All" && !dim.tags(r).includes(dim.active)) return false;
+    if(!dim.selected.size) continue;
+    const tags=dim.tags(r);
+    if(!filterValues(dim).some(v=>tags.includes(v))) return false;
   }
   if(query){
     const hay=(r.title+" "+r.author+" "+r.summary+" "+r.population+" "+r.methods+" "+r.steward).toLowerCase();
@@ -1571,7 +1621,7 @@ if((activeDims().length || queryRaw) && !location.hash){
     resetAll();
     if(a.dataset.facet){
       const dim = DIMENSIONS.find(d=>d.key===a.dataset.facet);
-      if(dim) setActive(dim, a.dataset.value);
+      if(dim) setActive(dim, nextValue(dim, a.dataset.value));
       document.getElementById('directory').scrollIntoView({block:'start'});
     } else {
       syncURL(); render();
@@ -1585,7 +1635,7 @@ if((activeDims().length || queryRaw) && !location.hash){
   });
 
   function resetAll(){
-    DIMENSIONS.forEach(d=>{ d.active="All"; paintDim(d); });
+    DIMENSIONS.forEach(d=>{ d.selected=new Set(); paintDim(d); });
     searchEl.value=''; queryRaw=''; query='';
   }
 })();
