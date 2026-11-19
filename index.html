@@ -697,6 +697,7 @@
     <div class="empty" id="empty">
       <p class="mono">No matches</p>
       <p>Try a different keyword or clear the filters.</p>
+      <p>Can't find what you need? <a id="emptySuggest" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource or a research idea</a>.</p>
     </div>
   </main>
 
@@ -1379,12 +1380,24 @@ function matches(r){
   return true;
 }
 
+/* The empty state's suggestion link. Its href in the markup (address and
+   subject, the same subject as the homepage button) is the fallback; when
+   nothing matches, render() adds a body carrying the current address, so
+   the email shows what the visitor searched and filtered for. */
+const suggestEl = document.getElementById('emptySuggest');
+const SUGGEST = suggestEl.getAttribute('href');
+function suggestHref(){
+  const body = 'What I was looking for:\r\n\r\n\r\nMy search and filters: ' + location.href;
+  return SUGGEST + '&body=' + encodeURIComponent(body);
+}
+
 function render(){
   renderActive();
   const rows = RESOURCES.map((r,i)=>({r,i})).filter(o=>matches(o.r));
   list.innerHTML='';
   countEl.textContent = `Showing ${rows.length} of ${RESOURCES.length}`;
   emptyEl.classList.toggle('show', rows.length===0);
+  if(!rows.length) suggestEl.href = suggestHref();
 
   rows.forEach((o,pos)=>{
     const r=o.r;
