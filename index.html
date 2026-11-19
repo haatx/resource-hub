@@ -156,6 +156,8 @@
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
   #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42}
   #intro .how p:last-child{margin-bottom:0}
+  /* heading over the facet list, set like the h3s in section 3 */
+  #intro .how h3{font-size:16px;margin:0 0 12px}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
   #intro .facetlist div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair)}
   #intro .facetlist dt{font-size:13.5px;font-weight:500;color:var(--ink-soft)}
@@ -548,14 +550,17 @@
           <p>You can narrow down the list six ways with the filters, and they work together. The search box looks across titles, authors, and topics at once. Some Place filters go a level deeper, so you can narrow down from the Houston region to a school district, for example.</p>
           <p>Your filters are saved in the page's web address, so you can send someone the exact view you're looking at instead of telling them which filters to tick.</p>
         </div>
-        <dl class="facetlist">
-          <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
-          <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, some narrowing further</dd></div>
-          <div><dt>Focus</dt><dd>Artists, organizations, audiences, education, civic art, cultural districts</dd></div>
-          <div><dt>Format</dt><dd>Reports, briefs, toolkits, dashboards, maps, directories</dd></div>
-          <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
-          <div><dt>Year</dt><dd>Publication year, grouped into bands</dd></div>
-        </dl>
+        <div>
+          <h3>Ways to filter.</h3>
+          <dl class="facetlist">
+            <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
+            <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, some narrowing further</dd></div>
+            <div><dt>Focus</dt><dd>Artists, organizations, audiences, education, civic art, cultural districts</dd></div>
+            <div><dt>Format</dt><dd>Reports, briefs, toolkits, dashboards, maps, directories</dd></div>
+            <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
+            <div><dt>Year</dt><dd>Publication year, grouped into bands</dd></div>
+          </dl>
+        </div>
       </div>
     </div>
   </section>
