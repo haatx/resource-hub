@@ -558,7 +558,7 @@
             <div><dt>Focus</dt><dd>Artists, organizations, audiences, education, civic art, cultural districts</dd></div>
             <div><dt>Format</dt><dd>Reports, briefs, toolkits, dashboards, maps, directories</dd></div>
             <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
-            <div><dt>Year</dt><dd>Publication year, grouped into bands</dd></div>
+            <div><dt>Published</dt><dd>Year the resource came out, grouped into bands. Its data may cover earlier years.</dd></div>
           </dl>
         </div>
       </div>
@@ -662,7 +662,7 @@
         </div>
       </div>
       <div class="filter-group">
-        <span class="filter-label mono" id="lbl-year">Year</span>
+        <span class="filter-label mono" id="lbl-year">Published</span>
         <div class="chips-wrap">
           <div class="chips" id="chips-year" role="group" aria-labelledby="lbl-year"></div>
         </div>
@@ -1116,7 +1116,7 @@ const DIMENSIONS = [
   { key:'methods', label:'Methods', el:document.getElementById('chips-methods'),
     order:["All","Survey","Data analysis","Interviews","Document review","Mapping","Experimental (RCT)","Convenings","Community submissions","Guide"],
     active:"All", tags:r=>r._methods },
-  { key:'year', label:'Year', el:document.getElementById('chips-year'),
+  { key:'year', label:'Published', el:document.getElementById('chips-year'),
     order:["All","2026","2025","2024","2020-2023","Before 2020"],
     active:"All", tags:r=>[yearBucket(r.year)] }
 ];
