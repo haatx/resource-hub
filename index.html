@@ -144,13 +144,15 @@
   #intro .what p{margin:0;font-size:14px;line-height:1.35;color:var(--ink-soft)}
 
   /* ---- 3. ways to use it ---- */
-  #intro .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:26px 24px}
-  /* One rule color for all four. The directory uses cyan, gold, and coral for
-     access status, so a color per article reads as a code. Navy would match
-     the section rules, and on a phone these would stack up as extra dividers. */
-  #intro .ways article{border-top:2px solid var(--hair);padding:16px 0 0}
-  #intro .ways h3{font-size:16px;margin:0 0 9px}
-  #intro .ways p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.38}
+  /* Four paragraphs with run-in heads, and no rules: a rule over each item
+     repeated the shape of the navy section rules, and on a phone the rules
+     read as extra dividers. Each head is semibold navy and runs straight into
+     its sentence, both at the size of the numbered steps in section 4. Four
+     columns when there's room; below 1100px the columns get cramped, so the
+     items stack as paragraphs in one column. */
+  #intro .ways{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 36px}
+  #intro .ways p{margin:0;font-size:16.5px;line-height:1.42}
+  #intro .ways b{font-weight:600;color:var(--navy)}
 
   /* ---- 4. how to use the directory ---- */
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
@@ -161,7 +163,7 @@
   #intro .steps li{margin:0 0 10px;padding-left:.15em}
   #intro .steps li:last-child{margin-bottom:0}
   #intro .steps li::marker{color:var(--ink-soft);font-weight:500;font-variant-numeric:tabular-nums}
-  /* heading over the facet list, set like the h3s in section 3 */
+  /* heading over the facet list */
   #intro .how h3{font-size:16px;margin:0 0 12px}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
   #intro .facetlist div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair)}
@@ -214,6 +216,9 @@
   #intro .partners img{display:block;height:auto}
   #intro .close{padding:var(--gap) 0 0}
 
+  @media (max-width:1099px){
+    #intro .ways{grid-template-columns:1fr;gap:15px}
+  }
   @media (max-width:900px){
     #intro .how{grid-template-columns:1fr;gap:30px}
   }
@@ -221,7 +226,6 @@
     #intro .hero{padding:40px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
     #intro .logo{height:38px;width:33px;margin:0}
-    #intro .ways{gap:22px}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
   }
@@ -523,22 +527,10 @@
     <div class="in">
       <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
-        <article>
-          <h3>Make your case.</h3>
-          <p>Pull figures for a presentation or City Council meeting, with sources a click away.</p>
-        </article>
-        <article>
-          <h3>Benchmark your work.</h3>
-          <p>See how your organization compares with peers across the region, state, and nation.</p>
-        </article>
-        <article>
-          <h3>Support every figure.</h3>
-          <p>Each finding traces back to a data resource you can readily name, cite, and share.</p>
-        </article>
-        <article>
-          <h3>Plan your programs.</h3>
-          <p>Learn who takes part in the arts across Houston, and what could bring more people in.</p>
-        </article>
+        <p><b>Make your case.</b> Pull figures for a presentation or City Council meeting, with sources a click away.</p>
+        <p><b>Benchmark your work.</b> See how your organization compares with peers across the region, state, and nation.</p>
+        <p><b>Support every figure.</b> Each finding traces back to a data resource you can readily name, cite, and share.</p>
+        <p><b>Plan your programs.</b> Learn who takes part in the arts across Houston, and what could bring more people in.</p>
       </div>
     </div>
   </section>
