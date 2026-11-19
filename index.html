@@ -1232,7 +1232,10 @@ function renderActive(){
     b.type='button';
     b.className='token';
     b.setAttribute('aria-label','Clear the search term');
-    b.innerHTML=`<span class="k">Search</span> ${queryRaw} <span class="x" aria-hidden="true">×</span>`;
+    /* The term goes in as a text node, never as markup: it can come from a
+       shared link's ?q=. */
+    b.innerHTML=`<span class="k">Search</span><span class="x" aria-hidden="true">×</span>`;
+    b.insertBefore(document.createTextNode(' '+queryRaw+' '),b.lastChild);
     b.addEventListener('click',()=>{ searchEl.value=''; queryRaw=''; query=''; syncURL(); render(); });
     tokensEl.appendChild(b);
   }
