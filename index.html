@@ -145,7 +145,10 @@
 
   /* ---- 3. ways to use it ---- */
   #intro .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:26px 24px}
-  #intro .ways article{border-top:2px solid var(--c);padding:16px 0 0}
+  /* One rule color for all four. The directory uses cyan, gold, and coral for
+     access status, so a color per article reads as a code. Navy would match
+     the section rules, and on a phone these would stack up as extra dividers. */
+  #intro .ways article{border-top:2px solid var(--hair);padding:16px 0 0}
   #intro .ways h3{font-size:16px;margin:0 0 9px}
   #intro .ways p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.38}
 
@@ -513,19 +516,19 @@
     <div class="in">
       <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
-        <article style="--c:var(--cyan)">
+        <article>
           <h3>Make your case.</h3>
           <p>Pull figures for a presentation or City Council meeting, with sources a click away.</p>
         </article>
-        <article style="--c:var(--gold)">
+        <article>
           <h3>Benchmark your work.</h3>
           <p>See how your organization compares with peers across the region, state, and nation.</p>
         </article>
-        <article style="--c:var(--coral)">
+        <article>
           <h3>Support every figure.</h3>
           <p>Each finding traces back to a data resource you can readily name, cite, and share.</p>
         </article>
-        <article style="--c:var(--indigo)">
+        <article>
           <h3>Plan your programs.</h3>
           <p>Learn who takes part in the arts across Houston, and what could bring more people in.</p>
         </article>
