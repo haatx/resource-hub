@@ -144,44 +144,60 @@
   #intro .what p{margin:0;font-size:14px;line-height:1.35;color:var(--ink-soft)}
 
   /* ---- 3. ways to use it ---- */
-  #intro .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:26px 24px}
-  #intro .ways article{border-top:2px solid var(--c);padding:16px 0 0}
-  #intro .ways h3{font-size:16px;margin:0 0 9px}
-  #intro .ways p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.38}
+  /* Four paragraphs with run-in heads, and no rules: a rule over each item
+     repeated the shape of the navy section rules, and on a phone the rules
+     read as extra dividers. Each head is semibold navy and runs straight into
+     its sentence, both at the size of the numbered steps in section 4. Four
+     columns when there's room; below 1100px the columns get cramped, so the
+     items stack as paragraphs in one column. */
+  #intro .ways{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 36px}
+  #intro .ways p{margin:0;font-size:16.5px;line-height:1.42}
+  #intro .ways b{font-weight:600;color:var(--navy)}
 
   /* ---- 4. how to use the directory ---- */
   #intro .how{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:start}
-  #intro .how p{margin:0 0 15px;font-size:16.5px;line-height:1.42}
-  #intro .how p:last-child{margin-bottom:0}
+  /* Numbered steps at the size of the paragraphs they replaced. The numbers
+     hang in a gutter just wide enough for them, so every line of a step
+     starts at the same edge and runs the full column. */
+  #intro .steps{margin:0;padding:0 0 0 1.35em;font-size:16.5px;line-height:1.42}
+  #intro .steps li{margin:0 0 10px;padding-left:.15em}
+  #intro .steps li:last-child{margin-bottom:0}
+  #intro .steps li::marker{color:var(--ink-soft);font-weight:500;font-variant-numeric:tabular-nums}
+  /* heading over the facet list */
+  #intro .how h3{font-size:16px;margin:0 0 12px}
   #intro .facetlist{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
   #intro .facetlist div{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair)}
   #intro .facetlist dt{font-size:13.5px;font-weight:500;color:var(--ink-soft)}
   #intro .facetlist dd{margin:0;font-size:14.5px}
 
   /* ---- 5. featured findings ---- */
-  #intro .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
-  #intro .stats a{
-    display:flex;flex-direction:column;justify-content:space-between;gap:18px;
-    text-decoration:none;color:inherit;
-    background:var(--paper-2);border:1px solid var(--hair);
-    border-left:3px solid var(--c);border-radius:var(--r);padding:22px;
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease);
-  }
-  #intro .stats a:hover{transform:translateY(-3px);box-shadow:0 14px 28px -20px var(--navy)}
-  #intro .stats a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  /* Open text, no boxes: a card per figure cost space, and the cards' colored
+     left borders repeated the directory's access-status colors. Each figure is
+     still a link that opens its record's row. Its source line sits just under
+     it, and the space between figures is three times that, so each figure
+     stays with its own source. Hover underlines the figure; nothing moves.
+     Four columns from 1100px, two from 761px, one on phones. */
+  #intro .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 40px}
+  #intro .stats a{display:block;text-decoration:none;color:inherit}
+  #intro .stats a:focus-visible{outline:2px solid var(--navy);outline-offset:6px}
   #intro .stats .fig{
     font-size:18px;line-height:1.3;font-weight:500;
     color:var(--navy);margin:0;
+    text-decoration-line:underline;text-decoration-thickness:1px;
+    text-decoration-color:transparent;text-underline-offset:.2em;
+    transition:text-decoration-color .2s var(--ease);
   }
+  @media (hover:hover){#intro .stats a:hover .fig{text-decoration-color:currentColor}}
   #intro .stats .nw{white-space:nowrap}
   #intro .stats .src{
-    font-size:13px;font-weight:500;color:var(--ink-soft);margin:0;
+    font-size:13px;font-weight:500;color:var(--ink-soft);margin:12px 0 0;
     display:flex;align-items:center;gap:8px;
   }
   #intro .stats .src svg{width:12px;height:12px;stroke:currentColor;fill:none;flex:none}
 
-  /* ---- 6. feedback ---- */
-  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
+  /* ---- 6. credit, suggestions, and feedback ---- */
+  /* the two buttons under the second paragraph; .ghostbtn is also the hero's
+     outlined button */
   #intro .pair{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   #intro .ghostbtn{
     display:inline-flex;align-items:center;gap:9px;
@@ -193,8 +209,9 @@
   @media (hover:hover){#intro .ghostbtn:hover{background:var(--navy);color:var(--paper)}}
   #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
-  /* ---- 7. credit ---- */
-  #intro .credit > div + div{margin:15px 0 0}
+  /* the partner block starts a little further below the buttons than the
+     buttons sit below the paragraph, so the buttons stay with the paragraph */
+  #intro .credit > div + div{margin:28px 0 0}
   #intro .credit p{margin:0 0 15px;font-size:16.5px;line-height:1.42;color:var(--ink)}
   #intro .credit p:last-of-type{margin-bottom:0}
   /* partner logos: balanced by eye rather than by height */
@@ -204,6 +221,10 @@
   #intro .partners img{display:block;height:auto}
   #intro .close{padding:var(--gap) 0 0}
 
+  @media (max-width:1099px){
+    #intro .ways{grid-template-columns:1fr;gap:15px}
+    #intro .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
   @media (max-width:900px){
     #intro .how{grid-template-columns:1fr;gap:30px}
   }
@@ -211,7 +232,7 @@
     #intro .hero{padding:40px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
     #intro .logo{height:38px;width:33px;margin:0}
-    #intro .ways{gap:22px}
+    #intro .stats{grid-template-columns:1fr}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
   }
@@ -517,22 +538,10 @@
     <div class="in">
       <h2 id="in-ways">Four things this is good for.</h2>
       <div class="ways">
-        <article style="--c:var(--cyan)">
-          <h3>Make your case.</h3>
-          <p>Pull figures for a presentation or City Council meeting, with sources a click away.</p>
-        </article>
-        <article style="--c:var(--gold)">
-          <h3>Benchmark your work.</h3>
-          <p>See how your organization compares with peers across the region, state, and nation.</p>
-        </article>
-        <article style="--c:var(--coral)">
-          <h3>Support every figure.</h3>
-          <p>Each finding traces back to a data resource you can readily name, cite, and share.</p>
-        </article>
-        <article style="--c:var(--indigo)">
-          <h3>Plan your programs.</h3>
-          <p>Learn who takes part in the arts across Houston, and what could bring more people in.</p>
-        </article>
+        <p><b>Make your case.</b> Pull figures for a presentation or City Council meeting, with sources a click away.</p>
+        <p><b>Benchmark your work.</b> See how your organization compares with peers across the region, state, and nation.</p>
+        <p><b>Support every figure.</b> Each finding traces back to a data resource you can readily name, cite, and share.</p>
+        <p><b>Plan your programs.</b> Learn who takes part in the arts across Houston, and what could bring more people in.</p>
       </div>
     </div>
   </section>
@@ -544,19 +553,24 @@
     <div class="in">
       <h2 id="in-how">Filter down, then open a row.</h2>
       <div class="how">
+        <ol class="steps">
+          <li>Search by title, author, or topic.</li>
+          <li>Filter the list. Houston region plus Map, for example, shows maps of the Houston region.</li>
+          <li>Pick more than one option in a group, like Map and Report, to see both.</li>
+          <li>Open a row for a plain-language summary, the key finding when there is one, and the details you need to cite and evaluate it.</li>
+          <li>Share what you see. Your search and filters are saved in the page's web address, so the link opens the same view.</li>
+        </ol>
         <div>
-          <p>Each resource has its own row. Open one to see a plain-language summary, the key finding when the source reports one, and the details you need to cite and evaluate it, like its scope and type, when it was published, where it comes from, and, if it's updated regularly, how often.</p>
-          <p>You can narrow down the list six ways with the filters, and they work together. The search box looks across titles, authors, and topics at once. Some Place filters go a level deeper, so you can narrow down from the Houston region to a school district, for example.</p>
-          <p>Your filters are saved in the page's web address, so you can send someone the exact view you're looking at instead of telling them which filters to tick.</p>
+          <h3>Ways to filter.</h3>
+          <dl class="facetlist">
+            <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
+            <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, some narrowing further</dd></div>
+            <div><dt>Focus</dt><dd>Artists, audiences, civic art, cultural districts, education, organizations</dd></div>
+            <div><dt>Format</dt><dd>Briefs, dashboards, directories, maps, reports, toolkits</dd></div>
+            <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
+            <div><dt>Published</dt><dd>Year the resource came out, grouped into bands. Its data may cover earlier years.</dd></div>
+          </dl>
         </div>
-        <dl class="facetlist">
-          <div><dt>Access</dt><dd>Public, upcoming, or available on request</dd></div>
-          <div><dt>Place</dt><dd>Houston region, Texas, United States, or global, some narrowing further</dd></div>
-          <div><dt>Focus</dt><dd>Artists, organizations, audiences, education, civic art, cultural districts</dd></div>
-          <div><dt>Format</dt><dd>Reports, briefs, toolkits, dashboards, maps, directories</dd></div>
-          <div><dt>Methods</dt><dd>How the research was done, from surveys to randomized trials</dd></div>
-          <div><dt>Year</dt><dd>Publication year, grouped into bands</dd></div>
-        </dl>
       </div>
     </div>
   </section>
@@ -567,37 +581,25 @@
   <section class="band" aria-labelledby="in-stats">
     <div class="in">
       <h2 id="in-stats">A few numbers from the collection.</h2>
-      <!-- figures and credits are written for the cards in FEATURED; each card opens its record's row -->
+      <!-- figures and credits are written by hand in FEATURED; each figure opens its record's row -->
       <div class="stats" id="introStats"></div>
     </div>
   </section>
 
     <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
-  <!-- 6. feedback and contributions -->
-  <section class="band" aria-labelledby="in-feedback">
-    <div class="in">
-      <h2 id="in-feedback">This hub is meant to grow.</h2>
-      <div class="feedback">
-        <p>If you know of a study, dashboard, or map that belongs here, send it our way. And if something's broken or out of date, please let us know.</p>
-        <div class="pair">
-          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <div class="in"><div class="rule" aria-hidden="true"></div></div>
-
-  <!-- 7. credit -->
+  <!-- 6. credit, suggestions, and feedback -->
   <section class="band close" aria-labelledby="in-credit">
     <div class="in">
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
           <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's for anyone who practices the arts or makes the case for them: artists and arts nonprofits, arts service organizations, and civic partners.</p>
-          <p>HAA maintains this collection and keeps the records current. If you have a question about anything on it, feel free to ask us.</p>
+          <p>HAA keeps the collection current. If you know of a study, dashboard, or map that belongs here, send it our way. If something's broken or out of date, or you have a question, let us know.</p>
+          <div class="pair">
+            <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+            <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+          </div>
         </div>
         <div>
           <p>Developed in partnership with:</p>
@@ -658,7 +660,7 @@
         </div>
       </div>
       <div class="filter-group">
-        <span class="filter-label mono" id="lbl-year">Year</span>
+        <span class="filter-label mono" id="lbl-year">Published</span>
         <div class="chips-wrap">
           <div class="chips" id="chips-year" role="group" aria-labelledby="lbl-year"></div>
         </div>
@@ -686,6 +688,7 @@
     <div class="empty" id="empty">
       <p class="mono">No matches</p>
       <p>Try a different keyword or clear the filters.</p>
+      <p>Can't find what you need? <a id="emptySuggest" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource or a research idea</a>.</p>
     </div>
   </main>
 
@@ -1093,29 +1096,45 @@ const filterCountEl = document.getElementById('filterCount');
 let query = "";
 let queryRaw = "";
 
-/* Single-select dimensions, each defaulting to "All". They AND together and
-   combine with the search box. `key` doubles as the URL query parameter. */
+/* Multi-select dimensions. `selected` holds the chosen options; empty means
+   "All". Within a dimension the options combine with OR (Map or Report);
+   dimensions AND together and combine with the search box. `key` doubles as
+   the URL query parameter, repeated once per option. */
 const DIMENSIONS = [
   { key:'access', label:'Access', el:document.getElementById('chips-access'),
     order:["All","Public","Upcoming","Upon request"],
-    isAccess:true, active:"All", tags:r=>[r.access] },
+    isAccess:true, selected:new Set(), tags:r=>[r.access] },
   { key:'place', label:'Place', el:document.getElementById('chips-place'),
     childEl:document.getElementById('chips-place-children'), tree:PLACE_TREE,
     order:["All","Houston region","Texas","United States","Global"],
-    active:"All", tags:r=>r._placeAll },
+    selected:new Set(), tags:r=>r._placeAll },
   { key:'focus', label:'Focus', el:document.getElementById('chips-focus'),
-    order:["All","Artists and workforce","Organizations","Audiences and public","Cross-city and national","Civic art","Education","Cultural districts"],
-    active:"All", tags:r=>r._focus },
+    order:["All","Artists and workforce","Audiences and public","Civic art","Cross-city and national","Cultural districts","Education","Organizations"],
+    selected:new Set(), tags:r=>r._focus },
   { key:'format', label:'Format', el:document.getElementById('chips-format'),
-    order:["All","Report","Brief or one-pager","Toolkit or guide","Dashboard or explorer","Map","Directory or calendar"],
-    active:"All", tags:r=>r._format },
+    order:["All","Brief or one-pager","Dashboard or explorer","Directory or calendar","Map","Report","Toolkit or guide"],
+    selected:new Set(), tags:r=>r._format },
   { key:'methods', label:'Methods', el:document.getElementById('chips-methods'),
-    order:["All","Survey","Data analysis","Interviews","Document review","Mapping","Experimental (RCT)","Convenings","Community submissions","Guide"],
-    active:"All", tags:r=>r._methods },
-  { key:'year', label:'Year', el:document.getElementById('chips-year'),
+    order:["All","Community submissions","Convenings","Data analysis","Document review","Experimental (RCT)","Guide","Interviews","Mapping","Survey"],
+    selected:new Set(), tags:r=>r._methods },
+  { key:'year', label:'Published', el:document.getElementById('chips-year'),
     order:["All","2026","2025","2024","2020-2023","Before 2020"],
-    active:"All", tags:r=>[yearBucket(r.year)] }
+    selected:new Set(), tags:r=>[yearBucket(r.year)] }
 ];
+
+/* The values a dimension's records are matched against, in chip order. A
+   Place parent narrowed by sub-options contributes those sub-options instead
+   of itself, so Houston region narrowed to Harris County, plus Texas, gives
+   Harris County and Texas. Each value is one token and one URL parameter. */
+function filterValues(dim){
+  const out=[];
+  dim.order.forEach(v=>{
+    if(!dim.selected.has(v)) return;
+    const kids = dim.tree ? (dim.tree[v]||[]).filter(c=>dim.selected.has(c)) : [];
+    if(kids.length) out.push(...kids); else out.push(v);
+  });
+  return out;
+}
 
 /* Counts are over the whole collection, not the current result set, so a chip
    never reads zero and the numbers stay stable as you filter. */
@@ -1123,13 +1142,22 @@ function tagCount(dim,val){
   return val==="All" ? RESOURCES.length : RESOURCES.filter(r=>dim.tags(r).includes(val)).length;
 }
 
-/* A second click on a selected chip clears it, the same as the token's x or
-   "All". In Place, clearing a child steps back to its parent, and clearing a
-   parent returns to All; clicking a parent while one of its children is
-   selected still widens to the parent, as before. */
+/* The selection after a click on v, as a new set. "All" clears the group.
+   Any other option toggles: a click adds it, a second click removes it, the
+   same as its token's x. In Place, a sub-option is added with its parent;
+   removing a parent removes its sub-options too; and removing a parent's
+   last sub-option leaves the whole parent selected. */
 function nextValue(dim,v){
-  if(v==="All" || v!==dim.active) return v;
-  return (dim.tree && PLACE_PARENT[v]) ? PLACE_PARENT[v] : "All";
+  if(v==="All") return new Set();
+  const next=new Set(dim.selected);
+  if(next.has(v)){
+    next.delete(v);
+    if(dim.tree && dim.tree[v]) dim.tree[v].forEach(c=>next.delete(c));
+  } else {
+    next.add(v);
+    if(dim.tree && PLACE_PARENT[v]) next.add(PLACE_PARENT[v]);
+  }
+  return next;
 }
 
 function makeChip(dim,v){
@@ -1141,8 +1169,8 @@ function makeChip(dim,v){
   const label = (dim.isAccess && v!=="All" && STATUS[v]) ? STATUS[v].label : v;
   b.innerHTML = `${label} <span class="n">${tagCount(dim,v)}</span>`;
   b.addEventListener('click',()=>{
-    const next = nextValue(dim,v);
-    if(next!==dim.active) setActive(dim,next);
+    if(v==="All" && !dim.selected.size) return;
+    setActive(dim,nextValue(dim,v));
   });
   return b;
 }
@@ -1165,72 +1193,85 @@ DIMENSIONS.forEach(dim=>{
 });
 
 /* Chips are built once and only repainted, so keyboard focus survives a
-   selection. */
+   selection. "All" is pressed when nothing else in the group is. A Place
+   parent stays pressed while sub-options narrow it, and each selected parent
+   that has sub-options shows its own row of them. */
 function paintDim(dim){
-  let activeParent = null;
-  if(dim.tree){
-    activeParent = dim.tree[dim.active] ? dim.active : (PLACE_PARENT[dim.active] || null);
-  }
+  const press=(c,on)=>c.setAttribute('aria-pressed', on ? 'true' : 'false');
   [...dim.el.children].forEach(c=>{
     const v=c.dataset.value;
-    const on = (v===dim.active) || (activeParent!==null && v===activeParent);
-    c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    press(c, v==="All" ? dim.selected.size===0 : dim.selected.has(v));
   });
   if(dim.tree){
     [...dim.childEl.children].forEach(grp=>{
-      grp.hidden = grp.dataset.parent!==activeParent;
-      [...grp.children].forEach(c=>c.setAttribute('aria-pressed', c.dataset.value===dim.active ? 'true' : 'false'));
+      grp.hidden = !dim.selected.has(grp.dataset.parent);
+      [...grp.children].forEach(c=>press(c, dim.selected.has(c.dataset.value)));
     });
   }
 }
 
-function setActive(dim,v,rerender=true){
-  dim.active=v;
+function setActive(dim,sel,rerender=true){
+  dim.selected=sel;
   paintDim(dim);
   if(rerender){ syncURL(); render(); }
 }
 
 /* ------------------------- deep-linkable filter state -------------------- */
 /* replaceState rather than pushState so filtering does not fill the back
-   stack. Wrapped because some browsers refuse history writes on file:// */
+   stack. Wrapped because some browsers refuse history writes on file://
+   pages. Each value from filterValues() is its own parameter, repeated for
+   more than one (?format=Map&format=Report), so a single-value link is just
+   the one-value case and no delimiter can collide with an option name. */
 function syncURL(){
   const p=new URLSearchParams();
-  DIMENSIONS.forEach(d=>{ if(d.active!=="All") p.set(d.key,d.active); });
+  DIMENSIONS.forEach(d=>filterValues(d).forEach(v=>p.append(d.key,v)));
   if(queryRaw) p.set('q',queryRaw);
   const qs=p.toString();
   try{ history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash); }catch(e){}
 }
 
+/* A Place sub-option (?place=Harris%20County) selects its parent as well, so
+   it opens with Houston region narrowed to Harris County. Values that match
+   no option, and "All", are dropped. */
 function readURL(){
   let p;
   try{ p=new URLSearchParams(location.search); }catch(e){ return; }
   DIMENSIONS.forEach(d=>{
-    const v=p.get(d.key);
-    if(!v) return;
-    const valid = d.order.includes(v) ||
-      (d.tree && Object.keys(d.tree).some(k=>d.tree[k].includes(v)));
-    if(valid) d.active=v;
+    p.getAll(d.key).forEach(v=>{
+      const parent = d.tree && Object.keys(d.tree).find(k=>d.tree[k].includes(v));
+      if(parent){ d.selected.add(parent); d.selected.add(v); }
+      else if(v!=="All" && d.order.includes(v)) d.selected.add(v);
+    });
   });
   const q=p.get('q');
   if(q){ searchEl.value=q; queryRaw=q; query=q.trim().toLowerCase(); }
 }
 
 /* --------------------- active filter summary and tokens ------------------ */
-function activeDims(){ return DIMENSIONS.filter(d=>d.active!=="All"); }
+function activeDims(){ return DIMENSIONS.filter(d=>d.selected.size); }
 
+/* One token per value from filterValues(), so a narrowed Place parent is
+   represented by its sub-options' tokens. A token's x does what a second
+   click on its chip does. The Filters count is the number of filter tokens;
+   the search term has its own box above the button and isn't counted. */
 function renderActive(){
-  const dims=activeDims();
+  /* Rebuilding the tokens drops focus from the one just removed. Hand it to
+     the token now in that place (or the last one), so a keyboard user can
+     keep removing; with none left, to the top of the directory. */
+  const was=[...tokensEl.children].indexOf(document.activeElement);
   tokensEl.innerHTML='';
-  dims.forEach(d=>{
-    const shown=(d.isAccess && STATUS[d.active]) ? STATUS[d.active].label : d.active;
+  let n=0;
+  DIMENSIONS.forEach(d=>filterValues(d).forEach(v=>{
+    const shown=(d.isAccess && STATUS[v]) ? STATUS[v].label : v;
     const b=document.createElement('button');
     b.type='button';
     b.className='token';
     b.setAttribute('aria-label','Remove filter '+d.label+': '+shown);
     b.innerHTML=`<span class="k">${d.label}</span> ${shown} <span class="x" aria-hidden="true">×</span>`;
-    b.addEventListener('click',()=>setActive(d,'All'));
+    b.addEventListener('click',()=>setActive(d,nextValue(d,v)));
     tokensEl.appendChild(b);
-  });
+    n++;
+  }));
   if(queryRaw){
     const b=document.createElement('button');
     b.type='button';
@@ -1243,13 +1284,23 @@ function renderActive(){
     b.addEventListener('click',()=>{ searchEl.value=''; queryRaw=''; query=''; syncURL(); render(); });
     tokensEl.appendChild(b);
   }
-  activeEl.hidden = dims.length===0 && !queryRaw;
-  filterCountEl.textContent = dims.length;
-  filterCountEl.dataset.zero = dims.length===0 ? 'true' : 'false';
+  activeEl.hidden = n===0 && !queryRaw;
+  filterCountEl.textContent = n;
+  filterCountEl.dataset.zero = n===0 ? 'true' : 'false';
+  if(was>-1){
+    const left=tokensEl.children;
+    if(left.length) left[Math.min(was,left.length-1)].focus();
+    else{
+      const dir=document.getElementById('directory');
+      dir.setAttribute('tabindex','-1');
+      dir.focus({preventScroll:true});
+      dir.addEventListener('blur',()=>dir.removeAttribute('tabindex'),{once:true});
+    }
+  }
 }
 
 document.getElementById('clearAll').addEventListener('click',()=>{
-  DIMENSIONS.forEach(d=>{ d.active="All"; paintDim(d); });
+  DIMENSIONS.forEach(d=>{ d.selected=new Set(); paintDim(d); });
   searchEl.value=''; queryRaw=''; query='';
   syncURL(); render();
 });
@@ -1312,7 +1363,9 @@ function actionHTML(r){
 
 function matches(r){
   for(const dim of DIMENSIONS){
-    if(dim.active!=="All" && !dim.tags(r).includes(dim.active)) return false;
+    if(!dim.selected.size) continue;
+    const tags=dim.tags(r);
+    if(!filterValues(dim).some(v=>tags.includes(v))) return false;
   }
   if(query){
     const hay=(r.title+" "+r.author+" "+r.summary+" "+r.population+" "+r.methods+" "+r.steward).toLowerCase();
@@ -1321,12 +1374,24 @@ function matches(r){
   return true;
 }
 
+/* The empty state's suggestion link. Its href in the markup (address and
+   subject, the same subject as the homepage button) is the fallback; when
+   nothing matches, render() adds a body carrying the current address, so
+   the email shows what the visitor searched and filtered for. */
+const suggestEl = document.getElementById('emptySuggest');
+const SUGGEST = suggestEl.getAttribute('href');
+function suggestHref(){
+  const body = 'What I was looking for:\r\n\r\n\r\nMy search and filters: ' + location.href;
+  return SUGGEST + '&body=' + encodeURIComponent(body);
+}
+
 function render(){
   renderActive();
   const rows = RESOURCES.map((r,i)=>({r,i})).filter(o=>matches(o.r));
   list.innerHTML='';
   countEl.textContent = `Showing ${rows.length} of ${RESOURCES.length}`;
   emptyEl.classList.toggle('show', rows.length===0);
+  if(!rows.length) suggestEl.href = suggestHref();
 
   rows.forEach((o,pos)=>{
     const r=o.r;
@@ -1498,11 +1563,10 @@ if((activeDims().length || queryRaw) && !location.hash){
   });
 
   /* ---- 5. featured findings -------------------------------------------- */
-  /* Short figures and credits written for the cards, not taken from the
-     records' finding fields; ordered national to local. Each card names its
+  /* Short figures and credits written for this section, not taken from the
+     records' finding fields; ordered national to local. Each figure names its
      record by title, so it opens that record's row and disappears rather than
-     going stale if the record is removed. Credits are stored in mixed case;
-     the CSS sets them in capitals. */
+     going stale if the record is removed. */
   const FEATURED = [
     {title:"The U.S. Arts and Cultural Production Satellite Account (1998-2023)",
      fig:"Arts and culture added $1.2 trillion in 2023, growing twice as fast as the U.S. economy.",
@@ -1517,13 +1581,11 @@ if((activeDims().length || queryRaw) && !location.hash){
      fig:"73% of local artists define success as having the time, space, and resources to make art.",
      credit:"Fresh Arts | 2022 GHAS Report"}
   ];
-  const ACCENTS = ['var(--cyan)','var(--coral)','var(--gold)','var(--indigo)'];
   const statsEl = document.getElementById('introStats');
-  FEATURED.forEach((f,i)=>{
+  FEATURED.forEach(f=>{
     const r = RESOURCES.find(x=>x.title===f.title);
     if(!r) return;                        /* record gone */
     const a = document.createElement('a');
-    a.style.setProperty('--c', ACCENTS[i % ACCENTS.length]);
     a.href = DIRECTORY + '#r-' + slug(r.title);
     a.dataset.record = 'r-' + slug(r.title);
     /* The pipe is visual only, as in the hero meta line. The organization and
@@ -1570,7 +1632,7 @@ if((activeDims().length || queryRaw) && !location.hash){
     resetAll();
     if(a.dataset.facet){
       const dim = DIMENSIONS.find(d=>d.key===a.dataset.facet);
-      if(dim) setActive(dim, a.dataset.value);
+      if(dim) setActive(dim, nextValue(dim, a.dataset.value));
       document.getElementById('directory').scrollIntoView({block:'start'});
     } else {
       syncURL(); render();
@@ -1584,7 +1646,7 @@ if((activeDims().length || queryRaw) && !location.hash){
   });
 
   function resetAll(){
-    DIMENSIONS.forEach(d=>{ d.active="All"; paintDim(d); });
+    DIMENSIONS.forEach(d=>{ d.selected=new Set(); paintDim(d); });
     searchEl.value=''; queryRaw=''; query='';
   }
 })();
