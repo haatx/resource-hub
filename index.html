@@ -171,23 +171,26 @@
   #intro .facetlist dd{margin:0;font-size:14.5px}
 
   /* ---- 5. featured findings ---- */
-  #intro .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
-  #intro .stats a{
-    display:flex;flex-direction:column;justify-content:space-between;gap:18px;
-    text-decoration:none;color:inherit;
-    background:var(--paper-2);border:1px solid var(--hair);
-    border-left:3px solid var(--c);border-radius:var(--r);padding:22px;
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease);
-  }
-  #intro .stats a:hover{transform:translateY(-3px);box-shadow:0 14px 28px -20px var(--navy)}
-  #intro .stats a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  /* Open text, no boxes: a card per figure cost space, and the cards' colored
+     left borders repeated the directory's access-status colors. Each figure is
+     still a link that opens its record's row. Its source line sits just under
+     it, and the space between figures is three times that, so each figure
+     stays with its own source. Hover underlines the figure; nothing moves.
+     Four columns from 1100px, two from 761px, one on phones. */
+  #intro .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 40px}
+  #intro .stats a{display:block;text-decoration:none;color:inherit}
+  #intro .stats a:focus-visible{outline:2px solid var(--navy);outline-offset:6px}
   #intro .stats .fig{
     font-size:18px;line-height:1.3;font-weight:500;
     color:var(--navy);margin:0;
+    text-decoration-line:underline;text-decoration-thickness:1px;
+    text-decoration-color:transparent;text-underline-offset:.2em;
+    transition:text-decoration-color .2s var(--ease);
   }
+  @media (hover:hover){#intro .stats a:hover .fig{text-decoration-color:currentColor}}
   #intro .stats .nw{white-space:nowrap}
   #intro .stats .src{
-    font-size:13px;font-weight:500;color:var(--ink-soft);margin:0;
+    font-size:13px;font-weight:500;color:var(--ink-soft);margin:12px 0 0;
     display:flex;align-items:center;gap:8px;
   }
   #intro .stats .src svg{width:12px;height:12px;stroke:currentColor;fill:none;flex:none}
@@ -218,6 +221,7 @@
 
   @media (max-width:1099px){
     #intro .ways{grid-template-columns:1fr;gap:15px}
+    #intro .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
   @media (max-width:900px){
     #intro .how{grid-template-columns:1fr;gap:30px}
@@ -226,6 +230,7 @@
     #intro .hero{padding:40px 0 0}
     #intro h1{white-space:normal;font-size:clamp(31px,8.1vw,47px)}
     #intro .logo{height:38px;width:33px;margin:0}
+    #intro .stats{grid-template-columns:1fr}
     #intro .pair{flex-direction:column;align-items:stretch}
     #intro .ghostbtn{justify-content:center}
   }
@@ -570,7 +575,7 @@
   <section class="band" aria-labelledby="in-stats">
     <div class="in">
       <h2 id="in-stats">A few numbers from the collection.</h2>
-      <!-- figures and credits are written for the cards in FEATURED; each card opens its record's row -->
+      <!-- figures and credits are written by hand in FEATURED; each figure opens its record's row -->
       <div class="stats" id="introStats"></div>
     </div>
   </section>
@@ -1561,11 +1566,10 @@ if((activeDims().length || queryRaw) && !location.hash){
   });
 
   /* ---- 5. featured findings -------------------------------------------- */
-  /* Short figures and credits written for the cards, not taken from the
-     records' finding fields; ordered national to local. Each card names its
+  /* Short figures and credits written for this section, not taken from the
+     records' finding fields; ordered national to local. Each figure names its
      record by title, so it opens that record's row and disappears rather than
-     going stale if the record is removed. Credits are stored in mixed case;
-     the CSS sets them in capitals. */
+     going stale if the record is removed. */
   const FEATURED = [
     {title:"The U.S. Arts and Cultural Production Satellite Account (1998-2023)",
      fig:"Arts and culture added $1.2 trillion in 2023, growing twice as fast as the U.S. economy.",
@@ -1580,13 +1584,11 @@ if((activeDims().length || queryRaw) && !location.hash){
      fig:"73% of local artists define success as having the time, space, and resources to make art.",
      credit:"Fresh Arts | 2022 GHAS Report"}
   ];
-  const ACCENTS = ['var(--cyan)','var(--coral)','var(--gold)','var(--indigo)'];
   const statsEl = document.getElementById('introStats');
-  FEATURED.forEach((f,i)=>{
+  FEATURED.forEach(f=>{
     const r = RESOURCES.find(x=>x.title===f.title);
     if(!r) return;                        /* record gone */
     const a = document.createElement('a');
-    a.style.setProperty('--c', ACCENTS[i % ACCENTS.length]);
     a.href = DIRECTORY + '#r-' + slug(r.title);
     a.dataset.record = 'r-' + slug(r.title);
     /* The pipe is visual only, as in the hero meta line. The organization and
