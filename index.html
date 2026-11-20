@@ -342,8 +342,12 @@
 
   /* --------------------------------- LIST ---------------------------------- */
   .list{padding-bottom:80px;border-top:1px solid var(--hair)}
-  .item{border-bottom:1px solid var(--hair);opacity:0;transform:translateY(14px);animation:rise .5s var(--ease) forwards}
-  @keyframes rise{to{opacity:1;transform:none}}
+  /* Each row rises in, staggered by the delay the script sets. The hidden start
+     state exists only as the animation's first frame, held through that delay
+     by the backwards fill, so with reduced motion on, which turns animations
+     off, rows show at once instead of staying invisible. */
+  .item{border-bottom:1px solid var(--hair);animation:rise .5s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}}
 
   .row{
     width:100%;background:transparent;border:0;cursor:pointer;text-align:left;
