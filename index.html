@@ -195,8 +195,9 @@
   }
   #intro .stats .src svg{width:12px;height:12px;stroke:currentColor;fill:none;flex:none}
 
-  /* ---- 6. feedback ---- */
-  #intro .feedback p{margin:0;font-size:16.5px;line-height:1.42;color:var(--ink-soft)}
+  /* ---- 6. credit, suggestions, and feedback ---- */
+  /* the two buttons under the second paragraph; .ghostbtn is also the hero's
+     outlined button */
   #intro .pair{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   #intro .ghostbtn{
     display:inline-flex;align-items:center;gap:9px;
@@ -208,8 +209,9 @@
   @media (hover:hover){#intro .ghostbtn:hover{background:var(--navy);color:var(--paper)}}
   #intro .ghostbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
 
-  /* ---- 7. credit ---- */
-  #intro .credit > div + div{margin:15px 0 0}
+  /* the partner block starts a little further below the buttons than the
+     buttons sit below the paragraph, so the buttons stay with the paragraph */
+  #intro .credit > div + div{margin:28px 0 0}
   #intro .credit p{margin:0 0 15px;font-size:16.5px;line-height:1.42;color:var(--ink)}
   #intro .credit p:last-of-type{margin-bottom:0}
   /* partner logos: balanced by eye rather than by height */
@@ -582,30 +584,18 @@
 
     <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
-  <!-- 6. feedback and contributions -->
-  <section class="band" aria-labelledby="in-feedback">
-    <div class="in">
-      <h2 id="in-feedback">This hub is meant to grow.</h2>
-      <div class="feedback">
-        <p>If you know of a study, dashboard, or map that belongs here, send it our way. And if something's broken or out of date, please let us know.</p>
-        <div class="pair">
-          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-          <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <div class="in"><div class="rule" aria-hidden="true"></div></div>
-
-  <!-- 7. credit -->
+  <!-- 6. credit, suggestions, and feedback -->
   <section class="band close" aria-labelledby="in-credit">
     <div class="in">
       <h2 id="in-credit">Built and maintained by Houston Arts Alliance.</h2>
       <div class="credit">
         <div>
           <p>The hub grew out of the community's need for a place to find and use research on Houston's arts sector. It's for anyone who practices the arts or makes the case for them: artists and arts nonprofits, arts service organizations, and civic partners.</p>
-          <p>HAA maintains this collection and keeps the records current. If you have a question about anything on it, feel free to ask us.</p>
+          <p>HAA keeps the collection current. If you know of a study, dashboard, or map that belongs here, send it our way. If something's broken or out of date, or you have a question, let us know.</p>
+          <div class="pair">
+            <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20suggest%20a%20resource">Suggest a resource <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+            <a class="ghostbtn" href="mailto:data@haatx.com?subject=Resource%20Hub%3A%20something%20is%20not%20working">Tell us what's not working <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+          </div>
         </div>
         <div>
           <p>Developed in partnership with:</p>
