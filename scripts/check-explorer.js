@@ -19,7 +19,14 @@
        data file, and every claim its wording makes holds against the data;
      - no digits appear outside figures and data-derived text, so nothing is
        typed in by hand;
-     - budget-band labels such as $250k-$999k sit in a nowrap span.
+     - budget-band labels such as $250k-$999k sit in a nowrap span;
+     - the frame (the first layer) shows the four approved figures in order,
+       Houston in its phrase and the national figure beneath, attendance
+       spelled out, one sentence per figure for screen readers, the approved
+       group line and small-group note, no section colors, and a source line
+       that cites the page of every figure it shows;
+     - each of the 36 copy sentences carries its view's Houston and national
+       figures as published, its group size, and no other digits.
    It also checks that the data file is complete, that the CSV and the
    inventory are up to date, and that new files use CRLF line endings.
    No dependencies.
@@ -100,6 +107,7 @@ function read(src){
   }
   return { values, free: free.join(' ') };
 }
+const esc2 = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const textOf = s => decode(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
 
 function checkValues(where, values, view){
@@ -361,6 +369,101 @@ for(const w of D.views){
   }
 }
 
+/* -------------------------------------------------------- the frame --- */
+/* The first layer. For every view: the same four figures in the same order,
+   each Houston figure inside its phrase and the national figure beneath it,
+   attendance spelled out; one sentence per figure for screen readers; the
+   group line and small-group note in their approved wording; and the source
+   inside the frame, citing the page of every figure it shows. */
+const S = D.source;
+const plain = r => r.status !== 'reported' ? E.STATUS_TEXT[r.status]
+  : MET[r.metric].unit === 'attendance_thousands' ? (r.value * 1000).toLocaleString('en-US') : r.display;
+const FRAME_IDS = 'local_gov_pct_expenses,personnel_pct_expenses,avg_attendance,primary_facility|rent';
+ok(E.FRAME.map(f=>f.m + (f.c ? '|' + f.c : '')).join(',') === FRAME_IDS, 'frame: not the four approved figures in order');
+for(const v of D.views){
+  const view = v.id, where = `${view} / frame`;
+  const fr = E.renderFrame(view);
+  const { values, free } = read(fr);
+  checkValues(where, values, view);
+  checkFree(where, free);
+  checkBands(where, fr);
+  const items = fr.split(/(?=<li class="ff">)/).slice(1);
+  ok(items.length === E.FRAME.length, `${where}: ${items.length} figures`);
+  E.FRAME.forEach((f, i)=>{
+    const it = items[i] || '', at = `${where} / ${f.m}`;
+    const h = REC[key(f.m, view, 'houston', f.c)], n = REC[key(f.m, view, 'national', f.c)];
+    /* the data file reports all four for both groups in every view; if a new
+       report drops one, the frame needs a decision, never a stand-in */
+    ok(h && n && h.status === 'reported' && n.status === 'reported', `${at}: not reported for both groups`);
+    if(!h || !n) return;
+    const nat = `${S.national.label}: ${plain(n)}`;
+    const said = it.match(/<p class="visually-hidden">([\s\S]*?)<\/p>/);
+    const want = `${f.pre ? f.pre + ' ' : ''}${plain(h)} ${f.post}. ${nat}.`;
+    ok(said && textOf(said[1]) === want, `${at}: screen readers hear "${said && textOf(said[1])}", expected "${want}"`);
+    const num = it.match(/<span class="ff-num"[^>]*>([\s\S]*?)<\/span><span class="ff-post"/);
+    ok(num && textOf(num[1]) === plain(h) && /data-g="houston"/.test(num[1]) && !/data-g="national"/.test(num[1]), `${at}: number reads "${num && textOf(num[1])}"`);
+    const line = it.match(/<span class="ff-nat"[^>]*>([\s\S]*?)<\/span><\/li>/);
+    ok(line && textOf(line[1]) === nat && /data-g="national"/.test(line[1]) && !/data-g="houston"/.test(line[1]), `${at}: national line reads "${line && textOf(line[1])}"`);
+    ok(it.includes(`aria-hidden="true">${esc2(f.post)}</span>`) && (!f.pre || it.includes(`aria-hidden="true">${esc2(f.pre)}</span>`)), `${at}: drawn phrase missing or not hidden from screen readers`);
+  });
+  const hN = nRec(view, 'houston').display, nN = nRec(view, 'national').display;
+  const gl = fr.match(/<span class="groupline">([\s\S]*?\.)<\/span>/);
+  ok(gl && textOf(gl[1]) === exact.group(hN, nN), `${where}: group line reads "${gl && textOf(gl[1])}"`);
+  const sn = fr.match(/<p class="smallnote">([\s\S]*?)<\/p>/);
+  if(nRec(view, 'houston').value < SMALL_GROUP) ok(sn && textOf(sn[1]) === exact.small(hN), `${where}: small-group note reads "${sn && textOf(sn[1])}"`);
+  else ok(!sn, `${where}: small-group note on a group of ${hN}`);
+  const tag = textOf((fr.match(/<h3 class="fr-tag"[^>]*>([\s\S]*?)<\/h3>/) || [, ''])[1]);
+  ok(tag === (v.mode === 'overall' ? 'All organizations' : (v.mode === 'discipline' ? 'Discipline: ' : 'Budget size: ') + v.label), `${where}: tag reads "${tag}"`);
+  const top = fr.slice(0, fr.indexOf('<ul class="ffs">'));
+  ok((textOf(top).match(new RegExp(S.period, 'g')) || []).length === 1, `${where}: ${S.period} should show once in the group`);
+  const order = ['class="fr-tag"', 'class="groupline"', ...(sn ? ['class="smallnote"'] : []), 'class="ffs"', 'class="fr-src"'].map(s=>fr.indexOf(s));
+  ok(order.every((x, i)=>x >= 0 && (i === 0 || x > order[i - 1])), `${where}: parts out of order`);
+  const pages = [...new Set(values.filter(x=>x.s !== 'not-reported').map(x=>REC[key(x.m, x.v, x.g, x.c)].page))].sort((a, b)=>a - b);
+  const src = textOf((fr.match(/<p class="fr-src">([\s\S]*?)<\/p>/) || [, ''])[1]);
+  const wantSrc = `Source: ${S.author}, ${S.title} (${S.publicationYear}), ${pages.length > 1 ? 'pp. ' : 'p. '}${pages.join(', ')}. Houston: ${S.houston.description}, not a census. National benchmark: ${S.national.benchmark}.`;
+  ok(src === wantSrc, `${where}: source reads "${src}"`);
+  ok(!fr.includes(SUMMARIES.whyLabel) && !/snap-lead|snap-why|class="notes"|pic-note/.test(fr), `${where}: second-layer text in the frame`);
+  ok(!/--(cyan|gold|coral|indigo|green|orange)\b/.test(fr), `${where}: a section color in the frame`);
+}
+/* the frame's CSS keeps to navy and the text colors */
+{
+  const css = (html.match(/<style>([\s\S]*?)<\/style>/) || [, ''])[1];
+  const rules = css.split('}').filter(r=>/(^|[\s,])\.(frame|fr-|ff)/.test(r.split('{')[0]));
+  ok(rules.length > 10, `frame CSS: only ${rules.length} rules found`);
+  ok(rules.every(r=>!/--(cyan|gold|coral|indigo|green|orange)\b/.test(r)), 'frame CSS uses a section color');
+}
+
+/* --------------------------------------------------- copy sentences --- */
+/* One plain-text sentence per frame figure, then a source sentence. The
+   Houston figure comes first and the national figure after "compared with",
+   both as published (attendance spelled out); the group size is the view's;
+   and no other digit appears except the budget size's own amounts. */
+for(const v of D.views){
+  const view = v.id;
+  const lines = E.copySentences(view);
+  ok(Array.isArray(lines) && lines.length === E.FRAME.length, `${view} / copy: ${lines && lines.length} sentences`);
+  const src = `Source: ${S.author}, ${S.title} (${S.publicationYear}); ${nRec(view, 'houston').display} ${S.houston.label} organizations that applied for ${S.presentedBy} operating support.`;
+  (lines || []).forEach((line, i)=>{
+    const f = E.FRAME[i], where = `${view} / copy / ${f.m}`;
+    ok(typeof line === 'string', `${where}: no sentence`);
+    if(typeof line !== 'string') return;
+    const h = REC[key(f.m, view, 'houston', f.c)], n = REC[key(f.m, view, 'national', f.c)];
+    ok(line.endsWith(' ' + src), `${where}: source sentence`);
+    const body = line.slice(0, line.length - src.length - 1);
+    const tail = ` compared with ${plain(n)} ${S.national.label.toLowerCase()} (${S.period}).`;
+    ok(body.endsWith(',' + tail), `${where}: national figure "${body.slice(-60)}"`);
+    const lead = body.slice(0, body.length - tail.length - 1);
+    const hAt = lead.indexOf(' ' + plain(h) + ' ');
+    ok(hAt > 0 && lead.indexOf(' ' + plain(h) + ' ', hAt + 1) === -1, `${where}: Houston figure ${plain(h)} not found once`);
+    let rest = lead.replace(' ' + plain(h) + ' ', ' ');
+    if(v.mode === 'budget') (v.label.match(/\$[\d.]+[KM]/g) || []).forEach(a=>{ ok(rest.includes(a), `${where}: budget amount ${a} missing`); rest = rest.replace(a, ''); });
+    ok(!/\d/.test(rest), `${where}: digits outside the figures: "${rest}"`);
+    ok(lead.includes(`${S.houston.label} nonprofit `), `${where}: doesn't name the Houston group`);
+    ok(!/[\u2013\u2014\u2018\u2019\u201C\u201D&]/.test(line), `${where}: a dash, curly quote, or ampersand`);
+    ok(!FRAMING.test(line), `${where}: better/worse framing`);
+  });
+}
+
 /* exact approved wording in the data file */
 ok(MET.avg_revenue.tableNote === "Average revenue minus average expenses doesn't equal the operating surplus or deficit. The report gives the operating result separately.", 'revenue note wording');
 ok(MET.earned_vs_contributed.cardNote === 'Earned revenue includes admissions, ticket sales, and program fees.', 'earned revenue wording');
@@ -371,10 +474,10 @@ ok(/media and communications/i.test(VIEW.visual.cardDefinition) && /NTEE A3/.tes
 const FALLBACK = "The full report isn't posted online yet. For a copy, email data@haatx.com.";
 ok(D.source.pdfFallback === FALLBACK, 'source.pdfFallback wording');
 function pdfStates(E2, url){
-  const hero = E2.heroPdf(), about = E2.aboutHTML();
+  const hero = E2.reportPdf(), about = E2.aboutHTML();
   const where = url ? 'with source.url' : 'without source.url';
   if(url){
-    ok(hero.where === 'cta' && hero.html.includes(`href="${url}"`), `hero ${where}: PDF button missing`);
+    ok(hero.where === 'link' && hero.html.includes(`href="${url}"`), `hero ${where}: PDF button missing`);
     ok(about.includes(`href="${url}"`), `About ${where}: PDF link missing`);
     ok(!textOf(hero.html + about).includes(FALLBACK), `${where}: fallback line still shown`);
   } else {
