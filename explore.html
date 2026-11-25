@@ -224,11 +224,13 @@
   .depth .pdfnote{margin:0}
 
   /* ---- snapshots ----
-     Each section opens with a self-contained snapshot: a plain finding, why
-     it matters, one picture, and its source, all inside one frame so a
-     screenshot of the frame needs nothing around it. The picture sits on a
-     navy plate, where every section's accent color clears 3:1. Every picture
-     counts in squares. Full figures sit below the frame, unchanged. */
+     The second layer. Each section card opens with a snapshot: a plain
+     finding, a sentence on what it means, one picture, the card's own
+     definitions and notes, and a one-line source. Who the two groups are is
+     said once, in the frame's source line and in About this data. The
+     picture sits on a navy plate, where every section's accent color clears
+     3:1. Every picture counts in squares. Full figures sit below the
+     snapshot, unchanged. */
   .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;padding:26px 0 0}
   .card{background:var(--paper-2);border:1px solid var(--hair);border-top:3px solid var(--c);border-radius:var(--r);min-width:0}
   .snap{
@@ -834,11 +836,15 @@
   let OPEN = new Set();
 
   /* ----------------------------------------------------------- cards --- */
+  /* a card's one-line source: author, year, period, the pages of every
+     figure on the card, and HAA's credit, since the sentences are HAA's
+     words about SMU DataArts' figures */
   function sourceText(){
-    return `<span class="src">Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>. ${esc(SUM.credit)}</span>`;
+    return `<span class="src">Source: <span class="dx">${esc(S.author)} (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>. ${esc(SUM.credit)}</span>`;
   }
 
-  /* who the figures describe, inside the frame so a screenshot can't lose it */
+  /* who the figures describe, in the frame's source line so a screenshot
+     can't lose it */
   function whoText(){
     return `<span class="dx">Houston: ${esc(S.houston.description)}, not a census. National benchmark: ${esc(S.national.benchmark)}.</span>`;
   }
@@ -873,7 +879,7 @@
       `<p class="snap-why">${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
       picture(card, view) +
       (figs ? `<dl class="figs">${figs}</dl>` : '') +
-      `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${groupText(view)} ${whoText()} ${sourceText()}</p></div>` +
+      `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${sourceText()}</p></div>` +
       `</div>`;
     PAGES = null;
     const table = card.section === 'sector-profile' ? sectorTable(card, view)

@@ -186,18 +186,21 @@ for(const v of D.views){
     const charts = (card.match(/<figure class="chart/g) || []).length;
     ok(figs <= 4, `${where}: ${figs} headline figures`);
     ok(charts === 1, `${where}: ${charts} pictures`);
-    /* source and group size sit inside the frame, so a screenshot keeps them */
+    /* a one-line source inside the snapshot: author, year, period, the pages
+       of every figure on the card, and HAA's credit. Who the groups are and
+       how big they are is said once, in the frame above. */
     const frame = card.slice(0, card.includes('<details') ? card.indexOf('<details') : undefined);
-    ok(/<span class="src">Source: /.test(frame), `${where}: source line outside the frame`);
-    ok(frame.includes(SUMMARIES.credit), `${where}: summary credit missing from the frame`);
-    ok(textOf(frame).includes(`Houston: ${D.source.houston.description}, not a census.`), `${where}: cohort line missing from the frame`);
-    ok(textOf(frame).includes(`National benchmark: ${D.source.national.benchmark}.`), `${where}: benchmark line missing from the frame`);
+    const cardPages = [...new Set(read(frame).values.filter(x=>x.s !== 'not-reported').map(x=>REC[key(x.m, x.v, x.g, x.c)].page))].sort((a, b)=>a - b);
+    const srcLine = textOf((frame.match(/<span class="src">([\s\S]*?)<\/span><\/p>/) || [, ''])[1]);
+    const wantLine = `Source: ${D.source.author} (${D.source.publicationYear}), ${D.source.period} data, ${cardPages.length > 1 ? 'pp. ' : 'p. '}${cardPages.join(', ')}. ${SUMMARIES.credit}`;
+    ok(srcLine === wantLine, `${where}: source reads "${srcLine}", expected "${wantLine}"`);
+    ok(!textOf(frame).includes('not a census') && !textOf(frame).includes(D.source.national.benchmark), `${where}: cohort or benchmark description repeated on the card`);
     ok((frame.match(/<figcaption class="pic-note">([^<]*)<\/figcaption>/g) || []).every(c=>Object.values(SUMMARIES.captions).includes(decode(c.replace(/<[^>]+>/g, '')))), `${where}: picture caption is not an approved caption`);
 
     const h = nRec(view, 'houston').display, n = nRec(view, 'national').display;
     const gl = card.match(/<span class="groupline">([\s\S]*?\.)<\/span>/);
     const sn = card.match(/<p class="smallnote">([\s\S]*?)<\/p>/);
-    ok(gl && textOf(gl[1]) === exact.group(h, n), `${where}: group line reads "${gl && textOf(gl[1])}"`);
+    ok(!gl, `${where}: group line repeated on the card`);
     if(cfg.section === 'sector-profile'){
       ok(!sn, `${where}: unexpected small-group note`);
     } else {
