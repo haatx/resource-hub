@@ -244,7 +244,6 @@
   .snap-tag{margin:0;font-size:13.5px;font-weight:500;color:var(--s-soft)}
   .snap-lead{margin:0;font-size:clamp(25px,2.65vw,38px);line-height:1.14;font-weight:500;letter-spacing:-.018em;color:var(--s-ink)}
   .snap-why{margin:clamp(14px,1.5vw,20px) 0 0;font-size:clamp(16.5px,1.3vw,18.5px);line-height:1.38;color:var(--s-ink)}
-  .snap-why strong{font-weight:600}
   .smallnote{
     margin:14px 0 0;padding:9px 0 9px 13px;border-left:3px solid var(--gold);
     font-size:15px;line-height:1.36;color:var(--ink);
@@ -871,7 +870,7 @@
     const frame = `<div class="snap">` +
       `<div class="snap-say"><div class="snap-top"><h2 id="h-${card.section}">${esc(sec.name)}</h2>${viewTag(view)}</div>` +
       `<p class="snap-lead">${say(copy.lead, view)}</p>` +
-      `<p class="snap-why"><strong>${esc(SUM.whyLabel)}</strong> ${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
+      `<p class="snap-why">${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
       picture(card, view) +
       (figs ? `<dl class="figs">${figs}</dl>` : '') +
       `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${groupText(view)} ${whoText()} ${sourceText()}</p></div>` +

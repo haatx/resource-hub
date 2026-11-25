@@ -180,6 +180,8 @@ for(const v of D.views){
     const { values, free } = read(card);
     checkValues(where, values, view);
     checkFree(where, free);
+    /* the "why" line follows the lead as plain text, with no label */
+    ok(!/why it matters/i.test(textOf(card)) && !/<p class="snap-why"><strong>/.test(card), `${where}: the "Why it matters" label is back`);
     const figs = (card.match(/class="fig-item"/g) || []).length;
     const charts = (card.match(/<figure class="chart/g) || []).length;
     ok(figs <= 4, `${where}: ${figs} headline figures`);
@@ -342,6 +344,7 @@ function claim(c, view, where){
 const LABELS = D.views.map(w=>w.label + ' ' + (w.definition || '') + ' ' + (D.componentLabels[w.id] || '')).join(' ');
 const FRAMING = /\b(better|worse|best|worst|lags?|lagging|behind|falls? short|underperform\w*|outperform\w*|rank\w*|crisis|struggl\w*|thriv\w*)\b/i;
 ok(new Set(Object.keys(SUMMARIES.views)).size === D.views.length, 'summaries: wrong number of views');
+ok(!('whyLabel' in SUMMARIES), 'summaries: the "Why it matters:" label is back');
 for(const w of D.views){
   for(const sec of D.sections){
     const where = `summary ${w.id} / ${sec.id}`;
@@ -422,7 +425,7 @@ for(const v of D.views){
   const src = textOf((fr.match(/<p class="fr-src">([\s\S]*?)<\/p>/) || [, ''])[1]);
   const wantSrc = `Source: ${S.author}, ${S.title} (${S.publicationYear}), ${pages.length > 1 ? 'pp. ' : 'p. '}${pages.join(', ')}. Houston: ${S.houston.description}, not a census. National benchmark: ${S.national.benchmark}.`;
   ok(src === wantSrc, `${where}: source reads "${src}"`);
-  ok(!fr.includes(SUMMARIES.whyLabel) && !/snap-lead|snap-why|class="notes"|pic-note/.test(fr), `${where}: second-layer text in the frame`);
+  ok(!/why it matters/i.test(fr) && !/snap-lead|snap-why|class="notes"|pic-note/.test(fr), `${where}: second-layer text in the frame`);
   ok(!/--(cyan|gold|coral|indigo|green|orange)\b/.test(fr), `${where}: a section color in the frame`);
 }
 /* the frame's CSS keeps to navy and the text colors */
