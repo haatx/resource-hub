@@ -25,7 +25,6 @@
      ["closest",metric,"discipline"]    this view has the smallest Houston-benchmark gap
    =========================================================================== */
 window.SMU_HOUSTON_SUMMARIES = {
-  whyLabel: "Why it matters:",
   credit: "Summary by Houston Arts Alliance.",
   captions: {
     organizations: "Each square is one organization.",

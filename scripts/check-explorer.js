@@ -19,7 +19,19 @@
        data file, and every claim its wording makes holds against the data;
      - no digits appear outside figures and data-derived text, so nothing is
        typed in by hand;
-     - budget-band labels such as $250k-$999k sit in a nowrap span.
+     - budget-band labels such as $250k-$999k sit in a nowrap span;
+     - the frame (the first layer) shows the four approved figures in order,
+       Houston in its phrase and the national figure beneath, attendance
+       spelled out, one sentence per figure for screen readers, the approved
+       group line and small-group note, no section colors, and a source line
+       that cites the page of every figure it shows;
+     - the second layer is closed by default behind "See all the figures",
+       with the CSV and report links outside it;
+     - each frame figure has a named Copy button wired to copySentences(),
+       with a live region and a select-the-text fallback, and no function
+       in the page script is declared twice;
+     - each of the 36 copy sentences carries its view's Houston and national
+       figures as published, its group size, and no other digits.
    It also checks that the data file is complete, that the CSV and the
    inventory are up to date, and that new files use CRLF line endings.
    No dependencies.
@@ -100,6 +112,8 @@ function read(src){
   }
   return { values, free: free.join(' ') };
 }
+const esc2 = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const at0 = (src, x) => src.indexOf(x);
 const textOf = s => decode(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
 
 function checkValues(where, values, view){
@@ -154,7 +168,7 @@ for(const r of D.values){
 /* ------------------------------------------------------- every view --- */
 const exact = {
   group: (h, n) => `Based on a group of ${h} Houston and ${n} national benchmark organizations.`,
-  small: h => `A small group: these averages come from a group of ${h} Houston organizations, and one organization can move them substantially.`
+  small: h => `A small group: these figures come from a group of ${h} Houston organizations, and one organization can move them substantially.`
 };
 const nRec = (view, geo) => VIEW[view].mode === 'overall' ? REC[key('orgs_total', 'overall', geo)]
   : REC[key(VIEW[view].mode === 'discipline' ? 'orgs_by_discipline_count' : 'orgs_by_budget_count', 'overall', geo, view)];
@@ -172,22 +186,27 @@ for(const v of D.views){
     const { values, free } = read(card);
     checkValues(where, values, view);
     checkFree(where, free);
+    /* the "why" line follows the lead as plain text, with no label */
+    ok(!/why it matters/i.test(textOf(card)) && !/<p class="snap-why"><strong>/.test(card), `${where}: the "Why it matters" label is back`);
     const figs = (card.match(/class="fig-item"/g) || []).length;
     const charts = (card.match(/<figure class="chart/g) || []).length;
     ok(figs <= 4, `${where}: ${figs} headline figures`);
     ok(charts === 1, `${where}: ${charts} pictures`);
-    /* source and group size sit inside the frame, so a screenshot keeps them */
+    /* a one-line source inside the snapshot: author, year, period, the pages
+       of every figure on the card, and HAA's credit. Who the groups are and
+       how big they are is said once, in the frame above. */
     const frame = card.slice(0, card.includes('<details') ? card.indexOf('<details') : undefined);
-    ok(/<span class="src">Source: /.test(frame), `${where}: source line outside the frame`);
-    ok(frame.includes(SUMMARIES.credit), `${where}: summary credit missing from the frame`);
-    ok(textOf(frame).includes(`Houston: ${D.source.houston.description}, not a census.`), `${where}: cohort line missing from the frame`);
-    ok(textOf(frame).includes(`National benchmark: ${D.source.national.benchmark}.`), `${where}: benchmark line missing from the frame`);
+    const cardPages = [...new Set(read(frame).values.filter(x=>x.s !== 'not-reported').map(x=>REC[key(x.m, x.v, x.g, x.c)].page))].sort((a, b)=>a - b);
+    const srcLine = textOf((frame.match(/<span class="src">([\s\S]*?)<\/span><\/p>/) || [, ''])[1]);
+    const wantLine = `Source: ${D.source.author} (${D.source.publicationYear}), ${D.source.period} data, ${cardPages.length > 1 ? 'pp. ' : 'p. '}${cardPages.join(', ')}. ${SUMMARIES.credit}`;
+    ok(srcLine === wantLine, `${where}: source reads "${srcLine}", expected "${wantLine}"`);
+    ok(!textOf(frame).includes('not a census') && !textOf(frame).includes(D.source.national.benchmark), `${where}: cohort or benchmark description repeated on the card`);
     ok((frame.match(/<figcaption class="pic-note">([^<]*)<\/figcaption>/g) || []).every(c=>Object.values(SUMMARIES.captions).includes(decode(c.replace(/<[^>]+>/g, '')))), `${where}: picture caption is not an approved caption`);
 
     const h = nRec(view, 'houston').display, n = nRec(view, 'national').display;
     const gl = card.match(/<span class="groupline">([\s\S]*?\.)<\/span>/);
     const sn = card.match(/<p class="smallnote">([\s\S]*?)<\/p>/);
-    ok(gl && textOf(gl[1]) === exact.group(h, n), `${where}: group line reads "${gl && textOf(gl[1])}"`);
+    ok(!gl, `${where}: group line repeated on the card`);
     if(cfg.section === 'sector-profile'){
       ok(!sn, `${where}: unexpected small-group note`);
     } else {
@@ -334,6 +353,7 @@ function claim(c, view, where){
 const LABELS = D.views.map(w=>w.label + ' ' + (w.definition || '') + ' ' + (D.componentLabels[w.id] || '')).join(' ');
 const FRAMING = /\b(better|worse|best|worst|lags?|lagging|behind|falls? short|underperform\w*|outperform\w*|rank\w*|crisis|struggl\w*|thriv\w*)\b/i;
 ok(new Set(Object.keys(SUMMARIES.views)).size === D.views.length, 'summaries: wrong number of views');
+ok(!('whyLabel' in SUMMARIES), 'summaries: the "Why it matters:" label is back');
 for(const w of D.views){
   for(const sec of D.sections){
     const where = `summary ${w.id} / ${sec.id}`;
@@ -361,6 +381,136 @@ for(const w of D.views){
   }
 }
 
+/* -------------------------------------------------------- the frame --- */
+/* The first layer. For every view: the same four figures in the same order,
+   each Houston figure inside its phrase and the national figure beneath it,
+   attendance spelled out; one sentence per figure for screen readers; the
+   group line and small-group note in their approved wording; and the source
+   inside the frame, citing the page of every figure it shows. */
+const S = D.source;
+const plain = r => r.status !== 'reported' ? E.STATUS_TEXT[r.status]
+  : MET[r.metric].unit === 'attendance_thousands' ? (r.value * 1000).toLocaleString('en-US') : r.display;
+const FRAME_IDS = 'local_gov_pct_expenses,personnel_pct_expenses,avg_attendance,primary_facility|rent';
+ok(E.FRAME.map(f=>f.m + (f.c ? '|' + f.c : '')).join(',') === FRAME_IDS, 'frame: not the four approved figures in order');
+for(const v of D.views){
+  const view = v.id, where = `${view} / frame`;
+  const fr = E.renderFrame(view);
+  const { values, free } = read(fr);
+  checkValues(where, values, view);
+  checkFree(where, free);
+  checkBands(where, fr);
+  const items = fr.split(/(?=<li class="ff">)/).slice(1);
+  ok(items.length === E.FRAME.length, `${where}: ${items.length} figures`);
+  E.FRAME.forEach((f, i)=>{
+    const it = items[i] || '', at = `${where} / ${f.m}`;
+    const h = REC[key(f.m, view, 'houston', f.c)], n = REC[key(f.m, view, 'national', f.c)];
+    /* the data file reports all four for both groups in every view; if a new
+       report drops one, the frame needs a decision, never a stand-in */
+    ok(h && n && h.status === 'reported' && n.status === 'reported', `${at}: not reported for both groups`);
+    if(!h || !n) return;
+    const nat = `${S.national.label}: ${plain(n)}`;
+    const said = it.match(/<p class="visually-hidden">([\s\S]*?)<\/p>/);
+    const want = `${f.pre ? f.pre + ' ' : ''}${plain(h)} ${f.post}. ${nat}.`;
+    ok(said && textOf(said[1]) === want, `${at}: screen readers hear "${said && textOf(said[1])}", expected "${want}"`);
+    const num = it.match(/<span class="ff-num"[^>]*>([\s\S]*?)<\/span><span class="ff-post"/);
+    ok(num && textOf(num[1]) === plain(h) && /data-g="houston"/.test(num[1]) && !/data-g="national"/.test(num[1]), `${at}: number reads "${num && textOf(num[1])}"`);
+    const line = it.match(/<span class="ff-nat"[^>]*>([\s\S]*?)<\/span><\/li>/);
+    ok(line && textOf(line[1]) === nat && /data-g="national"/.test(line[1]) && !/data-g="houston"/.test(line[1]), `${at}: national line reads "${line && textOf(line[1])}"`);
+    ok(it.includes(`aria-hidden="true">${esc2(f.post)}</span>`) && (!f.pre || it.includes(`aria-hidden="true">${esc2(f.pre)}</span>`)), `${at}: drawn phrase missing or not hidden from screen readers`);
+  });
+  const hN = nRec(view, 'houston').display, nN = nRec(view, 'national').display;
+  const gl = fr.match(/<span class="groupline">([\s\S]*?\.)<\/span>/);
+  ok(gl && textOf(gl[1]) === exact.group(hN, nN), `${where}: group line reads "${gl && textOf(gl[1])}"`);
+  const sn = fr.match(/<p class="smallnote">([\s\S]*?)<\/p>/);
+  if(nRec(view, 'houston').value < SMALL_GROUP) ok(sn && textOf(sn[1]) === exact.small(hN), `${where}: small-group note reads "${sn && textOf(sn[1])}"`);
+  else ok(!sn, `${where}: small-group note on a group of ${hN}`);
+  const tag = textOf((fr.match(/<h3 class="fr-tag"[^>]*>([\s\S]*?)<\/h3>/) || [, ''])[1]);
+  ok(tag === (v.mode === 'overall' ? 'All organizations' : (v.mode === 'discipline' ? 'Discipline: ' : 'Budget size: ') + v.label), `${where}: tag reads "${tag}"`);
+  const top = fr.slice(0, fr.indexOf('<ul class="ffs">'));
+  ok((textOf(top).match(new RegExp(S.period, 'g')) || []).length === 1, `${where}: ${S.period} should show once in the group`);
+  const order = ['class="fr-tag"', 'class="groupline"', ...(sn ? ['class="smallnote"'] : []), 'class="ffs"', 'class="fr-src"'].map(s=>fr.indexOf(s));
+  ok(order.every((x, i)=>x >= 0 && (i === 0 || x > order[i - 1])), `${where}: parts out of order`);
+  const pages = [...new Set(values.filter(x=>x.s !== 'not-reported').map(x=>REC[key(x.m, x.v, x.g, x.c)].page))].sort((a, b)=>a - b);
+  const src = textOf((fr.match(/<p class="fr-src">([\s\S]*?)<\/p>/) || [, ''])[1]);
+  const wantSrc = `Source: ${S.author}, ${S.title} (${S.publicationYear}), ${pages.length > 1 ? 'pp. ' : 'p. '}${pages.join(', ')}. Houston: ${S.houston.description}, not a census. National benchmark: ${S.national.benchmark}.`;
+  ok(src === wantSrc, `${where}: source reads "${src}"`);
+  ok(!/why it matters/i.test(fr) && !/snap-lead|snap-why|class="notes"|pic-note/.test(fr), `${where}: second-layer text in the frame`);
+  ok(!/--(cyan|gold|coral|indigo|green|orange)\b/.test(fr), `${where}: a section color in the frame`);
+}
+/* The second layer: closed by default and opened by one control between
+   the frame and the cards. The CSV and the report sit outside it, so they
+   stay in view while it's closed. */
+{
+  const at = x => html.indexOf(x);
+  const box = html.match(/<div class="detail" id="detail"[^>]*>/);
+  ok(box && /\shidden(\s|>)/.test(box[0]), 'second layer: not closed by default');
+  ok(/<div class="detail" id="detail"[^>]*>\s*<div class="cards" id="cards"><\/div>\s*<\/div>/.test(html), 'second layer: the cards are not inside it');
+  const btn = html.match(/<button[^>]*id="seeAll"[^>]*>([\s\S]*?)<\/button>/);
+  ok(btn && /aria-expanded="false"/.test(btn[0]) && /aria-controls="detail"/.test(btn[0]) && textOf(btn[1]) === 'See all the figures', 'second layer: the "See all the figures" control');
+  ok(at('id="frame"') < at('id="seeAll"') && at('id="seeAll"') < at('id="detail"'), 'second layer: control not between the frame and the cards');
+  ok(at('id="frame"') < at('id="csvLink"') && at('id="csvLink"') < at('id="detail"') && at('id="pdfNote"') < at('id="detail"'), 'second layer: the CSV or report link is inside the closed area');
+  ok(/getElementById\('csvLink'\)\.insertAdjacentHTML\('afterend', pdf\.html\)/.test(m[1]), 'second layer: the report link no longer sits beside the CSV link');
+}
+/* Copy: one button per frame figure, named in plain words; a polite live
+   region for "Copied"; and the select-the-text fallback, closed until it's
+   needed. The buttons themselves are built in the browser. */
+{
+  const names = E.FRAME.map(f=>f.name);
+  ok(names.every(x=>typeof x === 'string' && x.trim() && !/\d/.test(x)) && new Set(names).size === names.length, 'copy: every frame figure needs its own button name');
+  ok(/<p class="visually-hidden" id="copyStatus" role="status" aria-live="polite"><\/p>/.test(html), 'copy: no live region for "Copied"');
+  ok(/<div class="copyfall" id="copyFall" hidden>\s*<label for="copyText">[^<]+<\/label>\s*<textarea class="copytext" id="copyText"[^>]*readonly><\/textarea>/.test(html), 'copy: the select-the-text fallback is missing or open');
+  ok(/copySentences\(current\)\[i\]/.test(m[1]) && /navigator\.clipboard\.writeText\(text\)/.test(m[1]) && /copyText\.setSelectionRange\(0, text\.length\)/.test(m[1]), 'copy: not wired to copySentences() with the fallback');
+  ok(at0(html, 'id="frame"') < at0(html, 'id="copyBtns"') && at0(html, 'id="copyBtns"') < at0(html, 'id="seeAll"'), 'copy: the buttons are not between the frame and "See all the figures"');
+}
+/* the page's script runs as one scope, so a second function with the same
+   name would silently replace the first */
+{
+  const decl = [...m[1].matchAll(/\bfunction\s+([A-Za-z_$][\w$]*)\s*\(/g)].map(x=>x[1]);
+  const dup = decl.filter((x, i)=>decl.indexOf(x) !== i);
+  ok(!dup.length, `page script: function declared twice: ${[...new Set(dup)].join(', ')}`);
+}
+/* the frame's CSS keeps to navy and the text colors */
+{
+  const css = (html.match(/<style>([\s\S]*?)<\/style>/) || [, ''])[1];
+  const rules = css.split('}').filter(r=>/(^|[\s,])\.(frame|fr-|ff)/.test(r.split('{')[0]));
+  ok(rules.length > 10, `frame CSS: only ${rules.length} rules found`);
+  ok(rules.every(r=>!/--(cyan|gold|coral|indigo|green|orange)\b/.test(r)), 'frame CSS uses a section color');
+}
+
+/* --------------------------------------------------- copy sentences --- */
+/* One plain-text sentence per frame figure, then a source sentence. The
+   Houston figure comes first and the national figure after "compared with",
+   both as published (attendance spelled out); the source sentence names
+   both groups with the view's own sizes; and no other digit appears except
+   the budget size's own amounts. */
+for(const v of D.views){
+  const view = v.id;
+  const lines = E.copySentences(view);
+  ok(Array.isArray(lines) && lines.length === E.FRAME.length, `${view} / copy: ${lines && lines.length} sentences`);
+  const src = `Source: ${S.author}, ${S.title} (${S.publicationYear}). ${S.houston.label}: ${nRec(view, 'houston').display} organizations that applied for ${S.presentedBy} operating support. National: ${nRec(view, 'national').display} organizations in ${S.national.benchmark}.`;
+  (lines || []).forEach((line, i)=>{
+    const f = E.FRAME[i], where = `${view} / copy / ${f.m}`;
+    ok(typeof line === 'string', `${where}: no sentence`);
+    if(typeof line !== 'string') return;
+    const h = REC[key(f.m, view, 'houston', f.c)], n = REC[key(f.m, view, 'national', f.c)];
+    ok(line.endsWith(' ' + src), `${where}: source sentence`);
+    const body = line.slice(0, line.length - src.length - 1);
+    const tail = ` compared with ${plain(n)} ${S.national.label.toLowerCase()} (${S.period}).`;
+    ok(body.endsWith(',' + tail), `${where}: national figure "${body.slice(-60)}"`);
+    const lead = body.slice(0, body.length - tail.length - 1);
+    const hAt = lead.indexOf(' ' + plain(h) + ' ');
+    ok(hAt > 0 && lead.indexOf(' ' + plain(h) + ' ', hAt + 1) === -1, `${where}: Houston figure ${plain(h)} not found once`);
+    let rest = lead.replace(' ' + plain(h) + ' ', ' ');
+    if(v.mode === 'budget') (v.label.match(/\$[\d.]+[KM]/g) || []).forEach(a=>{ ok(rest.includes(a), `${where}: budget amount ${a} missing`); rest = rest.replace(a, ''); });
+    ok(!/\d/.test(rest), `${where}: digits outside the figures: "${rest}"`);
+    ok(lead.includes(`${S.houston.label} nonprofit `), `${where}: doesn't name the Houston group`);
+    /* the group is named without a parenthetical; the period is the only one */
+    ok((body.match(/\(/g) || []).length === 1, `${where}: a parenthetical besides (${S.period})`);
+    ok(!/[\u2013\u2014\u2018\u2019\u201C\u201D&]/.test(line), `${where}: a dash, curly quote, or ampersand`);
+    ok(!FRAMING.test(line), `${where}: better/worse framing`);
+  });
+}
+
 /* exact approved wording in the data file */
 ok(MET.avg_revenue.tableNote === "Average revenue minus average expenses doesn't equal the operating surplus or deficit. The report gives the operating result separately.", 'revenue note wording');
 ok(MET.earned_vs_contributed.cardNote === 'Earned revenue includes admissions, ticket sales, and program fees.', 'earned revenue wording');
@@ -371,10 +521,10 @@ ok(/media and communications/i.test(VIEW.visual.cardDefinition) && /NTEE A3/.tes
 const FALLBACK = "The full report isn't posted online yet. For a copy, email data@haatx.com.";
 ok(D.source.pdfFallback === FALLBACK, 'source.pdfFallback wording');
 function pdfStates(E2, url){
-  const hero = E2.heroPdf(), about = E2.aboutHTML();
+  const hero = E2.reportPdf(), about = E2.aboutHTML();
   const where = url ? 'with source.url' : 'without source.url';
   if(url){
-    ok(hero.where === 'cta' && hero.html.includes(`href="${url}"`), `hero ${where}: PDF button missing`);
+    ok(hero.where === 'link' && hero.html.includes(`href="${url}"`), `hero ${where}: PDF button missing`);
     ok(about.includes(`href="${url}"`), `About ${where}: PDF link missing`);
     ok(!textOf(hero.html + about).includes(FALLBACK), `${where}: fallback line still shown`);
   } else {

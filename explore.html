@@ -68,6 +68,9 @@
 
   #explore{--gap:clamp(32px,3.4vw,52px)}
   .band{padding:var(--gap) 0 0}
+  /* the hero and the selector read as one unit, so the rule between them sits closer */
+  .hero + .in .rule{margin-top:clamp(22px,2.2vw,32px)}
+  .band.pick{padding-top:clamp(22px,2.2vw,32px)}
 
   /* section divider, as on the homepage: one solid navy rule that draws in
      from the left once, the first time it is in view. The hidden start state
@@ -79,8 +82,20 @@
   #explore.js-rules .rule.drawn{clip-path:none}
   @keyframes draw{to{clip-path:inset(0 0 0 0 round 99px)}}
 
-  /* ---- hero: same lockup as the homepage ---- */
-  .hero{padding:56px 0 0}
+  /* ---- hero: same lockup as the homepage ----
+     The way back is a quiet link above the title, so the selector is the one
+     thing to do before a view is chosen. */
+  .hero{padding:28px 0 0}
+  .back{
+    display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:4px 0;
+    font-size:14.5px;font-weight:600;color:var(--navy);
+    text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;
+    text-decoration-color:color-mix(in srgb,var(--navy) 35%,transparent);
+    transition:text-decoration-color .2s var(--ease);
+  }
+  .back:hover{text-decoration-color:currentColor}
+  .back:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
   .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
   .logo{height:clamp(38px,3.25vw * 1.16,58px);width:auto;aspect-ratio:51/58;display:block;flex:none;margin:-58px 0 0}
   h1{
@@ -89,9 +104,9 @@
     letter-spacing:-.022em;margin:0;
   }
   h1:focus{outline:none}
-  .stand{margin:26px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.25;color:var(--ink-soft)}
+  .stand{margin:18px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.25;color:var(--ink-soft)}
   .meta{
-    font-size:14.5px;color:var(--ink-soft);margin:32px 0 0;
+    font-size:14.5px;color:var(--ink-soft);margin:14px 0 0;
   }
   .cta{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
   .btn,.ghostbtn{
@@ -119,8 +134,8 @@
   }
 
   /* ---- the selector ---- */
-  .lead{margin:0 0 20px;font-size:16.5px;line-height:1.42}
-  .pickbar{padding:14px 0 16px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .pick h2{margin-bottom:4px}
+  .pickbar{padding:12px 0 16px;border-bottom:1px solid var(--hair)}
   .pickrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
   fieldset{border:0;margin:0;padding:0;min-width:0}
   /* native radios, visually replaced; the input keeps focus and arrow keys */
@@ -156,15 +171,105 @@
      color is not the only signal (same as the directory's chips) */
   .opt input:checked + .chip{background:var(--coral);color:var(--navy);border-color:var(--coral);font-weight:600}
   .opt input:checked + .chip::before{content:"\2713";font-size:11px;line-height:1;font-weight:700}
-  .status{margin:12px 0 0;font-size:15px;color:var(--ink-soft)}
-  .status strong{color:var(--ink);font-weight:600}
+  .status strong{font-weight:600}
+
+  /* ---- the frame: the first layer ----
+     One frame for the selected view: the group, four figures, and the source,
+     so a screenshot of the frame is complete and citable on its own. Navy and
+     the page's text colors only; the section colors belong to the cards,
+     where they have a key. Each number sits inside its own phrase, with the
+     national figure on a smaller line beneath. On wide screens the four sit
+     in a row and their numbers share one line (subgrid); on tablets they
+     make two rows of two; on phones each figure reads as a sentence, the
+     number running into the words after it. */
+  .frame{
+    margin:clamp(18px,1.8vw,26px) 0 0;
+    border:1px solid var(--navy);
+    padding:clamp(18px,1.9vw,28px) clamp(18px,2.2vw,34px) clamp(14px,1.4vw,20px);
+  }
+  .fr-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 20px}
+  .fr-tag{margin:0;font-size:clamp(19px,1.6vw,23px);line-height:1.15;font-weight:500;letter-spacing:-.01em}
+  .fr-when{margin:0;font-size:15px;font-weight:500;color:var(--ink-soft)}
+  .fr-n{margin:5px 0 0;font-size:15px;line-height:1.38;color:var(--ink-soft);text-wrap:pretty}
+  .frame .smallnote{margin:12px 0 0;border-left-color:var(--navy)}
+  .ffs{
+    list-style:none;margin:clamp(14px,1.4vw,20px) 0 0;padding:clamp(14px,1.4vw,20px) 0 0;
+    border-top:1px solid var(--hair);
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(20px,2.6vw,44px);
+    animation:fade .35s var(--ease);
+  }
+  .ff{display:grid;grid-row:span 4;grid-template-rows:subgrid;min-width:0}
+  /* the screen-reader sentence stays out of a mouse selection, so copying
+     the frame's text doesn't paste each figure twice */
+  .ff > .visually-hidden{-webkit-user-select:none;user-select:none}
+  .ff-pre,.ff-post{font-size:clamp(16.5px,1.25vw,18px);line-height:1.28;text-wrap:pretty}
+  .ff-pre{grid-row:1;align-self:end}
+  .ff-num{
+    grid-row:2;margin:3px 0 5px;
+    font-size:clamp(44px,4.5vw,66px);line-height:1;font-weight:500;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .ff-post{grid-row:3}
+  .ff-nat{grid-row:4;margin:10px 0 0;font-size:15px;line-height:1.3;color:var(--ink-soft)}
+  .ff-nat .v{font-weight:500;color:var(--ink)}
+  .ff .v.na{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink-soft);white-space:normal}
+  .fr-src{
+    margin:clamp(14px,1.4vw,20px) 0 0;padding:11px 0 0;border-top:1px solid var(--hair);
+    font-size:13px;line-height:1.42;color:var(--ink-soft);
+  }
+
+  /* ---- the frame's actions ----
+     Under the frame and outside its border, so a screenshot of the frame
+     stays clean. "See all the figures" opens the second layer. The CSV and
+     the full report sit beside it and stay in view whether that layer is
+     open or closed. */
+  .actions{margin:14px 0 0}
+  .actions .cta{margin:20px 0 0}
+  .actions .pdfnote{margin:12px 0 0}
+  button.btn{font-family:inherit;line-height:inherit;cursor:pointer}
+  .seeall svg{transition:transform .3s var(--ease)}
+  .seeall[aria-expanded="true"] svg{transform:rotate(45deg)}
+
+  /* Copy: one quiet text button per figure, in the frame's order. While a
+     button shows "Copied", both labels share one grid cell, so the row
+     doesn't shift. If the clipboard is refused, the sentence waits in a
+     text box, selected, for the visitor to copy. */
+  .copyrow{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 20px}
+  .copyhead{margin:0;font-size:14.5px;line-height:1.3;color:var(--ink-soft)}
+  .copybtns{display:flex;flex-wrap:wrap;gap:0 20px;margin:0;padding:0;list-style:none}
+  .copybtn{
+    -webkit-appearance:none;appearance:none;background:none;border:0;margin:0;padding:6px 0;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;text-align:left;
+    font-family:inherit;font-size:14.5px;line-height:1.3;font-weight:600;color:var(--navy);
+  }
+  .copybtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
+  .copybtn .ic-done,.copybtn.done .ic-copy{display:none}
+  .copybtn.done .ic-done{display:block}
+  .cb-t{display:grid}
+  .cb-l,.cb-d{grid-area:1 / 1;transition:opacity .15s var(--ease)}
+  .cb-l{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:color-mix(in srgb,var(--navy) 35%,transparent)}
+  .copybtn:hover .cb-l{text-decoration-color:currentColor}
+  .cb-d{opacity:0}
+  .copybtn.done .cb-l{opacity:0}
+  .copybtn.done .cb-d{opacity:1}
+  .copybtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  .copyfall{margin:12px 0 0}
+  .copyfall label{display:block;margin:0 0 8px;font-size:15px;line-height:1.38}
+  .copytext{
+    display:block;width:100%;margin:0;padding:10px 12px;resize:vertical;
+    font-family:inherit;font-size:15px;line-height:1.42;color:var(--ink);
+    background:var(--paper);border:1px solid var(--navy);border-radius:var(--r);
+  }
+  .copytext:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
 
   /* ---- snapshots ----
-     Each section opens with a self-contained snapshot: a plain finding, why
-     it matters, one picture, and its source, all inside one frame so a
-     screenshot of the frame needs nothing around it. The picture sits on a
-     navy plate, where every section's accent color clears 3:1. Every picture
-     counts in squares. Full figures sit below the frame, unchanged. */
+     The second layer. Each section card opens with a snapshot: a plain
+     finding, a sentence on what it means, one picture, the card's own
+     definitions and notes, and a one-line source. Who the two groups are is
+     said once, in the frame's source line and in About this data. The
+     picture sits on a navy plate, where every section's accent color clears
+     3:1. Every picture counts in squares. Full figures sit below the
+     snapshot, unchanged. */
   .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;padding:26px 0 0}
   .card{background:var(--paper-2);border:1px solid var(--hair);border-top:3px solid var(--c);border-radius:var(--r);min-width:0}
   .snap{
@@ -180,7 +285,6 @@
   .snap-tag{margin:0;font-size:13.5px;font-weight:500;color:var(--s-soft)}
   .snap-lead{margin:0;font-size:clamp(25px,2.65vw,38px);line-height:1.14;font-weight:500;letter-spacing:-.018em;color:var(--s-ink)}
   .snap-why{margin:clamp(14px,1.5vw,20px) 0 0;font-size:clamp(16.5px,1.3vw,18.5px);line-height:1.38;color:var(--s-ink)}
-  .snap-why strong{font-weight:600}
   .smallnote{
     margin:14px 0 0;padding:9px 0 9px 13px;border-left:3px solid var(--gold);
     font-size:15px;line-height:1.36;color:var(--ink);
@@ -326,8 +430,36 @@
   @media (max-width:899px){
     .snap{grid-template-columns:minmax(0,1fr)}
   }
+  /* tablets: the four figures in two rows of two */
+  @media (max-width:1023px){
+    .ffs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .ff:nth-child(n+3){padding-top:clamp(20px,3vw,28px)}
+  }
+  /* phones: each figure is one block of text, read top to bottom. The phrase
+     before the number takes its own line, the number runs straight into the
+     words after it, and the national figure sits underneath. */
+  @media (max-width:559px){
+    .frame{margin-top:14px;padding:16px 16px 0}
+    .fr-tag{font-size:19px}
+    .ffs{grid-template-columns:minmax(0,1fr);margin-top:14px;padding:0}
+    .ff,.ff:nth-child(n+3){
+      grid-row:auto;grid-template-rows:none;grid-template-columns:auto minmax(0,1fr);
+      column-gap:10px;padding:14px 0 15px;
+    }
+    .ff + .ff{border-top:1px solid var(--hair)}
+    .ff-pre{grid-column:1 / -1;grid-row:1;margin:0 0 2px}
+    .ff-num{grid-column:1;grid-row:2;align-self:baseline;margin:0;font-size:40px}
+    .ff-post{grid-column:2;grid-row:2;align-self:baseline}
+    .ff-nat{grid-column:1 / -1;grid-row:3;margin:7px 0 0}
+    .fr-src{margin:0;padding:11px 0 13px}
+    .copyrow{display:block}
+    .copyhead{margin:0 0 4px}
+    .copybtns{display:block}
+    .copybtns li + li{border-top:1px solid var(--hair)}
+    .copybtn{display:flex;width:100%;padding:11px 0}
+  }
   @media (max-width:760px){
-    .hero{padding:40px 0 0}
+    .hero{padding:28px 0 0}
     h1{font-size:clamp(31px,8.1vw,47px)}
     .logo{height:38px;width:33px;margin:0}
     .cta{flex-direction:column;align-items:stretch}
@@ -337,9 +469,16 @@
   }
   @media (max-width:519px){
     .in{padding:0 16px}
-    .hero{padding:24px 0 0}
-    .hero-top{flex-direction:column-reverse;align-items:flex-end;gap:18px}
-    h1{align-self:stretch}
+    /* the way back and the logo share the top line, then the title */
+    .hero{padding:14px 0 0}
+    .hero .in{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:16px}
+    .hero .in > *{grid-column:1 / -1}
+    .hero .back{grid-column:1;grid-row:1;margin:0}
+    .hero-top{display:contents}
+    .logo{grid-column:2;grid-row:1}
+    h1{grid-column:1 / -1;grid-row:2;margin:12px 0 0}
+    .pickbar{padding:10px 0 14px}
+    .stand{margin-top:14px;font-size:16.5px;line-height:1.3}
     .seg{display:flex;width:100%}
     .seg .opt{flex:1 1 auto}
     .seg .opt span{padding:9px 8px;font-size:13.5px;text-align:center}
@@ -358,29 +497,23 @@
 
   <header class="hero">
     <div class="in">
+      <a class="back" href="index.html#directory"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>Back to all resources</a>
       <div class="hero-top">
         <h1 tabindex="-1">Explore Houston's Nonprofit Arts Sector</h1>
         <img class="logo" src="https://i0.wp.com/houstonartsalliance.com/wp-content/uploads/2024/11/HAA_Logo_Stacked_Full-Color.webp?fit=1674%2C1920&ssl=1" alt="Houston Arts Alliance logo">
       </div>
-      <!-- the second and third sentences are built from the data file -->
-      <p class="stand" id="standfirst">Choose a discipline or budget size to see figures on finances, staffing, attendance, and facilities for Houston's nonprofit arts organizations, with a national benchmark beside each one.</p>
+      <!-- the second sentence is built from the data file -->
+      <p class="stand" id="standfirst">Choose a part of Houston's nonprofit arts sector to see four figures, each beside a national benchmark.</p>
       <p class="meta" id="heroMeta"></p>
-      <p class="cta">
-        <a class="btn" href="index.html#directory"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg> Back to all resources</a>
-        <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
-      </p>
-      <!-- the PDF link, or while the report isn't online, source.pdfFallback -->
-      <p class="pdfnote" id="pdfNote" hidden></p>
       <noscript><p class="noscript">This explorer needs JavaScript to show the figures. Every figure is also in the <a href="data/smu-houston-profile.csv">CSV download</a>.</p></noscript>
     </div>
   </header>
 
   <div class="in"><div class="rule" aria-hidden="true"></div></div>
 
-  <section class="band" aria-labelledby="pick-h">
+  <section class="band pick" aria-labelledby="pick-h">
     <div class="in">
       <h2 id="pick-h">Choose a part of the sector.</h2>
-      <p class="lead">Look at all organizations together, or at one discipline or one budget size. The two breakdowns are separate: the report doesn't combine them.</p>
     </div>
     <div class="in">
       <div class="pickbar" id="pickbar">
@@ -400,9 +533,34 @@
             <div class="chips"></div>
           </fieldset>
         </div>
-        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <!-- the frame states the group, so this line is for screen readers only -->
+        <p class="status visually-hidden" id="status" role="status" aria-live="polite"></p>
       </div>
-      <div class="cards" id="cards"></div>
+      <!-- the first layer: the selected view in one frame -->
+      <section class="frame" id="frame" aria-labelledby="frame-h"></section>
+      <!-- the frame's actions; the CSV and the report stay in view -->
+      <div class="actions">
+        <!-- copy: one button per frame figure, built by the script -->
+        <div class="copyrow" role="group" aria-labelledby="copyHead">
+          <p class="copyhead" id="copyHead">Copy a figure as a sentence, with its source:</p>
+          <ul class="copybtns" id="copyBtns"></ul>
+        </div>
+        <div class="copyfall" id="copyFall" hidden>
+          <label for="copyText">Your browser didn't let this page copy. The sentence is selected below, so press Ctrl+C, or Cmd+C on a Mac, to copy it.</label>
+          <textarea class="copytext" id="copyText" rows="4" readonly></textarea>
+        </div>
+        <p class="visually-hidden" id="copyStatus" role="status" aria-live="polite"></p>
+        <div class="cta">
+          <button class="btn seeall" id="seeAll" type="button" aria-expanded="false" aria-controls="detail">See all the figures <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
+          <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        </div>
+        <!-- the PDF link, or while the report isn't online, source.pdfFallback -->
+        <p class="pdfnote" id="pdfNote" hidden></p>
+      </div>
+      <!-- the second layer: the five section cards, closed until opened -->
+      <div class="detail" id="detail" role="region" aria-label="All the figures" hidden>
+        <div class="cards" id="cards"></div>
+      </div>
     </div>
   </section>
 
@@ -527,6 +685,11 @@
     const c = 'v' + (r.status === 'reported' ? '' : ' na') + (cls ? ' ' + cls : '');
     return `<span class="${c}" data-m="${r.metric}" data-g="${r.geo}" data-c="${r.component || ''}" data-v="${r.view}" data-s="${r.status}">${esc(text)}</span>`;
   }
+  /* Sentences and the frame spell attendance out: the published 61K reads
+     61,000. Pictures and tables keep the report's 61K. */
+  const spelled = r => MET[r.metric].unit === 'attendance_thousands' && r.status === 'reported';
+  const longText = r => (r.value * 1000).toLocaleString('en-US');
+  const plainVal = r => r.status !== 'reported' ? STATUS_TEXT[r.status] : spelled(r) ? longText(r) : r.display;
   function groupN(view, geo){
     const v = VIEW[view];
     return v.mode === 'overall' ? REC[key('orgs_total', 'overall', geo)] : REC[key(MODE_COUNT[v.mode], 'overall', geo, view)];
@@ -544,13 +707,15 @@
   const list = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1];
   const PLUS = '<span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>';
 
-  /* exact wording approved for the group-size line and the small-group note */
+  /* exact wording approved for the group-size line and the small-group note.
+     The note says "figures", not "averages": the frame and the cards mix
+     averages with shares of spending and shares of organizations. */
   function groupText(view){
     return `<span class="groupline">Based on a group of ${val(groupN(view,'houston'))} Houston and ${val(groupN(view,'national'))} national benchmark organizations.</span>`;
   }
   function smallNote(view){
     if(!isSmall(view)) return '';
-    return `<p class="smallnote">A small group: these averages come from a group of ${val(groupN(view,'houston'))} Houston organizations, and one organization can move them substantially.</p>`;
+    return `<p class="smallnote">A small group: these figures come from a group of ${val(groupN(view,'houston'))} Houston organizations, and one organization can move them substantially.</p>`;
   }
 
   /* --------------------------------------------------------- figures --- */
@@ -589,9 +754,8 @@
       return val(r);
     }
     const r = rec(m, at || view, geo, c);
-    /* sentences spell attendance out: 61K reads 61,000 */
-    const long = MET[m].unit === 'attendance_thousands' && r.status === 'reported';
-    return val(r, [at && at !== view ? 'xv' : '', long ? 'long' : ''].filter(Boolean).join(' '), long ? (r.value * 1000).toLocaleString('en-US') : null);
+    const long = spelled(r);
+    return val(r, [at && at !== view ? 'xv' : '', long ? 'long' : ''].filter(Boolean).join(' '), long ? longText(r) : null);
   }
   function say(text, view){
     return text.split(/(\{[^}]+\})/).map(part=>{
@@ -730,21 +894,26 @@
   let OPEN = new Set();
 
   /* ----------------------------------------------------------- cards --- */
+  /* a card's one-line source: author, year, period, the pages of every
+     figure on the card, and HAA's credit, since the sentences are HAA's
+     words about SMU DataArts' figures */
   function sourceText(){
-    return `<span class="src">Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>. ${esc(SUM.credit)}</span>`;
+    return `<span class="src">Source: <span class="dx">${esc(S.author)} (${S.publicationYear}), ${esc(S.period)} data, ${pagesText(PAGES)}</span>. ${esc(SUM.credit)}</span>`;
   }
 
-  /* who the figures describe, inside the frame so a screenshot can't lose it */
+  /* who the figures describe, in the frame's source line so a screenshot
+     can't lose it */
   function whoText(){
     return `<span class="dx">Houston: ${esc(S.houston.description)}, not a census. National benchmark: ${esc(S.national.benchmark)}.</span>`;
   }
 
-  /* who the snapshot is about, so a screenshot names its own group */
-  function viewTag(view){
+  /* who the frame or snapshot is about, so a screenshot names its own group */
+  function tagText(view){
     const v = VIEW[view];
     const pre = v.mode === 'discipline' ? 'Discipline: ' : v.mode === 'budget' ? 'Budget size: ' : '';
-    return `<p class="snap-tag">${pre}${v.mode === 'overall' ? 'All organizations' : viewLabel(view)}</p>`;
+    return pre + (v.mode === 'overall' ? 'All organizations' : viewLabel(view));
   }
+  function viewTag(view){ return `<p class="snap-tag">${tagText(view)}</p>`; }
 
   function sectorTable(card, view){
     const v = VIEW[view];
@@ -765,10 +934,10 @@
     const frame = `<div class="snap">` +
       `<div class="snap-say"><div class="snap-top"><h2 id="h-${card.section}">${esc(sec.name)}</h2>${viewTag(view)}</div>` +
       `<p class="snap-lead">${say(copy.lead, view)}</p>` +
-      `<p class="snap-why"><strong>${esc(SUM.whyLabel)}</strong> ${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
+      `<p class="snap-why">${say(copy.why, view)}</p>${card.section === 'sector-profile' ? '' : smallNote(view)}</div>` +
       picture(card, view) +
       (figs ? `<dl class="figs">${figs}</dl>` : '') +
-      `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${groupText(view)} ${whoText()} ${sourceText()}</p></div>` +
+      `<div class="snap-foot">${notes.length ? `<p class="notes">${notes.map(t=>dx(t)).join(' ')}</p>` : ''}<p class="src-line">${sourceText()}</p></div>` +
       `</div>`;
     PAGES = null;
     const table = card.section === 'sector-profile' ? sectorTable(card, view)
@@ -778,13 +947,103 @@
 
   function renderCards(view){ return CARDS.map(c=>renderCard(c, view)).join(''); }
 
+  /* ------------------------------------------------------------ frame --- */
+  /* The first layer: the same four figures for every view, in this order.
+     Each number sits inside its own phrase, with the national figure on a
+     smaller line beneath. The phrases are page text; every figure comes from
+     the data file. name labels the figure's Copy button; copy is the
+     plain-text sentence that button copies, which names the group in full
+     because it travels without the frame. */
+  const FRAME = [
+    {m:'local_gov_pct_expenses', name:'Local government support', pre:'Local government support equals', post:'of what they spend',
+     copy:'For {group}, local government support equals {h} of what they spend, compared with {n} {nationally} ({period}).'},
+    {m:'personnel_pct_expenses', name:'Staff and contract workers', post:'of spending goes to staff and contract workers',
+     copy:'For {group}, {h} of spending goes to staff and contract workers, compared with {n} {nationally} ({period}).'},
+    {m:'avg_attendance', name:'Attendance', pre:'Each organization averages', post:'in attendance',
+     copy:'For {group}, attendance averages {h} per organization, compared with {n} {nationally} ({period}).'},
+    {m:'primary_facility', c:'rent', name:'Renting their main space', post:'rent their main space',
+     copy:'Among {group}, {h} rent their main space, compared with {n} {nationally} ({period}).'}
+  ];
+
+  const frameVal = r => spelled(r) ? val(r, 'long', longText(r)) : val(r);
+  function frameFigure(f, view){
+    const h = rec(f.m, view, 'houston', f.c), n = rec(f.m, view, 'national', f.c);
+    const nat = `${esc(S.national.label)}: ${frameVal(n)}`;
+    const hide = ' aria-hidden="true"';
+    /* screen readers hear number and phrase as one sentence; the drawn parts,
+       split across lines, are hidden from them */
+    return `<li class="ff">` +
+      `<p class="visually-hidden">${f.pre ? esc(f.pre) + ' ' : ''}${frameVal(h)} ${esc(f.post)}. ${nat}.</p>` +
+      (f.pre ? `<span class="ff-pre"${hide}>${esc(f.pre)}</span>` : '') +
+      `<span class="ff-num"${hide}>${frameVal(h)}</span>` +
+      `<span class="ff-post"${hide}>${esc(f.post)}</span>` +
+      `<span class="ff-nat"${hide}>${nat}</span></li>`;
+  }
+  /* the frame's own source: the report, the pages of every figure in the
+     frame, and who the two groups are */
+  function frameSource(){
+    return `Source: <span class="dx">${esc(S.author)}, <cite>${esc(S.title)}</cite> (${S.publicationYear}), ${pagesText(PAGES)}.</span> ${whoText()}`;
+  }
+  function renderFrame(view){
+    PAGES = new Set();
+    const top = `<div class="fr-top"><h3 class="fr-tag" id="frame-h">${tagText(view)}</h3><p class="fr-when">${dx(S.period)}</p></div>` +
+      `<p class="fr-n">${groupText(view)}</p>`;
+    const figs = `<ul class="ffs">${FRAME.map(f=>frameFigure(f, view)).join('')}</ul>`;
+    const out = top + smallNote(view) + figs + `<p class="fr-src">${frameSource()}</p>`;
+    PAGES = null;
+    return out;
+  }
+
+  /* ------------------------------------------------------ copy lines --- */
+  /* How a copied sentence names its group. Budget sizes are built from the
+     view's label in the data file. Disciplines need more than their label:
+     Visual Arts includes media organizations, and Other Arts is the report's
+     catch-all for everything outside the other two. Its examples (arts
+     education, arts councils, history and science museums) are in About
+     this data. */
+  const COPY_GROUP = {
+    performing: 'performing arts organizations',
+    visual: 'visual arts and media organizations',
+    other: 'arts and culture organizations outside the performing arts, visual arts, and media'
+  };
+  function budgetWords(label){
+    let x;
+    if((x = label.match(/^Under (.+)$/))) return 'under ' + x[1];
+    if((x = label.match(/^(.+)\+$/))) return 'of ' + x[1] + ' or more';
+    if((x = label.match(/^(.+)-(.+)$/))) return 'of ' + x[1] + ' to ' + x[2];
+    throw new Error('No wording for budget size ' + label);
+  }
+  function copyGroup(view){
+    const v = VIEW[view], who = S.houston.label + ' nonprofit ';
+    if(v.mode === 'discipline') return who + COPY_GROUP[view];
+    return who + 'arts organizations' + (v.mode === 'budget' ? ' with budgets ' + budgetWords(v.label) : '');
+  }
+  /* The source sentence names both groups. A sentence pasted on its own
+     loses the frame around it, and "nationally" alone reads like a
+     national average. */
+  function copySource(view){
+    return `Source: ${S.author}, ${S.title} (${S.publicationYear}). ` +
+      `${S.houston.label}: ${groupN(view, 'houston').display} organizations that applied for ${S.presentedBy} operating support. ` +
+      `National: ${groupN(view, 'national').display} organizations in ${S.national.benchmark}.`;
+  }
+  /* plain text, one per frame figure; null where either figure is missing,
+     so a sentence never stands in for a figure the report doesn't give */
+  function copySentences(view){
+    return FRAME.map(f=>{
+      const h = rec(f.m, view, 'houston', f.c), n = rec(f.m, view, 'national', f.c);
+      if(h.status !== 'reported' || n.status !== 'reported') return null;
+      const fill = {group:copyGroup(view), h:plainVal(h), n:plainVal(n), nationally:S.national.label.toLowerCase(), period:S.period};
+      return f.copy.replace(/\{(\w+)\}/g, (_, k)=>fill[k]) + ' ' + copySource(view);
+    });
+  }
+
   /* --------------------------------------------------- surrounding text --- */
   function statusText(view){
     return `Showing <strong>${viewLabel(view)}</strong>: ${val(groupN(view,'houston'))} Houston organizations, ${val(groupN(view,'national'))} in the national benchmark.`;
   }
   function standfirst(){
     PAGES = null;
-    return ` The figures come from ${esc(S.author)}' ${dx(S.period)} profile of ${val(groupN('overall','houston'))} Houston organizations, ${dx(S.houston.description)}, benchmarked against ${val(groupN('overall','national'))} organizations in the ${dx(S.national.benchmark)}. ${esc(S.presentedBy)} presents them here as ${esc(S.author)} published them.`;
+    return ` The figures come from ${esc(S.author)}' ${dx(S.period)} profile of ${val(groupN('overall','houston'))} organizations that applied for ${esc(S.presentedBy)} operating support.`;
   }
   function heroMeta(){
     return `<span class="dx">Source: ${esc(S.author)}</span> <span aria-hidden="true">|</span> <span class="dx">${esc(S.period)} data</span> <span aria-hidden="true">|</span> <span class="dx">Published ${S.publicationYear}</span>`;
@@ -798,8 +1057,8 @@
     if(!S.pdfFallback) return '';
     return `<span class="pdf-fallback">${esc(S.pdfFallback).replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, m=>`<a href="mailto:${m}">${m}</a>`)}</span>`;
   }
-  function heroPdf(){
-    if(S.url) return {where:'cta', html:`<a class="ghostbtn" id="pdfLink" href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB} ${PDF_ICON}</a>`};
+  function reportPdf(){
+    if(S.url) return {where:'link', html:`<a class="ghostbtn" id="pdfLink" href="${esc(S.url)}" target="_blank" rel="noopener">Read the full report (PDF)${NEW_TAB} ${PDF_ICON}</a>`};
     return {where:'note', html:pdfFallback()};
   }
   function citation(){
@@ -838,11 +1097,12 @@
     ].join('');
   }
 
-  root.SMU_EXPLORER = {CARDS, renderCards, renderCard, statusText, standfirst, heroMeta, creditHTML, aboutHTML, heroPdf, pdfFallback, keepBands, SMALL_GROUP, STATUS_TEXT};
+  root.SMU_EXPLORER = {CARDS, FRAME, renderCards, renderCard, renderFrame, copySentences, statusText, standfirst, heroMeta, creditHTML, aboutHTML, reportPdf, pdfFallback, keepBands, SMALL_GROUP, STATUS_TEXT};
 
   /* ======================== browser only below ======================== */
   if(typeof document === 'undefined') return;
 
+  const frameEl  = document.getElementById('frame');
   const cardsEl  = document.getElementById('cards');
   const statusEl = document.getElementById('status');
   const modeInputs = [...document.querySelectorAll('input[name="mode"]')];
@@ -853,8 +1113,8 @@
   document.getElementById('heroMeta').innerHTML = heroMeta();
   document.getElementById('credit').innerHTML = creditHTML();
   document.getElementById('aboutBody').innerHTML = aboutHTML();
-  const pdf = heroPdf();
-  if(pdf.where === 'cta') document.getElementById('csvLink').insertAdjacentHTML('afterend', pdf.html);
+  const pdf = reportPdf();
+  if(pdf.where === 'link') document.getElementById('csvLink').insertAdjacentHTML('afterend', pdf.html);
   else if(pdf.html){
     const note = document.getElementById('pdfNote');
     note.innerHTML = pdf.html;
@@ -886,6 +1146,57 @@
     }catch(e){}
   }
 
+  /* Copy. Each button copies its figure's sentence and source for the
+     current view as plain text. A browser can refuse the clipboard (some do
+     on file://); then the sentence goes into a text box, selected, so the
+     visitor can copy it themselves. */
+  const copyBtns = document.getElementById('copyBtns');
+  const copyFall = document.getElementById('copyFall');
+  const copyText = document.getElementById('copyText');
+  const copyStatus = document.getElementById('copyStatus');
+  const ICON_COPY = '<svg class="ic-copy" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5"/><path d="M5 15V5.5A1.5 1.5 0 0 1 6.5 4H15"/></svg>';
+  const ICON_DONE = '<svg class="ic-done" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  copyBtns.innerHTML = FRAME.map((f, i)=>`<li><button class="copybtn" type="button" data-i="${i}">${ICON_COPY}${ICON_DONE}` +
+    `<span class="cb-t"><span class="cb-l"><span class="visually-hidden">Copy: </span>${esc(f.name)}</span><span class="cb-d" aria-hidden="true">Copied</span></span></button></li>`).join('');
+  let copiedTimer = null;
+  function resetCopy(view){
+    clearTimeout(copiedTimer);
+    copyFall.hidden = true;
+    const lines = copySentences(view);
+    copyBtns.querySelectorAll('.copybtn').forEach(b=>{
+      b.classList.remove('done');
+      b.parentNode.hidden = !lines[+b.dataset.i];
+    });
+  }
+  function announceCopy(msg){
+    copyStatus.textContent = '';
+    setTimeout(()=>{ copyStatus.textContent = msg; }, 60);
+  }
+  copyBtns.addEventListener('click', async e=>{
+    const btn = e.target.closest('.copybtn');
+    if(!btn) return;
+    const i = +btn.dataset.i, text = copySentences(current)[i];
+    if(!text) return;
+    let copied = false;
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(text); copied = true; }
+    }catch(err){}
+    clearTimeout(copiedTimer);
+    copyBtns.querySelectorAll('.copybtn.done').forEach(b=>b.classList.remove('done'));
+    if(copied){
+      copyFall.hidden = true;
+      btn.classList.add('done');
+      announceCopy(`Copied: ${FRAME[i].name}, as a sentence with its source.`);
+      copiedTimer = setTimeout(()=>btn.classList.remove('done'), 2400);
+    } else {
+      /* the text box's label tells screen reader users what to do */
+      copyText.value = text;
+      copyFall.hidden = false;
+      copyText.focus();
+      copyText.setSelectionRange(0, text.length);
+    }
+  });
+
   let current = null;
   function show(view, announce){
     current = view;
@@ -896,7 +1207,9 @@
       fs.hidden = fs.dataset.mode !== mode;
       fs.querySelectorAll('input').forEach(i=>{ i.checked = i.value === view; });
     });
+    frameEl.innerHTML = renderFrame(view);
     cardsEl.innerHTML = renderCards(view);
+    resetCopy(view);
     const text = statusText(view);
     /* first paint fills the line without announcing it */
     if(announce) statusEl.innerHTML = text;
@@ -913,6 +1226,17 @@
   groupSets.forEach(fs=>fs.addEventListener('change', e=>{
     if(e.target.checked) show(e.target.value, true);
   }));
+  /* The second layer is closed until a visitor opens it. Only the cards
+     inside it are redrawn when the view changes, so once open it stays open,
+     like the full-figures tables below. */
+  const seeAll = document.getElementById('seeAll');
+  const detailEl = document.getElementById('detail');
+  seeAll.addEventListener('click', ()=>{
+    const open = seeAll.getAttribute('aria-expanded') !== 'true';
+    seeAll.setAttribute('aria-expanded', String(open));
+    detailEl.hidden = !open;
+  });
+
   /* the full-figures tables stay open or closed as you switch views */
   cardsEl.addEventListener('toggle', e=>{
     const d = e.target;
