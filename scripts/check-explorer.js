@@ -460,6 +460,8 @@ for(const v of D.views){
     if(v.mode === 'budget') (v.label.match(/\$[\d.]+[KM]/g) || []).forEach(a=>{ ok(rest.includes(a), `${where}: budget amount ${a} missing`); rest = rest.replace(a, ''); });
     ok(!/\d/.test(rest), `${where}: digits outside the figures: "${rest}"`);
     ok(lead.includes(`${S.houston.label} nonprofit `), `${where}: doesn't name the Houston group`);
+    /* the group is named without a parenthetical; the period is the only one */
+    ok((body.match(/\(/g) || []).length === 1, `${where}: a parenthetical besides (${S.period})`);
     ok(!/[\u2013\u2014\u2018\u2019\u201C\u201D&]/.test(line), `${where}: a dash, curly quote, or ampersand`);
     ok(!FRAMING.test(line), `${where}: better/worse framing`);
   });

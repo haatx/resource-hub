@@ -934,11 +934,13 @@
   /* How a copied sentence names its group. Budget sizes are built from the
      view's label in the data file. Disciplines need more than their label:
      Visual Arts includes media organizations, and Other Arts is the report's
-     catch-all for everything outside the other two. */
+     catch-all for everything outside the other two. Its examples (arts
+     education, arts councils, history and science museums) are in About
+     this data. */
   const COPY_GROUP = {
     performing: 'performing arts organizations',
     visual: 'visual arts and media organizations',
-    other: 'arts and culture organizations outside the performing arts, visual arts, and media (such as arts education groups, arts councils, and history and science museums)'
+    other: 'arts and culture organizations outside the performing arts, visual arts, and media'
   };
   function budgetWords(label){
     let x;
