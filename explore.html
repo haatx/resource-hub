@@ -648,13 +648,15 @@
   const list = a => a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1];
   const PLUS = '<span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>';
 
-  /* exact wording approved for the group-size line and the small-group note */
+  /* exact wording approved for the group-size line and the small-group note.
+     The note says "figures", not "averages": the frame and the cards mix
+     averages with shares of spending and shares of organizations. */
   function groupText(view){
     return `<span class="groupline">Based on a group of ${val(groupN(view,'houston'))} Houston and ${val(groupN(view,'national'))} national benchmark organizations.</span>`;
   }
   function smallNote(view){
     if(!isSmall(view)) return '';
-    return `<p class="smallnote">A small group: these averages come from a group of ${val(groupN(view,'houston'))} Houston organizations, and one organization can move them substantially.</p>`;
+    return `<p class="smallnote">A small group: these figures come from a group of ${val(groupN(view,'houston'))} Houston organizations, and one organization can move them substantially.</p>`;
   }
 
   /* --------------------------------------------------------- figures --- */

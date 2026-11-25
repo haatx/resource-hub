@@ -162,7 +162,7 @@ for(const r of D.values){
 /* ------------------------------------------------------- every view --- */
 const exact = {
   group: (h, n) => `Based on a group of ${h} Houston and ${n} national benchmark organizations.`,
-  small: h => `A small group: these averages come from a group of ${h} Houston organizations, and one organization can move them substantially.`
+  small: h => `A small group: these figures come from a group of ${h} Houston organizations, and one organization can move them substantially.`
 };
 const nRec = (view, geo) => VIEW[view].mode === 'overall' ? REC[key('orgs_total', 'overall', geo)]
   : REC[key(VIEW[view].mode === 'discipline' ? 'orgs_by_discipline_count' : 'orgs_by_budget_count', 'overall', geo, view)];
