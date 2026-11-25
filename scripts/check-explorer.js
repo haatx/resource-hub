@@ -25,6 +25,8 @@
        spelled out, one sentence per figure for screen readers, the approved
        group line and small-group note, no section colors, and a source line
        that cites the page of every figure it shows;
+     - the second layer is closed by default behind "See all the figures",
+       with the CSV and report links outside it;
      - each of the 36 copy sentences carries its view's Houston and national
        figures as published, its group size, and no other digits.
    It also checks that the data file is complete, that the CSV and the
@@ -430,6 +432,20 @@ for(const v of D.views){
   ok(src === wantSrc, `${where}: source reads "${src}"`);
   ok(!/why it matters/i.test(fr) && !/snap-lead|snap-why|class="notes"|pic-note/.test(fr), `${where}: second-layer text in the frame`);
   ok(!/--(cyan|gold|coral|indigo|green|orange)\b/.test(fr), `${where}: a section color in the frame`);
+}
+/* The second layer: closed by default and opened by one control between
+   the frame and the cards. The CSV and the report sit outside it, so they
+   stay in view while it's closed. */
+{
+  const at = x => html.indexOf(x);
+  const box = html.match(/<div class="detail" id="detail"[^>]*>/);
+  ok(box && /\shidden(\s|>)/.test(box[0]), 'second layer: not closed by default');
+  ok(/<div class="detail" id="detail"[^>]*>\s*<div class="cards" id="cards"><\/div>\s*<\/div>/.test(html), 'second layer: the cards are not inside it');
+  const btn = html.match(/<button[^>]*id="seeAll"[^>]*>([\s\S]*?)<\/button>/);
+  ok(btn && /aria-expanded="false"/.test(btn[0]) && /aria-controls="detail"/.test(btn[0]) && textOf(btn[1]) === 'See all the figures', 'second layer: the "See all the figures" control');
+  ok(at('id="frame"') < at('id="seeAll"') && at('id="seeAll"') < at('id="detail"'), 'second layer: control not between the frame and the cards');
+  ok(at('id="frame"') < at('id="csvLink"') && at('id="csvLink"') < at('id="detail"') && at('id="pdfNote"') < at('id="detail"'), 'second layer: the CSV or report link is inside the closed area');
+  ok(/getElementById\('csvLink'\)\.insertAdjacentHTML\('afterend', pdf\.html\)/.test(m[1]), 'second layer: the report link no longer sits beside the CSV link');
 }
 /* the frame's CSS keeps to navy and the text colors */
 {

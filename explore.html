@@ -218,10 +218,17 @@
     font-size:13px;line-height:1.42;color:var(--ink-soft);
   }
 
-  /* the depth: the full report and every figure, above the section cards */
-  .depth{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin:clamp(30px,3vw,44px) 0 0}
-  .depth .cta{margin:0}
-  .depth .pdfnote{margin:0}
+  /* ---- the frame's actions ----
+     Under the frame and outside its border, so a screenshot of the frame
+     stays clean. "See all the figures" opens the second layer. The CSV and
+     the full report sit beside it and stay in view whether that layer is
+     open or closed. */
+  .actions{margin:18px 0 0}
+  .actions .cta{margin:0;align-items:center}
+  .actions .pdfnote{margin:12px 0 0}
+  button.btn{font-family:inherit;line-height:inherit;cursor:pointer}
+  .seeall svg{transition:transform .3s var(--ease)}
+  .seeall[aria-expanded="true"] svg{transform:rotate(45deg)}
 
   /* ---- snapshots ----
      The second layer. Each section card opens with a snapshot: a plain
@@ -494,15 +501,19 @@
       </div>
       <!-- the first layer: the selected view in one frame -->
       <section class="frame" id="frame" aria-labelledby="frame-h"></section>
-      <!-- the detail: the full report, every figure, and the section cards -->
-      <div class="depth">
-        <p class="cta" id="depthLinks">
+      <!-- the frame's actions; the CSV and the report stay in view -->
+      <div class="actions">
+        <div class="cta">
+          <button class="btn seeall" id="seeAll" type="button" aria-expanded="false" aria-controls="detail">See all the figures <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
           <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        </p>
+        </div>
         <!-- the PDF link, or while the report isn't online, source.pdfFallback -->
         <p class="pdfnote" id="pdfNote" hidden></p>
       </div>
-      <div class="cards" id="cards"></div>
+      <!-- the second layer: the five section cards, closed until opened -->
+      <div class="detail" id="detail" role="region" aria-label="All the figures" hidden>
+        <div class="cards" id="cards"></div>
+      </div>
     </div>
   </section>
 
@@ -1115,6 +1126,17 @@
   groupSets.forEach(fs=>fs.addEventListener('change', e=>{
     if(e.target.checked) show(e.target.value, true);
   }));
+  /* The second layer is closed until a visitor opens it. Only the cards
+     inside it are redrawn when the view changes, so once open it stays open,
+     like the full-figures tables below. */
+  const seeAll = document.getElementById('seeAll');
+  const detailEl = document.getElementById('detail');
+  seeAll.addEventListener('click', ()=>{
+    const open = seeAll.getAttribute('aria-expanded') !== 'true';
+    seeAll.setAttribute('aria-expanded', String(open));
+    detailEl.hidden = !open;
+  });
+
   /* the full-figures tables stay open or closed as you switch views */
   cardsEl.addEventListener('toggle', e=>{
     const d = e.target;
