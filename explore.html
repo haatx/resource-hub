@@ -952,8 +952,13 @@
     if(v.mode === 'discipline') return who + COPY_GROUP[view];
     return who + 'arts organizations' + (v.mode === 'budget' ? ' with budgets ' + budgetWords(v.label) : '');
   }
+  /* The source sentence names both groups. A sentence pasted on its own
+     loses the frame around it, and "nationally" alone reads like a
+     national average. */
   function copySource(view){
-    return `Source: ${S.author}, ${S.title} (${S.publicationYear}); ${groupN(view, 'houston').display} ${S.houston.label} organizations that applied for ${S.presentedBy} operating support.`;
+    return `Source: ${S.author}, ${S.title} (${S.publicationYear}). ` +
+      `${S.houston.label}: ${groupN(view, 'houston').display} organizations that applied for ${S.presentedBy} operating support. ` +
+      `National: ${groupN(view, 'national').display} organizations in ${S.national.benchmark}.`;
   }
   /* plain text, one per frame figure; null where either figure is missing,
      so a sentence never stands in for a figure the report doesn't give */

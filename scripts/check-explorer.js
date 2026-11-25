@@ -436,13 +436,14 @@ for(const v of D.views){
 /* --------------------------------------------------- copy sentences --- */
 /* One plain-text sentence per frame figure, then a source sentence. The
    Houston figure comes first and the national figure after "compared with",
-   both as published (attendance spelled out); the group size is the view's;
-   and no other digit appears except the budget size's own amounts. */
+   both as published (attendance spelled out); the source sentence names
+   both groups with the view's own sizes; and no other digit appears except
+   the budget size's own amounts. */
 for(const v of D.views){
   const view = v.id;
   const lines = E.copySentences(view);
   ok(Array.isArray(lines) && lines.length === E.FRAME.length, `${view} / copy: ${lines && lines.length} sentences`);
-  const src = `Source: ${S.author}, ${S.title} (${S.publicationYear}); ${nRec(view, 'houston').display} ${S.houston.label} organizations that applied for ${S.presentedBy} operating support.`;
+  const src = `Source: ${S.author}, ${S.title} (${S.publicationYear}). ${S.houston.label}: ${nRec(view, 'houston').display} organizations that applied for ${S.presentedBy} operating support. National: ${nRec(view, 'national').display} organizations in ${S.national.benchmark}.`;
   (lines || []).forEach((line, i)=>{
     const f = E.FRAME[i], where = `${view} / copy / ${f.m}`;
     ok(typeof line === 'string', `${where}: no sentence`);
