@@ -27,6 +27,9 @@
        that cites the page of every figure it shows;
      - the second layer is closed by default behind "See all the figures",
        with the CSV and report links outside it;
+     - each frame figure has a named Copy button wired to copySentences(),
+       with a live region and a select-the-text fallback, and no function
+       in the page script is declared twice;
      - each of the 36 copy sentences carries its view's Houston and national
        figures as published, its group size, and no other digits.
    It also checks that the data file is complete, that the CSV and the
@@ -110,6 +113,7 @@ function read(src){
   return { values, free: free.join(' ') };
 }
 const esc2 = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const at0 = (src, x) => src.indexOf(x);
 const textOf = s => decode(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
 
 function checkValues(where, values, view){
@@ -446,6 +450,24 @@ for(const v of D.views){
   ok(at('id="frame"') < at('id="seeAll"') && at('id="seeAll"') < at('id="detail"'), 'second layer: control not between the frame and the cards');
   ok(at('id="frame"') < at('id="csvLink"') && at('id="csvLink"') < at('id="detail"') && at('id="pdfNote"') < at('id="detail"'), 'second layer: the CSV or report link is inside the closed area');
   ok(/getElementById\('csvLink'\)\.insertAdjacentHTML\('afterend', pdf\.html\)/.test(m[1]), 'second layer: the report link no longer sits beside the CSV link');
+}
+/* Copy: one button per frame figure, named in plain words; a polite live
+   region for "Copied"; and the select-the-text fallback, closed until it's
+   needed. The buttons themselves are built in the browser. */
+{
+  const names = E.FRAME.map(f=>f.name);
+  ok(names.every(x=>typeof x === 'string' && x.trim() && !/\d/.test(x)) && new Set(names).size === names.length, 'copy: every frame figure needs its own button name');
+  ok(/<p class="visually-hidden" id="copyStatus" role="status" aria-live="polite"><\/p>/.test(html), 'copy: no live region for "Copied"');
+  ok(/<div class="copyfall" id="copyFall" hidden>\s*<label for="copyText">[^<]+<\/label>\s*<textarea class="copytext" id="copyText"[^>]*readonly><\/textarea>/.test(html), 'copy: the select-the-text fallback is missing or open');
+  ok(/copySentences\(current\)\[i\]/.test(m[1]) && /navigator\.clipboard\.writeText\(text\)/.test(m[1]) && /copyText\.setSelectionRange\(0, text\.length\)/.test(m[1]), 'copy: not wired to copySentences() with the fallback');
+  ok(at0(html, 'id="frame"') < at0(html, 'id="copyBtns"') && at0(html, 'id="copyBtns"') < at0(html, 'id="seeAll"'), 'copy: the buttons are not between the frame and "See all the figures"');
+}
+/* the page's script runs as one scope, so a second function with the same
+   name would silently replace the first */
+{
+  const decl = [...m[1].matchAll(/\bfunction\s+([A-Za-z_$][\w$]*)\s*\(/g)].map(x=>x[1]);
+  const dup = decl.filter((x, i)=>decl.indexOf(x) !== i);
+  ok(!dup.length, `page script: function declared twice: ${[...new Set(dup)].join(', ')}`);
 }
 /* the frame's CSS keeps to navy and the text colors */
 {

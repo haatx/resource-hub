@@ -223,12 +223,44 @@
      stays clean. "See all the figures" opens the second layer. The CSV and
      the full report sit beside it and stay in view whether that layer is
      open or closed. */
-  .actions{margin:18px 0 0}
-  .actions .cta{margin:0;align-items:center}
+  .actions{margin:14px 0 0}
+  .actions .cta{margin:20px 0 0}
   .actions .pdfnote{margin:12px 0 0}
   button.btn{font-family:inherit;line-height:inherit;cursor:pointer}
   .seeall svg{transition:transform .3s var(--ease)}
   .seeall[aria-expanded="true"] svg{transform:rotate(45deg)}
+
+  /* Copy: one quiet text button per figure, in the frame's order. While a
+     button shows "Copied", both labels share one grid cell, so the row
+     doesn't shift. If the clipboard is refused, the sentence waits in a
+     text box, selected, for the visitor to copy. */
+  .copyrow{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 20px}
+  .copyhead{margin:0;font-size:14.5px;line-height:1.3;color:var(--ink-soft)}
+  .copybtns{display:flex;flex-wrap:wrap;gap:0 20px;margin:0;padding:0;list-style:none}
+  .copybtn{
+    -webkit-appearance:none;appearance:none;background:none;border:0;margin:0;padding:6px 0;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;text-align:left;
+    font-family:inherit;font-size:14.5px;line-height:1.3;font-weight:600;color:var(--navy);
+  }
+  .copybtn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex:none}
+  .copybtn .ic-done,.copybtn.done .ic-copy{display:none}
+  .copybtn.done .ic-done{display:block}
+  .cb-t{display:grid}
+  .cb-l,.cb-d{grid-area:1 / 1;transition:opacity .15s var(--ease)}
+  .cb-l{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:color-mix(in srgb,var(--navy) 35%,transparent)}
+  .copybtn:hover .cb-l{text-decoration-color:currentColor}
+  .cb-d{opacity:0}
+  .copybtn.done .cb-l{opacity:0}
+  .copybtn.done .cb-d{opacity:1}
+  .copybtn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+  .copyfall{margin:12px 0 0}
+  .copyfall label{display:block;margin:0 0 8px;font-size:15px;line-height:1.38}
+  .copytext{
+    display:block;width:100%;margin:0;padding:10px 12px;resize:vertical;
+    font-family:inherit;font-size:15px;line-height:1.42;color:var(--ink);
+    background:var(--paper);border:1px solid var(--navy);border-radius:var(--r);
+  }
+  .copytext:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
 
   /* ---- snapshots ----
      The second layer. Each section card opens with a snapshot: a plain
@@ -420,6 +452,11 @@
     .ff-post{grid-column:2;grid-row:2;align-self:baseline}
     .ff-nat{grid-column:1 / -1;grid-row:3;margin:7px 0 0}
     .fr-src{margin:0;padding:11px 0 13px}
+    .copyrow{display:block}
+    .copyhead{margin:0 0 4px}
+    .copybtns{display:block}
+    .copybtns li + li{border-top:1px solid var(--hair)}
+    .copybtn{display:flex;width:100%;padding:11px 0}
   }
   @media (max-width:760px){
     .hero{padding:28px 0 0}
@@ -503,6 +540,16 @@
       <section class="frame" id="frame" aria-labelledby="frame-h"></section>
       <!-- the frame's actions; the CSV and the report stay in view -->
       <div class="actions">
+        <!-- copy: one button per frame figure, built by the script -->
+        <div class="copyrow" role="group" aria-labelledby="copyHead">
+          <p class="copyhead" id="copyHead">Copy a figure as a sentence, with its source:</p>
+          <ul class="copybtns" id="copyBtns"></ul>
+        </div>
+        <div class="copyfall" id="copyFall" hidden>
+          <label for="copyText">Your browser didn't let this page copy. The sentence is selected below, so press Ctrl+C, or Cmd+C on a Mac, to copy it.</label>
+          <textarea class="copytext" id="copyText" rows="4" readonly></textarea>
+        </div>
+        <p class="visually-hidden" id="copyStatus" role="status" aria-live="polite"></p>
         <div class="cta">
           <button class="btn seeall" id="seeAll" type="button" aria-expanded="false" aria-controls="detail">See all the figures <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></button>
           <a class="ghostbtn" id="csvLink" href="data/smu-houston-profile.csv" download>Download the data (CSV) <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></a>
@@ -904,16 +951,17 @@
   /* The first layer: the same four figures for every view, in this order.
      Each number sits inside its own phrase, with the national figure on a
      smaller line beneath. The phrases are page text; every figure comes from
-     the data file. copy is the plain-text sentence for the Copy action, which
-     names the group in full because it travels without the frame. */
+     the data file. name labels the figure's Copy button; copy is the
+     plain-text sentence that button copies, which names the group in full
+     because it travels without the frame. */
   const FRAME = [
-    {m:'local_gov_pct_expenses', pre:'Local government support equals', post:'of what they spend',
+    {m:'local_gov_pct_expenses', name:'Local government support', pre:'Local government support equals', post:'of what they spend',
      copy:'For {group}, local government support equals {h} of what they spend, compared with {n} {nationally} ({period}).'},
-    {m:'personnel_pct_expenses', post:'of spending goes to staff and contract workers',
+    {m:'personnel_pct_expenses', name:'Staff and contract workers', post:'of spending goes to staff and contract workers',
      copy:'For {group}, {h} of spending goes to staff and contract workers, compared with {n} {nationally} ({period}).'},
-    {m:'avg_attendance', pre:'Each organization averages', post:'in attendance',
+    {m:'avg_attendance', name:'Attendance', pre:'Each organization averages', post:'in attendance',
      copy:'For {group}, attendance averages {h} per organization, compared with {n} {nationally} ({period}).'},
-    {m:'primary_facility', c:'rent', post:'rent their main space',
+    {m:'primary_facility', c:'rent', name:'Renting their main space', post:'rent their main space',
      copy:'Among {group}, {h} rent their main space, compared with {n} {nationally} ({period}).'}
   ];
 
@@ -1098,6 +1146,57 @@
     }catch(e){}
   }
 
+  /* Copy. Each button copies its figure's sentence and source for the
+     current view as plain text. A browser can refuse the clipboard (some do
+     on file://); then the sentence goes into a text box, selected, so the
+     visitor can copy it themselves. */
+  const copyBtns = document.getElementById('copyBtns');
+  const copyFall = document.getElementById('copyFall');
+  const copyText = document.getElementById('copyText');
+  const copyStatus = document.getElementById('copyStatus');
+  const ICON_COPY = '<svg class="ic-copy" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5"/><path d="M5 15V5.5A1.5 1.5 0 0 1 6.5 4H15"/></svg>';
+  const ICON_DONE = '<svg class="ic-done" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  copyBtns.innerHTML = FRAME.map((f, i)=>`<li><button class="copybtn" type="button" data-i="${i}">${ICON_COPY}${ICON_DONE}` +
+    `<span class="cb-t"><span class="cb-l"><span class="visually-hidden">Copy: </span>${esc(f.name)}</span><span class="cb-d" aria-hidden="true">Copied</span></span></button></li>`).join('');
+  let copiedTimer = null;
+  function resetCopy(view){
+    clearTimeout(copiedTimer);
+    copyFall.hidden = true;
+    const lines = copySentences(view);
+    copyBtns.querySelectorAll('.copybtn').forEach(b=>{
+      b.classList.remove('done');
+      b.parentNode.hidden = !lines[+b.dataset.i];
+    });
+  }
+  function announceCopy(msg){
+    copyStatus.textContent = '';
+    setTimeout(()=>{ copyStatus.textContent = msg; }, 60);
+  }
+  copyBtns.addEventListener('click', async e=>{
+    const btn = e.target.closest('.copybtn');
+    if(!btn) return;
+    const i = +btn.dataset.i, text = copySentences(current)[i];
+    if(!text) return;
+    let copied = false;
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(text); copied = true; }
+    }catch(err){}
+    clearTimeout(copiedTimer);
+    copyBtns.querySelectorAll('.copybtn.done').forEach(b=>b.classList.remove('done'));
+    if(copied){
+      copyFall.hidden = true;
+      btn.classList.add('done');
+      announceCopy(`Copied: ${FRAME[i].name}, as a sentence with its source.`);
+      copiedTimer = setTimeout(()=>btn.classList.remove('done'), 2400);
+    } else {
+      /* the text box's label tells screen reader users what to do */
+      copyText.value = text;
+      copyFall.hidden = false;
+      copyText.focus();
+      copyText.setSelectionRange(0, text.length);
+    }
+  });
+
   let current = null;
   function show(view, announce){
     current = view;
@@ -1110,6 +1209,7 @@
     });
     frameEl.innerHTML = renderFrame(view);
     cardsEl.innerHTML = renderCards(view);
+    resetCopy(view);
     const text = statusText(view);
     /* first paint fills the line without announcing it */
     if(announce) statusEl.innerHTML = text;
